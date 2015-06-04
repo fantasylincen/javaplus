@@ -1,0 +1,56 @@
+package cn.mxz.city;
+public class FunctionOpenManager {
+
+	/**
+	 * 模块名字
+	 */
+	public static enum ModuleType {
+MODULES
+;
+		public static ModuleType getType(int id) {
+		
+			
+GET_TYPE
+
+			throw new RuntimeException("无法找到对应类型:" + id);
+		}
+
+	}
+
+	private City city;
+
+	public FunctionOpenManager(City city) {
+		this.city = city;
+	}
+
+	/**
+	 * 该模块是否开启了
+	 */
+	public boolean isOpen(ModuleType type) {
+		return city.getLevel() >= getOpenLevel(type);
+	}
+	
+	/**
+	 * 该模块是否开启了
+	 */
+	public boolean isOpen(int moduleId) {
+		int level = city.getLevel();
+		int openLevel = getOpenLevel(moduleId);
+		return level >= openLevel;
+	}
+	
+	public int getOpenLevel(ModuleType type) {
+		switch(type) {
+MODULE_TYPE_CASES
+		}
+		return 10000;
+	}
+	
+	public int getOpenLevel(int moduleId) {
+		switch(moduleId) {
+INT_CASES
+		}
+		return 10000;
+	}
+	
+}

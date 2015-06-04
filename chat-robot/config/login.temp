@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!-- saved from url=(0019)https://github.com/ -->
+<html lang="en" class=""><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <title>Login</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="https://github.com/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://github.com/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://github.com/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://github.com/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://github.com/apple-touch-icon-144.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta property="og:url" content="https://github.com">
+      <meta property="og:site_name" content="GitHub">
+      <meta property="og:title" content="Build software better, together">
+      <meta property="og:description" content="GitHub is the best place to build software together. Over 4 million people use GitHub to share code.">
+      <meta property="og:image" content="https://assets-cdn.github.com/images/modules/open_graph/github-logo.png">
+      <meta property="og:image:type" content="image/png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="1200">
+      <meta property="og:image" content="https://assets-cdn.github.com/images/modules/open_graph/github-mark.png">
+      <meta property="og:image:type" content="image/png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="620">
+      <meta property="og:image" content="https://assets-cdn.github.com/images/modules/open_graph/github-octocat.png">
+      <meta property="og:image:type" content="image/png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="620">
+      <meta property="twitter:site" content="github">
+      <meta property="twitter:site:id" content="13334762">
+      <meta property="twitter:creator" content="github">
+      <meta property="twitter:creator:id" content="13334762">
+      <meta property="twitter:card" content="summary_large_image">
+      <meta property="twitter:title" content="GitHub">
+      <meta property="twitter:description" content="GitHub is the best place to build software together. Over 4 million people use GitHub to share code.">
+      <meta property="twitter:image:src" content="https://assets-cdn.github.com/images/modules/open_graph/github-logo.png">
+      <meta property="twitter:image:width" content="1200">
+      <meta property="twitter:image:height" content="1200">
+      <meta name="browser-stats-url" content="/_stats">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    <link rel="conduit-xhr" href="https://ghconduit.com:25035/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="/" data-pjax-transient="">
+      <meta name="google-analytics" content="UA-3769691-2">
+
+    <meta content="collector.githubapp.com" name="octolytics-host"><meta content="collector-cdn.github.com" name="octolytics-script-host"><meta content="github" name="octolytics-app-id"><meta content="71CC70A2:32E4:AEB674:54A399AE" name="octolytics-dimension-request_id">
+    
+    <meta content="Rails, view, dashboard#index" name="analytics-event">
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+
+    <meta content="authenticity_token" name="csrf-param">
+<meta content="q44hYM+m4CkjzfTSuftC4AQQIPnxz8JN2oPipOtswh4V13ITkGVH+Jwn8NsRIjk4IIyyPLBoe/hMLbrM1DHpvQ==" name="csrf-token">
+
+    <link href="http://bcs.duapp.com/vc-game/github2.css" media="all" rel="stylesheet" type="text/css">
+    <link href="http://bcs.duapp.com/vc-game/github1.css" media="all" rel="stylesheet" type="text/css">
+     
+    
+
+
+    <meta http-equiv="x-pjax-version" content="8adfdb5fdc7bd044b4c0142729d0410c">
+
+      <meta name="description" content="Build software better, together.">
+  <style type="text/css"></style>
+
+
+	<script type="text/javascript">
+		window.onload=function onLoginLoaded() {
+			//if (isPostBack == "False") {
+				GetLastUser();
+			//}
+		}
+		
+		function GetLastUser() {
+			var id = "49BAC005-7D5B-4231-8CEA-16939BEACD67";
+			var usr = GetCookie(id);
+			if (usr != null) {
+				document.getElementById('txtUserName').value = usr;
+			} else {
+				document.getElementById('txtUserName').value = "001";
+			}
+			GetPwdAndChk();
+		}
+		
+		
+		function SetPwdAndChk() {
+			
+			var usr = document.getElementById('uname').value;
+			alert(usr);
+			SetLastUser(usr);
+			
+			var pwd = document.getElementById('password').value;
+			alert(pwd);
+			var expdate = new Date();
+			expdate.setTime(expdate.getTime() + 14 * (24 * 60 * 60 * 1000));
+			SetCookie(usr, pwd, expdate);
+		}
+		
+		function SetLastUser(usr) {
+			var id = "49BAC005-7D5B-4231-8CEA-16939BEACD67";
+			var expdate = new Date();
+			expdate.setTime(expdate.getTime() + 14 * (24 * 60 * 60 * 1000));
+			SetCookie(id, usr, expdate);
+		}
+		
+		function GetPwdAndChk() {
+			var usr = document.getElementById('username').value;
+			var pwd = GetCookie(usr);
+			document.getElementById('txtPassword').value = pwd;
+		}
+		
+		function GetCookie(name) {
+			var arg = name + "=";
+			var alen = arg.length;
+			var clen = document.cookie.length;
+			var i = 0;
+			while (i < clen) {
+				var j = i + alen;
+				//alert(j);
+				if (document.cookie.substring(i, j) == arg) return getCookieVal(j);
+				i = document.cookie.indexOf(" ", i) + 1;
+				if (i == 0) break;
+			}
+			return null;
+		}
+		//var isPostBack = "<%= IsPostBack %>";
+		
+		function getCookieVal(offset) {
+			var endstr = document.cookie.indexOf(";", offset);
+			if (endstr == -1) endstr = document.cookie.length;
+			return unescape(document.cookie.substring(offset, endstr));
+		}
+		
+		function SetCookie(name, value, expires) {
+			var argv = SetCookie.arguments;
+			var argc = SetCookie.arguments.length;
+			var expires = (argc > 2) ? argv[2] : null;
+			var path = (argc > 3) ? argv[3] : null;
+			var domain = (argc > 4) ? argv[4] : null;
+			var secure = (argc > 5) ? argv[5] : false;
+			document.cookie = name + "=" + escape(value) + ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + ((path == null) ? "" : ("; path=" + path)) + ((domain == null) ? "" : ("; domain=" + domain)) + ((secure == true) ? "; secure" : "");
+		}
+		
+		function ResetCookie() {
+			var usr = document.getElementById('username').value;
+			var expdate = new Date();
+			SetCookie(usr, null, expdate);
+		}
+	</script>
+
+
+</head>
+
+
+  <body class="logged_out  env-production windows  homepage">
+    <a href="https://github.com/#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+    <div class="wrapper">
+      
+      
+
+      <div id="start-of-content" class="accessibility-aid"></div>
+        <div class="site clearfix" role="main">
+          <div id="site-container" class="context-loader-container" data-pjax-container="">
+            
+            
+<div class="marketing-section-signup">
+  <div class="container">
+      <form accept-charset="UTF-8" action="/login" autocomplete="off" class="form-signup-home js-form-signup-home" method="post"><div style="margin:0;padding:0;display:inline"></div>        <dl class="form">
+          <dd>
+            <input type="text" name="uname" class="textfield" placeholder="input username" autofocus="" onblur="GetPwdAndChk()">
+          </dd>
+        </dl>
+        
+        <dl class="form">
+          <dd>
+            <input type="password" name="password" class="textfield" placeholder="input password">
+          </dd>
+          <p class="text-muted">Input username and password here.</p>
+        </dl>
+        <input type="hidden" name="source_label" value="Homepage Form">
+        <button class="button primary button-block" type="submit">Login</button>
+        
+</form>
+    <h1 class="heading">HOME_TEXT</h1>
+    <p class="subheading">Welcome to VC game manager</p>
+  </div><!-- /.container -->
+
+  <div class="marketing-section-depth"></div>
+</div><!-- /.jumbotron -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;public interface QiYuMessageSender {		/**		 *		 */		void onButtonUpdate(ISocket socket, String buttons);}

@@ -1,0 +1,44 @@
+package PACKAGE_NAME;
+
+import java.util.Map;
+
+import cn.javaplus.comunication.ProtocolUser;
+import cn.javaplus.comunication.Request;
+import cn.mxz.communication.Action;
+
+import com.google.common.collect.Maps;
+
+public class ProtocolHandler<U extends ProtocolUser> {
+
+	private Map<String, Action> actions = Maps.newConcurrentMap();
+	
+	public ProtocolHandler() {
+REPEATED PUT_ACTIONS
+	}
+
+	public void onData(U user, Request rq) throws Throwable {
+		String className = rq.getClassName();
+		String methodName = rq.getMethodName();
+
+		Action a = getAction(className, methodName);
+
+		a.excuteBefore(user, rq.getArgsArray());
+		try {
+			a.excute(user, rq.getArgsArray());
+			a.excuteAfter(user, rq.getArgsArray());
+		} catch (Throwable e) {
+			a.excuteException(user, rq.getArgsArray());
+			throw e;
+		} finally {
+			a.excuteFinally(user, rq.getArgsArray());
+		}
+	}
+	
+	private Action getAction(String className, String methodName) {
+		return actions.get(key(className, methodName));
+	}
+
+	private String key(String className, String methodName) {
+		return className + ":" + methodName;
+	}
+}

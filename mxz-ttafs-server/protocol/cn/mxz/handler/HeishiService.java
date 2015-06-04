@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface HeishiService extends cn.mxz.util.Service{	/**	 * 黑市界面数据	 *	 * @return 黑市界面数据	 */	cn.mxz.protocols.heishi.HeishiP.HeishiPro getData();	/**	 * 黑市兑换	 *	 * @param propId propId道具id	 * @param count count道具数量	 * @return null	 */	cn.mxz.protocols.heishi.HeishiP.HeishiPro exchange(int propId, int count);}

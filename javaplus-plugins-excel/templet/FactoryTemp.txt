@@ -1,0 +1,9 @@
+package PACKAGE_NAME.dao.factory;
+
+import db.dao.impl.*;
+import db.dao.*;
+import db.domain.*;
+
+public class DaoFactory {
+GET_METHODS
+}

@@ -1,0 +1,22 @@
+package PACKAGE_NAME.domain;
+import java.util.Arrays;
+
+IMPORTS
+public class CLASS_NAMEImpl implements CLASS_NAME IMPLEMENTS{
+
+PROPERTIES
+
+	public CLASS_NAMEImpl() {
+	}
+
+	public CLASS_NAMEImpl(CLASS_NAME c) {
+COPY_CONSTRACTOR
+	}
+
+	@Override
+	public String tableName() {
+		return "TABLE_NAME";
+	}
+
+SETS_AND_GETS
+}

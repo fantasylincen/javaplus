@@ -1,0 +1,10 @@
+package db.dao.impl;import java.util.List;import java.util.ArrayList;import java.sql.PreparedStatement;import java.sql.ResultSet;import java.sql.SQLException;import db.domain.BossData;import db.domain.BossData;import dbutils.IdUtil;import java.util.concurrent.atomic.AtomicLong;import cn.javaplus.util.Closer;import java.sql.Connection;import com.lemon.commons.database.ConnectionFetcher;import db.domain.*;import java.sql.Blob;import java.sql.Date;import java.sql.Time;public interface BossDataDao {	/**	 * 增加	 */	void add(BossData bdo);	/**	 * 增加一批	 */	void addAll(List<BossData> bdos);	/**	 * 删除	 */	void delete(Integer boss_id);	/**	 * 更新	 */	void update(BossData bdo);		/**	 * 更新一批	 */		void update(List<BossData> bdos);	/**	 * 删除一批	 */	void delete(List<BossData> bdos);		/**	 * 删除	 */			void delete(BossData bdo);		/**	 * 存入 有则覆盖 无则增加	 */			void save(BossData bdo);		/**	 * 存入一批 有则覆盖 无则增加	 */		void save(List<BossData> bdos);		/**	 * 取得	 */			BossData get(Integer boss_id);		/**	 * 取得所有	 */			List<BossData> getAll();		/**	 * 表记录数量	 */		int getCount();/*	@Deprecated	List<BossData> findBy(String field, String o);*/		public List<BossData> findByBossId(Integer o);
+		public List<BossData> findByUname(String o);
+		public List<BossData> findByBossTempletId(Integer o);
+		public List<BossData> findByHp(Integer o);
+		public List<BossData> findByLevel(Integer o);
+		public List<BossData> findByMapId(Integer o);
+		public List<BossData> findByKiller(String o);
+		public List<BossData> findByFoundTime(Integer o);
+		public List<BossData> findByIsShared(Boolean o);
+		@Deprecated	List<BossData> findBy(String field, String o, int limit);		/**	 * 生成一个对应的数据传输对象	 */			BossData createDTO();		/**	 * 清空	 */			void clear();		@Deprecated	void update(String fieldName, Object value);		@Deprecated	List<BossData> findBy(String field, String symbol, String o, int limit);		@Deprecated	List<BossData> findWhere(String where);		@Deprecated	List<BossData> findByScope(String field, int min, int max, int limit);}

@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;import cn.javaplus.comunication.PacketCompressedByZlib;public class VipCardMessageSenderImpl implements VipCardMessageSender{	/**	 *	 */	public void xxx(ISocket socket) {		PacketCompressedByZlib p = new PacketCompressedByZlib();		p.putInt(440002);				p.putString("");		p.send(socket);	}}

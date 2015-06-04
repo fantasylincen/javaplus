@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+<!-- serverConfigKey 与 vchd/game-properties.xml 中的 serverConfigKey相对应 -->
+<!-- projectId 管理平台上的 项目id -->
+<!-- serverIdentity 管理平台上的-> 系统配置中的 serverIdentity -->
+
+<gameConfigPath>http://120.24.227.207/vchd/gameconfig/getGameConfigByServerIdentity?projectId=142562186547910000009&amp;serverConfigKey=llyydzcdpbhsgb8837aadf&amp;serverIdentity=SERVER_IDENTITY</gameConfigPath>
+</properties>

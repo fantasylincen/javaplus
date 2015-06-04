@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>LevelUpReward</name>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.LevelUpRewardPro getData()
+	    <doc>获得升级奖励信息</doc>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.UserLevelUpPro receive(int level)
+	    <doc>领取指定等级的升级奖励</doc>
+		<args>等级</args>
+		<back>User.getData</back>
+		<back>LevelUpReward.getData</back>
+	</method>
+
+
+
+</protocol>

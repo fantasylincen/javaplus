@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Cornucopia</name>
+
+	<method>
+	    cn.mxz.protocols.cornucopia.CornucopiaPro getData()
+	    <doc>获取摇钱树界面信息</doc>
+	    <return></return>
+	</method>
+
+
+
+	<method>
+	    void run()
+	    <doc>摇</doc>
+		<back>Cornucopia.getData</back>
+		<back>User.getData</back>
+	</method>
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void notice(String log)
+	    <doc>给客户端发个公告</doc>
+		<args>公告消息 格式: type|userId|userNick    type:消息号 1,2,3,4,5,,,,</args>
+	</server_to_client_method>
+
+</protocol>

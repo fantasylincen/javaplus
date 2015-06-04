@@ -1,0 +1,24 @@
+	
+	public List<CLASS_NAME> findByUPPER_FNAME(PACKAGE_FTYPE o){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> ls = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE FILED_NAME_IN_TABLE = ?";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			ss.setNext(o);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ls.add(mapping(rs));
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return ls;
+	}

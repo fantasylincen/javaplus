@@ -1,0 +1,3 @@
+package db.domain;import java.util.Arrays;public interface UserLoginReward extends Domain , 
+				UserItem
+			{	String getUname();	void setUname(String uname);void addUname(String uname);	String getRewardTypeThree();	void setRewardTypeThree(String rewardTypeThree);void addRewardTypeThree(String rewardTypeThree);	String getRewardTypeTen();	void setRewardTypeTen(String rewardTypeTen);void addRewardTypeTen(String rewardTypeTen);	String getRewardTypeFifteen();	void setRewardTypeFifteen(String rewardTypeFifteen);void addRewardTypeFifteen(String rewardTypeFifteen);	String getRewardTypeThirty();	void setRewardTypeThirty(String rewardTypeThirty);void addRewardTypeThirty(String rewardTypeThirty);}

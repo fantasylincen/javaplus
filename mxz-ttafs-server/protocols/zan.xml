@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Zan</name>
+
+	<method>
+	    cn.mxz.protocols.zan.ZanPro getData()
+	    <doc>获得主界面信息</doc>
+	    <return>主界面信息</return>
+	</method>
+	<method>
+	    void clickZan()
+	    <doc>点赞</doc>
+	    <back>Zan.getData</back>
+
+	    <back>User.getData</back>
+	</method>
+</protocol>

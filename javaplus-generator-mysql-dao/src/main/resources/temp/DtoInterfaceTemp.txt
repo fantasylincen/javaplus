@@ -1,0 +1,8 @@
+package PACKAGE_NAME.domain;
+import java.util.Arrays;
+
+IMPORTS
+public interface CLASS_NAME extends Domain IMPLEMENTS{
+
+METHODS
+}

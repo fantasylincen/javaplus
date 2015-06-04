@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>VipCard</name>
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void xxx()
+
+	    <doc>给客户端发个通知</doc>
+
+	</server_to_client_method>
+
+
+	<method>
+
+	    cn.mxz.protocols.vip.VipCardPro getData()
+
+	    <doc>获得主界面信息</doc>
+
+	    <return>主界面信息</return>
+	</method>
+
+
+	<method>
+	    void buy()
+
+	    <doc>点击运行按钮开始转转盘</doc>
+
+		<back>VipCard.getData()</back>
+
+	</method>
+
+</protocol>

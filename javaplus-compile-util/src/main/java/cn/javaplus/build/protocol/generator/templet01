@@ -1,0 +1,20 @@
+public static class ■■■ implements CocosUI{
+	private CocoStudioUIEditor editor;
+	
+■■■
+
+	public void build() {
+		editor = buildEditor("■■■", Altas.get■■■().getAltas());
+		editor.createGroup();
+	}
+	public void load() {
+		Altas.get■■■().load();
+	}
+	public void unload() {
+		Altas.get■■■().unload();
+	}
+}
+
+public static ■■■ create■■■() {
+	return new ■■■();
+}

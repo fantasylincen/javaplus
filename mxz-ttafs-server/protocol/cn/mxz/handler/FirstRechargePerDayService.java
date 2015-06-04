@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface FirstRechargePerDayService extends cn.mxz.util.Service{	/**	 * 获取界面信息	 *	 * @return 返回数据，简化起见，返回一个字符串，格式如下: 今日充值元宝数,是否领取奖励(1:领取，0：未领取)，道具id，数量	 */	String getDate();	/**	 * 仅仅返回是否领取每日奖励	 *	 * @return 仅仅返回是否领取每日奖励	 */	String getDate1();	/**	 * 获取每日充值奖励	 *	 * 	 */	void getAward();}

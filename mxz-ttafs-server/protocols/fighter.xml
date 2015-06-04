@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Fighter</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FighterPro getFighter(int id)
+
+
+	    <doc>获得指定战士</doc>
+
+	    <return>战士数据</return>
+
+	    <args>战士唯一ID（注意不是配置表里面的ID，　是后端发过来的战士唯一ID(数据库唯一标识)）</args>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FightersPro get(int index, int count)
+
+	    <doc>
+
+			如果欲获得所有战士列表, get(0, 1000000)即可
+
+			指定一个战士的下标位置, 和获取的数量, 获得某段战士列表,
+			比如现在玩家总共有      [A B C D E F G] 7个战士, 依次排列
+			则:
+				get(0, 0)		返回 [             ]
+				get(0, 3) 		返回 [A B C        ]
+				get(5, 2) 		返回 [          F G]
+				get(6, 20) 		返回 [            G]
+				get(0, 100000) 	返回 [A B C D E F G] 该方法即获得所有战士
+				get(1, 123323) 	返回 [  B C D E F G]
+
+		</doc>
+
+		<args>战士列表的开始索引</args>
+		<args>截取战士数量</args>
+
+
+	    <return>获得某段战士列表</return>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.god.SpiritesPro getSpirites(int index, int count)
+
+	    <doc>
+
+			如果欲获得所有魂魄列表, getSpirites(0, 1000000)即可
+
+			指定一个魂魄的下标位置, 和获取的数量, 获得某段魂魄列表,
+			比如现在玩家总共有      [A B C D E F G] 7个魂魄, 依次排列
+			则:
+				get(0, 0)		返回 [             ]
+				get(0, 3) 		返回 [A B C        ]
+				get(5, 2) 		返回 [          F G]
+				get(6, 20) 		返回 [            G]
+				get(0, 100000) 	返回 [A B C D E F G] 该方法即获得所有魂魄
+				get(1, 123323) 	返回 [  B C D E F G]
+
+		</doc>
+
+		<args>魂魄列表的开始索引</args>
+		<args>截取魂魄数量</args>
+
+
+	    <return>获得某段魂魄列表</return>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.god.RecruitResaultPro recruit(int recruitType)
+
+
+	    <doc>
+			招募
+		</doc>
+
+		<args>招募方式</args>
+
+		<back>User.getData()</back>
+
+	</method>
+
+	<method>
+
+	    int recruitByJuHun(int type)
+
+	    <doc>
+			用聚魂值招募
+		</doc>
+
+		<args>招募方式</args>
+
+		<return>招得的魂魄ID</return>
+
+	</method>
+
+	<method>
+
+	    void levelUpSpirite(int typeId)
+
+	    <doc>
+			升星
+		</doc>
+
+		<args>战士ID</args>
+
+	</method>
+
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FighterSkillsPro getSkillReadys(int indexStart, int count)
+
+	    <doc>
+
+			可装备的技能列表
+
+			如果欲获得所有技能列表, getSkillReadys(100001, 0, 1000000)即可
+
+			指定一个技能的下标位置, 和获取的数量, 获得某段可装备的技能列表,
+			比如现在玩家总共有      [A B C D E F G] 7个技能, 依次排列
+			则:
+				get(0, 0)		返回 [             ]
+				get(0, 3) 		返回 [A B C        ]
+				get(5, 2) 		返回 [          F G]
+				get(6, 20) 		返回 [            G]
+				get(0, 100000) 	返回 [A B C D E F G] 该方法即获得所有技能
+				get(1, 123323) 	返回 [  B C D E F G]
+
+		</doc>
+
+		<args>技能起始索引</args>
+		<args>获取可装备技能的数量</args>
+
+
+	</method>
+
+
+
+	<method>
+
+	    void changeSkill(int fighterId, int oldId, int newId)
+
+	    <doc>更换技能</doc>
+
+		<args>战士ID</args>
+		<args>旧技能ID</args>
+		<args>新技能ID</args>
+	</method>
+
+
+	<method>
+
+	    void takeOffSkill(int fighterId, int skillId)
+
+	    <doc>卸下技能</doc>
+
+		<args>战士ID</args>
+		<args>技能ID</args>
+	</method>
+
+
+	<method>
+
+	    void addSkill(int fighterTypeId, int skillId)
+
+	    <doc>在空格子上面增加一个技能</doc>
+
+		<args>战士ID</args>
+
+		<args>技能ID</args>
+
+		<return>在空格子上面增加一个技能</return>
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FighterSkillPro levelUpSkill(int skillId, String stuffSkills)
+
+	    <doc>升级技能</doc>
+
+		<args>技能ID</args>
+		<args>被消耗的技能ID列表  用逗号分隔</args>
+
+		<return>升级后的技能</return>
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.XianShiPro getXianShiData()
+
+	    <doc>
+
+			获得仙市界面数据
+
+		</doc>
+
+		<return></return>
+
+	</method>
+
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FighterPro exchange(int typeId)
+
+	    <doc>
+			兑换一个战士
+		</doc>
+
+		<args>战士ID</args>
+
+		<return>招得的战士</return>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FighterPro getFighterAfterLevelUp(int id)
+
+
+	    <doc>获得指定战士 升星后的属性</doc>
+
+	    <return>战士数据 升星后的属性</return>
+
+	    <args>战士唯一ID（注意不是配置表里面的ID，　是后端发过来的战士唯一ID(数据库唯一标识)）</args>
+
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FightersPro getOtherFighter(String userId, int index, int count)
+
+	    <doc>
+
+			如果欲获得所有战士列表, get(0, 1000000)即可
+
+			指定一个战士的下标位置, 和获取的数量, 获得某段战士列表,
+			比如现在玩家总共有      [A B C D E F G] 7个战士, 依次排列
+			则:
+				get(0, 0)		返回 [             ]
+				get(0, 3) 		返回 [A B C        ]
+				get(5, 2) 		返回 [          F G]
+				get(6, 20) 		返回 [            G]
+				get(0, 100000) 	返回 [A B C D E F G] 该方法即获得所有战士
+				get(1, 123323) 	返回 [  B C D E F G]
+
+		</doc>
+
+		<args> 用户ID </args>
+		<args>战士列表的开始索引</args>
+		<args>截取战士数量</args>
+
+
+	    <return>获得某段战士列表</return>
+
+	</method>
+
+	<!-- <server_to_client_method>服务器主动发送消息给客户端的方法
+
+	    void fighterUpdate(String fighterIds)
+
+	    <doc>主动通知客户端 某些战士的属性发生变化了</doc>
+
+		<args>逗号分隔的战士ID列表</args>
+
+	</server_to_client_method> -->
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FightersPro getFighters(String ids)
+
+	    <doc>逗号分隔 的战士列表</doc>
+
+	    <return>战士数据</return>
+
+	    <args>逗号分隔的战士ID列表</args>
+
+	</method>
+
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void fightersUpdate(cn.mxz.protocols.user.god.FightersPro fighters)
+
+	    <doc>主动通知客户端 某些战士的属性发生变化了</doc>
+
+		<args>战士列表</args>
+
+	</server_to_client_method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void fightersRemove(String fighterIds)
+
+	    <doc>主动通知客户端 某些战士被移除了</doc>
+
+		<args>战士ID列表, 逗号分隔</args>
+
+	</server_to_client_method>
+
+
+	<method>
+
+	    void openFighter()
+
+	    <doc>通知服务器 点击了伙伴按钮</doc>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+
+	<method>
+
+	    int getSpiriteCount(int typeId)
+
+	    <doc>
+
+			指定魂魄的数量
+		</doc>
+
+		<args>魂魄ID</args>
+
+
+	    <return>数量</return>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.RecruitResaultsPro recruitTenTimes(int recruitType)
+
+
+	    <doc>
+			十次寻仙
+		</doc>
+
+		<args>招募方式</args>
+
+		<back>User.getData()</back>
+
+	</method>
+	
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void capacityChanged(int capacityOld, int capacityNew)
+
+	    <doc>主动通知客户端 战斗力变化了</doc>
+
+		<args>原战斗力</args>
+		<args>新战斗力</args>
+
+	</server_to_client_method>
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void tianMingChanged(String tianMingAdd, String tianMingRemove)
+
+	    <doc>主动通知客户端 天命变化了</doc>
+
+		<args>增加的天命   天命id逗号分隔</args>
+		<args>移除的天命   天命id逗号分隔</args>
+
+	</server_to_client_method>
+
+	<method>
+
+	    String getSpiriteCount2(int typeId)
+
+	    <doc>
+
+			指定魂魄的数量
+		</doc>
+
+		<args>魂魄ID</args>
+
+
+	    <return>魂魄ID,数量</return>
+
+	</method>
+
+</protocol>

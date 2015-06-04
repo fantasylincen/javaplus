@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+
+	<!-- can be null -->
+ 	<defaultValue
+
+            EXCEL="F:/移盘/work/文档/项目/游戏项目/开发文档/SVN/项目计划相关/策划资料/手机数值"
+			AS_CODE="E:/gameWork/PhoneEntitiesSDK/src"
+			PACKAGE_NAME="cn.mxz"
+			INTERFACE_CONFIG="D:/generate.xml"
+			AS_XML="E:/gameWork/PhoneEntitiesSDK/datas/tempXML/"
+			JAVA_CODE="C:/Windows/temp"
+			JAVA_XML="C:/Windows/temp"
+			/>
+
+
+
+
+	<implements>
+
+		<!-- The interfaces in your projects, child class will be implements it! -->
+		<!-- Example: PvpTask.java will be:  "public class PvpTask implements cn.mxz.base.task.TaskTemplet {....}" -->
+		<interface name="cn.mxz.base.task.TaskTemplet">
+			        <child name="PvpTask"/>
+					<child name="AchieveTask"/>
+					<child name="DailyTask"/>
+			    </interface>
+
+
+			    <interface name="PropTemplet">
+
+			        <child name="Equipment"/>
+			        <child name="Gem"/>
+			        <child name="Stuff"/>
+			        <child name="Consumable"/>
+			        <child name="Fish"/>
+
+			    </interface>
+
+			    <interface name="HostTemplet">
+
+			        <child name="SkillHost"/>
+			        <child name="FormationHost"/>
+
+			    </interface>
+			    <interface name="BasisTemplet">
+
+			        <child name="SkillBasis"/>
+			        <child name="FormationBasis"/>
+
+			    </interface>
+
+
+
+
+			    <interface name="DemonParameter">
+
+			        <child name="CustodianMap"/>
+			    </interface>
+
+			    <interface name="RandomReward">
+
+			        <child name="Consumable"/>
+			    </interface>
+			    <interface name="ISkillTemplet">
+
+			        <child name="Skill"/>
+			    </interface>
+
+			    <interface name="IFighterTemplet">
+
+			        <child name="Fighter"/>
+			        <child name="CopterMonster"/>
+			    </interface>
+
+
+			    <interface name="Attribute">
+
+			        <child name="Fighter"/>
+					<child name="QualityUp"/>
+					<child name="DanReward"/>
+					<child name="UnionSkill"/>
+					<child name="Dogz"/>
+					<child name="YuanShen"/>
+					<child name="BossBasicData"/>
+					<child name="CopterMonster"/>
+
+
+			    </interface>
+
+			    <interface name="AdditionMultiplier">
+
+					<child name="QualityRatio"/>
+					<child name="Heart"/>
+					<child name="QualityJob"/>
+					<child name="UnionSkill"/>
+
+				</interface>
+
+
+				<interface name="INeedsInExcel">
+
+			        <child name="GodZentia"/>
+					<child name="RandomEvent"/>
+					<child name="EquipmentAdvanced"/>
+
+			    </interface>
+
+
+				<interface name="Chipable">
+
+			        <child name="Dogz"/>
+					<child name="Skill"/>
+					<child name="Formation"/>
+
+			    </interface>
+
+				<interface name="PrizeInExcel">
+
+			        <child name="EnterRewards"/>
+			        <child name="Stuff"/>
+					<child name="Consumable"/>
+					<child name="Regist"/>
+					<child name="LevelUpReward"/>
+					<child name="RegistRewardLibrary"/>
+					<child name="DanReward"/>
+					<child name="PvpTask"/>
+					<child name="RandomEvent"/>
+					<child name="BossEventIntegral"/>
+					<child name="BossRewardEvent"/>
+					<child name="Clearance"/>
+					<child name="Present"/>
+					<child name="AchieveTask"/>
+					<child name="DailyTask"/>
+					<child name="RechargeFeedback"/>
+
+
+			    </interface>
+
+				<interface name="FighterExpPrize">
+
+			        <child name="MissionMap"/>
+			        <child name="BossEventMap"/>
+			        <child name="TowerMissionMap"/>
+
+			    </interface>
+
+				<interface name="MapTemplet">
+
+			        <child name="MissionMap"/>
+			        <child name="BossEventMap"/>
+			        <child name="TowerMissionMap"/>
+
+			    </interface>
+
+
+	</implements>
+
+
+
+
+
+
+
+
+
+	<asimplements>
+	    <interface name="IProp">
+	        <child name="Equipment"/>
+	        <child name="Dogz"/>
+	        <child name="Gem"/>
+	        <child name="Stuff"/>
+			<child name="BaseReward"/>
+			<child name="Consumable"/>
+			<child name="Fish"/>
+			<child name="Fighter"/>
+	    </interface>
+
+	</asimplements>
+
+	<specialVoName><!-- 为客户端指定的生成的Vo类类名 -->
+	    <class base="Clothes" to="Clothes"/>
+	    <class base="Fighter" to="Fighter"/>
+	</specialVoName>
+
+	<voPicType>
+		.jpg
+	</voPicType>
+
+	<voPrefix>
+		<head></head>
+		<class name="Fighter" to="fighter/"/>
+	</voPrefix>
+
+
+	<implements>
+	    <interface name="interfaces.PropTemplet">
+	        <child name="Equipment"/>
+	        <child name="Gem"/>
+	    </interface>
+
+
+	    <interface name="interfaces.Attribute">
+	        <child name="Fighter"/>
+	    </interface>
+	</implements>
+
+	<extends>
+	    <class name="demand.Wares">
+	    </class>
+	</extends>
+
+	<classPath class="Ability" name="cn.mxz.vo.AbilityVo"/>
+
+	<config_id_package> cn.mxz.model </config_id_package>
+
+</root>

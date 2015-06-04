@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;public interface SkillMessageSender {		/**		 *		 */		void skillsUpdate(ISocket socket, cn.mxz.protocols.user.god.FighterP.FighterSkillsPro skills);		/**		 *		 */		void skillsRemove(ISocket socket, String skillIds);}

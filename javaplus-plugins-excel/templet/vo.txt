@@ -1,0 +1,7 @@
+Clothes=Clothes
+Equipment=Equipment
+Fighter=NpcGodVo
+Buff=Buff
+Gem=Gem
+Skill=Skill
+Task=Task

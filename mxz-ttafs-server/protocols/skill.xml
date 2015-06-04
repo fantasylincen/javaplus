@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Skill</name>
+
+	<method>
+	    cn.mxz.protocols.user.god.FighterSkillPro generate(int id)
+	    <doc>合成某个技能</doc>
+		<args>技能ID</args>
+		<return>被合成的技能信息</return>
+	</method>
+
+	<method>
+	    cn.mxz.protocols.user.god.FighterSkillPro getAddition(int id)
+	    <doc>获得某个技能加成信息</doc>
+		<args>技能ID</args>
+		<return>获得某个技能加成信息</return>
+	</method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void skillsUpdate(cn.mxz.protocols.user.god.FighterSkillsPro skills)
+
+	    <doc>主动通知客户端 某些技能的属性发生变化了</doc>
+
+		<args>技能列表</args>
+
+	</server_to_client_method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void skillsRemove(String skillIds)
+
+	    <doc>主动通知客户端 某些技能被移除了</doc>
+
+		<args>技能ID列表, 逗号分隔</args>
+
+	</server_to_client_method>
+
+
+</protocol>

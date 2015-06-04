@@ -1,0 +1,13 @@
+package db.domain;import java.util.Arrays;public class NewFighterImpl implements NewFighter {	@Key	private String uname;	@Key	private int typeId;	private int level;	private int exp;	public static final int V_LEN = 20;	public static final int YUANSHEN_LEVEL_LEN = 10;	public static final int YUANSHEN_TYPE_LEN = 10;	public static final int YUANSHEN_EXP_LEN = 10;	private int [] v = new int[20];	private int [] yuanshen_level = new int[10];	private int [] yuanshen_type = new int[10];	private int [] yuanshen_exp = new int[10];	public NewFighterImpl() {	}	public NewFighterImpl(NewFighter c) {		this.uname = c.getUname();		this.typeId = c.getTypeId();		this.level = c.getLevel();		this.exp = c.getExp();		for (int i = 0; i < v.length; i++) {
+			v[i] = c.getV(i);
+		}
+		for (int i = 0; i < yuanshen_level.length; i++) {
+			yuanshen_level[i] = c.getYuanshenLevel(i);
+		}
+		for (int i = 0; i < yuanshen_type.length; i++) {
+			yuanshen_type[i] = c.getYuanshenType(i);
+		}
+		for (int i = 0; i < yuanshen_exp.length; i++) {
+			yuanshen_exp[i] = c.getYuanshenExp(i);
+		}
+	}	@Override	public String tableName() {		return "new_fighter";	}	public void setUname(String uname) {		this.uname = uname;	}	public String getUname() {		return this.uname;	}public void addUname(String uname) {		this.uname += uname;}	public void setTypeId(int typeId) {		this.typeId = typeId;	}	public int getTypeId() {		return this.typeId;	}public void addTypeId(int typeId) {		this.typeId += typeId;}	public void setLevel(int level) {		this.level = level;	}	public int getLevel() {		return this.level;	}public void addLevel(int level) {		this.level += level;}	public void setExp(int exp) {		this.exp = exp;	}	public int getExp() {		return this.exp;	}public void addExp(int exp) {		this.exp += exp;}	public void setV(int index, int value) {		this.v[index] = value;	}	public int getV(int index) {		return this.v[index];	}	public void setYuanshenLevel(int index, int value) {		this.yuanshen_level[index] = value;	}	public int getYuanshenLevel(int index) {		return this.yuanshen_level[index];	}	public void setYuanshenType(int index, int value) {		this.yuanshen_type[index] = value;	}	public int getYuanshenType(int index) {		return this.yuanshen_type[index];	}	public void setYuanshenExp(int index, int value) {		this.yuanshen_exp[index] = value;	}	public int getYuanshenExp(int index) {		return this.yuanshen_exp[index];	}}

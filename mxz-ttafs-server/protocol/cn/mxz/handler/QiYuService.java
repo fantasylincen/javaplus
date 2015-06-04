@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface QiYuService extends cn.mxz.util.Service{	/**	 * 获得所有按钮的内容	 *	 * @return 获得所有按钮的内容	 */	String getButtons();}

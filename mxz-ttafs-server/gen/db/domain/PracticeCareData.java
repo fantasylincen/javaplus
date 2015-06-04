@@ -1,0 +1,1 @@
+package db.domain;public interface PracticeCareData extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	String getFriendId();	void setFriendId(String friendId);void addFriendId(String friendId);}

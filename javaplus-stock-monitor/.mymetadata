@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="javaplus-stock-monitor"
+  id="myeclipse.1428821928203"
+  context-root="/smonitor"
+  j2ee-spec="5.0"
+  archive="javaplus-stock-monitor.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

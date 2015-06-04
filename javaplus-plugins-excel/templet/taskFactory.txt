@@ -1,0 +1,26 @@
+package com.lemon.ai.main.logic.task.util;
+
+IMPORTS
+
+import com.lemon.ai.main.logic.task.base.Task;
+
+import db.domain.UserTask;
+
+public class TaskFactory {
+	
+	private static TaskFactory instance;
+
+	private TaskFactory() {
+	}
+
+	public static final TaskFactory getInstance() {
+		if (instance == null) {
+			instance = new TaskFactory();
+		}
+		return instance;
+	}
+	
+	public Task createTaskBy(int id, UserTask ut) {
+		SWITCHS
+	}
+}

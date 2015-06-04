@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+        <!-- path: 只要该目录下的某个文件发生了变化, 那么就会触发DAO生成器生成代码  -->
+        <DB 
+            path="D:/workspace/MobileServer/res/"
+            description = "DAO生成器配置" 
+            dir="D:/workspace/MobileServer/gen/" 
+            driver="com.mysql.jdbc.Driver"
+            package="db"
+			url="jdbc:mysql://localhost:3306/mobile10004" 
+			uname="root"
+			pwd="mxz2013">
+
+			<generate_table is_generate_factory="true"><!-- true:生成工厂 -->
+			
+				<table name="user_data">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				
+				<table name="mission_map">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				
+				<table name="mission_star">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				
+				<table name="user_formation">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+			
+				<table name="fighter_info">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				<table name="equipment_info">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				<table name="gem_info">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				<table name="mission">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				<table name="user_grid">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+				<table name="user_bag">
+					<interface>
+						interfaces.NameAble
+					</interface>
+				</table>
+				
+			</generate_table>
+        </DB>
+        
+        
+
+        <!-- clientXmlGeneratePath: 给前端导出的xml路径 -->
+        
+        <EXCEL 
+            description = "数值表生成器配置"
+            path="D:/workspace/InternetFiles/策划资料/手机数值/"
+			dir="D:/asworkspace/PhoneEntitiesSDK/src/cn/mxz/"
+			package="generate"
+			package2="templets"
+			javaclasspath="D:/workspace/MobileServer/gen/"
+			templets="D:/workspace/Properties/temp/"
+			aiXmlGeneratePath="D:/workspace/MobileServer/res/properties/"
+			clientXmlGeneratePath="D:/asworkspace/PhoneEntitiesSDK/datas/tempXML/">
+			
+			<implements>
+			    <interface name="interfaces.PropTemplet">
+			        <child name="Equipment"/>
+			        <child name="Gem"/>
+			    </interface>
+				
+				
+			    <interface name="interfaces.Attribute">
+			        <child name="Fighter"/>
+			    </interface>
+			</implements>            
+            
+			<extends>
+			    
+			    <class name="demand.Wares">
+			    </class>
+			</extends>
+			
+			<specialVoName><!-- 为客户端指定的生成的Vo类类名 -->
+			    <class base="Clothes" to="Clothes"/>
+			    <class base="Fighter" to="Fighter"/>
+			</specialVoName>
+			
+			
+			<voPrefix>
+				fighter/
+			</voPrefix>
+			
+			<voPicType>
+				.jpg
+			</voPicType>
+       </EXCEL>
+       
+       <!-- MessageProperties.properties 导出为前端所需的message.xml -->
+        <MESSAGE
+        	messageFile="D:/workspace/MobileServer/res/properties/MessageConfig.xml"
+        	javafile="D:/workspace/MobileServer/gen/message/S.java"
+        >
+        
+        </MESSAGE>
+</root>

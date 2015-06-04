@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;public interface EquipmentMessageSender {		/**		 *		 */		void equipmentsUpdate(ISocket socket, cn.mxz.protocols.user.equipment.EquipmentP.EquipmentsPro equipments);		/**		 *		 */		void equipmentsRemove(ISocket socket, String equipmentIds);}

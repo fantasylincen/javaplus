@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Mission</name>
+
+	<method>
+
+	    void enter(int storyId)
+
+	    <doc>进入某个剧情地图(点击"继续征程"按钮后,需要调用的方法)</doc>
+
+		<args>剧情ID</args>
+
+	</method>
+
+
+	<method>
+
+	    void giveUp(int missionId)
+	    <args>关卡id</args>
+	    <doc>放弃当前剧情进程</doc>
+	    <back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.mission.MissionPro getMissionData()
+
+	    <doc>获得副本数据</doc>
+
+	    <return>副本数据</return>
+	</method>
+
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.battle.CampPro getDemonCamp(int path)
+
+	    <doc>获取指定路径节点上的怪物信息</doc>
+
+	    <return>指定路径节点上的怪物信息</return>
+
+		<args>临近节点的路径</args>
+
+
+
+	</method>
+
+	<method>
+
+	    void backMainBranch()
+
+	    <doc>返回到主线分叉路口</doc>
+
+	</method>
+
+	<method>
+
+	    Boolean branchIsCross()
+
+	    <doc>是否通过支线路口</doc>
+	</method>
+
+	<method>
+
+	    Boolean branchCross(int missionId)
+		<args>关卡id</args>
+	    <doc>是否通过支线路口</doc>
+
+
+	</method>
+
+
+	<method>
+
+	    void encounterQuestion(int path)
+
+	    <doc>遇到?</doc>
+
+		<back>User.getFightingCapacity</back>
+
+		<back>User.getData</back>
+
+		<args>需要开启的宝箱在哪条路上</args>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.mission.MissionWarSituationPro fighting(int path)
+
+	    <doc>
+
+			跟临近的怪兽打仗,
+
+				打赢了的话, 人就会跳到对应的位置上,
+
+				打输了的话, 人的位置不变
+		</doc>
+
+		<args>临近节点的路径</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+	<method>
+
+	    void crossEmpty(int path)
+
+	    <doc>
+	    			通过空节点
+	    </doc>
+
+		<args>临近节点的路径</args>
+
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.mission.RandomAddFriendPro randomAddFriend()
+
+	    <doc>随机加好友</doc>
+
+	    <return>随机产生的用户信息</return>
+
+	</method>
+
+	<method>
+
+	    String getStarByCapterId(int chapterId)
+
+	    <doc>获得副本星星数量</doc>
+
+		<args>章节ID</args>
+
+	    <return>
+			逗号分隔的各个关卡的星星情况:
+			例子:
+				1:13/20,2:14/25,3:28/28.......
+				第一关 获得13星 总20星...第二关........
+		</return>
+
+	</method>
+
+
+	<method>
+
+	    String getStarBySceneId(int sceneId)
+
+	    <doc>获得副本星星数量</doc>
+
+		<args>副本Id</args>
+	    <return>
+			逗号分隔的各个关卡的星星情况:
+			例子:
+				1:13/20,2:14/25,3:28/28.......
+				第一关 获得13星 总20星...第二关........
+		</return>
+
+
+
+	</method>
+
+	
+
+	<method>
+
+	    String getStarByMissionId(int missionId)
+
+	    <doc>获得副本星星数量</doc>
+
+		<args>关卡ID</args>
+	    <return>
+			逗号分隔的各个关卡的星星情况:
+			例子:
+				1:13/20
+				第一关 获得13星 总20星
+		</return>
+
+	</method>
+
+
+
+	<method>
+	    cn.mxz.protocols.user.mission.BoxPro openChests()
+	    <doc>开启所有的宝箱</doc>
+		<!-- 更新战斗力 -->
+		<back>User.getFightingCapacity</back>
+		<back>User.getData()</back>
+	</method>
+
+	<method>
+	    int getBoxes()
+	    <doc>获得所有的宝箱ID</doc>
+		<return>当前暂存的宝箱的数量</return>
+	</method>
+
+	<method>
+	    cn.mxz.protocols.user.mission.BoxPro openChest(int path)
+	    <doc>开启踩到的宝箱</doc>
+		<args>需要开启的宝箱在哪条路上</args>
+
+		<!-- 更新战斗力 -->
+		<back>User.getFightingCapacity</back>
+		<back>User.getData()</back>
+	</method>
+
+	<method>
+	    int getRebirthSec()
+	    <doc>主角复活倒计时</doc>
+		<return>主角复活倒计时 秒</return>
+	</method>
+
+	<method>
+	    cn.mxz.protocols.user.mission.MissionWarSituationPro challenge( int missionId, Boolean isBranch )
+	    <doc>副本boss挑战</doc>
+	    <args>关卡ID</args>
+	    <args>是否支线boss</args>
+		<return></return>
+		<back>User.getData</back>
+
+	</method>
+	<method>
+	    void refreshChallenge( int missionId, Boolean isBranch )
+	    <doc>刷新副本boss的每日挑战次数</doc>
+	    <args>关卡ID</args>
+	    <args>是否支线boss</args>
+	</method>
+
+	<method>
+
+		cn.mxz.protocols.user.battle.CampPro getBossDemonCamp(int missionId,Boolean isBranch)
+
+	    <doc>获取boss挑战的怪物信息</doc>
+		<args>关卡ID</args>
+	    <args>是否支线boss</args>
+
+	    <return>指定路径节点上的怪物信息</return>
+	</method>
+
+
+
+	<method>
+
+	    int getStarReceivedStep(int chapterId)
+
+	    <doc>获得副本星星奖励领取情况</doc>
+
+		<args>章节ID</args>
+
+	    <return>
+	    	1: 可以领取 30%通关奖励
+	    	2: 可以领取60%通关奖励
+	    	3: 可以领取90%通关奖励
+	    </return>
+
+	</method>
+
+
+	<method>
+
+	    void receivedStarReward(int chapterId)
+
+	    <doc>领取副本星星奖励</doc>
+
+		<args>章节ID</args>
+	    <return> </return>
+
+		<back>Mission.getStarReceivedStep(chapterId)</back>
+
+	</method>
+
+
+	<method>
+
+	    void raiseAllUp()
+
+	    <doc>复活阵上所有死亡的战士</doc>
+
+	    <return> </return>
+
+	</method>
+
+
+	<method>
+
+	    String getCurrentStarByMissionId(int missionId)
+
+	    <doc>获得当前副本星星数量</doc>
+
+		<args>关卡ID</args>
+	    <return>
+			逗号分隔的各个关卡的星星情况:
+			例子:
+				1:13/20
+				第一关 获得13星 总20星
+		</return>
+
+	</method>
+
+	<method>
+
+	    String refreshPosition()
+
+	    <doc>重新校准玩家当前所在的位置</doc>
+
+	    <return>用逗号分隔的字符串path,index</return>
+	</method>
+
+	<method>
+	    cn.mxz.protocols.user.mission.MissionChallengePro getChallengeData( int missionId )
+	    <args>missionID</args>
+	    <doc>获取关卡的今日挑战次数信息</doc>
+	    <return></return>
+	</method>
+
+
+	<method>
+
+	    String getStarReceivedStep2(int chapterId)
+
+	    <doc>获得副本星星奖励领取情况</doc>
+
+		<args>章节ID</args>
+
+	    <return>
+	    	类似:
+	    	 [
+	    	 	{ "hasReceive":true, "canReceive":true },
+	    	 	{ "hasReceive":true, "canReceive":true },
+	    	 	{ "hasReceive":true, "canReceive":true },
+	    	 ]
+
+
+			if (没得狂狂()) {
+				return;
+			}
+
+	    	 if(hasReceive) {
+	    	 	showOpen() //显示开启状态
+	    	 	return ;
+	    	 }
+
+	    	 if(canReceive) {
+	    	 	showClose() //显示关闭状态, 但是可以领取
+	    	 	return ;
+	    	 }
+
+	    	 showGray(); // 显示灰色状态
+
+
+
+	    </return>
+
+	</method>
+
+
+	<method>
+
+	    void receivedStarReward2(int chapterId, int percent)
+
+	    <doc>领取副本星星奖励</doc>
+
+		<args>章节ID</args>
+		<args>
+			1: 30%通关奖励
+	    	2: 60%通关奖励
+	    	3: 90%通关奖励
+	    </args>
+	    <return> </return>
+
+		<back>Mission.getStarReceivedStep(chapterId)</back>
+
+	</method>
+
+	<method>
+	    void resetMopingUp( int missionId, int type )
+	    <doc>重置今日扫荡次数</doc>
+	    <args>关卡ID</args>
+	    <args>扫荡类型		1、主线   2、支线  3、小怪</args>
+	</method>
+
+	<method>
+
+	    String mopingUp(int missionId, int type, int count)
+
+	    <doc>扫荡</doc>
+	    <args>关卡ID</args>
+	    <args>扫荡类型		1、主线   2、支线  3、小怪</args>
+	    <args>扫荡次数</args>
+	    <return>id,数量,id,数量    奖品字符串</return>
+	    <back>User.getData</back><!-- 2014年4月28日 20:20:40  林岑加 -->
+	</method>
+
+	<method>
+	    String getMopingUpData(int missionId, int type)
+	    <doc>获取关卡扫荡的显示数据</doc>
+	    <args>关卡ID</args>
+	    <args>扫荡类型		1、主线   2、支线  3、小怪</args>
+	    <return>剩余扫荡次数,剩余重置次数</return>
+	</method>
+	
+	
+	
+	<method>
+	    String getRunningMission()
+	    <doc>获取正在进行的关卡数据</doc>
+	    <return>用逗号分隔的关卡id</return>
+	</method>
+	
+	<method>
+	    void resetMopingUpColdTime()
+	    <doc>重置扫荡的冷却时间</doc>
+	    <back>User.getData</back>
+	</method>
+	
+	<method>	
+	 void directJumpBranch()
+	    <doc>如果此关卡玩家仅仅通了 主线，支线未通过，则允许玩家直接跳到分叉点上, 此时当前关卡必须不为空</doc>
+	</method>
+
+<method>
+	    String getCrossSituation(String missionId)
+	    <doc>获取输入关卡boss的战斗情况</doc>
+	    <args>用逗号分隔的关卡ID</args>
+	    <return>用逗号分隔的关卡boss战斗情况，1代表战胜，0代表失败，主线在前，支线在后</return>
+	</method>
+</protocol>

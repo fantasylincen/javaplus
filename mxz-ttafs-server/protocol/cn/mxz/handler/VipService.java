@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface VipService extends cn.mxz.util.Service{	/**	 * 获得礼包购买情况	 *	 * @return 获得礼包购买情况	 */	String getData();	/**	 * 点击运行按钮开始转转盘	 *	 * @param vipLevel vip等级	 * 	 */	void buy(int vipLevel);}

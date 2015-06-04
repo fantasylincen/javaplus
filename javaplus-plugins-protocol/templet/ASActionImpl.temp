@@ -1,0 +1,22 @@
+package PACKAGE_NAME
+{
+	import flash.net.Socket;
+
+	import cn.mxz.packet.Packet;
+	import cn.mxz.packet.PacketImpl;
+	
+	import flash.events.EventDispatcher;
+	
+	import CALLER_INTERFACE_PACKAGE.INTERFACE_NAME;
+
+	public class CLASS_NAME extends EventDispatcher implements INTERFACE_NAME
+	{
+		private var _socket:Socket;
+		
+		public function set socket(socket:Socket):void {
+			this._socket = socket;
+		}
+		
+METHODS
+	}
+}

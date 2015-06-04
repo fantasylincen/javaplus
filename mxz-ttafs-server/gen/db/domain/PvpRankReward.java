@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface PvpRankReward extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	int getRank();	void setRank(int rank);void addRank(int rank);	boolean getHasReceive();	void setHasReceive(boolean hasReceive);}

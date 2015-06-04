@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Pvp</name>
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpScenePro getMyData()
+
+	    <doc>获得我的PVP信息</doc>
+	    <return>获得我自己的PVP信息</return>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpScenePro getOther(String userId)
+
+	    <doc>获得我的PVP信息</doc>
+		<args>别人的帐号</args>
+	    <return>获得我自己的PVP信息</return>
+
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpUsersPro getRandomUser()
+
+	    <doc>随机3个人出来给我打</doc>
+	    <return>随机3个人的信息</return>
+
+	</method>
+
+
+
+	<method>
+
+
+	    cn.mxz.protocols.pvp.PvpUsersPro getTops(int page, int count)
+
+	    <doc>第几页</doc>
+
+		<args>起始排行</args>
+		<args>
+			截取数量
+			(
+				范围 0 - 30, 如果超过这个值, 就报错.
+				假设getNearest(1, 30) 而总人数只有15人的时候,
+				程序不会报错, 并会返回15个人的数据
+			)
+		</args>
+
+	    <return>我附近的所有玩家的PVP信息</return>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpRewardPro getReward()
+
+	    <doc>Pvp奖励信息</doc>
+
+	    <return>Pvp奖励信息</return>
+
+	</method>
+
+
+	<method>
+
+	    void receiveReward(int rewardType)
+
+	    <doc>领取Pvp奖励</doc>
+
+		<args>奖励类型</args>
+	</method>
+
+	<method>
+
+	    int buyTimes(int count)
+
+	    <doc>购买挑战机会(1个机会=5次)</doc>
+
+		<args>购买机会数量</args>
+		<return>现在有多少次</return>
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.WarSituationsPro getWarsituations(int page, int count)
+
+	    <doc>获取最近战报信息</doc>
+
+		<args>页码(1 - x)</args>
+		<args>每页数量</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    void kowtow()
+
+	    <doc>膜拜</doc>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpWarsituationPro fighting(String userId)
+
+	    <doc>挑战某人</doc>
+
+		<args>别人的ID</args>
+
+		<return>挑战结果信息</return>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+
+	    cn.mxz.protocols.pvp.PvpUsersPro getUsersNearMe(int pageCount)
+
+	    <doc>获得我所在的页面的信息</doc>
+
+		<args>每页记录数量</args>
+
+	    <return>获得我所在的页面的信息</return>
+
+	</method>
+
+
+
+
+	<method>
+
+
+	    cn.mxz.protocols.pvp.PvpUsersPro getTops2(int page, int count)
+
+	    <doc>第几页</doc>
+
+		<args>起始排行</args>
+		<args>
+			截取数量
+			(
+				范围 0 - 30, 如果超过这个值, 就报错.
+				假设getNearest(1, 30) 而总人数只有15人的时候,
+				程序不会报错, 并会返回15个人的数据
+			)
+		</args>
+
+	    <return>我附近的所有玩家的PVP信息</return>
+
+	</method>
+
+
+	<method>
+
+	    void recieveReward(int taskId)
+
+	    <doc>领取任务奖励</doc>
+		<args>任务ID</args>
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.TaskRewardsPro getTaskReward()
+
+	    <doc>获取PVP任务奖励信息</doc>
+	    <return>PVP任务奖励信息</return>
+
+	</method>
+
+
+	<method>
+
+	    void recieveRankReward()
+
+	    <doc>领取奖励</doc>
+
+		<back>User.getData</back>
+	</method>
+
+
+	<method>
+
+	    int buyFuWen()
+
+	    <doc>购买挑战机会(1个机会=5次)</doc>
+
+		<return>现在有多少次</return>
+	</method>
+
+
+
+	<method>
+
+	    int useFuWen()
+	    <doc>购买挑战机会(1个机会=5次)</doc>
+		<return>现在有多少次</return>
+	</method>
+
+
+	<method>
+
+	   cn.mxz.protocols.user.battle.WarSituationPro getWarSituation(int situationId)
+
+	   <doc>Pvp夺宝战报</doc>
+	   <return></return>
+
+		<args>战况信息ID</args>
+
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpUsersPro getTopsToday()
+
+	    <doc>今日前十名, 这个排名明日00:00才会更新</doc>
+
+	    <return>>今日前十名, 这个排名明日00:00才会更新</return>
+
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.WarSituationsPro getWarsituationsCs(int page, int count)
+
+	    <doc>获取最近战报信息</doc>
+
+		<args>页码(1 - x)</args>
+		<args>每页数量</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    void receiveDanReward()
+
+	    <doc>领取当前的段位奖励</doc>
+		<back>Pvp.getMyData</back>
+
+	</method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpScenePro recieveRankReward2()
+
+	    <doc>领取奖励</doc>
+
+		<back>User.getData</back>
+		<return> ... </return>
+	
+	</method>
+	
+	
+	<method>
+
+	     cn.mxz.protocols.pvp.PvpScenePro receiveDanReward2()
+
+	    <doc>领取当前的段位奖励</doc>
+		<back>Pvp.getMyData</back>
+		<return> ... </return>
+	
+	</method>
+	
+	
+	<method>
+	     cn.mxz.protocols.pvp.PvpRewardStatusPro getRewardStatus()
+
+	    <doc>竞技场奖励</doc>
+		<return> ... </return>
+	
+	</method>
+	
+	<method>
+	     void clearRefreshCd()
+
+	    <doc>清空刷新冷却时间</doc>
+		<return> ... </return>
+	
+	</method>
+	
+
+
+	<method>
+
+	    cn.mxz.protocols.pvp.PvpRandomResultPro getRandomUser2(Boolean isRefresh)
+
+		<args>是否刷新这3个人</args>
+	    <doc>随机3个人出来给我打</doc>
+	    <return>随机3个人的信息</return>
+
+	</method>
+
+
+
+</protocol>

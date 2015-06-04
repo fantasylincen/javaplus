@@ -1,0 +1,112 @@
+package PACKAGE_NAME.dao.impl;
+
+import java.util.List;
+import PACKAGE_NAME.domain.CLASS_NAME;
+import com.lemon.commons.database.ConnectionFetcher;
+import java.sql.Connection;
+import db.domain.*;
+
+//带读缓存
+public class CLASS_NAMEDao3 extends CLASS_NAMEDao1 {
+
+CACHE_DEFINE
+
+	CLASS_NAMEDao3(ConnectionFetcher fetcher) {
+		super(fetcher);
+	}
+
+	public void add(CLASS_NAME CLASS_PARAMETER) {
+		if(CLASS_PARAMETER == null) {
+			throw new NullPointerException();
+		}
+		super.add(CLASS_PARAMETER);
+		cache.put(KEYS_GETTERS, CLASS_PARAMETER);
+	}
+
+	
+	public void addAll(List<CLASS_NAME> CLASS_PARAMETERs) {
+		for(CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+			if(CLASS_PARAMETER == null) {
+				throw new NullPointerException("列表中包含空元素!");
+			}
+		}
+		super.addAll(CLASS_PARAMETERs);
+		for(CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+			cache.put(KEYS_GETTERS, CLASS_PARAMETER);
+		}
+	}
+
+	
+	public void delete(PK_PARAMETER) {
+		super.delete(KEYNAMES_LINK_BY_COMMA);
+		cache.delete(KEYNAMES_LINK_BY_COMMA);
+	}
+
+	public void delete(CLASS_NAME CLASS_PARAMETER) {
+		super.delete(CLASS_PARAMETER);
+		cache.delete(KS_GETTER);
+	}
+
+	public void delete(List<CLASS_NAME> CLASS_PARAMETERs) {
+		for(CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+			delete(CLASS_PARAMETER);
+		}
+	}
+
+	public void update(CLASS_NAME CLASS_PARAMETER) {
+		if(CLASS_PARAMETER == null) {
+			throw new NullPointerException();
+		}
+		super.update(CLASS_PARAMETER);
+		cache.put(KEYS_GETTERS, CLASS_PARAMETER);
+	}
+
+	public void save(CLASS_NAME CLASS_PARAMETER) {
+		if(CLASS_PARAMETER == null) {
+			throw new NullPointerException();
+		}
+		super.save(CLASS_PARAMETER);
+		cache.put(KEYS_GETTERS, CLASS_PARAMETER);
+	}
+	
+	public void save(List<CLASS_NAME> CLASS_PARAMETERs) {
+		for(CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+			save(CLASS_PARAMETER);
+		}
+	}
+
+	public void update(List<CLASS_NAME> CLASS_PARAMETERs) {
+		for(CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+			update(CLASS_PARAMETER);
+		}
+	}
+
+	public CLASS_NAME get(PK_PARAMETER) {
+		CLASS_NAME ooo = cache.get(KEYNAMES_LINK_BY_COMMA);
+		if(ooo == null) {
+			ooo = super.get(KEYNAMES_LINK_BY_COMMA);
+			if(ooo != null) {
+				cache.put(KEYNAMES_LINK_BY_COMMA, ooo);
+			}
+		}
+		return ooo;
+	}
+
+	
+	public List<CLASS_NAME> getAll() {
+		if(cache.getAll().size() < getCount()) {
+			cache.clear();
+			List<CLASS_NAME> all = super.getAll();
+			for (CLASS_NAME CLASS_PARAMETER : all) {
+				cache.put(KEYS_GETTERS, CLASS_PARAMETER);
+			}
+		}
+		return cache.getAll();
+	}
+
+	
+	public void clear() {
+		cache.clear();
+		super.clear();
+	}
+}

@@ -1,0 +1,11 @@
+package PACKAGE_NAME
+{
+	
+IMPORTS
+
+	public interface INTERFACE_NAME
+	{
+	
+METHODS
+	}
+}

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+	<!-- 活动好友 -->
+    <name>ActivityFriend</name>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void onGetRequest(String userId, String nick)
+
+	    <doc>发送通知玩家收到了好友请求</doc>
+		
+		<args>对方的帐号</args>
+		
+		<args>对方的昵称</args>
+	    
+	</server_to_client_method>
+	
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void onToBeFriend(String userId, String nick)
+
+	    <doc>发送通知玩家成为了好友</doc>
+		
+		<args>对方的帐号</args>
+		
+		<args>对方的昵称</args>
+	    
+	</server_to_client_method>
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void onFriendMessage(String userId, String nick)
+
+	    <doc>当别人发来好友请求,好有消息......的时候调用</doc>
+		
+		<args>对方的帐号</args>
+		
+		<args>对方的昵称</args>
+	    
+	</server_to_client_method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.friend.FriendsAllListPro getFriendsAll(int page)
+
+	    <doc>好友列表</doc>
+	    <return>好友列表</return>
+	    <args>第几页的好友列表</args>
+	    
+	</method>
+	
+	
+	<method>
+	   	cn.mxz.protocols.user.friend.ApplyListPro getApplyMessage(int page)
+	    <doc>获得申请详情信息</doc>
+	    <return>申请信息列表</return>
+	    <args>第几页的申请信息</args>
+	</method>
+	
+	
+	
+	<method>
+	   	cn.mxz.protocols.user.friend.FriendReceiveListPro getReceiveMessage(int page)
+	    <doc>发出去的好友申请信息</doc>
+	    <return>发出去申请信息列表</return>
+	    <args>第几页的信息</args>
+	</method>
+	
+	
+	<method>
+	   	cn.mxz.protocols.user.friend.FriendSendAndReceiveListPro getApplyRefuseMessage(int page)
+	    <doc>获得发出接收的好友信息列表</doc>
+	    <return>发出接收的好友列表</return>
+	    <args>第几页的信息</args>
+	</method>
+	
+	
+	<method>
+	   	cn.mxz.protocols.user.friend.QueryListPro getQueryMessage(String userMes ,int page)
+	    <doc>获得查询信息</doc>
+	    <return>查询信息列表</return>
+	    <args>通过玩家账号查询或等级</args>
+	    <args>第几页的查询信息</args>
+	</method>
+	
+	
+	<method>
+	   	void addRequest(String userId)
+	    <doc>请求添加某人为好友</doc>
+	    <return>把玩家账号添加到user_friend_request里面</return>
+	    <args>所要添加的玩家账号</args>
+	</method>
+	
+	
+	<method>
+	   	void refuse(String userId)
+	    <doc>拒绝添加某人为好友</doc>
+	    <return>把玩家账号从user_friend_request里面删除</return>
+	    <args>所要删除的玩家账号（拒绝）</args>
+	</method>
+	
+	
+	<method>
+	   	void accept(String userId)
+	    <doc>同意添加某人为好友</doc>
+	    <return>把玩家账号添加到friend_bag里面</return>
+	    <args>所要删除的玩家账号（同意）</args>
+	</method>
+	
+	
+	<method>
+	   	void remove(String friendId)
+	    <doc>删除好友</doc>
+	    <return>把玩家账号从friend_bag里面删除</return>
+	    <args>所要删除的玩家账号（删除）</args>
+	</method>
+	
+	
+	<method>
+	   	void cancel(String friendId)
+	    <doc>取消发出的申请信息</doc>
+	    <return>把玩家账号从user_friend_request里面删除</return>
+	    <args>所要删除的玩家账号（删除）</args>
+	</method>
+	
+	
+	
+</protocol>

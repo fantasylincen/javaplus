@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>BossBattle</name>
+
+	<method>
+	    cn.mxz.protocols.bossbattle.BossBattleResultPro doBattle()
+	    <doc>boss战的战斗</doc>
+	</method>
+		
+</protocol>

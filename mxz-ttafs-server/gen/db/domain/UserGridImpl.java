@@ -1,0 +1,6 @@
+package db.domain;import java.util.Arrays;public class UserGridImpl implements UserGrid , 
+				UserItem
+
+			, 
+				DBGrid
+			{	@Key	private String uname;	@Key	private int gridId;	private int typeid;	private int count;	public UserGridImpl() {	}	public UserGridImpl(UserGrid c) {		this.uname = c.getUname();		this.gridId = c.getGridId();		this.typeid = c.getTypeid();		this.count = c.getCount();	}	@Override	public String tableName() {		return "user_grid";	}	public void setUname(String uname) {		this.uname = uname;	}	public String getUname() {		return this.uname;	}public void addUname(String uname) {		this.uname += uname;}	public void setGridId(int gridId) {		this.gridId = gridId;	}	public int getGridId() {		return this.gridId;	}public void addGridId(int gridId) {		this.gridId += gridId;}	public void setTypeid(int typeid) {		this.typeid = typeid;	}	public int getTypeid() {		return this.typeid;	}public void addTypeid(int typeid) {		this.typeid += typeid;}	public void setCount(int count) {		this.count = count;	}	public int getCount() {		return this.count;	}public void addCount(int count) {		this.count += count;}}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>NewFormation</name>
+    
+	<method>
+	
+	    cn.mxz.protocols.newformation.NewCampPro getData()
+	    <doc>获得主界面信息</doc>
+	    <return>主界面信息</return>		
+	</method>
+	
+	<method>
+	    cn.mxz.protocols.newformation.OtherCampPro lookUpOther( String userId)
+	    <doc>查看其它玩家信息</doc>
+	    <args>userId 其它玩家id</args>
+	    <return>主界面信息</return>		
+	</method>
+
+	<method>
+	    boolean tacticalUp( int source, String fregment )
+	    <doc>阵法升级</doc>
+	    <args>source 源id</args>
+	    <args>fregment 用逗号分隔的阵法id字符串</args>
+	</method>
+	
+	<method>
+	    void setCurrentTacticalId( int id )
+	    <doc>选择阵法</doc>
+	    <args>阵法id</args>
+	</method>
+	
+	<method>
+	    boolean refreshBackupPos( int position )
+	    <doc>刷新替补位</doc>
+	    <args>替补位的位置，从100开始</args>
+	    <back>User.getData</back><!-- 2014年4月28日 20:20:40  林岑加 -->
+	</method>
+
+	<method>
+	    boolean change( int heroId, int targetPos, int targetHeroId )
+	    <doc>设置英雄的位置</doc>
+	    <args>heroId 英雄id</args>
+	    <args>targetPos 目标位置</args>
+	    <args>targetHeroId 目标位置的英雄id，没有则为-1</args>
+	</method>	
+	
+	
+	<method>
+	    boolean move( int heroId, int targetPos )
+	    <doc>设置英雄的位置</doc>
+	    <args>heroId 英雄id</args>
+	    <args>targetPos 目标位置</args>
+	</method>	
+	
+	<method>
+	    cn.mxz.protocols.newformation.TacticalPro compound( int targetId )
+	    <doc>合成阵法</doc>
+	    <args>targetId 目标阵法id</args>
+	    <return>新阵法</return>
+	    
+	</method>	
+	
+</protocol>

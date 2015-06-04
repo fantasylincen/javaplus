@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface LevelUpReward extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	int getLevel();	void setLevel(int level);void addLevel(int level);}

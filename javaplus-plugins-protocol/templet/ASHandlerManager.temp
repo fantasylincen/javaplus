@@ -1,0 +1,11 @@
+package PACKAGE_NAME
+{
+
+	import HANDLER_PACK.*;
+	
+	public interface Handlers
+	{
+	
+HANDLER_GETTERS
+	}
+}

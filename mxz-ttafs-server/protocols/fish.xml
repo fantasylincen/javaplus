@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>Fish</name>
+	
+	
+	<method>
+	    void start(Boolean isAutoBuy)
+	    <doc>开始钓鱼</doc>
+		<args>是否自动购买</args>
+		
+		<back>User.getData</back>
+		
+	</method>
+		
+		
+	<method>
+	    int stop(int probability)
+	    <doc>收杆</doc>
+		<args>几率:服务器根据该值去随机获得的鱼</args>
+		
+		<back>Fish.getData</back>
+		<back>User.getData</back>
+		
+	</method>
+	
+	
+	<method>
+	
+	    cn.mxz.protocols.user.fish.FishUserPro getData()
+		
+	    <doc>获取钓鱼数据</doc>
+		
+	</method>
+		
+		
+	<method>
+	
+	    int sell(int gridId, int count)
+		
+	    <doc>出售</doc>
+		
+	    <args>格子ID</args>
+		
+		<args>卖出数量</args>
+		
+		<back>User.getData</back>
+		<back>Fish.getData</back>
+		
+	</method>
+		
+</protocol>

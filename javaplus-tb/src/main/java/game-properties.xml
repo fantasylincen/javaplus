@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<!-- 如果订单延期处理时间超过这个值(毫秒) 系统将会把其移入到错误订单进行处理 -->
+	<maxDelayProcessMillis>5000</maxDelayProcessMillis>
+</properties>

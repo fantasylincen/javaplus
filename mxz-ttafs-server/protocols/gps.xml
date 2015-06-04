@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>GPS</name>
+    
+	<method>
+	    
+		void sendLocation(int longitude, int latitude)
+		
+	    <doc>发送自己的坐标给服务器</doc>
+		<args>经度 x 10000</args>
+		<args>纬度 x 10000</args>
+		
+	</method>
+	
+	<method>
+	    cn.mxz.protocols.user.LookAroundPro getLookAround(int page, int countOfPage)
+	    <doc>获得附近的人的列表</doc>
+		<return>附近的人的列表</return>
+		<args>页码</args>
+		<args>每一页有几个人, 最大不能超过100</args>
+	</method>
+	
+	<method>
+	    cn.mxz.protocols.user.LookGirlPro getLookgirl(int page, int countOfPage)
+	    <doc>获得附近的人的列表</doc>
+		<return>附近的人的列表</return>
+		<args>页码</args>
+		<args>每一页有几个人, 最大不能超过100</args>
+	</method>
+	
+	<method>
+	    cn.mxz.protocols.user.LookBoyPro getLookboy(int page, int countOfPage)
+	    <doc>获得附近的人的列表</doc>
+		<return>附近的人的列表</return>
+		<args>页码</args>
+		<args>每一页有几个人, 最大不能超过100</args>
+	</method>
+	
+	<method>
+	   	void removeGPS()
+	    <doc>删除自己位置</doc>
+	    <return>把玩家账号从user_gps里面删除</return>
+	</method>
+	
+</protocol>

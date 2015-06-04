@@ -1,0 +1,573 @@
+package PACKAGE_NAME.dao.impl;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.sql.SQLException;
+import PACKAGE_NAME.domain.CLASS_NAME;
+import cn.javaplus.util.Closer;
+import java.sql.Connection;
+import com.lemon.commons.database.ConnectionFetcher;
+import cn.javaplus.util.Util;
+import db.domain.*;
+
+import java.sql.Blob;
+import java.sql.Date;
+import java.sql.Time;
+//这一版本的Dao, 是第一版本的Dao, 不带任何缓存
+//该文件自动生成, 禁止手动修改!
+public class CLASS_NAMEDao1 implements CLASS_NAMEDao{
+class StatementSetter {
+
+		private PreparedStatement ps;
+		private int index = 1;
+
+		public StatementSetter(PreparedStatement ps) {
+			this.ps = ps;
+		}
+
+		void setNext(Integer value) throws SQLException {
+			ps.setInt(index++, value);
+		}
+
+		void setNext(Byte value) throws SQLException {
+			ps.setByte(index++, value);
+		}
+
+		void setNext(Blob value) throws SQLException {
+			ps.setBlob(index++, value);
+		}
+
+		void setNext(Short value) throws SQLException {
+			ps.setShort(index++, value);
+		}
+
+		void setNext(String value) throws SQLException {
+			ps.setString(index++, value);
+		}
+
+		void setNext(Float value) throws SQLException {
+			ps.setFloat(index++, value);
+		}
+
+		void setNext(byte[] value) throws SQLException {
+			ps.setBytes(index++, value);
+		}
+
+		void setNext(Boolean value) throws SQLException {
+			ps.setBoolean(index++, value);
+		}
+
+		void setNext(Date value) throws SQLException {
+			Timestamp tttt = new Timestamp(value.getTime());
+			ps.setTimestamp(index++, tttt);
+		}
+
+		void setNext(Timestamp value) throws SQLException {
+			ps.setTimestamp(index++, value);
+		}
+
+		void setNext(Long value) throws SQLException {
+			ps.setLong(index++, value);
+		}
+
+		void setNext(Double value) throws SQLException {
+			ps.setDouble(index++, value);
+		}
+
+		void setNext(Time value) throws SQLException {
+			ps.setTime(index++, value);
+		}
+
+		void setNext(Object value) throws SQLException {
+
+			if (value == null) {
+				throw new NullPointerException("不能为null");
+			}
+			
+			if (value instanceof Integer) {
+				setNext((Integer) value);
+			} else if (value instanceof Byte) {
+				setNext((Byte) value);
+			} else if (value instanceof Blob) {
+				setNext((Blob) value);
+			} else if (value instanceof Short) {
+				setNext((Short) value);
+			} else if (value instanceof String) {
+				setNext((String) value);
+			} else if (value instanceof Float) {
+				setNext((Float) value);
+			} else if (value instanceof byte[]) {
+				setNext((byte[]) value);
+			} else if (value instanceof Boolean) {
+				setNext((Boolean) value);
+			} else if (value instanceof Date) {
+				Date date = (Date) value;
+				Timestamp tttt = new Timestamp(date.getTime());
+				setNext(tttt);
+			} else if (value instanceof Long) {
+				setNext((Long) value);
+			} else if (value instanceof Double) {
+				setNext((Double) value);
+			} else if (value instanceof Time) {
+				setNext((Time) value);
+			} else {
+				throw new RuntimeException("无法识别的类型:" + value.getClass());
+			}
+		}
+
+		public void addBatch() throws SQLException {
+			index = 1;
+			ps.addBatch();
+		}
+
+	}
+	
+	private ConnectionFetcher	fetcher;
+
+	public CLASS_NAMEDao1(ConnectionFetcher fetcher) {
+		this.fetcher = fetcher;
+	}
+
+	private static boolean hasLog = db.dao.impl.DBConfig.hasLog;
+
+	public void add(CLASS_NAME CLASS_PARAMETER) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "INSERT INTO TABLE_NAME (COLUMN_NAMES) "
+					+ "VALUES (COLUMN_?S)";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+PS_SETS_ADD
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+
+	
+	public void addAll(List<CLASS_NAME> CLASS_PARAMETERs) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "INSERT INTO TABLE_NAME (COLUMN_NAMES) "
+					+ "VALUES (COLUMN_?S)";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			for (CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+PS_SETS_ADD
+				ss.addBatch();
+			}
+			ps.executeBatch();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+
+	public void delete(PK_PARAMETER) {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "DELETE FROM TABLE_NAME WHERE PKCOLUMNS_S";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+PK_PS_SETS
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+ 		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+
+	public void update(CLASS_NAME CLASS_PARAMETER) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "UPDATE TABLE_NAME SET COLUMN_PARAMETERS WHERE PKCOLUMNS_S";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+PS_SETS_UPDATE
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+	
+	
+	public void update(List<CLASS_NAME> CLASS_PARAMETERs) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "UPDATE TABLE_NAME SET COLUMN_PARAMETERS WHERE PKCOLUMNS_S";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			for(CLASS_NAME CLASS_PARAMETER: CLASS_PARAMETERs) {
+PS_SETS_UPDATE
+				ss.addBatch();
+			}
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+
+	public void delete(List<CLASS_NAME> CLASS_PARAMETERs) {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "DELETE FROM TABLE_NAME WHERE PK_COLUMNS";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			for (CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+DELETE_SETS
+				ss.addBatch();
+			}
+			ps.executeBatch();
+			if(hasLog)
+				System.out.println(sql);
+ 		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+	
+	
+	public void delete(CLASS_NAME CLASS_PARAMETER) {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "DELETE FROM TABLE_NAME WHERE PK_COLUMNS";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+DELETE_SETS
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+ 		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+	
+	
+	public void save(CLASS_NAME CLASS_PARAMETER) {
+	PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "REPLACE INTO TABLE_NAME (COLUMN_NAMES) "
+					+ "VALUES (COLUMN_?S)";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+PS_SETS_ADD
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+
+	public void save(List<CLASS_NAME> CLASS_PARAMETERs) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "REPLACE INTO TABLE_NAME (COLUMN_NAMES) "
+					+ "VALUES (COLUMN_?S)";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			for (CLASS_NAME CLASS_PARAMETER : CLASS_PARAMETERs) {
+PS_SETS_ADD
+				ss.addBatch();
+			}
+			ps.executeBatch();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+	
+	public CLASS_NAME get(PK_PARAMETER) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		CLASS_NAME CLASS_PARAMETER = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE PK_COLUMNS";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+PK_PS_SETS
+			rs = ps.executeQuery();
+			while (rs.next()) {
+			CLASS_PARAMETER = mapping(rs);
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return CLASS_PARAMETER;
+	}
+	
+	public List<CLASS_NAME> getAll() {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> CLASS_PARAMETERs = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME";
+			ps = c.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				CLASS_NAME CLASS_PARAMETER = new CLASS_NAMEImpl();
+				CLASS_PARAMETER = mapping(rs);
+				CLASS_PARAMETERs.add(CLASS_PARAMETER);
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return CLASS_PARAMETERs;
+	}
+
+	public int getCount() {
+		PreparedStatement ps = null;
+ 		ResultSet rs = null;
+		int count = 0;
+		Connection c = fetcher.getConnection();
+ 		try {
+			String sql = "SELECT COUNT(*) FROM TABLE_NAME";
+			ps = c.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				count =  rs.getInt(1);
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+ 			Closer.close(rs, ps, c);
+		}
+ 		return count;
+ 	}
+
+	private CLASS_NAME mapping(ResultSet rs) throws SQLException {
+		CLASS_NAME CLASS_PARAMETER = new CLASS_NAMEImpl();
+RS_GETS
+		return CLASS_PARAMETER;
+	}
+
+/*
+	
+	public List<CLASS_NAME> findBy(String field, String o){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> ls = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE " + field + " = ?";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			ss.setNext(o);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ls.add(mapping(rs));
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return ls;
+	}
+*/
+
+FINDERS
+	
+	public List<CLASS_NAME> findBy(String field, String o, int limit){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> ls = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE " + field + " = ? limit ?";
+			ps = c.prepareStatement(sql);
+			
+			StatementSetter ss = new StatementSetter(ps);
+			ss.setNext(o);
+			ss.setNext(limit);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ls.add(mapping(rs));
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return ls;
+	}
+
+	
+	public CLASS_NAME createDTO() {
+		return new CLASS_NAMEImpl();
+	}
+
+	
+	public void clear() {
+		PreparedStatement ps = null;
+		Connection c = fetcher.getConnection();
+ 		try {
+			String sql = "DELETE FROM TABLE_NAME";
+			ps = c.prepareStatement(sql);
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(ps, c);
+		}
+	}
+
+	public void update(String fieldName, Object value) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "UPDATE TABLE_NAME SET " + fieldName + " = ?";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			ss.setNext(value);
+			ps.executeUpdate();
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+	}
+	
+	public List<CLASS_NAME> findBy(String field, String symbol, String o, int limit){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> ls = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE " + field + " " + symbol + " ? LIMIT ?";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			ss.setNext(o);
+			ss.setNext(limit);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ls.add(mapping(rs));
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return ls;
+	}
+
+	
+	public List<CLASS_NAME> findWhere(String where){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> ls = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE " + where + ";";
+			ps = c.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ls.add(mapping(rs));
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return ls;
+	}
+
+	
+	public List<CLASS_NAME> findByScope(String field, int min, int max, int limit){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CLASS_NAME> ls = new ArrayList<CLASS_NAME>();
+		Connection c = fetcher.getConnection();
+		try {
+			String sql = "SELECT * FROM TABLE_NAME WHERE " + field + " >= ? AND " + field + " <= ? LIMIT ?";
+			ps = c.prepareStatement(sql);
+			StatementSetter ss = new StatementSetter(ps);
+			ss.setNext(min);
+			ss.setNext(max);
+			ss.setNext(limit);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ls.add(mapping(rs));
+			}
+			if(hasLog)
+				System.out.println(sql);
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps, c);
+		}
+		return ls;
+	}
+}

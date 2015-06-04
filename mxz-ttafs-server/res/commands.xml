@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+
+	<node>
+
+			停服
+
+			<command> stopserver </command>
+		</node>
+		
+	<node>
+
+		执行Groovy脚本
+
+		<arg>请输入脚本></arg>
+
+		<tip>方法:</tip>
+
+		<tip> getCity 获取城池</tip>
+		<tip> ln 回显方法</tip>
+		<tip> echo 回显方法</tip>
+		<tip> println 回显方法</tip>
+		<tip> print 回显方法</tip>
+
+
+		<tip>变量:</tip>
+
+		<tip> onlineSize 在线人数</tip>
+		<tip> world 世界</tip>
+
+		<tip></tip>
+
+		<command>
+
+			rungroovyscript
+
+		</command>
+
+	</node>
+
+	<node>
+
+		系统命令
+
+		<node>
+
+			重载游戏世界
+
+			<command>
+
+				reloadworld
+
+			</command>
+
+		</node>
+
+		<node>
+
+			重载系统配置
+
+			<command>
+
+				reloadproperties
+
+			</command>
+
+		</node>
+
+
+
+		<node>
+
+			设置服务器运行模式
+
+			<arg>请输入版本类型></arg>
+
+			<command> setdebugerstatus </command>
+
+			<tip>您可以输入:</tip>
+			<tip> 0.将服务器置为正式版本</tip>
+			<tip> 1.将服务器置为调试版本</tip>
+
+
+		</node>
+
+
+		<node>
+
+			重启服务器
+
+			<command> restartserver </command>
+		</node>
+
+		
+
+
+
+		<node>
+
+			踢某人下线
+
+			<arg>玩家帐号></arg>
+
+			<command> kicksomeone </command>
+		</node>
+		
+		<node>
+
+			清空所有用户今日操作计数器
+
+			<command> clearusercounters </command>
+		</node>
+
+	</node>
+
+	<node>
+
+		查询
+
+
+		<node>
+
+			查询系统消费情况
+
+			<command> queryconsumption </command>
+		</node>
+
+
+		<node>
+
+			查询玩家操作记录
+
+			<command> queryoperationlog </command>
+		</node>
+
+
+		<node>
+
+			查询玩家在线信息
+
+			<arg>页码(1-x)></arg>
+			<arg>每页记录条数></arg>
+
+			<command> queryonlineall </command>
+		</node>
+
+
+
+		<node>
+
+			查询玩家流量使用情况
+
+			<arg>页码(1-x)></arg>
+			<arg>每页记录条数></arg>
+
+			<command> queryflow </command>
+
+		</node>
+
+		<node>
+
+			查询最近登陆的玩家玩家流量使用情况
+
+			<arg>页码(1-x)></arg>
+			<arg>每页记录条数></arg>
+
+			<command> queryflownearest </command>
+
+		</node>
+
+
+
+	</node>
+
+
+	<node>
+
+		设置玩家某项属性
+
+		<arg>请输入玩家属性></arg>
+		<arg>玩家帐号></arg>
+		<arg>属性值></arg>
+
+		<command> set </command>
+
+		<tip>您可以输入:</tip>
+		<tip>1000.通关ID</tip>
+		<tip>活跃度: LIVENESS</tip>
+		<tip>金币: CASH</tip>
+		<tip>体力: PHYSICAL</tip>
+		<tip>修行: CULTIVATION</tip>
+		<tip>声望: REPUTATION</tip>
+		<tip>精力:POWER</tip>
+		<tip>聚魂: JU_HUN</tip>
+		<tip>兽魂: SHOU_HUN</tip>
+		<tip>金锭: NEW_GOLD</tip>
+
+	</node>
+
+
+	<node>
+
+		增加玩家某项属性
+
+		<arg>请输入玩家属性></arg>
+		<arg>玩家帐号></arg>
+		<arg>增加量></arg>
+
+		<command> add </command>
+
+		<tip>您可以输入:</tip>
+		<tip>1001.元宝</tip>
+		<tip>活跃度: LIVENESS</tip>
+		<tip>金币: CASH</tip>
+		<tip>体力: PHYSICAL</tip>
+		<tip>修行: CULTIVATION</tip>
+		<tip>声望: REPUTATION</tip>
+		<tip>精力:POWER</tip>
+		<tip>聚魂: JU_HUN</tip>
+		<tip>兽魂: SHOU_HUN</tip>
+		<tip>金锭: NEW_GOLD</tip>
+		<tip>七色晶石: QI_SE_JING_SHI</tip>
+
+	</node>
+
+
+	<node>
+
+		增加某个神将的经验值
+
+		<arg>玩家帐号></arg>
+		<arg>神将ID></arg>
+		<arg>增加量></arg>
+
+		<command> addexp </command>
+
+	</node>
+
+
+
+
+
+
+
+
+
+	<node>
+
+		测试功能
+
+		<node>
+
+			全服公告
+
+			<arg>请输入消息内容></arg>
+
+			<command> sendmessagetoalluser </command>
+
+		</node>
+
+
+		<node>
+
+			给所有在线玩家发送系统错误
+
+			<command> sendsystemerror </command>
+
+		</node>
+
+
+		<node>
+
+			给某个玩家发送消息
+
+			<arg>玩家帐号></arg>
+			<arg>请输入消息内容></arg>
+
+
+			<command> sendmessagetooneuser </command>
+
+		</node>
+
+
+		<node>
+
+			让2个玩家成为好友
+
+			<arg>玩家帐号1></arg>
+			<arg>玩家帐号2></arg>
+
+
+			<command> tobefriend </command>
+
+
+		</node>
+
+
+	</node>
+
+
+
+
+	<node>
+
+		发布公告
+
+		<node>
+
+			新增公告
+
+			<arg>标题></arg>
+			<arg>请输入消息内容></arg>
+			<arg>类型: 0 活动 1 公告 2 温馨提示 ></arg>
+			<arg>过期时间 比如:2014-10-11 13:00></arg>
+			<arg>是否重要: 1是 0否></arg>
+
+			<command> addnotice </command>
+
+		</node>
+	</node>
+
+
+
+
+	<node>
+
+		退出
+
+		<command>
+
+			quit
+
+		</command>
+
+	</node>
+
+
+
+
+	<node>
+
+		活动(注意:只允许一个活动运行, 一个活动开启前, 会自动结束所有活动)
+
+		<node>
+
+			Boss活动
+
+			<node>
+
+				立即开始
+
+				<command> startbossactivity </command>
+
+			</node>
+
+
+			<node>
+
+				延迟15分钟开始
+
+				<command> startbossactivitywhile </command>
+
+			</node>
+
+
+
+			<node>
+
+				立即停止
+
+				<command> stopbossactivity </command>
+
+			</node>
+
+
+			<node>
+
+				延迟1小时结束
+
+				<command> stopbossactivitywhile </command>
+
+			</node>
+
+
+		</node>
+
+
+
+
+		<node>
+
+			爬塔活动
+
+			<node>
+
+				开始
+
+				<command> starttoweractivity </command>
+
+			</node>
+
+
+
+			<node>
+
+				停止
+
+				<command> stoptoweractivity </command>
+
+			</node>
+
+		</node>
+
+
+
+	</node>
+
+
+
+
+
+
+
+
+	<node>
+
+		赠送物品
+
+
+		<node>
+
+			赠送装备
+
+
+			<arg>装备 TypeId></arg>
+			<arg>数量></arg>
+			<arg>玩家帐号></arg>
+
+			<command> addequipment </command>
+
+			<tip>装备 151101-156611</tip>
+			<tip>装备 前三位:151-156 后三位:101-106 201-210 301-311 401-407 502-507
+				601-611
+			</tip>
+
+
+		</node>
+
+
+		<node>
+
+			赠送某个物品 , 通过"ID,数量|ID,数量|..."
+
+			<arg>玩家帐号></arg>
+			<arg>奖励列表></arg>
+
+			<command> addreward </command>
+		</node>
+
+
+		<node>
+
+			赠送道具
+
+
+			<arg>道具(不要是装备) TypeId></arg>
+			<arg>数量></arg>
+			<arg>玩家帐号></arg>
+
+			<command> addprop </command>
+
+			<tip>鱼 160001-160015</tip>
+
+			<tip>材料 130001-130029</tip>
+			<tip>消耗品 140001-140014</tip>
+			<tip>宝石 前三位 120 第四位 0 - 8 第五位 0 最后 2 - 6</tip>
+
+
+		</node>
+
+		<node>
+
+			赠送道具(根据道具名字)
+
+
+			<arg>道具名字></arg>
+			<arg>数量></arg>
+			<arg>玩家帐号></arg>
+
+			<command>addpropbyname</command>
+
+
+		</node>
+
+		<node>
+
+			赠送神将
+
+
+			<arg>神将 TypeId></arg>
+			<arg>数量(不可大于20)></arg>
+			<arg>玩家帐号></arg>
+
+			<command>addfighter</command>
+
+
+		</node>
+
+
+		<node>
+
+			赠送神将(根据神将名字)
+
+
+			<arg>神将名字></arg>
+			<arg>数量(不可大于20)></arg>
+			<arg>玩家帐号></arg>
+
+			<command> addfighterbyname </command>
+
+
+		</node>
+
+		<node>
+
+			赠送魂魄
+
+
+			<arg>神将 TypeId></arg>
+			<arg>数量(不可大于20)></arg>
+			<arg>玩家帐号></arg>
+
+			<command> addspirite </command>
+
+
+		</node>
+
+
+		<node>
+
+			赠送技能
+
+
+			<arg>技能 TypeId></arg>
+			<arg>数量(不可大于20)></arg>
+			<arg>玩家帐号></arg>
+
+			<command> addskill </command>
+
+
+		</node>
+
+		<node>
+
+			赠送神兽
+
+
+			<arg>神兽 TypeId></arg>
+			<arg>玩家帐号></arg>
+
+			<command> adddogz </command>
+
+
+		</node>
+
+
+
+	</node>
+
+
+	<node>
+
+		清屏
+
+		<command> clean </command>
+
+
+	</node>
+
+</node>

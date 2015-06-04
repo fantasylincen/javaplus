@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>LoginReward</name>
+
+	<!-- <method>
+		cn.mxz.protocols.user.loginReward.RewardListPro getData()
+	    <doc>获取登陆奖励列表</doc>
+	    <return>登陆奖励列表</return>
+
+	</method>
+
+	<method>
+	   	void addLoginReward(int loginTimes)
+	    <doc>领取登陆奖励</doc>
+	    <return>把玩家账号从user_login_reward里面删除</return>
+	    <args>领取的是那次</args>
+	</method> -->
+
+
+	<method>
+		int getContinuousDay()
+	    <doc>连续登陆天数</doc>
+	    <return>连续登陆天数</return>
+	</method>
+
+	<method>
+		cn.mxz.protocols.user.loginReward.LoginRewardPro openAllCard()
+	    <doc>翻开所有牌</doc>
+	    <return>所有得到的奖励和所有没有得到的奖励</return>
+	</method>
+
+	<method>
+		String receiveGoldReward()
+	    <doc>领取今日登陆元宝奖励</doc>
+	    <return>今日领取到了多少元宝,明日可领取多少元宝</return>
+	    <back>User.getData</back>
+	</method>
+
+</protocol>

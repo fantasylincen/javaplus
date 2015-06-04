@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface UserService extends cn.mxz.util.Service{	/**	 * 获取用户数据	 *	 * @return null	 */	cn.mxz.protocols.user.UserP.UserPro getData();	/**	 * 获得用户战斗力	 *	 * @return 用户的战斗力	 */	int getFightingCapacity();	/**	 * 玩家升级数据	 *	 * @return 玩家升级数据	 */	cn.mxz.protocols.user.UserP.UserLevelUpPro getUserLevelUpData();}

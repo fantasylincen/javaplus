@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<attacks>
+
+	<attackType>
+
+		<id> 1 </id>
+		<name>单体攻击</name>
+
+		<position> (0,0) </position>
+
+	</attackType>
+
+
+	<attackType>
+
+		<id> 2 </id>
+		<name>左右溅射伤害</name>
+
+		<!-- 被击相对位置 -->
+		<position> (0,0) </position>
+		<position> (-1,0) </position>
+		<position> (1,0) </position>
+
+		<!-- 衰减:如果通过Position只找到了2个人( (0,0) and (-1,0) ), 那么这两个人的衰减为:1, 0.6 -->
+		<decay> 1 </decay>
+		<decay> 0.6 </decay>
+		<decay> 0.5 </decay>
+
+	</attackType>
+
+
+	<attackType>
+
+		<id> 3 </id>
+
+		<name>横排攻击</name>
+
+		<!-- 被击相对位置 -->
+		<position> (0,0) </position>
+		<position> (-1,0) </position>
+		<position> (1,0) </position>
+		<position> (-2,0) </position>
+		<position> (2,0) </position>
+
+		<!-- 衰减 -->
+		<decay> 1 </decay>
+		<decay> 0.6 </decay>
+		<decay> 0.6 </decay>
+		<decay> 0.3 </decay>
+		<decay> 0.3 </decay>
+
+	</attackType>
+
+
+	<attackType>
+
+		<id> 3 </id>
+
+		<name>随机攻击</name>
+
+		<!-- 被击绝对位置 -->
+		<absolutePosition>0|1|2|3|4|5|6|7|8|9|10|11|12|13|14</absolutePosition>
+
+
+	</attackType>
+
+
+
+	<attackType>
+
+		<id> 3 </id>
+
+		<name>全体攻击</name>
+
+		<!-- 被击绝对位置 -->
+
+		<absolutePosition>0</absolutePosition>
+		<absolutePosition>1</absolutePosition>
+		<absolutePosition>2</absolutePosition>
+		<absolutePosition>3</absolutePosition>
+		<absolutePosition>4</absolutePosition>
+		<absolutePosition>5</absolutePosition>
+		<absolutePosition>6</absolutePosition>
+		<absolutePosition>7</absolutePosition>
+		<absolutePosition>8</absolutePosition>
+		<absolutePosition>9</absolutePosition>
+		<absolutePosition>10</absolutePosition>
+		<absolutePosition>11</absolutePosition>
+		<absolutePosition>12</absolutePosition>
+		<absolutePosition>13</absolutePosition>
+		<absolutePosition>14</absolutePosition>
+
+
+	</attackType>
+</attacks>

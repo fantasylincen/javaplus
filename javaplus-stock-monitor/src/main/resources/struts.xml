@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+
+	<package name="control" extends="struts-default" namespace="/doc/example">
+		<action name="addZiXuan" class="cn.javaplus.smonitor.AddZiXuanAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		
+		<action name="test" class="cn.javaplus.smonitor.TestAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		
+		<action name="selectStock" class="cn.javaplus.smonitor.SelectStockAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		
+		
+		<action name="selectDay" class="cn.javaplus.smonitor.SelectDayAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		
+		
+		<action name="selectMin" class="cn.javaplus.smonitor.SelectMinAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		<action name="deleteZiXuan" class="cn.javaplus.smonitor.DeleteStockAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		<action name="mark" class="cn.javaplus.smonitor.MarkAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		<action name="deleteMark" class="cn.javaplus.smonitor.DeleteMarkAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		
+		<action name="back" class="cn.javaplus.smonitor.BackAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		
+		<action name="next" class="cn.javaplus.smonitor.NextAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		<action name="buy" class="cn.javaplus.smonitor.BuyAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+		<action name="sell" class="cn.javaplus.smonitor.SellAction">
+			<result type="redirect">/doc/example/smonitor.jsp</result>
+		</action>
+	</package>
+</struts>    

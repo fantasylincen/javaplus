@@ -1,0 +1,28 @@
+package PACKAGE_NAME;
+
+import java.util.List;
+
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
+import static cn.javaplus.common.util.Util.Random.*;
+import static cn.javaplus.common.util.Util.Collection.*;
+import static cn.mxz.util.debuger.Debuger.*;
+import static define.D.*;
+import cn.mxz.user.team.god.Hero;
+import cn.mxz.*;
+import cn.mxz.fighter.HeroProperty;
+import cn.javaplus.common.util.Util;
+import cn.mxz.user.City;
+import cn.javaplus.common.util.math.Scope;
+
+import com.google.common.collect.Lists;
+import cn.mxz.user.team.god.Hero;
+import cn.mxz.battle.BattleCamp;
+import cn.mxz.fighter.Fighter;
+
+/** DOC */
+public class CLASS_NAME {
+SCRIPT
+}

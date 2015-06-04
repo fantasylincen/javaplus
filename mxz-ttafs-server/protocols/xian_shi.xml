@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>XianShi</name>
+
+
+	<method>
+	    cn.mxz.protocols.xianshi.XianShiPresentsPro getPresents()
+	    <doc>获得所有的可以领取的礼包</doc>
+	    <return>获得所有的可以领取的礼包</return>
+	</method>
+
+
+	<method>
+	    void buyPresent(int id, int count)
+	    <doc>领取所有的礼包</doc>
+	    <args>礼包ID</args>
+	    <args>购买数量</args>
+		<back>User.getData</back>
+
+	</method>
+
+</protocol>

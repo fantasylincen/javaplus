@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+
+    <name>Heishi</name>
+    
+	<method>
+		cn.mxz.protocols.heishi.HeishiPro getData()
+
+		<doc>黑市界面数据</doc>
+		<return>黑市界面数据</return>
+	</method>
+
+
+
+	<method>
+
+		cn.mxz.protocols.heishi.HeishiPro exchange(int propId, int count)
+
+	   <doc>黑市兑换</doc>
+		<args>propId道具id</args>
+		<args>count道具数量</args>
+
+	</method>
+</protocol>

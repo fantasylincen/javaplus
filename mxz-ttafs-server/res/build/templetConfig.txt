@@ -1,0 +1,150 @@
+package PACKAGE_NAME;
+
+import java.io.File;
+import com.google.common.collect.Maps;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.dom4j.Attribute;
+
+public class CLASS_NAMEConfig {
+
+	private static Map<KEY_TYPE, CLASS_NAME> map;
+	private static List<KEY_TYPE> keys;
+	private static List<CLASS_NAME> all;
+
+
+	static {
+		load();
+	}
+
+	public static List<CLASS_NAME> getAll() {
+		return new ArrayList<CLASS_NAME>(all);
+	}
+
+	public static List<KEY_TYPE> getKeys() {
+		return keys;
+	}
+
+	private static final String fileName = "res/properties/CLASS_BASE_NAMEConfig.xml";
+
+	@SuppressWarnings("unchecked")
+	public static void load() {
+
+		Map<KEY_TYPE, CLASS_NAME> map = Maps.newConcurrentMap();
+		List<KEY_TYPE> keys = new ArrayList<KEY_TYPE>();
+
+		try {
+			File inputXml = new File(fileName);
+			SAXReader saxReader = new SAXReader();
+			Document document = saxReader.read(inputXml);
+			Element employees = document.getRootElement();
+			for (Iterator<Element> i = employees.elementIterator(); i.hasNext();) {
+				Element e = i.next();
+
+				try {
+					put(e, map);
+				} catch (RuntimeException e1) {
+					List<Attribute> all = e.attributes();
+
+					StringBuilder sb = new StringBuilder();
+
+					for (Attribute o : all) {
+						sb.append("[" + o.getStringValue() + "]");
+					}
+
+					System.err.println("Error:" + fileName + "......" + sb);
+					throw e1;
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		keys.addAll(map.keySet());
+
+		Collections.sort(keys);
+		
+		
+		
+		
+				
+		
+		CLASS_NAMEConfig.map = map;
+		CLASS_NAMEConfig.keys = keys;
+		
+		
+		
+		
+		
+		
+		
+		List<CLASS_NAME> all = new ArrayList<CLASS_NAME>();
+		for(KEY_TYPE c : keys) {
+			all.add(get(c));
+		}
+		CLASS_NAMEConfig.all = all;
+	}
+
+	private static void put(Element e, Map<KEY_TYPE, CLASS_NAME> map) {
+		CLASS_NAME x = new CLASS_NAME();
+PARSE_SETS
+		CLASS_NAME remove = map.put(x.getKEY_NAME(), x);
+		if(remove != null) {
+			throw new RuntimeException("唯一标识重复了! 不可以有重复的唯一标识");
+		}
+	}
+
+	public static CLASS_NAME get(KEY_TYPE x) {
+		synchronized (map) {
+			return map.get(x);
+		}
+	}
+
+	/**
+	 * 最小键值
+	 */
+	public static KEY_TYPE getMaxKey() {
+		return keys.get(keys.size() - 1);
+	}
+
+	/**
+	 * 最大键值
+	 */
+	public static KEY_TYPE getMinKey() {
+		return keys.get(0);
+	}
+
+	/**
+	 * 键值最大的模板
+	 */
+	public static CLASS_NAME getMax() {
+		return get(getMaxKey());
+	}
+
+	/**
+	 * 键值最小的模板
+	 */
+	public static CLASS_NAME getMin() {
+		return get(getMinKey());
+	}
+
+
+FINDERS
+
+GETARRAYS
+
+GETLISTS
+
+	private static boolean equals(Object o1, Object o2) {
+		return o1.equals(o2);
+	}
+
+}

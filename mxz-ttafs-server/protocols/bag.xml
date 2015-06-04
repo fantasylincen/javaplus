@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+	<name>Bag</name>
+
+
+	<method>
+
+		cn.mxz.protocols.user.god.BagPro getData()
+
+		<doc>获得背包详细内容</doc>
+		<return>背包所有数据</return>
+
+	</method>
+
+	<method>
+
+		cn.mxz.protocols.user.god.BagPro getTempBagData()
+
+		<doc>获得临时背包所有数据</doc>
+		<return>临时背包所有数据</return>
+
+
+	</method>
+
+
+	<method>
+
+		cn.mxz.protocols.user.mission.BoxPro useProp(int position)
+
+		<doc>使用指定位置的某个道具</doc>
+		<args>被使用道具的索引位置</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.PropPro getCount(int id)
+
+		<doc>获得某个物品在背包中的数量</doc>
+
+		<args>物品的ID(对应到Excel的第一列)</args>
+
+		<return>某个物品在背包中的数量</return>
+
+	</method>
+
+	<method>
+
+		cn.mxz.protocols.user.PropsPro getCounts(String ids)
+
+		<doc>获得一堆物品在背包中的数量</doc>
+
+		<args>物品的ID(对应到Excel的第一列) 用逗号连接各个ID</args>
+
+		<return>某个物品在背包中的数量</return>
+
+	</method>
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.mission.BoxPro usePropToFighter(int propType,
+		int count, int fighterId)
+
+		<doc>使用某个道具</doc>
+
+		<args>道具类型</args>
+
+		<args>使用数量</args>
+
+		<args>战士唯一ID(非Excel第一列) 如果无法取得战士ID , 发-1(比如某个草是对全体战士起效的)</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.PropPro getCountBySpotId(int id)
+
+		<doc>获得某个物品在背包中的数量</doc>
+
+		<args>物品的ID(对应到Excel的第一列)</args>
+
+		<return>某个物品在背包中的数量</return>
+
+	</method>
+
+
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.mission.BoxPro usePropBySpotId(int spotId, int
+		count, int fighterId)
+
+		<doc>使用某个道具</doc>
+
+		<args>道具类型</args>
+
+		<args>使用数量</args>
+
+		<args>战士唯一ID(非Excel第一列) 如果无法取得战士ID , 发-1(比如某个草是对全体战士起效的)</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+	<method>
+
+		void moveToBagFromTempBag(int gridId)
+
+		<doc>从临时背包将物品移动到正式背包</doc>
+
+		<args>背包格子ID</args>
+
+	</method>
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.mission.BoxPro useProp2(int propType, int count)
+
+		<doc>使用某个道具</doc>
+
+		<args>道具类型</args>
+
+		<args>使用数量</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.god.BagPro getPiecesBag()
+
+		<doc>获得碎片背包详细内容</doc>
+		<return>碎片背包所有数据</return>
+
+	</method>
+
+
+	<method>
+
+		cn.mxz.protocols.user.mission.BoxPro buyAndUseProp2(int propType, int
+		count)
+
+		<doc>使用某个道具</doc>
+
+		<args>道具类型</args>
+
+		<args>使用数量</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+	<method>
+
+		String getRemainUseTimes(int propType)
+		<doc>获取某个道具今日剩余使用次数</doc>
+		<args>道具类型</args>
+		<back>User.getData</back>
+		<return>剩余使用次数/今日总共可以使用多少次 例子: 13/20 </return>
+
+	</method>
+
+
+	<method>
+
+		cn.mxz.protocols.user.god.BagPro getBagAll()
+
+		<doc>获得所有背包数据, 仅仅瞿伟在 夺宝时使用</doc>
+		<return>背包所有数据</return>
+
+	</method>
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+		void bagUpdate(cn.mxz.protocols.user.god.BagPro changes)
+
+
+		<doc>主动通知客户端背包发生了变化</doc>
+
+		<args>背包所有数据</args>
+
+	</server_to_client_method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+		void bagRemoved(String bagIdsRemoved)
+
+
+		<doc>被移除了的背包格子ID列表, 逗号分隔</doc>
+
+		<args>被移除了的背包格子ID列表, 逗号分隔</args>
+
+	</server_to_client_method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+		void piecesBagUpdate(cn.mxz.protocols.user.god.BagPro changes)
+
+
+		<doc>主动通知客户端碎片背包发生了变化</doc>
+
+		<args>碎片背包所有数据</args>
+
+	</server_to_client_method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+		void piecesBagRemoved(String bagIdsRemoved)
+
+
+		<doc>碎片背包被移除了的背包格子ID列表, 逗号分隔</doc>
+
+		<args>碎片背包被移除了的背包格子ID列表, 逗号分隔</args>
+
+	</server_to_client_method>
+
+
+
+	<method>
+
+		void sell(String propTypesAndcounts)
+
+		<doc>卖出道具</doc>
+		<args>道具id1, 数量1, 道具id2, 数量2,..... </args>
+
+		<back>User.getData</back>
+
+	</method>
+
+	<!-- <method> cn.mxz.protocols.user.PropsPro getCountsInPiecesBag(String
+		ids) <doc>获得一堆物品在背包中的数量</doc> <args>物品的ID(对应到Excel的第一列) 用逗号连接各个ID</args>
+		<return>某个物品在碎片背包中的数量</return> </method> -->
+</protocol>

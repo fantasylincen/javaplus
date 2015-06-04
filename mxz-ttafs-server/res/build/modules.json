@@ -1,0 +1,212 @@
+{
+	"modules":[
+		"player":{
+			"create":"Player:player:new PlayerImpl(this, dto)"
+		},
+		:{
+			"name":"team",
+			"create":"Team:team:TeamFactory.createTeam(this)"
+		},
+		:{
+			"name":"friend",
+			"create":"FriendManager:friendManager:FriendManagerFactory.createFriendManager(this)"
+		},
+		:{
+			"name":"dogz",
+			"create":"DogzManager:dogzManager:DogzManagerFactory.createDogzManager(this)"
+		},
+		:{
+			"name":"formation",
+			"create":"Formation:formation:FormationFactory.getFormation(this)"
+		},
+		:{
+			"name":"userCounter",
+			"create":"UserCounter:userCounter:new UserCounterMongoImpl(this)"
+		},
+		:{
+			"name":"userCounterHistory",
+			"create":"UserCounter:userCounterHistory:new UserCounterHistoryMongoImpl(this)"
+		},
+		:{
+			"name":"userCounterAuto",
+			"create":"UserCounterSetter:userCounterAuto:new UserCounterAuto(this)"
+		},
+		:{
+			"name":"cd",
+			"create":"CDManager:CDManager:ColdDownFactory.getCDManager(getId())"
+		},
+		:{
+			"name":"checker",
+			"create":"Checker:checker:new PlayerChecker(getPlayer())"
+		},
+		:{
+			"name":"equipment",
+			"create":"EquipmentManager:equipmentManager:new EquipmentManagerImpl(this)"
+		},
+		:{
+			"name":"logs",
+			"create":"LogsManager:logsManager:new LogsManagerImpl(this)"
+		},
+		:{
+			"name":"dailyTask",
+			"create":"DailyTaskManager:dailyTaskManager:new DailyTaskManagerImpl(this)"
+		},
+		:{
+			"name":"achieveTask",
+			"create":"AchieveTaskManager:achieveTaskManager:new AchieveTaskManagerImpl(this)"
+		},
+		:{
+			"name":"enemy",
+			"create":"EnemyManager:enemyManager:new EnemyManagerImpl(this)"
+		},
+		:{
+			"name":"pvp",
+			"create":"PvpManager:newPvpManager:new PvpManagerImpl(this)"
+		},
+		:{
+			"name":"yuanFen",
+			"create":"YuanFen:yuanFen:new YuanFenImpl(this)"
+		},
+		:{
+			"name":"mission",
+			"create":"IMissionManager:mission:new MissionManagerImpl(this)"
+		},
+		:{
+			"name":"bagAuto",
+			"create":"BagAuto:bagAuto:new BagAutoImpl(this)"
+		},
+		:{
+			"name":"bag",
+			"create":"Bag<Grid>:bag:BagFactory.createBag(this)"
+		},
+		:{
+			"name":"tempBag",
+			"create":"Bag<Grid>:tempBag:BagFactory.createTempBag(this)"
+		},
+		:{
+			"name":"piecesBag",
+			"create":"Bag<Grid>:piecesBag:BagFactory.createPiecesBag(this)"
+		},
+		:{
+			"name":"skill",
+			"create":"SkillManager:skillManager:new SkillManagerImpl(this)"
+		},
+		:{
+			"name":"dailyTaskPlayer",
+			"create":"DailyTaskPlayer:dailyTaskPlayer:new DailyTaskPlayerImpl(this)"
+		},
+		:{
+			"name":"vipPlayer",
+			"create":"VipPlayer:vipPlayer:new VipPlayerImpl(this)"
+		},
+		:{
+			"name":"achieveTaskPlayer",
+			"create":"AchieveTaskPlayer:achieveTaskPlayer:new AchieveTaskPlayerImpl(this)"
+		},
+		:{
+			"name":"userShenmo",
+			"create":"UserShenmo:userShenmo:new UserShenmo(this)"
+		},
+		:{
+			"name":"present",
+			"create":"PresentManager:presentManager:new PresentManagerImpl(this)"
+		},
+		:{
+			"name":"prompt",
+			"create":"PromptManager:promptManager:new PromptManagerImpl(this)"
+		},
+		:{
+			"name":"spirite",
+			"create":"SpiriteManager:spiriteManager:new SpiriteManagerImpl(this)"
+		},
+		:{
+			"name":"snatch",
+			"create":"SnatchManager:snatchManager:new SnatchManagerImpl(this)"
+		},
+		:{
+			"name":"service",
+			"create":"ServiceManager:serviceManager:new ServiceManagerImpl(this)"
+		},
+		:{
+			"name":"loginRewardPlayer",
+			"create":"LoginRewardPlayer:loginRewardPlayer:new LoginRewardPlayerImpl(this)"
+		},
+		:{
+			"name":"continuousManager",
+			"create":"ContinuousManager:continuousManager:new ContinuousManagerImpl(this)"
+		},
+		:{
+			"name":"qiyu",
+			"create":"QiYuManager:qiyuManager:new QiYuManagerImpl(this)"
+		},
+		:{
+			"name":"vipCard",
+			"create":"VipCardPlayer:vipCardPlayer:new VipCardPlayerImpl(this)"
+		},
+		:{
+			"name":"invitation",
+			"create":"InvitationManager:invitationManager:new InvitationManagerImpl(this)"
+		},
+		:{
+			"name":"zan",
+			"create":"ZanManager:ZanManager:new ZanManagerImpl(this)"
+		},
+		:{
+			"name":"messageSender",
+			"create":"IMessageSender:messageSender:new MessageSenderImpl(this)"
+		},
+		:{
+			"name":"shangXiang",
+			"create":"ShangXiangPlayer:shangXiangPlayer:new ShangXiangPlayerImpl(this)"
+		},
+		:{
+			"name":"chuangZhen",
+			"create":"ChuangZhenPlayer:chuangZhenPlayer:new ChuangZhenPlayerImpl(this)"
+		},
+		:{
+			"name":"fengshentai",
+			"create":"IFengshentaiManager:fengshentaiManager:new FengshentaiManagerImpl(this)"
+		},
+		:{
+			"name":"attributeRecorder",
+			"create":"AttributeRecorder:attributeRecorder:new AttributeRecorder(this)"
+		},
+		:{
+			"name":"freeze",
+			"create":"FreezeManager:freezeManager:new FreezeManager(this)"
+		},
+		:{
+			"name":"prizeCenter",
+			"create":"IPrizeCenter:prizeCenter:new PrizeCenterLinekong(this)"
+		},
+		:{
+			"name":"tempCollection",
+			"create":"TempCollection:tempCollection:new TempCollection(this)"
+		},
+		:{
+			"name":"yunYou",
+			"create":"YunYouPlayer:yunYouPlayer:new YunYouPlayerImpl(this)"
+		},
+		:{
+			"name":"guide",
+			"create":"Guide:guide:new Guide(this)"
+		},
+		:{
+			"name":"heiShi",
+			"create":"HeiShi:heiShi:new HeiShi(this)"
+		},
+		"tianMing":{
+			"create":"TianMingManager:tianMingManager:new TianMingManager(this)"
+		},
+		"prizeSender1":{
+			"create":"UserPrizeSender:prizeSender1:new PrizeSender1(this)"
+		},
+		"prizeSender2":{
+			"create":"UserPrizeSender:prizeSender2:new PrizeSender2(this)"
+		},
+		"openServerReward" : {
+			"create":"OpenServerRewardManager:openServerRewardManager:new OpenServerRewardManager(this)"
+		},
+
+	]
+}

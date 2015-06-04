@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>Logs</name>
+
+	<method>
+
+	   void clear()
+
+	   <doc>清空所有日志</doc>
+	    
+	</method>
+	
+	
+	<method>
+
+	   cn.mxz.protocols.user.log.LogsAll getAll()
+
+	   <doc>所有日志</doc>
+	   <return>所有日志</return>
+		
+	</method>
+	
+	
+	<method>
+
+	   void remove(int type, int logId)
+
+		<doc>删除某个日志</doc>
+	    <args>1 PVP日志 2 夺宝日志 3 双休日志</args>
+	    <args>日志唯一ID</args>
+		
+	</method>
+</protocol>

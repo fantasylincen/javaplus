@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;import java.util.Date;public interface UmsOnlineno extends Domain {	int getServerId();	void setServerId(int serverId);void addServerId(int serverId);	int getOnlineNumber();	void setOnlineNumber(int onlineNumber);void addOnlineNumber(int onlineNumber);	Date getUpdateTime();	void setUpdateTime(Date updateTime);}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Daji</name>
+
+    <method>
+
+	    cn.mxz.protocols.daji.DajiPro getData()
+
+	    <doc>获取面板数据</doc>
+
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.daji.DajiResultPro drift()
+
+	    <doc>驱赶</doc>
+
+	</method>
+	
+
+
+	<method>
+
+	    int protect()
+
+	    <doc>点击保护按钮</doc>
+	    <return>当前返回次数</return>
+		<back>Daji.getData()</back>
+
+	</method>
+
+	<method>
+
+	    int getProtectPrize()
+
+	    <doc>累计保护三次或者五次的时候获取奖励</doc>
+	    <return>物品id</return>
+		<back>User.getData</back>
+
+	</method>
+
+	<method>
+
+	    void getDriftPrize()
+
+	    <doc>获取驱赶奖励</doc>
+		<back>User.getData</back>
+
+	</method>
+</protocol>

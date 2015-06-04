@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface ActivityScoreReward extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	String getScores();	void setScores(String scores);void addScores(String scores);}

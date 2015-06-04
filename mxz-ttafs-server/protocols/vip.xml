@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Vip</name>
+
+	<method>
+	    String getData()
+	    <doc>获得礼包购买情况</doc>
+	    <return>获得礼包购买情况</return>
+	</method>
+
+
+	<method>
+	    void buy(int vipLevel)
+	    <doc>点击运行按钮开始转转盘</doc>
+		<args>vip等级</args>
+	</method>
+
+</protocol>

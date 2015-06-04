@@ -1,0 +1,1 @@
+package db.domain;import java.util.List;public interface TServerStartTimeDAO {	void add(TServerStartTime tssto);		TServerStartTime get(String server_id);	List<TServerStartTime> getAll(int pageNo, int pageCount);	List<TServerStartTime> getAll();	int getCount();	void update(TServerStartTime tssto);	void delete(String server_id);	int nextId();	}

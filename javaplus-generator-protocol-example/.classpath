@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="fastjson-1.1.37.jar" sourcepath="C:/Users/Administrator/.m2/repository/com/alibaba/fastjson/1.1.37/fastjson-1.1.37-sources.jar"/>
+	<classpathentry kind="lib" path="guava-r09.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/javaplus-util"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

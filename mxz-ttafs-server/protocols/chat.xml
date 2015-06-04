@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Chat</name>
+
+	<method>
+	    void sendToWorld(String message)
+	    <doc>发送消息到世界</doc>
+		<args>消息内容</args>
+	</method>
+
+	<method>
+	    void sendToUnion(String message)
+	    <doc>发送消息到我自己的联盟</doc>
+		<args>消息内容</args>
+	</method>
+
+
+	<method>
+	    void sendToUser(String message, String userId)
+	    <doc>发送消息到某个人</doc>
+		<args>消息内容</args>
+		<args>玩家账号</args>
+	</method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+	    void onMessageWorld(String message)
+	    <doc>
+			格式: 发送者ID|昵称|等级|性别(0:女 1:男)|主角神将ID|消息内容
+			当有世界聊天信息的时候, 发送该事件
+		</doc>
+		<args>消息内容</args>
+	</server_to_client_method>
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+	    void onMessageUnion(String message)
+	    <doc>
+			格式: 发送者ID|昵称|等级|性别(0:女 1:男)|主角神将ID|消息内容
+			当有联盟聊天信息的时候, 发送该事件
+		</doc>
+		<args>消息内容</args>
+	</server_to_client_method>
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+	    void onMessageUser(String message)
+	    <doc>
+			格式: 发送者ID|昵称|等级|性别(0:女 1:男)|主角神将ID|消息内容
+			当有单个玩家聊天信息的时候, 发送该事件
+		</doc>
+		<args>消息内容</args>
+	</server_to_client_method>
+
+	<method>
+	    void openMessage(int type)
+	    <doc>通知后端打开了世界聊天</doc>
+
+		<args>0:世界 1:联盟 2:私聊</args>
+	</method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void receiveGmMessage(String title, String body, String mailType, String senderName)
+
+	    <doc>通知客户端  收到了  GM  的消息回复</doc>
+
+		<args>此参数是蓝港发过来的, 具体咨询蓝港      邮件标题</args>
+		<args>此参数是蓝港发过来的, 具体咨询蓝港      邮件内容</args>
+		<args>此参数是蓝港发过来的, 具体咨询蓝港      邮件类型</args>
+		<args>此参数是蓝港发过来的, 具体咨询蓝港      发件人名</args>
+
+	</server_to_client_method>
+
+</protocol>

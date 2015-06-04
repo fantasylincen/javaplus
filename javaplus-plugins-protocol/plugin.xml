@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="Protocol Generator"
+            class="cn.javaplus.plugins.generator.protocol.preferences.SamplePreferencePage"
+            id="mxzcodegenerator.preferences.SamplePreferencePage">
+      </page>
+   </extension>
+   
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="cn.javaplus.plugins.generator.protocol.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+      		 class="cn.javaplus.plugins.generator.protocol.startup.Startup">
+      </startup>
+   </extension>
+
+	<extension
+	      point="org.eclipse.ui.console.consoleFactories">
+	   <consoleFactory
+	    class="cn.javaplus.plugins.console.ConsoleFactory"
+	         label="Protocol Generator">
+	   </consoleFactory>
+	</extension>
+</plugin>

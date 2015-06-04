@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="ProtoEditor"
+            extensions="proto"
+            icon="icons/favicon.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="com.taobao.protobuf.editors.ProtoEditor"
+            id="com.taobao.protobuf.editors.ProtoEditor">
+      </editor>
+   </extension>
+   
+   
+   <extension
+         point="org.eclipse.ui.popupMenus">
+         
+      <objectContribution
+            adaptable="false"
+            id="com.taobao.protobuf.pbObjectContirbution"
+            nameFilter="*.proto"
+            objectClass="org.eclipse.core.resources.IFile">
+         
+         <menu
+               icon="icons/pb.gif"
+               id="com.taobao.protobuf.pbmenu"
+               label="Proto buffer generate"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         
+         <action
+               class="com.taobao.protobuf.generator.PBGeneratorDelegate"
+               enablesFor="+"
+               icon="icons/jcu_obj.gif"
+               id="com.taobao.protobuf.pbjavaaction"
+               label="genrate java sources"
+               menubarPath="com.taobao.protobuf.pbmenu/content">
+         </action>
+         
+      </objectContribution>
+   </extension>
+   
+   
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.taobao.protobuf.perference.PBPerferencePage"
+            id="com.taobao.protobuf.pbconfigpage"
+            name="ProtocolBuffers">
+      </page>
+   </extension>
+   
+   
+   <extension
+         id="pbmarker"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+      <attribute
+            name="test1111">
+      </attribute>
+      <super
+            type="org.eclipse.core.resources.textmarker">
+      </super>
+   </extension>
+
+
+
+	<extension
+	      point="org.eclipse.ui.console.consoleFactories">
+	   <consoleFactory
+	    class="cn.javaplus.plugins.console.ConsoleFactory"
+	         label="Protobuf Generator">
+	   </consoleFactory>
+	</extension>
+	
+</plugin>

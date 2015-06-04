@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Corona</name>
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void xxx()
+
+	    <doc>给客户端发个通知</doc>
+
+	</server_to_client_method>
+
+
+	<method>
+
+	    cn.mxz.protocols.corona.CoronaPro getData()
+
+	    <doc>获得主界面信息</doc>
+
+	    <return>主界面信息</return>
+	</method>
+
+
+	<method>
+	    cn.mxz.protocols.user.PropPro run( int type, int ts )
+
+	    <doc>点击运行按钮开始转转盘</doc>
+
+	    <args>type	1:免费	2:单倍	3:双倍</args>
+	    <args>时间戳</args>
+	    <return>玩家中的奖品</return>
+	    <back>User.getData</back>
+	    
+
+	</method>
+
+	<method>
+	    void refreshCorona()
+	    <doc>刷新转盘内容</doc>
+	    <return>刷新整个界面</return>
+	    <back>Corona.getData</back>
+	    <back>User.getData</back>
+	</method>
+
+	<method>
+	    cn.mxz.protocols.corona.CoronaMessageSPro getMessages()
+	    <doc>刷新广播消息</doc>
+	    <return></return>
+	</method>
+
+</protocol>

@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface LogsService extends cn.mxz.util.Service{	/**	 * 清空所有日志	 *	 * 	 */	void clear();	/**	 * 所有日志	 *	 * @return 所有日志	 */	cn.mxz.protocols.user.log.LogsP.LogsAll getAll();	/**	 * 删除某个日志	 *	 * @param type 1 PVP日志 2 夺宝日志 3 双休日志	 * @param logId 日志唯一ID	 * 	 */	void remove(int type, int logId);}

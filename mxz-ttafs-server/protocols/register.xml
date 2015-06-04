@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>Register</name>
+
+	<method>
+
+	    void regist()
+
+	    <doc>签到</doc>
+		
+		<back>Register.getData</back>
+	    
+	</method>
+	
+	<method>
+
+	    void remedy()
+
+	    <doc>补签</doc>
+	    
+		<back>Register.getData</back>
+		
+	</method>
+	
+	<method>
+
+	    cn.mxz.protocols.user.CalendarPro getData()
+
+	    <doc>获得签到日历数据</doc>
+	    <return>签到日历数据</return>
+	    
+	</method>
+	
+</protocol>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+	<node><!--服务器操作-->
+		<command>server</command>
+		<desc>服务器操作</desc>
+		
+		<node>
+			<command>start</command>
+			<desc>开启服务器</desc>
+		</node>
+		
+		<node>
+			<command>stop</command>
+			<desc>        关闭服务器</desc>
+		</node>
+		
+		<node>
+			<command>info</command>
+			<desc>        服务器信息</desc>
+		</node>
+	</node>
+	
+	
+	<node><!--玩家操作-->
+		<command>player</command>
+		<desc>玩家操作</desc>
+		
+		<node>
+			<command>setGold</command>
+			<desc>设置元宝</desc>
+		</node>
+		
+		<node>
+			<command>setMoney</command>
+			<desc>设置金币</desc>
+		</node>
+		
+		<node>
+			<command>setLevel</command>
+			<desc>设置等级</desc>
+		</node>
+		
+		<node>
+			<command>setExp</command>
+			<desc>设置经验</desc>
+		</node>
+	</node>
+	
+	
+</node>

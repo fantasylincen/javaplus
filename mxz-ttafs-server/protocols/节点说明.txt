@@ -1,0 +1,23 @@
+<protocol>   协议根节点
+
+    <name>Fighter</name>			-	协议名字
+
+	<method>						-	方法
+
+								 方法返回值  方法名       方法参数列表, 可以是Java里面的各种基本数据类型
+									|		|			|
+									|		|			|
+
+	    cn.mxz.protocols.user.god.GodPro getFighter(int id)
+
+		<id>11231</id>				-	可选项   强制定义的包号(主要是为了版本更新时 ,不会收到协议顺序的影响, 造成包号变更)
+
+	    <doc>获得指定战士</doc>		-	方法注释
+
+	    <return>战士数据</return>		-	返回值注释
+
+	    <args>战士唯一ID</args> 		-	方法参数注释, 有几个参数, 就必须有几个<args>节点
+
+	</method>
+
+</protocol>

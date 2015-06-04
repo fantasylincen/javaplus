@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="javaplus-tb"
+  id="myeclipse.1423039259780"
+  context-root="/javaplus-tb"
+  j2ee-spec="6.0"
+  archive="javaplus-tb.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

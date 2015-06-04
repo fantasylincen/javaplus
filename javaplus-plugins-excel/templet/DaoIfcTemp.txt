@@ -1,0 +1,34 @@
+package PACKAGE_NAME.dao;
+
+import java.util.List;
+import PACKAGE_NAME.domain.CLASS_NAME;
+
+public interface DAO<K, T> {
+
+	void add(T CLASS_PARAMETER);
+	
+	void addAll(List<T> CLASS_PARAMETER);
+	
+	T get(K k);
+	
+	
+	List<T> getAll(int pageNo, int pageCount);
+	
+	
+	List<T> getAll();
+	
+	
+	int getCount();
+	
+	
+	void update(T t);
+	
+	
+	void delete(K k);
+	
+	
+	int nextId();
+	
+	
+	FINDERS
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>ChuangZhen</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.chuangzhen.ChuangZhenWarSituationPro fighting(int type)
+
+		<args>1:力战 2:奋战 3:血战</args>
+
+	    <doc>
+
+			闯阵
+		</doc>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+</protocol>

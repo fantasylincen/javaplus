@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface PvpTops extends Domain {	int getRank();	void setRank(int rank);void addRank(int rank);	String getUname();	void setUname(String uname);void addUname(String uname);}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="account" extends="struts-default" namespace="/account">
+		<action name="enterServer" class="cn.vgame.b.account.EnterServerAction" />
+		<action name="createRole" class="cn.vgame.b.account.CreateRoleAction" />
+		<action name="getRoleList" class="cn.vgame.b.account.GetRoleListAction" />
+		<action name="selectRole" class="cn.vgame.b.account.SelectRoleAction" />
+	</package>
+	
+	<package name="recharge4YiJie" extends="struts-default" namespace="/recharge">
+		<action name="recharge4YiJie" class="cn.vgame.b.recharge.Recharge4YiJieAction" />
+	</package>
+
+	<package name="game" extends="struts-default" namespace="/turntable">
+
+		<action name="getRole" class="cn.vgame.b.turntable.GetRoleAction" />
+
+		<!-- 
+		
+		买东西 
+			传入参数
+				id: 买的物品id, 对应配置表 marketplace.id
+			返回
+				{ type:购买物品类型, id:购买id  客户端发好多就原样返回, count:数量}
+		-->
+		<action name="buy" class="cn.vgame.b.turntable.BuyAction" />
+		
+		
+		<!-- 
+		
+			获得随机推荐20个玩家
+			传入参数
+				count 可选项, 如果不发,默认20个
+			返回
+			 * {
+			 * 		count:数量,
+			 * 		roles: [
+			 *			{ roleId:角色id,  nick昵称},
+			 *			{ roleId:角色id,  nick昵称},
+			 *			{ roleId:角色id,  nick昵称},
+			 *			{ roleId:角色id,  nick昵称},
+			 *			{ roleId:角色id,  nick昵称},
+			 *			{ roleId:角色id,  nick昵称},
+			 *			{ roleId:角色id,  nick昵称},
+			 *		]
+			 *  }
+		 -->
+		<action name="recommendRoles" class="cn.vgame.b.turntable.RecommendRolesAction" />
+		
+		
+	</package>
+
+	<!-- 喊话 -->
+	<package name="message" extends="struts-default" namespace="/message">
+		<action name="sendMessage" class="cn.vgame.b.message.SendMessageAction" />
+		<action name="getMessages" class="cn.vgame.b.message.GetMessagesAction" />
+	</package>
+
+
+
+	<package name="gm" extends="struts-default" namespace="/gm">
+
+		<interceptors>
+			<interceptor name="gmlog" class="cn.vgame.b.log.LogInterceptor"></interceptor>
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="gmlog"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<action name="reloadConfig" class="cn.vgame.b.gm.ReloadConfigAction">
+			<result type="redirect">/gm/reloadSuccess.jsp</result>
+		</action>
+
+		<action name="setUser" class="cn.vgame.b.gm.SetUserAction">
+			<result type="redirect">/gm/setUser.jsp</result>
+		</action>
+
+	</package>
+
+</struts>    

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Enemy</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.enemy.EnemysPro getEnemys(int index, int count)
+
+		<id>11231</id>
+
+	    <doc>获得敌人列表</doc>
+
+	    <return>敌人列表</return>
+
+	    <args>起始下标</args>
+	    <args>获取数量, 可比实际数量大</args>
+
+	</method>
+
+	<method2>
+
+	    cn.mxz.json.MyData getMyData()
+
+		<id>11231</id>
+
+	    <doc>获得敌人列表</doc>
+
+	    <return>敌人列表</return>
+
+	    <args>起始下标</args>
+	    <args>获取数量, 可比实际数量大</args>
+
+	</method2>
+
+
+
+	<method>
+
+	    void addToEnemy(String userId)
+
+	    <doc>添加敌人</doc>
+
+		<args>敌人帐号</args>
+	</method>
+
+	<method>
+
+	    void removeEnemy(String userId)
+
+	    <doc>移除敌人</doc>
+
+		<args>敌人帐号</args>
+	</method>
+
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.enemy.EnemyWarSituationPro revenge(String userId)
+
+	    <doc>
+
+			复仇
+		</doc>
+
+		<args>玩家帐号</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.enemy.EnemyWarSituationPro attack(String userId)
+
+	    <doc>
+
+			攻击某个敌人
+		</doc>
+
+		<args>玩家帐号</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.enemy.SystemItemsPro getSystemList(int indexStart, int count)
+
+	    <doc>
+
+			获取系统消息
+		</doc>
+
+		<args>起始下标</args>
+		<args>获取数量</args>
+
+		<back>User.getData</back>
+
+		<return>系统消息列表</return>
+
+	</method>
+
+</protocol>

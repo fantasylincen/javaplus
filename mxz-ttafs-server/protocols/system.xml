@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>System</name>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void error()
+
+	    <doc>通知客户端报错了</doc>
+
+	</server_to_client_method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void sendMessage(int code, String formatStr, int messageType)
+
+	    <doc>发送普通文字消息给客户端</doc>
+
+		<args>消息号</args>
+
+		<args>
+
+			格式化字符串 (以前是把各个格式化字符串一个一个发给客户端, 现在改为将所有字符串用 $ 连接)
+
+		</args>
+
+		<args>
+
+			消息类型
+				 1 (屏幕中部文字提示)该消息会叠加在之前的消息上
+				 2 (屏幕中部文字提示)该消息会覆盖之前的消息
+				 3 (顶部滚屏公告)公告
+
+		</args>
+
+	</server_to_client_method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void kick()
+
+	    <doc>被挤下线事件</doc>
+
+	</server_to_client_method>
+
+
+
+	<method>
+
+	    void recharge(int count)
+
+	    <doc>充值测试接口, 调试模式才起效</doc>
+
+	    <args>元宝数量</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+		void goldNotEnouph()
+
+	    <doc>金币不够</doc>
+
+
+	</server_to_client_method>
+
+
+
+	<method>
+
+	    boolean getRechargeAward()
+
+	    <doc>获取首次充值大礼包</doc>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+		void beat()
+
+	    <doc>心跳包</doc>
+
+
+	</server_to_client_method>
+
+	<method>
+
+	    void beatToServer()
+
+	    <doc>获取首次充值大礼包</doc>
+
+	</method>
+
+</protocol>

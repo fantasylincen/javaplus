@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface VipCardService extends cn.mxz.util.Service{	/**	 * 获得主界面信息	 *	 * @return 主界面信息	 */	cn.mxz.protocols.vip.VipCardP.VipCardPro getData();	/**	 * 点击运行按钮开始转转盘	 *	 * 	 */	void buy();}

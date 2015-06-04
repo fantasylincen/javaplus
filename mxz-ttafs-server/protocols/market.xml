@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>Market</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.market.MyTradePro getMyTrade()
+	    
+	    <doc>我的交易信息列表（"我的交易"）</doc>
+	    <return>交易信息</return>
+	</method>
+	
+	<method>
+
+	    void getChooseFighterPro(String fighterId,String tradeNeed)
+	    
+	    <doc>提出交易</doc>
+	    <args>所选神将的id</args>
+	    <args>交易所选择的条件（字符串的形式）</args>
+	    
+	</method>
+	
+	<method>
+
+	    cn.mxz.protocols.user.market.TradeFighterMessagePro queryTradeMes(int typeId , int page)
+	    <doc>查找交易信息</doc>
+	    <return>交易信息</return>
+	    <args>所要查找神将Id</args>
+	    <args>第几页</args>
+	    
+	</method>
+	
+	
+	<method>
+
+	    void AcceptTrade(int fighterId,String uName)
+	    <doc>接受交易</doc>
+	    <args>神将唯一Id</args>
+	    <args>神将属于哪个玩家</args>
+	</method>
+	
+	<method>
+
+	    void cancelTrade(int fighterId,String uName)
+	    <doc>取消交易</doc>
+	    <args>神将唯一Id</args>
+	    <args>神将属于哪个玩家</args>
+	</method>
+	
+	<method>
+
+	    cn.mxz.protocols.user.market.TradeFighterMessagePro queryToStep(int step)
+	    
+	    <doc>根据品阶在市场上查找信息</doc>
+	    <return>交易信息</return>
+	    <args>所要查询的品阶</args>
+	</method>
+	
+</protocol>

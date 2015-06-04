@@ -1,0 +1,12 @@
+	@Override
+	public List<CLASS_NAME> findByUPPER_FNAME(PACKAGE_FTYPE o) {
+		List<CLASS_NAME> all = dao.findByUPPER_FNAME(o);
+		for (CLASS_NAME CLASS_PARAMETER : cache.values()) {
+			if(equals(o, CLASS_PARAMETER.getUPPER_FNAME())) {
+				all.add(CLASS_PARAMETER);
+			}
+		}
+		return all;
+	}
+
+	

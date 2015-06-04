@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Battle</name>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.mission.MissionWarSituationPro fightingTest()
+
+	    <doc>
+
+			战斗测试
+		</doc>
+
+
+	</method>
+
+
+
+	<method>
+
+		cn.mxz.protocols.user.battle.CampPro getDemonCamp(int path, int index)
+
+	    <doc>获取指定路径节点上的怪物信息</doc>
+
+	    <return>指定路径节点上的怪物信息</return>
+
+		<args>临近节点的路径</args>
+
+		<args>临近节点在路径中的索引位置</args>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.mission.MissionWarSituationPro getWelcomeFighting()
+
+	    <doc>
+
+			模拟战斗
+		</doc>
+
+
+	</method>
+
+</protocol>

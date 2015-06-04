@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;public interface BossMessageSender {		/**		 *		 */		void onReceiveBoss(ISocket socket, int bossId, int count);}

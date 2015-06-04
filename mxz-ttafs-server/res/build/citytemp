@@ -1,0 +1,132 @@
+CITY_HEAD
+
+FILEDS
+
+
+	private UserBase	dto;
+
+
+
+	public City(UserBase dto) {
+		this.dto = dto;
+	}
+
+
+
+	/**
+	 * 是否是测试玩家
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	public boolean isTester() {
+		if(!Debuger.isDevelop()) {
+			return false;
+		}
+		String id = getId();
+		return !(id.startsWith("hzmxz") && id.endsWith("hzmxz"));
+	}
+
+
+	public String getId() {
+		return getPlayer().getId();
+	}
+
+
+	public long getLastLoginMillis() {
+		return dto.getLastLoginTime() * 1000L;
+	}
+
+
+	public void setLastLoginSec(int sec) {
+		dto.setLastLoginTime(sec);
+		DaoFactory.getUserBaseDao().update(dto);
+	}
+
+
+	public ISocket getSocket() {
+
+		final World world = WorldFactory.getWorld();
+
+		final SocketManager socketManager = world.getSocketManager();
+
+		return socketManager.getSocket(this);
+	}
+
+
+	public int hashCode() {
+		return getId().hashCode();
+	}
+
+
+	public String toString() {
+		return getId() + ":" + getPlayer().getNick();
+	}
+
+	public UserBase getDto() {
+		return dto;
+	}
+	/**
+	 * 判断两个对象的类型是否一致
+	 *
+	 * @param obj1
+	 * @param obj2
+	 * @param c
+	 * @return
+	 */
+	private boolean isTypeEquals(Object obj1, Object obj2, Class<?> c) {
+
+		if (obj1 == null || obj2 == null) {
+
+			return false;
+		}
+
+		if (!obj1.getClass().equals(c) || !obj2.getClass().equals(c)) {
+
+			return false;
+		}
+
+		return true;
+	}
+
+
+	public boolean equals(Object obj) {
+
+		if (!isTypeEquals(obj, this, City.class)) {
+
+			return false;
+		}
+
+		final City u2 = (City) obj;
+
+		return u2.getId().equals(getId());
+	}
+
+
+	public int getLevel() {
+		return getPlayer().getLevel();
+	}
+
+
+	public String getSearchedField() {
+		return getPlayer().getNick();
+	}
+
+
+	public void freeMemory() {
+
+FREE_MEMORY
+	}
+
+/*
+	public void loadAll() {
+
+LOAD_ALL
+	}
+*/
+
+GETTERS
+
+FREES
+
+RELOADS
+}

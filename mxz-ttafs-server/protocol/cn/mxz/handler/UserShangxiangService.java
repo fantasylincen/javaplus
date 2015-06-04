@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface UserShangxiangService extends cn.mxz.util.Service{	/**	 * 获得当前上香状态	 *	 * @return 当前上香状态	 */	cn.mxz.protocols.user.UserShangXiangP.TodayIsGetPro getSX();	/**	 * 上香	 *	 * 	 */	void sendSX();}

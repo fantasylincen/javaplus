@@ -1,0 +1,1 @@
+package mongo.dtodefine;import cn.javaplus.db.mongo.Dao;import cn.javaplus.db.mongo.Key;/** * 好友请求 * * @author 林岑 * */@Daointerface UserFriendRequest {	/**	 * 请求方	 *	 * @return	 */	@Key	String getApplicant();	/**	 * 接收方	 *	 * @return	 */	@Key	String getReceiver();	long getRequestTime();}

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+	<!-- 装备 -->
+    <name>Equipment</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentsPro getEquippedAll()
+
+	    <doc>所有装备信息</doc>
+
+	    <return>所有装备信息</return>
+
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentsPro getAllByPart(String parts)
+
+	    <doc>所有部位为part的装备信息</doc>
+
+	    <return>所有部位为part的装备信息</return>
+
+		<args>部位  用逗号分隔, 可一次性获取多个部位 </args>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentsPro getInStorageAll()
+
+	    <doc>所有仓库里面的装备信息, 包含已经装备的</doc>
+
+	    <return>所有仓库里面的装备信息, 包含已经装备的</return>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro change(int id1, int id2)
+
+	    <doc>更换装备</doc>
+
+		<args>装备ID1</args>
+
+		<args>装备ID2</args>
+
+		<return>换到人身上的装备</return>
+
+		<back>User.getData</back>
+	</method>
+
+
+
+	<method>
+
+
+	    int getLevelUpAddition(int id)
+
+	    <doc>获取强化装备后加成</doc>
+
+		<args>id</args>
+
+		<return>获取装备强化后的加成</return>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro changeEquipment(int fighterId, int id1, int id2)
+
+	    <doc>更换装备</doc>
+
+		<args>装备战士ID</args>
+
+		<args>装备ID1</args>
+
+		<args>装备ID2</args>
+
+		<return>换到人身上的装备</return>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro add(int id, int fighterTypeId)
+
+	    <doc>在空格子上面增加一个装备</doc>
+
+		<args>装备ID</args>
+
+		<args>战士ID</args>
+
+		<return>换到人身上的装备</return>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro levelUp(int id, int levelAdd)
+
+	    <doc>强化装备</doc>
+
+		<args>装备ID1</args>
+
+		<args>强化等级</args>
+
+		<return>被强化后的装备</return>
+
+		<back>User.getData</back>
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro getAfterGenerate(int srcEquipmentId)
+
+	    <doc>获得某件装备合成后的属性</doc>
+
+		<args>源装备ID</args>
+
+		<return>被合成后的装备</return>
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.SnatchResultPro snatch(String userId, int stuffTempletId)
+
+	    <doc>抢夺</doc>
+
+		<args>玩家ID</args>
+		<args>抢夺的材料ID</args>
+
+		<back>User.getData()</back>
+
+	</method>
+
+
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentSnatchListPro getSnatchList(int stuffTempletId)
+
+	    <doc>获得随机的玩家列表</doc>
+		<args>抢夺的材料ID</args>
+
+	</method>
+
+
+
+<method>
+
+	    cn.mxz.protocols.user.equipment.ProtectFighter countDownTime()
+
+	    <doc>获取免战倒计时</doc>
+		<return>返回的是免战倒计时</return>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.ProtectFighter protect()
+
+	    <doc>免战</doc>
+		<return>返回的是免战倒计时</return>
+	</method>
+
+
+
+	<method>
+
+	    void sell(String equipmentIds)
+
+	    <doc>出售装备</doc>
+
+		<args>装备ID 用逗号分隔</args>
+
+		<back>Equipment.getInStorageAll</back>
+
+	</method>
+
+
+	<method>
+
+	    int takeOff(int fighterId, int equipmentId)
+
+	    <doc>卸下装备</doc>
+
+		<args>战士ID</args>
+
+		<args>装备ID</args>
+
+		<back>User.getData</back>
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.LogSnatchPro snatchLog(int page)
+
+	    <doc>夺宝日志</doc>
+
+		<args>日志的第几页</args>
+
+		 <return>被夺宝的日志信息</return>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentHadPro getEquipmentHad()
+
+	    <doc>当前拥有的装备数量</doc>
+		<return>当前拥有的装备数量</return>
+
+	</method>
+
+
+
+	<method>
+
+	   cn.mxz.protocols.user.battle.WarSituationPro getWarSituation(int situationId)
+
+	   <doc>获得夺宝战况信息</doc>
+	   <return>获得夺宝战况信息</return>
+
+		<args>战况信息ID</args>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro generate2(int srcEquipmentId, int dstEquipmentTempletId)
+
+	    <doc>合成某件装备</doc>
+
+		<args>作为材料的装备唯一ID</args>
+
+		<args>目标装备类型ID</args>
+
+		<return>被合成后的装备</return>
+
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.user.equipment.EquipmentPro generate3(int stuffId)
+
+	    <doc>合成某件装备</doc>
+
+		<args>材料ID</args>
+
+		<return>被合成后的装备</return>
+
+	</method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void equipmentsUpdate(cn.mxz.protocols.user.equipment.EquipmentsPro equipments)
+
+	    <doc>主动通知客户端 某些装备的属性发生变化了</doc>
+
+		<args>装备列表</args>
+
+	</server_to_client_method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void equipmentsRemove(String equipmentIds)
+
+	    <doc>主动通知客户端 某些装备被移除了</doc>
+
+		<args>装备唯一ID列表, 逗号分隔</args>
+
+	</server_to_client_method>
+
+</protocol>

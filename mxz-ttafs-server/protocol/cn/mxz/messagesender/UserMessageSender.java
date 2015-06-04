@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;public interface UserMessageSender {		/**		 *		 */		void onUpdateUserList(ISocket socket, cn.mxz.protocols.user.UserP.UserPro user);}

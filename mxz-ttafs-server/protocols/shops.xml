@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>Shop</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.shops.ShopsAllPro getData()
+
+	    <doc>获取商城信息</doc>
+	    <return>商城所有数据</return>
+	    
+	</method>
+	
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.shops.ShopToolsPro getShopTools(int typeId)
+
+	    <doc>获取商品信息</doc>
+	    <return>商品数据</return>
+	    <args>道具ID</args>
+	    
+	</method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.shops.ShopToolsPro buyTool(int toolId, int count)
+
+	    <doc>购买商品道具</doc>
+	    <args>道具ID</args>
+        <args>数量</args>
+        <return>操作数据</return>
+        
+		<back>User.getData</back>
+		
+	</method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.shops.ShopPricePro getPrice(int toolId)
+
+	    <doc>商品的价格</doc>
+	    <args>道具ID</args>
+        <return>价格</return>
+
+	</method>
+	
+</protocol>

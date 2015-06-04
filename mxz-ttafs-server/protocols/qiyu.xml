@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+<!-- 奇遇 -->
+	<name>QiYu</name>
+
+
+	<method>
+
+		String getButtons()
+
+		<doc>获得所有按钮的内容</doc>
+		<return>获得所有按钮的内容</return>
+
+	</method>
+
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void onButtonUpdate(String buttons)
+
+	    <doc>主动通知客户端 按钮发生变化了</doc>
+
+	    <args>更新后的按钮</args>
+
+	</server_to_client_method>
+
+</protocol>

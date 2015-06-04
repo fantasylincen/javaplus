@@ -1,0 +1,6 @@
+package PACKAGE_NAME;
+
+public interface INTERFACE_NAMEService extends cn.mxz.util.Service{
+
+METHODS
+}

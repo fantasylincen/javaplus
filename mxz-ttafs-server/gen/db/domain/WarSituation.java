@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface WarSituation extends Domain {	int getSituationId();	void setSituationId(int situationId);void addSituationId(int situationId);	int getCreateTime();	void setCreateTime(int createTime);void addCreateTime(int createTime);	byte [] getData();	void setData(byte [] data);}

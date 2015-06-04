@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>FirstRechargePerDay</name>
+
+	
+	
+
+	<method>
+
+	    String getDate()
+
+	    <doc>获取界面信息</doc>
+
+	    <return>
+			返回数据，简化起见，返回一个字符串，格式如下:
+	 		 今日充值元宝数,是否领取奖励(1:领取，0：未领取)，道具id，数量  
+		</return>
+
+	</method>
+
+
+<method>
+
+	    String getDate1()
+
+	    <doc>仅仅返回是否领取每日奖励 </doc>
+
+	    <return>
+			仅仅返回是否领取每日奖励 
+		</return>
+
+	</method>
+
+	<method>
+
+	    void getAward()
+
+	    <doc>获取每日充值奖励</doc>
+
+	</method>
+</protocol>

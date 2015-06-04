@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface SkillService extends cn.mxz.util.Service{	/**	 * 合成某个技能	 *	 * @param id 技能ID	 * @return 被合成的技能信息	 */	cn.mxz.protocols.user.god.FighterP.FighterSkillPro generate(int id);	/**	 * 获得某个技能加成信息	 *	 * @param id 技能ID	 * @return 获得某个技能加成信息	 */	cn.mxz.protocols.user.god.FighterP.FighterSkillPro getAddition(int id);}

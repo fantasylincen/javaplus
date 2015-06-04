@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface UserBase extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	String getNick();	void setNick(String nick);void addNick(String nick);	int getLastLoginTime();	void setLastLoginTime(int lastLoginTime);void addLastLoginTime(int lastLoginTime);}

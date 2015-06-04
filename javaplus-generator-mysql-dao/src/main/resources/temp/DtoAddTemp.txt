@@ -1,0 +1,4 @@
+public void addMETHOD_NAME(TYPE_NAME PROPERTY_NAME) {
+		this.PROPERTY_NAME += PROPERTY_NAME;
+}
+

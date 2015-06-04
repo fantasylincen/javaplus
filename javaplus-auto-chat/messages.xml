@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages>
+	<message>
+		<!-- 神马时候发送这段消息 -->
+		<time>12:00</time>
+
+		<!-- 发往哪个群 群号 -->
+		<to>308592173</to>
+
+		<!-- 消息内容 -->
+		<content>
+
+			测试测试
+
+			老婆 测试测试-------------------
+
+			老婆 测试测试-------------------
+
+			测试测试
+
+		</content>
+	</message>
+
+
+	<message>
+		<time>12:00</time>
+		<to>308592173</to>
+		<content> 哈哈哈哈 2014年6月7日 11:36:14 </content>
+	</message>
+
+
+	<message>
+		<time>12:00</time>
+		<to>308592173</to>
+		<content> 哈哈哈哈 2014年6月7日 11:36:14 </content>
+	</message>
+
+
+</messages>

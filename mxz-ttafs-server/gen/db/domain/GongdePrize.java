@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface GongdePrize extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	String getPrize();	void setPrize(String prize);void addPrize(String prize);}

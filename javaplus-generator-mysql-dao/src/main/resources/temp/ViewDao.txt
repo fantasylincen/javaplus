@@ -1,0 +1,87 @@
+package PACKAGE_NAME.dao.impl;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import PACKAGE_NAME.domain.CLASS_NAME;
+import cn.javaplus.util.Closer;
+import java.sql.Connection;
+import com.lemon.commons.database.ConnectionFetcher;
+import cn.javaplus.util.Util;
+import db.domain.*;
+
+//该文件自动生成, 禁止手动修改!
+public class CLASS_NAMEDao {
+
+	private ConnectionFetcher	fetcher;
+
+	public CLASS_NAMEDao(ConnectionFetcher fetcher) {
+		this.fetcher = fetcher;
+	}
+
+	public List<CLASS_NAME> getAll() {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection connection = null;
+		List<CLASS_NAME> CLASS_PARAMETERs = new ArrayList<CLASS_NAME>();
+		try {
+			String sql = "select * from TABLE_NAME";
+			connection = fetcher.getConnection();
+			ps = connection.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				CLASS_NAME CLASS_PARAMETER = new CLASS_NAMEImpl();
+				CLASS_PARAMETER = mapping(rs);
+				CLASS_PARAMETERs.add(CLASS_PARAMETER);
+			}
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+			Closer.close(rs, ps);
+			Closer.close(connection);
+		}
+		return CLASS_PARAMETERs;
+	}
+
+	public int getCount() {
+		PreparedStatement ps = null;
+ 		ResultSet rs = null;
+		Connection connection = null;
+		int count = 0;
+ 		try {
+			String sql = "select count(*) from TABLE_NAME";
+			connection = fetcher.getConnection();
+			ps = connection.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				count =  rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw Util.Exception.toRuntimeException(e);
+		} finally {
+ 			Closer.close(rs, ps);
+			Closer.close(connection);
+		}
+ 		return count;
+ 	}
+
+	private CLASS_NAME mapping(ResultSet rs) throws SQLException {
+		CLASS_NAME CLASS_PARAMETER = new CLASS_NAMEImpl();
+		RS_GETS
+		return CLASS_PARAMETER;
+	}
+}
+
+
+/*
+
+KEYS 
+
+CLASS_NAME
+
+CLASS_PARAMETER
+
+RS_GETS
+*/

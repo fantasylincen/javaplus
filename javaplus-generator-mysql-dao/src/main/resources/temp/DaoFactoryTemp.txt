@@ -1,0 +1,24 @@
+package PACKAGE_NAME.dao.impl;
+
+import db.GameDB;
+import com.lemon.commons.database.ConnectionFetcher;
+import dbutils.IdUtil;
+import java.util.concurrent.atomic.AtomicLong;
+
+public class DaoFactory {
+
+GET_METHODS
+
+NEXT_IDS
+
+	public static void commitAllSafety() {
+COMMIT_ALL
+	}
+	
+	public static void setFetcher(ConnectionFetcher fetcher) {
+		DaoFactory.fetcher = fetcher;
+	}
+
+	private static ConnectionFetcher		fetcher;
+
+}

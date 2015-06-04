@@ -1,0 +1,32 @@
+{
+"memo": "memo",
+"ext_info": {
+"single_limit": "2",
+"user_limit": "3",
+"logo_name": "b"
+},
+"goods_info": {
+"id": "10001",
+"name": "a",
+"price": "0.01",
+"expiry_date": "2015-03-13 00:00:01|2015-03-15 23:59:59",
+"desc": "c",
+"sku_title": "d",
+"sku": [
+{
+"sku_id": "001",
+"sku_name": "e",
+"sku_price": "0.01",
+"sku_inventory": "1"
+},
+{
+"sku_id": "002",
+"sku_name": "f",
+"sku_price": "9.00",
+"sku_inventory": "1"
+}
+]
+},
+"need_address":"T",
+"trade_type":"1"
+}

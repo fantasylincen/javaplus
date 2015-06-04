@@ -1,0 +1,19 @@
+package PACKAGE_NAME
+{
+	import flash.net.Socket;
+	import CALLER_PACKAGE.*;
+	import CALLER_IMPLEMENT_PACKAGE.*;
+		
+	public class ActionFactory
+	{
+		
+HANDLER_FILEDS
+		
+		public static function set socket(value:Socket):void
+		{
+SET_SOCKETS
+		}
+	
+CALLER_GETTERS
+	}
+}

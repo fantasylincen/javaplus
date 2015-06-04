@@ -1,0 +1,13 @@
+package PACKAGE_NAME
+{
+
+IMPORTS
+
+	import flash.events.IEventDispatcher;
+
+	public interface INTERFACE_NAME extends IEventDispatcher
+	{
+	
+METHODS
+	}
+}

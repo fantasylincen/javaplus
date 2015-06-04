@@ -1,0 +1,27 @@
+package PACKAGE_NAME
+{
+	import flash.net.Socket;
+	import flash.utils.ByteArray;
+	import flash.events.Event;
+	import cn.mxz.events.*;
+	
+IMPORTS
+	
+	public class DataHandler
+	{
+
+		public function onData(packet:ByteArray, packetType:int):void
+		{
+
+			var data:ByteArray = new ByteArray();
+			packet.readBytes(data);
+			var error:String = data.readUTF();
+			var hasError:Boolean = error.length != 0;
+			
+			switch(packetType)
+			{
+HANDLER_CASES
+			}
+		}
+	}
+}

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Dogz</name>
+
+	<method>
+
+		cn.mxz.protocols.user.DogzListPro getDogzAll()
+
+		<doc>获得所有神兽</doc>
+
+	</method>
+
+	<method>
+
+		cn.mxz.protocols.user.DogzFighting getFighting()
+
+		<doc>获得当前出战神兽</doc>
+
+	</method>
+
+	<method>
+
+
+		cn.mxz.protocols.user.DogzPro dunWu(int type, Boolean isProtected, int dogzTypeId)
+
+		<doc>顿悟(神兽品质随机增加|减少) 顿悟之后, 如果神兽处于被保护状态, 那么将会被取消保护</doc>
+
+		<args>顿悟类型  (0 元宝顿悟, 1 用回魂丹顿悟)</args>
+		<args>是否保护</args>
+		<args>神兽类型ID(Excel表唯一标识)</args>
+		<return>顿悟后的神兽信息</return>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+		void protectedDogz(int dogzTypeId)
+
+		<doc>保护某个神兽, 保护这个神兽之后, 在顿悟时, 就不会出现品质下降</doc>
+		<args>神兽类型ID(Excel表唯一标识)</args>
+
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+		cn.mxz.protocols.user.DogzPro feed(int dogzTypeId, String gridIds)
+
+		<doc>用某种鱼喂养某个神兽, 喂养之后成长值增加</doc>
+		<args>神兽类型ID(Excel表唯一标识)</args>
+		<args>鱼篓格子ID列表  用|分隔, 例如 1|3|7|9</args>
+		<return>喂养后的神兽信息</return>
+
+		<back>User.getData</back>
+		<back>Fish.getData</back>
+
+	</method>
+
+
+	<method>
+
+		cn.mxz.protocols.user.DogzPro setFighting(int dogzTypeId)
+
+	    <doc>出战某个神兽, 出战后, 该神兽的加成作用就会作用到队伍</doc>
+		<args>神兽类型ID(Excel表唯一标识)</args>
+		<return>出战神兽信息</return>
+		<back>Dogz.getDogzAll</back>
+		<back>User.getData</back>
+
+
+	</method>
+
+
+	<method>
+
+		void takeBack(int dogzTypeId)
+
+	    <doc>召回某个神兽, 召回后, 该神兽的加成作用就不会作用到队伍</doc>
+		<args>神兽类型ID(Excel表唯一标识)</args>
+		<return>召回神兽信息</return>
+		<back>Dogz.getDogzAll</back>
+		<back>User.getData</back>
+
+
+
+	</method>
+
+
+	<method>
+
+		cn.mxz.protocols.user.DogzPro generate(int dogzTypeId)
+
+	    <doc>碎片合成</doc>
+		<args>神兽类型ID(Excel表唯一标识)</args>
+		<return>被合成的神兽信息</return>
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.PropPro exchange(int stuffId)
+	    <args>兑换的材料ID</args>
+	    <doc>兑换某个材料</doc>
+		<return> 兑换之后, 这个碎片的数量 </return>
+
+		<back>User.getData</back>
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.DogzPro zhuHun(int dogzId)
+	    <args>神兽ID</args>
+	    <doc>注魂</doc>
+		<return> 注魂后的神兽  </return>
+
+		<back>User.getData</back>
+	</method>
+
+</protocol>

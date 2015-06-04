@@ -1,0 +1,96 @@
+/*
+
+[SYSTEM]
+显示当前在线人数: World world = WorldFactory.getWorld();    out.println("当前在线人数:" + world.getOnlineAll().size());
+
+清空所有玩家的每日签到数据:for (City u : WorldFactory.getWorld().getAll()) 	{ Register r = new RegisterImpl(u); r.reset(); UserCounter c = u.getUserCounterHistory(); c.clear(CounterKey.REGIST_REMEDY_TIMES);}
+
+[PVP]
+
+设置某个玩家当前胜点: String userId = "hjl40"; int count = 290; DAO<String,UserPvpMessage> DAO = CacheDaoFactory.getUserPvpMessageDAO(); UserPvpMessage u = DAO.get(userId); u.setPvpWinPoints(count); DAO.update(u);
+
+[PVP]
+清空pvp任务: new PvpTaskClear().runSafty(); new UserCountersZeroTask().runSafty();
+
+[Prop]
+增加道具: String userId = "qw8_r0"; String props = "135115,10-135116,10-135117,10"; City city = CityFactory.getCity(userId); String[] ps = props.split("-"); for (String p : ps) { int typeId = new Integer(p.split(",")[0]); int count = new Integer(p.split(",")[1]); city.getPiecesBag().addProp(typeId, count); }
+
+[VIP]
+增加累计充值: String userId = "lc255_r0"; City c = CityFactory.getCity(userId); UserCounter his = c.getUserCounterHistory(); his.add(CounterKey.TOTAL_RECHARGE_GOLD_COUNT, 600);
+
+*/
+
+import cn.javaplus.db.*;
+import db.dao.factory.*;
+import db.domain.*;
+
+import cn.mxz.base.servertask.UserCountersZeroTask;
+import cn.mxz.base.world.World;
+import cn.mxz.base.world.WorldFactory;
+import cn.mxz.city.CityFactory;
+import cn.mxz.city.City;
+import cn.mxz.base.world.PlayerFactory;
+import cn.mxz.user.Player;
+import cn.mxz.city.PlayerProperty;
+import cn.javaplus.util.Util;
+import java.io.PrintWriter;
+import cn.mxz.city.CityFactory;
+
+import cn.mxz.util.counter.CounterKey;
+import cn.mxz.util.counter.UserCounter;
+import java.nio.ByteBuffer;
+import cn.mxz.factory.IFactory;
+import static cn.mxz.base.telnet.command.system.V.*;
+
+import com.lemon.commons.socket.ISocket;
+
+
+
+class X {
+
+	private PrintWriter out;
+
+	private World world = WorldFactory.getWorld();
+
+	void run(out) {
+
+		this.out = out;
+
+	//当前在线人数
+		int onlineSize = world.getOnlineAll().size();
+
+
+
+		SCRIPT
+	}
+
+	//获得玩家城池
+	City getCity(userId) {
+
+		return CityFactory.getCity(userId);
+	}
+
+	//回显
+	void println(o) {
+
+		out.println o
+	}
+
+	//回显
+	void echo (o) {
+
+		ln o
+	}
+
+	//回显
+	void ln(o) {
+
+		println o
+	}
+
+	//回显  不换行
+	void print(o) {
+
+		out.print o
+	}
+}

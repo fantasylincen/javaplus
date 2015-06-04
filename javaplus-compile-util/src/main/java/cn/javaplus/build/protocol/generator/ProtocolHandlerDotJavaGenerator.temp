@@ -1,0 +1,24 @@
+	private final class ProtocolHandler {
+		
+		private Map<String, Action> actions;
+		
+		public ProtocolHandler() {
+			if(actions == null) {
+				actions = new HashMap<String, Action>();
+REPEATED PUT_ACTIONS
+			}
+		}
+		
+		public void onData(String data) {
+			JsonReader jr = new JsonReader();
+			JsonValue obj = jr.parse(data);
+			String cn = obj.getString("className");
+			String mn = obj.getString("methodName");
+			dispatchEvent(cn, mn, obj);
+		}
+	
+		private void dispatchEvent(String cn, String mn, JsonValue obj) {
+			Action action = actions.get(cn + "." + mn);
+			action.run(cn, mn, obj);
+		}
+	}

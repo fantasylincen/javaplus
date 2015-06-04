@@ -1,0 +1,21 @@
+
+		case PACKET_NUMBER: {
+READ_FILEDS
+
+			{
+				try {
+					RETURN_TYPE data = ((INTERFACE_NAMEService)factory.get("BEAN_NAME")).METHOD_NAME(INSERT_FIELDS);
+					response.putString("");				//no error
+					PUT_DATA
+				} catch (ClientException e) {
+					response.putString(e.getMessage());	//error happen
+					throw e;
+				} catch (Throwable e) {
+					response.putString(e.getClass().getName() + ":" + e.getMessage());	//error happen
+					throw e;
+				}
+			}
+			
+RESPONSES
+			break;
+		}

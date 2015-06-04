@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface FormationService extends cn.mxz.util.Service{}

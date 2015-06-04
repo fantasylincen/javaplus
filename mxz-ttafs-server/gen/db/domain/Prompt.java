@@ -1,0 +1,1 @@
+package db.domain;public interface Prompt extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	boolean getV(int index);	void setV(int index, boolean v1);}

@@ -1,0 +1,1 @@
+//package db.domain;//import java.util.Arrays;//////public interface KeyValue extends Domain {////	String getK();////	void setK(String k);////void addK(String k);////	String getV();////	void setV(String v);////void addV(String v);//////}

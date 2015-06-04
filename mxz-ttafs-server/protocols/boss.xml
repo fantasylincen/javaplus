@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+	<!-- 活动好友 -->
+    <name>Boss</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.boss.FriendPointPro getFriendPointsAll()
+
+	    <doc>好友分享给我的积分列表</doc>
+	    <return>好友分享给我的积分列表</return>
+	    	    
+	</method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.boss.BossListPro getBossList()
+
+	    <doc>获得Boss列表</doc>
+	    <return>Boss列表</return>
+	    	    
+	</method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.boss.BossPro getBoss(int bossId)
+
+	    <doc>获得Boss列表中的Boss</doc>
+	    <return>Boss列表中的Boss</return>
+		<args>Boss唯一ID, 这个id可以在BossListPro里面的某个元素里面取得</args>
+	    	    
+	</method>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 一下方法是杜伟需要考虑的 -->
+	
+	
+	<method>
+	
+	    void giveUp()
+	    <doc>放弃当前剧情进程</doc>
+		
+	</method>
+	
+	<method>
+	
+	    cn.mxz.protocols.user.mission.MissionPro getMissionData()
+		
+	    <doc>获得副本数据</doc>
+		
+	    <return>副本数据</return>
+	</method>
+	
+	
+	<method>
+	
+	    void enter(int storyId)
+		
+	    <doc>进入某个剧情地图(点击"继续征程"按钮后,需要调用的方法)</doc>
+		
+		<args>剧情ID</args>
+		
+	</method>
+	
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.battle.WarSituationPro hitBoss(int bossId, Boolean isFull)
+
+	    <doc>跟某个Boss战斗 可以是当前列表中的任意Boss</doc>
+	    <return>奖励信息</return>
+		<args>Boss唯一ID, 这个id可以在BossListPro里面的某个元素里面取得</args>
+		<args>是否全力战斗</args>
+	    	    
+		<back>User.getData</back>
+	</method>
+	
+	
+	<method>
+	
+	    int moveTo(int path, int index)
+		
+	    <doc>
+		
+			走到临近的位置上去, 
+				1.如果不是临近的, 会报错
+				2.移动成功扣除一点体力
+				3.如果移动到了终点, 显示到达终点提示, 然后清除该地图, 回到主界面
+			
+				如果中途遇到了Boss, 那么直接加入到Boss列表中
+			
+		</doc>
+		
+		<args>临近节点的路径</args>
+		<args>临近节点在路径中的索引位置</args>
+		
+		<return> 是否遇到了Boss </return>
+		
+		<back>User.getData</back>
+	</method>
+		
+		
+	<method>
+
+	    boolean isTouchedBoss()
+
+	    <doc>判断是否碰到了Boss</doc>
+	    <return>判断是否碰到了Boss</return>
+	    	    
+	</method>
+	
+	
+	<method>
+
+	    int getTouchedBossId()
+
+	    <doc>获得当前在地图上遇到的BossId</doc>
+	    <return>当前在地图上遇到的BossId</return>
+	    	    
+	</method>
+	
+	
+	<method>
+
+	    cn.mxz.protocols.user.boss.BossPro getBossTouched()
+
+	    <doc>获得当前在地图上遇到的Boss</doc>
+	    <return>当前在地图上遇到的Boss</return>
+	    	    
+	</method>
+	
+	
+	<method>
+	
+		cn.mxz.protocols.user.boss.RewardPanelPro getBossPrize()
+		
+	    <doc>攻击Boss之后调用该方法, 会把Boss战斗所获得的积分奖励反馈给客户端</doc>
+		
+	    <return>积分奖励</return>
+		
+	</method>
+	
+	
+	<method>
+	
+		cn.mxz.protocols.user.battle.CampPro getDemonCamp(int path, int index)
+		
+	    <doc>获取指定路径节点上的怪物信息</doc>
+		
+	    <return>指定路径节点上的怪物信息</return>
+		
+		<args>临近节点的路径</args>
+		
+		<args>临近节点在路径中的索引位置</args>
+		
+	</method>
+	
+	
+	<method>
+	
+	    cn.mxz.protocols.user.mission.BoxPro openChest()
+		
+	    <doc>开启踩到的宝箱</doc>
+		
+		<!-- 更新战斗力 -->
+		<back>User.getFightingCapacity</back>
+		
+		<back>User.getData()</back>
+		
+		
+		
+	</method>
+	
+	<method>
+	
+	    cn.mxz.protocols.user.mission.RandomMessagePro encounterQuestion()
+		
+	    <doc>遇到?</doc>
+		
+		<back>User.getFightingCapacity</back>
+		
+		<back>User.getData</back>
+		
+		
+		
+	</method>
+	
+	<method>
+	
+	    cn.mxz.protocols.user.mission.MoneyMessagePro openMoney()
+		
+	    <doc>遇到钱袋</doc>
+		
+		<back>User.getFightingCapacity</back>
+		
+		<back>User.getData</back>
+		
+		
+	</method>
+	
+	
+	
+	
+	<method>
+	
+	    cn.mxz.protocols.user.mission.MissionPrizePro receiveMissionPrize()
+		
+	    <doc>领取副本战斗奖励</doc>
+		
+	    <return>领取副本战斗奖励</return>
+		
+		<back>User.getData()</back>
+		
+		
+		
+	</method>
+	
+	<method>
+	
+	    cn.mxz.protocols.user.battle.WarSituationPro fighting(int path, int index)
+		
+	    <doc>
+		
+			跟临近的怪兽打仗, 
+			
+				打赢了的话, 人就会跳到对应的位置上, 
+				
+				打输了的话, 人的位置不变
+		</doc>
+		
+		<args>临近节点的路径</args>
+		
+		<args>临近节点在路径中的索引位置</args>
+		
+		
+		
+		<back>User.getData</back>
+		
+	</method>
+	
+	
+	
+	<method>
+
+	    void acceptFriendShared()
+
+	    <doc>接受好友分享的积分</doc>
+	    	    
+	</method>
+	
+	
+	
+	<method>
+	
+		cn.mxz.protocols.user.battle.CampPro getBossCamp()
+		
+	    <doc>获得碰到的Boss的阵形</doc>
+		
+	    <return>碰到的Boss的阵形</return>
+		
+	</method>
+	
+	
+	<method>
+	
+		cn.mxz.protocols.user.battle.CampPro getPlayerCamp(Boolean isFullFighting)
+		
+	    <doc>获得我的阵形</doc>
+		
+		<args>是否全力一击</args>
+		
+	    <return>获得我的阵形</return>
+		
+	</method>
+	
+	
+	
+	<method>
+	
+		cn.mxz.protocols.user.battle.CampPro getBossCampById(int bossId)
+		
+	    <doc>获得Boss列表中, 某个Boss的阵容, 前置条件, bossId必须在你能看见的Boss列表中</doc>
+		
+		
+		<args>BossID</args>
+		
+	</method>
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void onReceiveBoss(int bossId, int count)
+
+	    <doc>通知客户端收到了一个朋友发来的Boss求助</doc>
+
+		<args>BossId</args>
+		<args>别人发给我的Boss数量</args>
+
+	</server_to_client_method>
+	
+	
+	
+	<method>
+	
+		int getBossCountInvitedMe()
+		
+	    <doc>别人发给我的Boss数量</doc>
+			
+	</method>
+	
+</protocol>

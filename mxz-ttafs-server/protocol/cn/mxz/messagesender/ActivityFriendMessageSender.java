@@ -1,0 +1,1 @@
+package cn.mxz.messagesender;import com.lemon.commons.socket.ISocket;public interface ActivityFriendMessageSender {		/**		 *		 */		void onGetRequest(ISocket socket, String userId, String nick);		/**		 *		 */		void onToBeFriend(ISocket socket, String userId, String nick);		/**		 *		 */		void onFriendMessage(ISocket socket, String userId, String nick);}

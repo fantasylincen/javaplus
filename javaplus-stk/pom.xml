@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cn.javaplus</groupId>
+	<artifactId>stock</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>httpunit</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+    <repositories>    
+        <repository>
+            <id>repo-mirror</id>
+            <url>http://maven.net.cn/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>    
+        <pluginRepository>
+            <id>plugin-repo-mirror</id>
+            <url>http://maven.net.cn/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>cn.javaplus</groupId>
+			<artifactId>javaplus-util</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.javaplus</groupId>
+			<artifactId>javaplus-generator-mongodb-dao</artifactId>
+			<version>2014.04.14.19.48</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+	</dependencies>
+</project>

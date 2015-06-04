@@ -1,0 +1,5 @@
+package db.domain;public class Mission implements Domain , 
+						MissionData
+					, 
+						UserItem
+					{	@Key	private String uname;	private int missionId;	public Mission() {	}	public Mission(Mission c) {		this.uname = c.uname;		this.missionId = c.missionId;	}	@Override	public String tableName() {		return "mission";	}	@Override	public void setUname(String uname) {		this.uname = uname;	}	@Override	public String getUname() {		return this.uname;	}@Overridepublic void addUname(String uname) {		this.uname += uname;}	@Override	public void setMissionId(int missionId) {		this.missionId = missionId;	}	@Override	public int getMissionId() {		return this.missionId;	}@Overridepublic void addMissionId(int missionId) {		this.missionId += missionId;}}

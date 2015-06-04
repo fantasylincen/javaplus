@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface SystemService extends cn.mxz.util.Service{	/**	 * 充值测试接口, 调试模式才起效	 *	 * @param count 元宝数量	 * 	 */	void recharge(int count);	/**	 * 获取首次充值大礼包	 *	 * @return null	 */	Boolean getRechargeAward();	/**	 * 获取首次充值大礼包	 *	 * 	 */	void beatToServer();}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+	<name>Init</name>
+
+	<method>
+		cn.mxz.protocols.user.AccessResultPro access(String id, String token, int adultState, String mac, int clientType, int UnixTime, String otherValue)
+
+		<doc>接入游戏服务器</doc>
+		<return>是否是新用户</return>
+		<!-- <args>用户的来源: 1:漫想族帐号   2:蓝港帐号</args> -->
+		<args>用户ID</args>
+		<args>合作商加密串</args>
+		<args>成人标志 1 成年 2  先固定传一个2 就行了</args>
+		<args>客户端mac</args>
+		<args>客户端类型:1 ios;2 android;3 其它 （手游）</args>
+		<args>时间戳（手游）</args>
+		<args>预留值</args>
+
+<!--
+IDCode，玩家身份证
+ClientType，客户端类型:1 ios;2 android;3 其它 （手游）
+SdkVersion，版本号，为空的情况下，默认使用最初的版本（手游）
+UnixTime，时间戳（手游）
+CP_ID，渠道编号（手游）
+Pad，扩展字段，用于临时数据传输（手游）
+ADID，广告ID（手游 -->
+
+	<!-- 	body.setParamNameAndValue("GWID", D.GET_WAY_ID);
+		body.setParamNameAndValue("GameID", D.GAME_ID);
+		body.setParamNameAndValue("UserIP4", Util.IP.getValue("127.0.0.1"));
+		body.setParamNameAndValue("Port", 12345);
+		body.setParamNameAndValue("Token", token);
+		body.setParamNameAndValue("UID", D.GET_WAY_ID);
+		body.setParamNameAndValue("AdultState", 1);
+		body.setParamNameAndValue("UN", userId);
+		body.setParamNameAndValue("PW", 123456);
+		body.setParamNameAndValue("MAC", "A1B2C3D4E5F6");
+		body.setParamNameAndValue("PWType", 0);
+		body.setParamNameAndValue("IDCode", 0);
+		body.setParamNameAndValue("ClientType", 0);
+		body.setParamNameAndValue("SdkVersion", 0);
+		body.setParamNameAndValue("UnixTime", 0);
+		body.setParamNameAndValue("CP_ID", 0);
+		body.setParamNameAndValue("Pad", 0);
+		body.setParamNameAndValue("ADID", 0);
+		 -->
+
+
+	</method>
+
+
+	<method>
+		int setNick(String nick)
+
+		<doc>设置角色昵称</doc>
+		<args>用户昵称</args>
+	</method>
+
+
+	<method>
+		boolean create(String invitationCode)
+
+		<doc>确定创建角色</doc>
+		<args>邀请码</args>
+		<return>是否创建成功</return>
+	</method>
+
+
+	<method>
+		int setUserType(int fighterTypeId)
+		<doc>设定主神将类型ID</doc>
+		<args>神将类型ID</args>
+	</method>
+
+
+	<method>
+		int createUser(int fighterTypeId, String invitationCode)
+
+		<doc>确定创建角色</doc>
+		<args>神将类型ID</args>
+		<args>邀请码</args>
+		<return>错误Code 如果为0 表示成功</return>
+	</method>
+
+	<method>
+		void resetUser()
+		<doc>重置帐号</doc>
+	</method>
+
+
+
+
+	<method>
+		String getRandomNick()
+
+		<doc>获得一个随机昵称</doc>
+		<return> 随机的昵称 </return>
+	</method>
+
+
+</protocol>

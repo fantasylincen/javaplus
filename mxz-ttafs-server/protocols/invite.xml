@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+	<!-- 阵形操作 -->
+    <name>Invite</name>
+
+	<method>
+		cn.mxz.protocols.user.InvitesPro getData()
+
+		<doc>邀请有礼界面数据</doc>
+		<return>邀请有礼界面数据</return>
+	</method>
+
+	<method>
+		void receive(int count)
+
+		<doc>领奖</doc>
+		<return>领奖</return>
+		<args>邀请数量</args>
+		<back>Invite.getData()</back>
+	</method>
+
+</protocol>

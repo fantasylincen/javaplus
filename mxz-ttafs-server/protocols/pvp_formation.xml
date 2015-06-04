@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+	<!-- PVP阵形操作 -->
+    <name>PVPFormation</name>
+
+	<method>
+	    void selectPVP(int formationId)
+	    <doc>设置为出战阵容(选定某个阵形为默认阵形)</doc>
+	    <args>待选定的阵形ID</args>
+		
+		<back>User.getData()</back>
+	</method>
+
+	
+	<method>
+
+	    void movePVP(int positionSrc, int positionDst)
+
+	    <doc>
+			拖动某个人从某个位置拖动到另外一个位置,
+				1.如果positionSrc位置没有人, throw new IllOperationException("指定位置没有人")
+				2.如果2个位置都有人, 交换两个人的位置
+		</doc>
+
+	    <args>源位置(从0开始)</args>
+	    <args>目标位置(从0开始)</args>
+	    
+		<back>User.getData()</back>
+		
+	</method>
+	
+	<method>
+	    void addFighterPVP(int fighterTypeId, int position)
+	    
+	    <doc>
+	                    往指定点添加战士
+	    </doc>
+
+	    <args>战士类型ID</args>
+	    <args>添加位置</args>
+	
+		<back>User.getData()</back>
+	
+	</method>
+	
+	<method>
+	    void removeFighterPVP(int position)
+	    
+	    <doc>
+	                     移除指定位置的战士
+	    </doc>
+
+	    <args>移除位置</args>
+		
+		<back>User.getData()</back>
+	    
+	</method>
+	
+</protocol>

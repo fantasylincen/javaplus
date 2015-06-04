@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+
+	<action>
+ 		<ask>查询[server]的玩家关卡分布</ask>
+ 		<ask>查询[server]的关卡分布</ask>
+		
+		<answer>
+			<sendToServer scriptFile="QueryMission.java">
+				return query();
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>查询[server]的玩家等级分布</ask>
+ 		<ask>查询[server]的等级分布</ask>
+		
+		<answer>
+			<sendToServer scriptFile="QueryLevel.java">
+				return query();
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>查询[server]的[user]的[type]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="QueryUserProperties.java">
+				return query(user, type);
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>[server]最大关卡ID</ask>
+ 		<ask>[server]最大通关ID</ask>
+ 		<ask>[server]最大关卡</ask>
+ 		<ask>[server]最大通关</ask>
+		
+		<answer>
+			<sendToServer scriptFile="QueryMaxMissionId.java">
+				return getMaxMissionId();
+			</sendToServer>
+		</answer>
+	</action>
+
+<action>
+ 		<ask>[server]的SQL测试</ask>
+		
+		<answer>
+			<sendToServer scriptFile="SqlTest.java">
+				return test();
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>[server]运行测试代码</ask>
+		
+		<answer>
+			<sendToServer scriptFile="TestCode.java">
+				return test();
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>[server]的[user]跳过引导</ask>
+		
+		<answer>
+			<sendToServer scriptFile="PassGuide.java">
+				return pass(user);
+			</sendToServer>
+		</answer>
+	</action>
+
+<action>
+ 		<ask>把[server]的女娲散财购买数量设置为[count]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="SetNvwaCount.java">
+				return set(count);
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>清空[server]的[user]的女娲散财数据</ask>
+		
+		<answer>
+			<sendToServer scriptFile="ClearNvwa.java">
+				return clear(user);
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>[server]的[user]的id</ask>
+		
+		<answer>
+			<sendToServer scriptFile="QueryId.java">
+				return query(user);
+			</sendToServer>
+		</answer>
+	</action>
+
+	 <action>
+		<ask>查看[fighter]的天命</ask>
+		<answer>
+			<actionClass>
+				QueryTianMing
+			</actionClass>
+		</answer>
+	</action>
+
+
+	<action>
+ 		<ask>给[server]的[user]充值[count]元宝</ask>
+ 		<ask>给[server]的[user]充值[count]</ask>
+ 		<ask>[server]的[user]充值[count]元宝</ask>
+ 		<ask>[server]的[user]充值[count]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="ChongZhi.java">
+				chongZhi(user, count);
+				return "充值成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+
+	<action>
+ 		<ask>[server]让[user1]和[user2]成为好友</ask>
+ 		
+		<answer>
+			<sendToServer scriptFile="ToBeFriend.java">
+				run(user1, user2);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>重置[server]的[user]的渡劫次数</ask>
+ 		<ask>重置[server]的[user]的渡天劫次数</ask>
+ 		<ask>[server]重置[user]的渡劫次数</ask>
+ 		<ask>[server]重置[user]的渡天劫次数</ask>
+ 		<ask>[server]的[user]重置渡劫次数</ask>
+ 		<ask>[server]的[user]重置渡天劫次数</ask>
+ 		
+		<answer>
+			<sendToServer scriptFile="ResetChuangZhenTimes.java">
+				run(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+
+	<action>
+ 		<ask>重置[server]的[user]的今日挑战次数</ask>
+ 		
+		<answer>
+			<sendToServer scriptFile="ResetChallengeTimes.java">
+				run(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>把[server]的[user]的日常任务全部完成</ask>
+ 		
+		<answer>
+			<sendToServer scriptFile="FinishAllDailyTask.java">
+				finish(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>把[server]的[user]设为超级帐号</ask>
+ 		<ask>[server]的[user]设为超级帐号</ask>
+ 		<ask>[server]的[user]设为超级帐号</ask>
+ 		<ask>让[server]的[user]成为超级帐号</ask>
+ 		
+ 		<ask>把[server]的[user]设为超级账号</ask>
+ 		<ask>[server]的[user]设为超级账号</ask>
+ 		<ask>[server]的[user]设为超级账号</ask>
+ 		<ask>让[server]的[user]成为超级账号</ask>
+ 		
+		<answer>
+			<sendToServer scriptFile="ToSuperMan.java">
+				toSuperMan(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	
+	<action>
+ 		<ask>把[server]的[user]的神兽删了</ask>
+ 		<ask>删除[server]的[user]的神兽</ask>
+ 		<ask>删除[server]的[user]神兽</ask>
+ 		<ask>[server]删除[user]的神兽</ask>
+ 		<ask>[server]删除[user]神兽</ask>
+ 		
+		<answer>
+			<sendToServer scriptFile="DeleteDogz.java">
+				deleteDogz(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>[server]公告[message]</ask>
+ 		<ask>[server]发送公告[message]</ask>
+ 		<ask>[server]发公告[message]</ask>
+ 		<ask>公告[server][message]</ask>
+ 		<ask>发送公告[server][message]</ask>
+ 		<ask>发公告[server][message]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="NotifyAllUser.java">
+				sendNotify(message);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>把[server]的[user]的计数器重置</ask>
+ 		<ask>重置[server]的[user]的计数器</ask>
+ 		<ask>重置[server]的[user]计数器</ask>
+ 		<ask>[server]重置[user]的计数器</ask>
+ 		<ask>[server]重置[user]计数器</ask>
+ 		
+ 		
+ 		<ask>把[server]的[user]的计数器清空</ask>
+ 		<ask>清空[server]的[user]的计数器</ask>
+ 		<ask>清空[server]的[user]计数器</ask>
+ 		<ask>[server]清空[user]的计数器</ask>
+ 		<ask>[server]清空[user]计数器</ask>
+ 		
+ 		
+ 		
+ 		<ask>把[server]的[user]的今日计数器重置</ask>
+ 		<ask>重置[server]的[user]的今日计数器</ask>
+ 		<ask>重置[server]的[user]今日计数器</ask>
+ 		<ask>[server]重置[user]的今日计数器</ask>
+ 		<ask>[server]重置[user]今日计数器</ask>
+ 		
+ 		
+ 		<ask>把[server]的[user]的今日计数器清空</ask>
+ 		<ask>清空[server]的[user]的今日计数器</ask>
+ 		<ask>清空[server]的[user]今日计数器</ask>
+ 		<ask>[server]清空[user]的今日计数器</ask>
+ 		<ask>[server]清空[user]今日计数器</ask>
+ 		
+ 		
+ 		<ask>把[server]的[user]的十二点计数器清空</ask>
+ 		<ask>清空[server]的[user]的十二点计数器</ask>
+ 		<ask>清空[server]的[user]十二点计数器</ask>
+ 		<ask>[server]清空[user]的十二点计数器</ask>
+ 		<ask>[server]清空[user]十二点计数器</ask>
+ 		
+ 		<ask>把[server]的[user]的12点计数器清空</ask>
+ 		<ask>清空[server]的[user]的12点计数器</ask>
+ 		<ask>清空[server]的[user]12点计数器</ask>
+ 		<ask>[server]清空[user]的12点计数器</ask>
+ 		<ask>[server]清空[user]12点计数器</ask>
+		
+		<answer>
+			<sendToServer scriptFile="ResetUserCounter.java">
+				reset(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>把[server]的[user]踢了</ask>
+ 		<ask>把[server]的[user]踢下线</ask>
+ 		<ask>把[server]的[user]踢掉</ask>
+ 		
+ 		<ask>[server]把[user]踢了</ask>
+ 		<ask>[server]把[user]踢下线</ask>
+ 		<ask>[server]把[user]踢掉</ask>
+ 		
+ 		<ask>踢了[server]的[user]</ask>
+ 		<ask>踢下线[server]的[user]</ask>
+ 		<ask>踢掉[server]的[user]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="KickSomeOne.java">
+				kick(user);
+				return "操作成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+
+	<action>
+	<!-- lc私服在线人数 -->
+ 		<ask>查看[server]当前在线人数</ask>
+ 		<ask>[server]当前在线人数</ask>
+ 		<ask>查看[server]在线人数</ask>
+ 		<ask>查看[server]当前人数</ask>
+ 		<ask>[server]当前人数</ask>
+ 		<ask>[server]在线人数</ask>
+ 		<ask>查看[server]人数</ask>
+ 		<ask>[server]人数</ask>
+		
+		<answer>
+			<sendToServer scriptFile="ShowOnlineSize.java">
+				return showOnlineSize();
+			</sendToServer>
+		</answer>
+	</action>
+	
+
+	<action>
+ 		<ask>把[server]的[user]的[type]全部删了</ask>
+ 		<ask>[server]把[user]的[type]全部删了</ask>
+ 		<ask>把[server]的[user]的[type]删了</ask>
+ 		<ask>把[server]的[user]的[type]丢了</ask>
+ 		<ask>[server]把[user]的[type]删了</ask>
+ 		<ask>[server]的[user]把[type]删了</ask>
+ 		<ask>[server]把[user]的[type]丢了</ask>
+ 		<ask>[server]的[user]的[type]丢了</ask>
+ 		<ask>[server]把[user]的[type]全部丢了</ask>
+ 		<ask>[server]的[user]的[type]全部丢了</ask>
+ 		<ask>[server]把[user]的[type]全部删了</ask>
+ 		<ask>[server]的[user]把[type]全部删了</ask>
+		
+		<answer>
+			<sendToServer scriptFile="DropGoods.java">
+				dropGoods(user, type);
+				return "删除成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>把[server]的[user]的背包清空掉</ask>
+ 		<ask>把[server]的[user]的背包清空</ask>
+ 		<ask>把[server]的[user]的背包清掉</ask>
+ 		<ask>清空[server]的[user]的背包</ask>
+ 		<ask>清掉[server]的[user]的背包</ask>
+ 		<ask>[server]清空[user]的背包</ask>
+ 		<ask>[server]清掉[user]的背包</ask>
+ 		<ask>[server]的[user]的背包清空</ask>
+ 		<ask>[server]的[user]背包清空</ask>
+		
+		<answer>
+			<sendToServer scriptFile="ClearBag.java">
+				clearBag(user);
+				return "清空成功";
+			</sendToServer>
+		</answer>
+	</action>
+
+	<action>
+ 		<ask>把[server]的[user]的[type]设置为[count]</ask>
+		<ask>将[server]的[user]的[type]设置为[count]</ask>
+		<ask>[server]的[user]的[type]设置为[count]</ask>
+		<ask>[server]把[user]的[type]设置为[count]</ask>
+		<ask>[server]的[user][type]设置为[count]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="UserSet.java">
+				set(user, type, count);
+				return "设置成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>把[server]的[user]的[fighter]的等级设置为[count]</ask>
+		<ask>将[server]的[user]的[fighter]的等级设置为[count]</ask>
+		<ask>[server]的[user]的[fighter]的等级设置为[count]</ask>
+		<ask>[server]把[user]的[fighter]的等级设置为[count]</ask>
+		<ask>[server]的[user][fighter]的等级设置为[count]</ask>
+		
+ 		<ask>把[server]的[user]的[fighter]等级设置为[count]</ask>
+		<ask>将[server]的[user]的[fighter]等级设置为[count]</ask>
+		<ask>[server]的[user]的[fighter]等级设置为[count]</ask>
+		<ask>[server]把[user]的[fighter]等级设置为[count]</ask>
+		<ask>[server]的[user][fighter]等级设置为[count]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="SetFighterLevel.java">
+				setLevel(user, fighter, count);
+				return "设置成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	
+	<action>
+ 		<ask>给[server]的[user]赠送[count][reward]</ask>
+ 		<ask>给[server]的[user]增加[count][reward]</ask>
+ 		<ask>给[server]的[user]送[count][reward]</ask>
+ 		<ask>[server]的[user]赠送[count][reward]</ask>
+ 		<ask>[server]的[user]增加[count][reward]</ask>
+ 		<ask>[server]的[user]送[count][reward]</ask>
+ 		<ask>[server]的[user]加[count][reward]</ask>
+ 		<ask>[server]给[user]送[count][reward]</ask>
+ 		<ask>[server]给[user]加[count][reward]</ask>
+ 		<ask>[server]的[user]增加[count][reward]</ask>
+ 		<ask>[server]的[user]的[reward]增加[count]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="SendReward.java">
+				send(user, reward, count);
+				return "赠送成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	<action>
+ 		<ask>把[server]重新加载一下</ask>
+ 		<ask>重新加载一下[server]</ask>
+ 		<ask>把[server]重新加载</ask>
+ 		<ask>[server]重新加载</ask>
+ 		<ask>重新加载[server]</ask>
+ 		
+ 		<ask>把[server]重载一下</ask>
+ 		<ask>重载一下[server]</ask>
+ 		<ask>把[server]重载</ask>
+ 		<ask>[server]重载</ask>
+ 		<ask>重载[server]</ask>
+		
+		<answer>
+			<sendToServer scriptFile="ReloadWorld.java">
+				reload();
+				return "重载成功";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	 <action>
+		<ask>你听得懂什么?</ask>
+		<ask>你听得懂什么</ask>
+		<ask>HELP</ask>
+		<ask>help</ask>
+		<ask>Help</ask>
+		<ask>帮助</ask>
+		<answer>
+			<actionClass>
+				Help
+			</actionClass>
+		</answer>
+	</action>
+	
+	
+	
+	<action>
+		<ask>把[server]停了</ask>
+		<ask>把[server]停掉</ask>
+		<ask>[server]停止</ask>
+		<ask>停止[server]</ask>
+		<ask>[server]停服</ask>
+		<ask>停服[server]</ask>
+		<ask>停掉[server]</ask>
+		<ask>[server]停掉</ask>
+		
+		<answer>
+			<sendToServer scriptFile="StopServer.java">
+				stopServer();
+				return "停服OK";
+			</sendToServer>
+		</answer>
+	</action>
+	
+	
+	
+	
+	
+	
+	
+	
+	<action>
+		<ask>你是</ask>
+		<ask>你是?</ask>
+		<ask>你叫什么名字</ask>
+		<ask>你的名字</ask>
+		<ask>你叫什么</ask>
+		<ask>你的名字是什么</ask>
+		<ask>你叫</ask>
+		<ask>你叫什么名字?</ask>
+		<ask>你的名字?</ask>
+		<ask>你叫什么?</ask>
+		<ask>你的名字是什么?</ask>
+		<ask>你叫?</ask>
+		<ask>你是谁</ask>
+		<ask>你是谁?</ask>
+		<ask>报上你的大名</ask>
+		
+		<answer>
+			<actionClass>
+				AnwerMyName
+			</actionClass>
+		</answer>
+	</action>
+	
+	
+	
+</actions>

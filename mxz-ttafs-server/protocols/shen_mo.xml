@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+    <name>ShenMo</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.PropPro exchange(int stuffId)
+	    <args>兑换的材料ID</args>
+	    <doc>兑换某个材料</doc>
+		<return> 兑换之后, 这个碎片的数量 </return>
+		
+		<back>User.getData</back>
+	</method>
+
+	<method>
+
+	    cn.mxz.protocols.shenmo.ShenmoWarSituationPro fight(int shenmoId, int type)
+	    <doc>神魔战斗</doc>
+	    <args>神魔id</args>
+	    <args>击杀方法</args>	
+	    <back>User.getData</back>	
+	</method>
+	
+	<method>
+
+	    cn.mxz.protocols.shenmo.ShenMoListPro getMyData()
+	    <doc>我的神魔信息</doc>
+	    
+	</method>
+	
+	<method>
+
+	    String getPrize( int shenmoId)
+	    <doc>神魔领奖</doc>
+	    <args>神魔id</args>
+	    <back>User.getData</back>	
+	</method>
+	
+	<method>
+	    void getGongdePrize( int index )
+	     <args>第几个奖励，从1开始</args>
+	    <doc>功德领奖</doc>
+	</method>
+	
+	<method>
+	    cn.mxz.protocols.shenmo.ShenmoPro getNewShenmo()
+	    <doc>获取自己发现的最新神魔的信息</doc>
+	</method>
+	
+</protocol>

@@ -1,0 +1,1 @@
+//package db.domain;//import java.util.Arrays;//////public interface Enemy extends Domain {////	String getUname();////	void setUname(String uname);////void addUname(String uname);////	String getEnemyId();////	void setEnemyId(String enemyId);////void addEnemyId(String enemyId);//////}

@@ -1,0 +1,114 @@
+package PACKAGE_NAME.dao.impl;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import PACKAGE_NAME.domain.CLASS_NAME;
+import PACKAGE_NAME.domain.CLASS_NAME;
+import dbutils.IdUtil;
+import java.util.concurrent.atomic.AtomicLong;
+import cn.javaplus.util.Closer;
+import java.sql.Connection;
+import com.lemon.commons.database.ConnectionFetcher;
+import db.domain.*;
+
+import java.sql.Blob;
+import java.sql.Date;
+import java.sql.Time;
+
+public interface CLASS_NAMEDao {
+
+	/**
+	 * 增加
+	 */
+	void add(CLASS_NAME CLASS_PARAMETER);
+
+	/**
+	 * 增加一批
+	 */
+	void addAll(List<CLASS_NAME> CLASS_PARAMETERs);
+
+	/**
+	 * 删除
+	 */
+	void delete(PK_PARAMETER);
+
+	/**
+	 * 更新
+	 */
+	void update(CLASS_NAME CLASS_PARAMETER);
+	
+	/**
+	 * 更新一批
+	 */	
+	void update(List<CLASS_NAME> CLASS_PARAMETERs);
+
+	/**
+	 * 删除一批
+	 */
+	void delete(List<CLASS_NAME> CLASS_PARAMETERs);
+	
+	/**
+	 * 删除
+	 */		
+	void delete(CLASS_NAME CLASS_PARAMETER);
+	
+	/**
+	 * 存入 有则覆盖 无则增加
+	 */		
+	void save(CLASS_NAME CLASS_PARAMETER);
+	
+	/**
+	 * 存入一批 有则覆盖 无则增加
+	 */	
+	void save(List<CLASS_NAME> CLASS_PARAMETERs);
+	
+	/**
+	 * 取得
+	 */		
+	CLASS_NAME get(PK_PARAMETER);
+	
+	/**
+	 * 取得所有
+	 */		
+	List<CLASS_NAME> getAll();
+	
+	/**
+	 * 表记录数量
+	 */	
+	int getCount();
+
+/*
+	@Deprecated
+	List<CLASS_NAME> findBy(String field, String o);
+*/
+
+INTERFAC_FINDS
+	
+	@Deprecated
+	List<CLASS_NAME> findBy(String field, String o, int limit);
+	
+	/**
+	 * 生成一个对应的数据传输对象
+	 */		
+	CLASS_NAME createDTO();
+	
+	/**
+	 * 清空
+	 */		
+	void clear();
+	
+	@Deprecated
+	void update(String fieldName, Object value);
+	
+	@Deprecated
+	List<CLASS_NAME> findBy(String field, String symbol, String o, int limit);
+	
+	@Deprecated
+	List<CLASS_NAME> findWhere(String where);
+	
+	@Deprecated
+	List<CLASS_NAME> findByScope(String field, int min, int max, int limit);
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+        <define
+        	defineFile="D:/workspace/MobileServer/res/properties/DefineConfig.xml"
+        	javafile="D:/workspace/MobileServer/gen/define/D.java"
+        	asfile="D:/asworkspace/ProtocolSDK/gen/cn/mxz/define/D.as"
+        >
+
+        </define>
+</root>

@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface AvoidFighter extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	boolean getIsFighter();	void setIsFighter(boolean isFighter);	int getStartTime();	void setStartTime(int startTime);void addStartTime(int startTime);}

@@ -1,0 +1,1 @@
+package cn.mxz.base.config;public class Cfg {		/** 数据库驱动 */		public final static String DBDriver = "com.mysql.jdbc.Driver";}

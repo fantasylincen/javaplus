@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface RegisterService extends cn.mxz.util.Service{	/**	 * 签到	 *	 * 	 */	void regist();	/**	 * 补签	 *	 * 	 */	void remedy();	/**	 * 获得签到日历数据	 *	 * @return 签到日历数据	 */	cn.mxz.protocols.user.RegistP.CalendarPro getData();}

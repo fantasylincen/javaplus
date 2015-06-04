@@ -1,0 +1,10 @@
+package db.dao.impl;import java.util.List;import java.util.ArrayList;import java.sql.PreparedStatement;import java.sql.ResultSet;import java.sql.SQLException;import db.domain.UserDogz;import db.domain.UserDogz;import dbutils.IdUtil;import java.util.concurrent.atomic.AtomicLong;import cn.javaplus.util.Closer;import java.sql.Connection;import com.lemon.commons.database.ConnectionFetcher;import db.domain.*;import java.sql.Blob;import java.sql.Date;import java.sql.Time;public interface UserDogzDao {	/**	 * 增加	 */	void add(UserDogz udo);	/**	 * 增加一批	 */	void addAll(List<UserDogz> udos);	/**	 * 删除	 */	void delete(Integer dogz_id, String uname);	/**	 * 更新	 */	void update(UserDogz udo);		/**	 * 更新一批	 */		void update(List<UserDogz> udos);	/**	 * 删除一批	 */	void delete(List<UserDogz> udos);		/**	 * 删除	 */			void delete(UserDogz udo);		/**	 * 存入 有则覆盖 无则增加	 */			void save(UserDogz udo);		/**	 * 存入一批 有则覆盖 无则增加	 */		void save(List<UserDogz> udos);		/**	 * 取得	 */			UserDogz get(Integer dogz_id, String uname);		/**	 * 取得所有	 */			List<UserDogz> getAll();		/**	 * 表记录数量	 */		int getCount();/*	@Deprecated	List<UserDogz> findBy(String field, String o);*/		public List<UserDogz> findByUname(String o);
+		public List<UserDogz> findByDogzId(Integer o);
+		public List<UserDogz> findByIsBattlefield(Boolean o);
+		public List<UserDogz> findByLevel(Integer o);
+		public List<UserDogz> findByGrowth(Integer o);
+		public List<UserDogz> findByStep(Integer o);
+		public List<UserDogz> findByIsProtected(Boolean o);
+		public List<UserDogz> findByTrait(Integer o);
+		public List<UserDogz> findByDunwuCount(Integer o);
+		@Deprecated	List<UserDogz> findBy(String field, String o, int limit);		/**	 * 生成一个对应的数据传输对象	 */			UserDogz createDTO();		/**	 * 清空	 */			void clear();		@Deprecated	void update(String fieldName, Object value);		@Deprecated	List<UserDogz> findBy(String field, String symbol, String o, int limit);		@Deprecated	List<UserDogz> findWhere(String where);		@Deprecated	List<UserDogz> findByScope(String field, int min, int max, int limit);}

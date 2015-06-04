@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+			
+	<node>
+	
+		查询
+		
+		<node>
+
+			查询某段时间内登陆过的玩家
+
+			<arg>开始日期></arg>
+			<arg>结束日期></arg>
+			<tip>可以输入: 2013-02-13 或者 2013-02-13 12:32</tip>
+			<tip>注意如果两次都输入2013-09-16的话, 代表查询2013-09-16 00:00 - 2013-09-16 00:00 时间段</tip>
+			
+			<command> querylogintoday </command>
+			
+		</node>
+	
+	
+		<node>
+
+			查询某段时间内创建的玩家
+
+			<arg>开始日期></arg>
+			<arg>结束日期></arg>
+			<tip>可以输入: 2013-02-13 或者 2013-02-13 12:32</tip>
+			<tip>注意如果两次都输入2013-09-16的话, 代表查询2013-09-16 00:00 - 2013-09-16 00:00 时间段</tip>
+			
+			<command> querycreatetoday </command>
+			
+		</node>
+		
+		
+		
+		<node>
+
+			查询留存率
+
+			<node>
+
+				次日留存率
+
+				<arg>日期></arg>
+				<tip>可以输入: 2013-02-13</tip>
+				
+				<command> queryciriliucunlv </command>
+				
+			</node>
+
+			
+			<node>
+
+				3日留存率
+
+				<arg>日期></arg>
+				<tip>可以输入: 2013-02-13</tip>
+				
+				<command> querysanriliucunlv </command>
+				
+			</node>
+
+			
+			<node>
+
+				7日留存率
+
+				<arg>日期></arg>
+				<tip>可以输入: 2013-02-13</tip>
+				
+				<command> queryqiriliucunlv </command>
+				
+			</node>
+			
+			
+			<node>
+
+				付费率
+				
+				<command> fufeilv </command>
+				
+			</node>
+
+		</node>
+	
+	
+	</node>
+
+
+	
+	
+</node>

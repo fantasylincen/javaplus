@@ -1,0 +1,3 @@
+package db.domain;import java.util.Arrays;public interface UserMission extends Domain , 
+				MissionData
+			{	String getUname();	void setUname(String uname);void addUname(String uname);	int getMissionId();	void setMissionId(int missionId);void addMissionId(int missionId);	int getDieCount();	void setDieCount(int dieCount);void addDieCount(int dieCount);	int getNodeIndex();	void setNodeIndex(int nodeIndex);void addNodeIndex(int nodeIndex);	int getCreateDate();	void setCreateDate(int createDate);void addCreateDate(int createDate);}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Yunyou</name>
+
+	<method>
+
+	    cn.mxz.protocols.yunyou.YunyouSPro getData()
+
+	    <doc>获得主界面信息</doc>
+
+	    <return>主界面信息</return>
+		
+		
+	</method>
+	
+	<method>
+
+	    cn.mxz.protocols.yunyou.YunyouPro getById( int id )
+
+	    <doc>通过唯一id获取一个云游仙人的信息</doc>
+		<args>id 云游仙人的唯一id</args>
+	    <return>云游仙人的信息</return>		
+		
+	</method>
+
+	<method>
+	    void buy( int id )
+
+	    <doc>限时抢购</doc>
+	    <args>id 云游仙人的唯一id</args>
+		
+	</method>
+
+	<method>
+	    void getExp( int id, Boolean isDouble)
+	    <doc>指点结束，获取经验</doc>
+	    <args>index 从0开始的序列号</args>
+	    <args>isDouble 是否双倍购买</args>
+	    
+	    <!--  <back>QiYu.getButtons</back>-->
+	</method>
+	
+	<method>
+	    void getExpForceDouble( int id)
+	    <doc>指点结束，强制获取双倍经验,如果需要的道具“酒”不足则直接购买</doc>
+	    <args>index 从0开始的序列号</args>
+	    
+	    <!--  <back>QiYu.getButtons</back>-->
+	</method>
+</protocol>

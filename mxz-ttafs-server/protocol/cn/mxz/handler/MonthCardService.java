@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface MonthCardService extends cn.mxz.util.Service{	/**	 * 获取界面信息	 *	 * @return 逗号分隔的用户情况: 例子: 1,100,3434(本月是否已经购买，当日充值元宝数,vip剩余天数（>=0）)	 */	String getDate();	/**	 * 购买月卡	 *	 * @return 逗号分隔的用户情况: 例子: 1,100,3434(本月是否已经购买，当日充值元宝数,vip剩余天数（>=0）)	 */	String buy();}

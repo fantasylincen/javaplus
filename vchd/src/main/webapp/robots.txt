@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /index.jsp
+Allow: /news.jsp
+Allow: /product.jsp
+Allow: /recruitment.jsp
+Allow: /cooperation.jsp
+Allow: /contact.jsp

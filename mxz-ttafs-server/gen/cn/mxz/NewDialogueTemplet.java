@@ -1,0 +1,4 @@
+//[剧情]新手剧情package cn.mxz;public class NewDialogueTemplet {	/** 	 * id 	 */	private int id;	/** 	 * 對話人名稱 	 */	private String name;	/** 	 * 對話角色id
+（-1為主角） 	 */	private int resid;	/** 	 * 劇情內容 	 */	private String content;	/**	 * id	 */	void setId(int id) {		this.id = id;	}	/**	 * id	 */	public int getId() {		return this.id;	}	/**	 * 對話人名稱	 */	void setName(String name) {		this.name = name;	}	/**	 * 對話人名稱	 */	public String getName() {		return this.name;	}	/**	 * 對話角色id
+（-1為主角）	 */	void setResid(int resid) {		this.resid = resid;	}	/**	 * 對話角色id
+（-1為主角）	 */	public int getResid() {		return this.resid;	}	/**	 * 劇情內容	 */	void setContent(String content) {		this.content = content;	}	/**	 * 劇情內容	 */	public String getContent() {		return this.content;	}}

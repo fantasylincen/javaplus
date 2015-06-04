@@ -1,0 +1,34 @@
+package cn.mxz.city;
+
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
+public class BaseRewards {
+
+	public static class BaseRewardId {
+ID_FILEDS
+	}
+	
+	private static Set<Integer> ids = Sets.newHashSet(REWARD_IDS);
+
+	/**
+	 * 判断这个奖励是不是基本奖励
+	 */
+	public static boolean isBaseReward(int id) {
+		return ids.contains(id);
+	}
+
+	/**
+	 * 给user赠送基本奖励
+	 * @param user
+	 * @param id
+	 * @param count
+	 */
+	/*public static void add(City user, int id, int count) {
+		switch(id) {
+REPEATED ADD_SWITCH
+		}
+		throw new RuntimeException("无法识别的ID:" + id);
+	}*/
+}

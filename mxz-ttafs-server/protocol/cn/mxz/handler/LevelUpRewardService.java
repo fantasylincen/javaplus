@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface LevelUpRewardService extends cn.mxz.util.Service{	/**	 * 获得升级奖励信息	 *	 * @return null	 */	cn.mxz.protocols.user.LevelUpRewardP.LevelUpRewardPro getData();	/**	 * 领取指定等级的升级奖励	 *	 * @param level 等级	 * @return null	 */	cn.mxz.protocols.user.UserP.UserLevelUpPro receive(int level);}

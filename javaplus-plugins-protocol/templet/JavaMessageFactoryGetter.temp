@@ -1,0 +1,4 @@
+
+	public static CLASS_NAMEMessageSender getCLASS_NAME() {
+		return new CLASS_NAMEMessageSenderImpl();
+	}

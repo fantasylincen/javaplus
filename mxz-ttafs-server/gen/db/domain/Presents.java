@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface Presents extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	int getV(int index);	void setV(int index, int v1);}

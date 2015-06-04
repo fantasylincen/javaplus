@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>User</name>
+
+	<method>
+	    cn.mxz.protocols.user.UserPro getData()
+	    <doc>获取用户数据</doc>
+	</method>
+
+	<method>
+	    int getFightingCapacity()
+	    <doc>获得用户战斗力</doc>
+		<return>用户的战斗力</return>
+	</method>
+
+
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+
+	    void onUpdateUserList(cn.mxz.protocols.user.UserPro user)
+
+
+	    <doc>更新主界面数据事件</doc>
+	    <args>玩家数据</args>
+
+	</server_to_client_method>
+
+	<method>
+	    cn.mxz.protocols.user.UserLevelUpPro getUserLevelUpData()
+	    <doc>玩家升级数据</doc>
+		<return>玩家升级数据</return>
+	</method>
+
+</protocol>

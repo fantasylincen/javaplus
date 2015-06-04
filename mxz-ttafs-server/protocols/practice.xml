@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+    
+	
+    <name>Practice</name>
+
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+	
+		void sendRequestMessage(String text)
+		<doc>提示玩家有人给他发来了双休邀请</doc>
+		<args>消息内容</args>
+	
+	</server_to_client_method>
+	
+	
+	
+	<server_to_client_method><!-- 服务器主动发送消息给客户端的方法 -->
+	
+		void onPracticeStart(String userId, String nick)
+		<doc>当别人开始和你双休的时候调用</doc>
+		<args>玩家帐号</args>
+		<args>玩家昵称</args>
+	
+	</server_to_client_method>
+	
+	
+	<method>
+	
+		void careFor(String friendId)
+		
+		<doc>关注好友</doc>
+		
+		<args>好友ID</args>
+		
+		<back>Practice.getAskForCareList</back>
+		
+	</method>
+	
+	
+	<method>
+	
+		void askForCare(String friendId)
+		
+		<doc>求关注</doc>
+		
+		<args>好友ID</args>
+		
+		<back>Practice.getAskForCareList</back>
+		
+		
+	</method>
+	
+	<method>
+	
+		cn.mxz.protocols.user.AskForCarePro getAskForCareList()
+		
+		<doc>获得求关注列表</doc>
+		
+	</method>
+	
+	
+	<method>
+	
+		cn.mxz.protocols.user.PracticeAdditionPro getAddition()
+		
+		<doc>获得双休的战斗属性加成</doc>
+		
+	</method>
+	
+	
+	<method>
+	
+		void removeCareData(String userId)
+		
+		<doc>删除玩家求关注信息</doc>
+		
+		<args>玩家ID</args>
+		
+	</method>
+	
+	
+	<method>
+	    cn.mxz.protocols.user.PracticeDataPro getData()
+	    <doc>获得我的修练场信息</doc>
+		<return>我的修练场信息</return>
+	</method>
+	
+	
+	<method>
+	    cn.mxz.protocols.user.PracticeLogListPro getLog()
+	    <doc>获得双休日志</doc>
+		<return>双休日志</return>
+	</method>
+	
+	
+	
+	<method>
+	    cn.mxz.protocols.user.PracticeDataPro lookUpOther(String userId)
+	    <doc>查看别人的修练场信息</doc>
+		<args>别人的帐号</args>
+		<return>别人的修练场信息</return>
+	</method>
+	
+	
+	<method>
+	    cn.mxz.protocols.user.PracticeRequestListPro getRequest(int page, int countOfPage)
+	    <doc>获得双休邀请列表</doc>
+		<args>当前页码</args>
+		<args>每页记录条数</args>
+	</method>
+	
+	
+	<method>
+	    void request(String userId, int mode)
+	    <doc>邀请和别人双修</doc>
+		<args>玩家帐号</args>
+		<args>修炼模式</args>
+	</method>
+	
+	
+	<method>
+	    void accept(String userId)
+	    <doc>同意和别人双休</doc>
+		<args>和我双修的那个人的Id</args>
+	</method>
+	
+	
+	
+	<method>
+	    void refuse(String userId)
+	    <doc>拒绝和别人双修</doc>
+		<args>玩家帐号</args>
+	</method>
+	
+	
+	<method>
+	    cn.mxz.protocols.user.PracticeFriendListPro getFriends(int page, int countOfPage)
+	    <doc>获得双休好友列表</doc>
+		<args>当前页码</args>
+		<args>每页记录条数</args>
+	</method>
+	
+	
+	
+	
+	<method>
+	    void stopPracticeWithOther()
+	    <doc>结束和别人双休</doc>
+	</method>
+	
+	
+	
+	<method>
+	    void qmsa()
+	    <doc>亲密示爱</doc>
+		<back>Practice.getData</back>
+	</method>
+	
+	
+	<method>
+	    void bnhh()
+	    <doc>百年好合</doc>
+		<back>Practice.getData</back>
+	</method>
+	
+	
+	<method>
+	    void bysf()
+	    <doc>比翼双飞</doc>
+		<back>Practice.getData</back>
+	</method>
+	
+	<method>
+	    void setAutoAccept(Boolean isAutoAccept)
+	    <doc>设置是否自动接受双休</doc>
+		<args>是否自动接受</args>
+		
+	</method>
+	
+	
+	
+</protocol>

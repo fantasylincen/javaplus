@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface ResetUser extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	int getNewestUserIdIndex();	void setNewestUserIdIndex(int newestUserIdIndex);void addNewestUserIdIndex(int newestUserIdIndex);}

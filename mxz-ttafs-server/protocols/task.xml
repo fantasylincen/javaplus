@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Task</name>
+
+	<method>
+
+
+		cn.mxz.protocols.user.task.TaskListPro getDailyTask()
+
+	    <doc>每日任务</doc>
+
+	    <return> . </return>
+
+
+	</method>
+
+	<method>
+
+
+		cn.mxz.protocols.user.task.TaskListPro getAchieveTask()
+
+	    <doc>成就任务</doc>
+
+	    <return> . </return>
+
+
+	</method>
+
+
+	<method>
+
+
+		void receiveAchieveTaskPrize(int taskId)
+
+	    <doc>领取成就任务奖励</doc>
+
+		<args>任务ID</args>
+		<back>User.getData</back>
+
+	</method>
+
+
+	<method>
+
+		void receiveDailyTaskPrize(int taskId)
+
+	    <doc>领取日常任务奖励</doc>
+		<args>任务ID</args>
+
+		<back>User.getData</back>
+	</method>
+
+
+
+	<method>
+
+
+		void receiveAchieveTaskChapterPrize(int chapterId)
+
+	    <doc>领取成就任务章节奖励</doc>
+
+		<args>章节ID</args>
+	</method>
+
+
+
+
+	<method>
+
+		String getAchieveTaskChapterPrizeStatus()
+
+	    <doc>章节任务奖励领取状态   比如: 1,0,1,0,1,0</doc>
+	</method>
+	
+	
+	<method>
+
+		void receiveDailyTaskBoxReward(int index)
+	
+		<args>宝箱索引</args>
+
+	    <doc>领取日常任务 宝箱奖励</doc>
+	</method>
+</protocol>

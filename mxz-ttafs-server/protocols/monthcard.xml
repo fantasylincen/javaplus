@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>MonthCard</name>
+
+	
+	
+
+	<method>
+
+	    String getDate()
+
+	    <doc>获取界面信息</doc>
+
+	    <return>
+			逗号分隔的用户情况:
+			例子:
+				1,100,3434(本月是否已经购买，当日充值元宝数,vip剩余天数（>=0）)
+		</return>
+
+	</method>
+
+
+
+
+	<method>
+
+	    String buy()
+
+	    <doc>购买月卡</doc>
+
+	    <return>
+			逗号分隔的用户情况:
+			例子:
+				1,100,3434(本月是否已经购买，当日充值元宝数,vip剩余天数（>=0）)
+		</return>
+
+	</method>
+</protocol>

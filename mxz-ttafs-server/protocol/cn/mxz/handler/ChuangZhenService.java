@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface ChuangZhenService extends cn.mxz.util.Service{	/**	 * 闯阵	 *	 * @param type 1:力战 2:奋战 3:血战	 * @return null	 */	cn.mxz.protocols.user.chuangzhen.ChuangZhenP.ChuangZhenWarSituationPro fighting(int type);}

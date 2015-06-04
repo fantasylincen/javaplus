@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface InviteUsers extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	String getFriend();	void setFriend(String friend);void addFriend(String friend);}

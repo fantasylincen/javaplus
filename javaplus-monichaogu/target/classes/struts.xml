@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+
+	<package name="gp" extends="struts-default" namespace="/gp">
+		<action name="addZiXuan" class="cn.javaplus.monichaogu.AddZiXuanAction">
+			<result type="redirect">/doc/example/mykl.jsp</result>
+		</action>
+		
+		<action name="back" class="cn.javaplus.monichaogu.BackAction">
+			<result type="redirect">/doc/example/mykl.jsp</result>
+		</action>
+		
+		<action name="next" class="cn.javaplus.monichaogu.NextAction">
+			<result type="redirect">/doc/example/mykl.jsp</result>
+		</action>
+		<action name="buy" class="cn.javaplus.monichaogu.BuyAction">
+			<result type="redirect">/doc/example/mykl.jsp</result>
+		</action>
+		<action name="sell" class="cn.javaplus.monichaogu.SellAction">
+			<result type="redirect">/doc/example/mykl.jsp</result>
+		</action>
+	</package>
+</struts>    

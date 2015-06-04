@@ -1,0 +1,42 @@
+package PACKAGE_NAME
+{
+IMPORTS
+	import flash.events.Event;
+
+	/**
+	 * CLASS_DOC
+	 */
+	public class CLASS_NAME extends Event
+	{
+		
+		public static const ID:String = "EVENT_VALUE";
+		
+FILEDS
+		private var _error:String;
+		
+		public function CLASS_NAME() {
+			super(ID);
+		}
+		
+GETTER_SETTER
+
+		public function get error():String
+		{
+			return this._error;
+		}
+		
+		public function set error(error:String):void
+		{
+			this._error = error;
+		}
+		
+		/**
+		 * 服务器是否发生了异常
+		 */
+		public function hasError():Boolean
+		{
+			return this._error.length != 0;
+		}
+	}
+
+}

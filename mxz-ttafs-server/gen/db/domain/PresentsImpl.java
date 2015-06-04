@@ -1,0 +1,4 @@
+package db.domain;import java.util.Arrays;public class PresentsImpl implements Presents {	@Key	private String uname;	public static final int V_LEN = 20;	private int [] v = new int[20];	public PresentsImpl() {	}	public PresentsImpl(Presents c) {		this.uname = c.getUname();		for (int i = 0; i < v.length; i++) {
+			v[i] = c.getV(i);
+		}
+	}	@Override	public String tableName() {		return "presents";	}	public void setUname(String uname) {		this.uname = uname;	}	public String getUname() {		return this.uname;	}public void addUname(String uname) {		this.uname += uname;}	public void setV(int index, int value) {		this.v[index] = value;	}	public int getV(int index) {		return this.v[index];	}}

@@ -1,0 +1,10 @@
+public class ■■■ {
+	public Group toGroup() {
+		return (Group)editor.findActor("■■■");
+	}
+■■■
+}
+
+public ■■■ get■■■() {
+	return new ■■■();
+}

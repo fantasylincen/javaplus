@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface BossScoreShared extends Domain {	String getUanme();	void setUanme(String uanme);void addUanme(String uanme);	String getShareId();	void setShareId(String shareId);void addShareId(String shareId);	int getScore();	void setScore(int score);void addScore(int score);}

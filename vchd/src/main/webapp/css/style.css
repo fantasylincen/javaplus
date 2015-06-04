@@ -1,0 +1,114 @@
+@charset "utf-8";
+ul,li,p,a,img,h1,h2,h3,h4,h5,span,input{margin:0; padding:0; list-style:none;}
+body{background:#ffffff; font:12px Arial, Helvetica, sans-serif; color:#3a3a3a;}
+a{color:#3a7fe6; text-decoration:none;}
+a:hover{text-decoration:underline; }
+
+#index{ width:1000px; margin:0 auto;}
+
+/*  header  */
+#top{margin:0 auto; width:1000px; overflow:hidden;}
+.logo{ float:left; width:141px; height:48px;}
+#top ul{height:24px; padding-top:8px; float:right; margin-left:50px; margin-top:10px;} 
+#top ul li {float:left; height:24px; color:#b5b4b4; padding-right:8px;}
+#top ul li a {color:#b5b4b4; }
+#top ul li a:hover{color:#fdaa01; }
+
+#nav{height:37px; background:url(images/nav_bg.png) repeat-x; margin-top:10px; padding-bottom:10px;}
+#menu{margin:0 auto; width:1000px; height:37px; overflow:hidden;}
+#menu ul{height:33px; position:relative; top:8px;}
+#menu li {float:left; display:block; margin-right:30px; width:80px; font-size:14px; text-align:center; line-height:33px;}
+#menu li a {display:block; color:#ffffff; }
+#menu li a:hover{ background:url(images/li_header_bg.jpg) top no-repeat; color:#505050; text-decoration:none;}
+#menu li .active{ background:url(images/li_header_bg.jpg) no-repeat; color:#505050;}
+.banner{width:1000px; height:288px; margin:0 auto; clear:both;}
+
+/*  content */
+.content{width:910px; margin:0 auto; overflow:hidden;}
+.title{height:26px; margin-top:10px;}
+
+.rolling{margin:0 auto; width:910px; height:116px; margin-top:20px; background:url(images/product_bg.jpg) no-repeat;}
+.rolling-img{ float:left; width:830px; margin:10px 0px 10px 0px;}
+.product01{float:left; margin-left:10px;}
+.left{ margin:0 auto; width:24px; float:left; margin:38px 6px 39px 6px;}
+.right{ margin:0 auto; width:24px; float:right; margin:38px 6px 39px 6px;}
+
+.text-content{margin:0 auto; width:910px; color:#9a9a9a;}
+.text-item{width:910px;}
+.h1{font-size:14px; font-weight:bold; color:#8C6603; margin-top:20px; margin-bottom:20px;background:#DDDDDF;height:25px;}
+.h2{font-size:12px; font-weight:bold; color:#fdab01;}
+.h3{line-height:2em; text-indent:2em; margin-bottom:20px;}
+.titles{ height:12px; width:120px; word-spacing:10px; word-spacing:6px;}
+.h4{width:790px; float:left; margin-bottom:10px; }
+
+.table{ width:910px;}
+.table tr td{ line-height:2em;}
+
+.table-01{width:420px; font:Georgia 11px; color:#333333; text-align:center; border-collapse:collapse; margin-top:10px; margin-bottom:10px;}
+.table-01 td{ border:1px solid #ececec; width:140px; line-height:1.5em; }
+
+/*  footer  */
+.footer{ margin-top:30px; padding:0;}
+.footer-content{ margin:0 auto; width:1000px; word-spacing:10px; clear:both; }
+.footer-content p{text-align:center; color:#9a9a9a;}
+.footer-content p a{ color:#505050;}
+.footer-content p a:hover{color:#fdaa01; text-decoration:none;}
+
+/*  nwes list  */
+.list{ width:640px; font-size:12px;color:#fdaa01; margin-top:10px; }
+.list ul{ list-style:none; clear:both;}
+.news-list{width:640px; height:30px; line-height:30px; margin:0px; padding:0px; word-spacing:8px; clear:both;}
+.news-list p{font-size:10px; float:left; padding-right:8px;}
+.news-list a{width:540px; height:30px; overflow:hidden; color:#9a9a9a; display:block; float:left;}
+.news-list a:hover{ color:#fdaa01; text-decoration:none;}
+.news-list span { color:#9a9a9a; float:right; text-align:right}
+/*.list ul a .news-list{ display:block; width:460px; float:left; text-indent:5px; text-decoration:none; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:inline; color:#9a9a9a;}
+.list ul li a .date{display:block; width:75px; float:right; text-align:center; color:#9a9a9a; text-decoration:none; display:inline;}
+.list li a{ width:640px; height:30px; display:block; color:#9a9a9a; text-decoration:none; }
+.list li a:hover{ color:#fdaa01; text-decoration:none;}*/
+/*.list ul li a:hover .date,.list ul li a:hover .news-list{ color:#fdaa01; text-decoration:none;}*/
+
+
+.pagination{ margin-bottom:20px; margin-left:8px; margin-top:10px; }
+.pagination a{ color:#505050; line-height:17px; display:block; float:left; padding:0 4px;}
+.pagination a:hover{ color:#fdaa01; text-decoration:none;}
+.pagination .current{font-weight:bold; font-size:14px; color:#fdaa01;}
+
+.news-content,contact{margin-top:10px; width:910px; margin:0 auto; overflow:hidden;}
+h1{ font-size:14px; font-weight:bold; color:#4d4d4d; text-align:center; line-height:2em; margin-top:10px;}
+h2{ font-size:12px; color:#9a9a9a; text-align:center; line-height:2em; margin-bottom:10px;}
+.news-content p,.cooperation p{ text-indent:2em; font-size:12px; color:#9a9a9a; line-height:2em;}
+.cooperation p span{ color:#3a7fe6;}
+
+.contact p{font-size:12px; color:#9a9a9a; line-height:2em;}
+.map{ margin-top:10px; margin-bottom:10px; padding:0;}
+
+
+.department{width:910px; height:139px; margin-top:10px; margin-bottom:10px;}
+.department img{ float:left;}
+
+.recruitment{width:276px; font-size:12px; color:#9f8c8c; margin-top:10px; margin-bottom:10px;}
+.item-01{ float:left; margin-right:40px;}
+.item-02{ float:right;}
+.label{ width:276px; height:65px;}
+.one{ background:url(images/rec_label_design.jpg) no-repeat;}
+.two{ background:url(images/rec_label_r&d.jpg) no-repeat;}
+.three{ background:url(images/rec_label_operation.jpg) no-repeat;}
+.four{ background:url(images/rec_label_planning.jpg) no-repeat;}
+.five{ background:url(images/rec_label_marketing.jpg) no-repeat;}
+.six{ background:url(images/rec_label_other.jpg) no-repeat;}
+
+.recruitment ul{ list-style:none; clear:both;}
+.recruitment-list{ height:30px; line-height:30px; margin:0px; padding:0px; word-spacing:8px; clear:both;}
+.recruitment-list p{font-size:12px; float:left; padding-right:8px;}
+.recruitment-list a{ height:30px; overflow:hidden; color:#9a9a9a; display:block; float:left;}
+.recruitment-list a:hover{ color:#fdaa01; text-decoration:none;}
+.recruitment-list span { color:#9a9a9a; float:right; text-align:right}
+
+.rec-content p{ margin-top:10px; margin-bottom:10px; color:#9a9a9a; line-height:2em;}
+.button{ width:320px; height:60px; background:#fdaa01; color:#ffffff;text-align:center; margin-bottom:20px; }
+.button a{ line-height:28px; color:#fff; font-size:12px; font-weight:bold; text-decoration:none; display:block; padding-top:3px;} 
+
+.pageCL{padding-left:20px; color:#9a9a9a; word-spacing:4px; }
+.pagIn{width:40px; background:#fdaa01; text-align:center; margin:0 5px; height:17px; border:0; }
+.pagGO{width:25px; height:19px; font-size:12px; background:#fdaa01; border:0px; color:#fff;}

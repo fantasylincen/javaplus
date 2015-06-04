@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<goto_game>
+http://www.sjcqol.com/
+</goto_game>
+<navigate>
+<link_shouye>index.html</link_shouye>
+<link_tuandui>about.html</link_tuandui>
+<link_chanpin>product.html</link_chanpin>
+<link_xinwen>/news/index.html</link_xinwen>
+<link_shangwu>cooperation.html</link_shangwu>
+<link_zhaopin>recruitment.html</link_zhaopin>
+<link_lianxi>contact.html</link_lianxi>
+
+<link_topshouye>index.html</link_topshouye>
+<link_toplianxi>contact.html</link_toplianxi>
+<link_topkefu></link_topkefu>
+</navigate>
+
+<pic_zhuti>
+<picture id="1">images/imagezhuti.png</picture>
+<link_zhuti>http://www.sjcqol.com/</link_zhuti>
+</pic_zhuti>
+
+</root>
+

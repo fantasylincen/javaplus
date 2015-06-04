@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>YuanShen</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.god.YuanShenPro levelUp(int fighterId, int index, String fightersAndSpirites)
+
+		<args>战士ID</args>
+		<args>元神索引 [0 - 7] </args>
+		
+		<args>
+		
+			被吞噬的战士列表和魂魄列表
+			比如:
+					战士ID,战士ID,战士ID|魂魄ID-数量,魂魄ID-数量,魂魄ID-数量
+					10001,10002,30002|10002-12,10005-3,10007-4
+		</args>
+		
+	    <doc>升级某个元神</doc>
+	    
+	    <back>Fighter.getSpirites(0, 10000)</back>
+		
+	</method>
+
+
+	<method>
+	
+	    cn.mxz.protocols.user.god.YuanShenPro reset(int fighterId, int index)
+
+		<args>战士ID</args>
+		<args>元神索引 [0 - 7] </args>
+		
+	    <doc>重置某个元神</doc>
+		
+		<back>User.getData</back>
+	</method>
+	
+</protocol>

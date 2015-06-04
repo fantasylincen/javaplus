@@ -1,0 +1,8 @@
+	public void setMETHOD_NAME(int index, TYPE_NAME value) {
+		this.PROPERTY_NAME[index] = value;
+	}
+
+	public TYPE_NAME getMETHOD_NAME(int index) {
+		return this.PROPERTY_NAME[index];
+	}
+

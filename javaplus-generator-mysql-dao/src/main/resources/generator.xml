@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+	dir="D:/workspace/MobileServer/gen/"
+	driver="com.mysql.jdbc.Driver"
+	package="db"
+	url="jdbc:mysql://192.168.1.54:3306/mobile10003"
+	uname="root"
+	pwd="game_ttafs">
+
+<!--
+	dir="自动生成的代码保存的路径(这个文件夹是一个源文件夹)"
+	driver="JDBC驱动"
+	package="自动生成的代码的包路径"
+	url="数据库路径"
+	uname="数据库帐号"
+	pwd="数据库密码"
+-->
+
+	<templesPath>
+		src/main/resources/temp/
+	</templesPath>
+
+	<generate_table is_generate_factory="true"><!-- true:生成工厂  DaoFactory.java  如果是false, 那么就不会生成DaoFactory.java-->
+
+		<!-- <table name="表名"> -->
+
+		<table name="user_data" />
+		<table name="user_base" />
+		<table name="war_situation" />
+		<table name="logs" />
+		<table name="boss_data" />
+		<table name="boss_damage_data" />
+		<table name="user_dogz" />
+		<table name="user_market" />
+		<table name="avoid_fighter" />
+		<table name="backup_position" />
+		<table name="pvp_war_situation" />
+		<table name="pvp_extra" />
+		<table name="pvp" />
+		<table name="presents" />
+		<table name="pvp_rank_reward" />
+		<table name="invite_users" />
+		<table name="continuous" />
+		<table name="user_base" />
+		<table name="log_login" />
+		<table name="log_buy" />
+		<table name="log_consume" />
+		<table name="log_boss_award" />
+		<table name="log_find_fighter" />
+
+		<table name="mission_star" />
+		<table name="pvp" />
+		<table name="new_camp" />
+		<table name="log_snatch" />
+		<table name="skills" />
+		<table name="new_fighter" />
+		<table name="spirite" />
+
+		<table name="user_data" />
+		<table name="mission_map" />
+		<table name="user_bag" />
+		<table name="level_up_reward" />
+
+		<table name="mission_challenge" />
+
+		<table name="new_equipment" />
+
+		<table name="chuang_zhen">
+			<interface>
+				ChuangZhenTable
+			</interface>
+		</table>
+
+		<table name="chuang_zhen_ranking_list">
+			<interface>
+				ChuangZhenTable
+			</interface>
+		</table>
+
+		<table name="tactical">
+			<interface>
+				UserItem
+			</interface>
+			<interface>
+				TacticalDTO
+			</interface>
+		</table>
+
+		<table name="user_mission">
+
+			<interface>
+				MissionData
+			</interface>
+		</table>
+
+
+
+		<table name="user_pieces_grid">
+			<interface>
+				DBGrid
+			</interface>
+		</table>
+
+		<table name="user_pieces_bag">
+			<interface>
+				UserItem
+			</interface>
+
+			<interface>
+				DBBag
+			</interface>
+		</table>
+
+		<table name="user_grid">
+			<interface>
+				UserItem
+
+			</interface>
+			<interface>
+				DBGrid
+			</interface>
+		</table>
+
+		<table name="recharge_record"></table>
+		<table name="ums_onlineno"></table>
+	</generate_table>
+</config>

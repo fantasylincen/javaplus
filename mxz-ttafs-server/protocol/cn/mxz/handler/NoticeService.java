@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface NoticeService extends cn.mxz.util.Service{	/**	 * 获取通知模块所有信息	 *	 * @return 通知模块所有信息	 */	cn.mxz.protocols.user.NoticeP.NoticePro getData();}

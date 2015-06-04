@@ -1,0 +1,9 @@
+package PACKAGE_NAME;
+
+IMPORTS
+
+public class Loader {
+	public static final void loadAll(){
+LOADS
+	}
+}

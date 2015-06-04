@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface TowerService extends cn.mxz.util.Service{}

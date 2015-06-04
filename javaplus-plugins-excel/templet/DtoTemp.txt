@@ -1,0 +1,18 @@
+package PACKAGE_NAME.domain;
+
+import java.util.Arrays;
+
+IMPORTS
+public class CLASS_NAME IMPLEMENTS{
+
+PROPERTIES
+
+	public CLASS_NAME() {
+	}
+
+	public CLASS_NAME(CLASS_NAME c) {
+COPY_CONSTRACTOR
+	}
+
+SETS_AND_GETS
+}

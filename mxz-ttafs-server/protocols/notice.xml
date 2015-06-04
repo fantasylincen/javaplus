@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+	<!-- 通知模块 -->
+    <name>Notice</name>
+
+	<method>
+
+	   cn.mxz.protocols.user.NoticePro getData()
+
+	    <doc>获取通知模块所有信息</doc>
+	    <return>通知模块所有信息</return>
+
+	</method>
+	<!--
+	<method>
+
+	    void receive(int id)
+
+	    <doc>领奖</doc>
+
+		<args>奖励ID</args>
+
+	</method> -->
+
+</protocol>

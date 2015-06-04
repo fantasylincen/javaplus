@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface XianShiService extends cn.mxz.util.Service{	/**	 * 获得所有的可以领取的礼包	 *	 * @return 获得所有的可以领取的礼包	 */	cn.mxz.protocols.xianshi.XianShiP.XianShiPresentsPro getPresents();	/**	 * 领取所有的礼包	 *	 * @param id 礼包ID	 * @param count 购买数量	 * 	 */	void buyPresent(int id, int count);}

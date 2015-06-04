@@ -1,0 +1,1 @@
+package cn.mxz.handler;public interface ZanService extends cn.mxz.util.Service{	/**	 * 获得主界面信息	 *	 * @return 主界面信息	 */	cn.mxz.protocols.zan.ZanP.ZanPro getData();	/**	 * 点赞	 *	 * 	 */	void clickZan();}

@@ -1,0 +1,8 @@
+
+	//该类是通过  Build.java 生成的, 千万不要手动改, 到 modules文件 里面加入你的模块就可以了
+	public TYPE getUPPER_NAME() {
+		if(LOWER_NAME != null) {
+			return LOWER_NAME;
+		}
+		return LOWER_NAME = CREATE;
+	}

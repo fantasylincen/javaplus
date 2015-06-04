@@ -1,0 +1,14 @@
+				case PACKET_NUMBER:
+				{
+					var EVENT_NAME:EVENT_CLASS_NAME = new EVENT_CLASS_NAME();
+					
+					if(!hasError) {
+MERGE_FROM
+					} else {
+						EVENT_NAME.error = error;
+					}
+					
+					ActionFactory.ACTION_NAME.dispatchEvent(EVENT_NAME);
+					
+					break;
+				}

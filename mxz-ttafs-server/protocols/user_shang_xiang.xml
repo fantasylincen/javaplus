@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>UserShangxiang</name>
+
+	<method>
+	   cn.mxz.protocols.user.TodayIsGetPro getSX()
+
+	    <doc>获得当前上香状态</doc>
+	    <return>当前上香状态</return>
+
+	</method>
+
+	<method>
+	    void sendSX()
+
+	    <doc>上香</doc>
+
+	    <back>UserShangxiang.getSX()</back>
+	    <!-- <back>QiYu.getButtons()</back> -->
+
+
+	</method>
+
+</protocol>

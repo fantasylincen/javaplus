@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+
+    <name>Guide</name>
+
+	<method>
+
+
+	    String getStatusAll(int id)
+
+	    <doc>所有引导状态:例子(12100152110011: 表示总共20个引导)</doc>
+
+		<args> ... </args>
+
+	    <return> . </return>
+
+	</method>
+
+	<method>
+
+	    void mark(int id, int index, int status)
+
+	    <doc>标记某个引导的状态</doc>
+
+		<args>id</args>
+		<args>引导索引</args>
+		<args>引导状态值 (范围0-9)</args>
+
+	</method>
+
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FighterPro takeFighter(int id)
+
+	    <doc>领取第一个战士</doc>
+
+		<args>战士ID</args>
+
+		<return>战士信息</return>
+
+	</method>
+
+
+</protocol>

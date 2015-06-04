@@ -1,0 +1,1 @@
+package db.domain;import java.util.Arrays;public interface EquipmentHad extends Domain {	String getUname();	void setUname(String uname);void addUname(String uname);	int getEquipmentTypeId();	void setEquipmentTypeId(int equipmentTypeId);void addEquipmentTypeId(int equipmentTypeId);}

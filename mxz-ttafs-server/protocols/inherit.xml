@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<protocol>
+
+    <name>Inherit</name>
+
+	<method>
+
+	    cn.mxz.protocols.user.god.FightersPro inherit(int from, int to, int propId )
+
+		<doc>神将传承</doc>
+	    <return>两个神将的新数据</return>
+		<args>传承神将</args>
+		<args>目标神将</args>
+		<args>使用的道具ID</args>
+
+	</method>
+
+
+
+	<method>
+
+	    int getInheritLevel(int from, int to, int propId )
+
+		<doc>获取 to 传承后的等级</doc>
+	    <return>to 传承后的等级</return>
+		<args>传承神将</args>
+		<args>目标神将</args>
+		<args>使用的道具ID</args>
+
+	</method>
+	
+
+
+</protocol>

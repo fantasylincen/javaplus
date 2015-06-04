@@ -1,0 +1,3 @@
+package db.domain;public interface TacticalDTO extends Domain , 
+						UserItem
+					{	String getUname();	int getIds();	int getTempletId();	int getLevel();	boolean getIscurrent();	float getAccumulate();		void addLevel(int a);				void setUname(String u);	void  setIds(int a);	void  setTempletId(int a);	void  setLevel(int a);	void  setIscurrent(boolean a);	void  setAccumulate(float a);}

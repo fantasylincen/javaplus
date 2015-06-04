@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="javaplus-mncg"
+  id="myeclipse.1423039259780"
+  context-root="/monichaogu"
+  j2ee-spec="6.0"
+  archive="javaplus-mncg.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
