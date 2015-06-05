@@ -239,7 +239,7 @@
 			<exclusions>
 				<exclusion>
 					<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
+					<artifactId>commons-codec</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
