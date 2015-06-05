@@ -1,5 +1,6 @@
 package cn.vgame.a;
 
+import java.net.URL;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import cn.javaplus.cmd.Cmd;
 import cn.javaplus.log.Log;
+import cn.javaplus.util.Resources;
 import cn.javaplus.util.Util;
 import cn.vgame.a.account.Role;
 import cn.vgame.a.config.ServerConfig;
@@ -157,11 +159,8 @@ public class Server {
 	}
 
 	private static String getPath() {
-		if(isLinux()) {
-			return cmd("pwd", ".*");
-		} else {
-			return cmd("cmd /c echo %cd%", ".*");
-		}
+		URL url = Resources.getResource("struts.xml");
+		return url.getPath();
 	}
 
 	private static String cmd(String cmd, String patten) {

@@ -32,6 +32,7 @@ public final class InitThread extends Thread {
 		Log.d(getString("webContextRoot"));
 		Log.d(getString("zoneId"));
 		Log.d(getString("serverIdentity"));
+		Log.d(getString("isDebug"));
 	}
 
 	private Object getString(String key) {

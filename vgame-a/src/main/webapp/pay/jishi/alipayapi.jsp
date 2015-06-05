@@ -1,3 +1,6 @@
+<%@page import="cn.javaplus.excel.Row"%>
+<%@page import="cn.vgame.share.Xml"%>
+<%@page import="cn.javaplus.excel.Sheet"%>
 <%@page import="cn.javaplus.log.Log"%>
 <%@page import="cn.vgame.a.config.ServerConfig"%>
 <%@page import="cn.vgame.a.Server"%>
@@ -64,7 +67,7 @@
 		String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
 		//必填
 		//充值的VB数量
-		int vb = new Integer(new String(request.getParameter("vb").getBytes("ISO-8859-1"),"UTF-8"));
+		int id = new Integer(new String(request.getParameter("id").getBytes("ISO-8859-1"),"UTF-8"));
 		//必填
 		//订单描述
 		String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"),"UTF-8");
@@ -92,17 +95,36 @@
 		sParaTemp.put("return_url", return_url);
 		sParaTemp.put("out_trade_no", out_trade_no);
 		sParaTemp.put("subject", subject);
-		sParaTemp.put("total_fee", (/* vb * */ 0.01) + "");
+		
+		
+		
+		sParaTemp.put("total_fee", getFee(id) + "");
 		sParaTemp.put("body", body);
 		sParaTemp.put("show_url", show_url);
 		sParaTemp.put("anti_phishing_key", anti_phishing_key);
 		sParaTemp.put("exter_invoke_ip", exter_invoke_ip);
 
-		Server.getZfbRechargeManager().createZfbOrder(sParaTemp, vb, roleId);
+		Server.getZfbRechargeManager().createZfbOrder(sParaTemp, id, roleId);
 		
 		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
 		out.println(sHtmlText);
 	%>
+	
+	<%!
+	
+		public double getFee(int id) {
+			Sheet sheet = Xml.getSheet("recharge-A");
+			Row row = sheet.get(id);
+			
+			boolean isDebug = Server.getConfig().getBoolean("isDebug");
+			
+			if(isDebug) {
+				return 0.01;
+			}
+			
+			return row.getDouble("rmb");
+		}
+	 %>
 	<body>
 	</body>
 </html>

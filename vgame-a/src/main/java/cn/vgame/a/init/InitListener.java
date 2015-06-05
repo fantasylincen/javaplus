@@ -4,8 +4,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import cn.javaplus.log.Log;
-import cn.javaplus.log.Out;
-import cn.vgame.a.log.MongoDbLogOutput;
 
 public class InitListener implements ServletContextListener {
 
