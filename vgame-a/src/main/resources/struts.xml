@@ -13,6 +13,11 @@
 	<package name="recharge4YiJie" extends="struts-default" namespace="/recharge">
 		<action name="recharge4YiJie" class="cn.vgame.a.recharge.Recharge4YiJieAction" />
 	</package>
+	
+	<!-- 这个链接是客户端调用的, 客户端调用后, 服务器向AppStore验证订单号是否正确 -->
+	<package name="recharge4AppStoreBuyClient" extends="struts-default" namespace="/recharge4AppStore">
+		<action name="recharge4AppStoreBuyClient" class="cn.vgame.a.recharge.Recharge4AppStoreBuyClientAction" />
+	</package>
 
 	<package name="turntable" extends="struts-default" namespace="/turntable">
 		<action name="commitMySwitchs" class="cn.vgame.a.turntable.CommitMySwitchsAction" />

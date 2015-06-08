@@ -106,18 +106,20 @@ a:hover {
 			<form id="contacts-form" name=form<%=id %> action=pay/jishi/alipayapi.jsp
 			method=post target="_blank">
 			<div class="box2" id="body" style="clear:left">
-				<input type="hidden" size="30" name="WIDout_trade_no"
-					value="<%=Util.ID.createId()%>" /> <input type="hidden" size="30"
-					name="WIDsubject" value="game coin" /> <input type="hidden"
-					size="30" name="WIDbody" value="buy game coin" /> <input
-					type="hidden" size="30" name="WIDshow_url"
-					value="recharge/rechargeSuccess.jsp" /> <input id="id" name="id"
-					type="hidden" value="<%=id %>" /> <%=r.get("dsc") %><a
-					href="javascript:form<%=id %>.submit();"></a>
+				<input type="hidden" name="WIDout_trade_no" value="<%=Util.ID.createId()%>" /> 
+				<input type="hidden" name="WIDsubject" value="game coin" /> 
+				<input type="hidden" name="WIDbody" value="buy game coin" /> 
+				<input type="hidden" name="WIDshow_url" value="recharge/rechargeSuccess.jsp" /> 
+				<input type="hidden" name="WIDtotal_fee" value="0.01" /> 
+				<input id="id" name="id" type="hidden" value="<%=id %>" /> <%=r.get("dsc") %>
+				<a href="javascript:form<%=id %>.submit();"></a>
 					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="javascript:form<%=id %>.submit();"><img src="recharge/buttonUp.png" style="width:60px;height:38px;"/></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:form<%=id %>.submit();"><img src="recharge/buttonUp.png" style="width:60px;height:38px;"/></a>
 			</div>
+			
+			
+			
 	</form>
 	<%
 		}

@@ -31,7 +31,7 @@ public class AlipayConfig {
 	public static String seller_email = "vchudong@gmail.com";
 	
 	// 商户的私钥
-	public static String key = "4hrob8h54i84to8vd5fz65r98d2fc2ag";
+	public static String key = "j7ei75fq2nwf7iavut2akyy7wh87j81c";
 
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	

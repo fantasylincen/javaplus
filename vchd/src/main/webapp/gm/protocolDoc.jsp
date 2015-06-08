@@ -142,6 +142,21 @@ ver:未知<br>
 </td>
 </tr>
 </table>
+<h2><br>/recharge4AppStore
+</h2><table class="bordered">	<thead>		<tr>			<th>说明</th>			<th>名字</th>			<th>参数列表</th>		</tr>	</thead><tr>
+<td><a  title=" A.正常情况: { }
+  
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge4AppStore/recharge4AppStoreBuyClient?receipt=XXXXXX">
+充值
+</a></td>
+<td>
+recharge4AppStoreBuyClient
+</td>
+<td>
+receipt:未知<br>
+</td>
+</tr>
+</table>
 <h2><br>/turntable
 </h2><table class="bordered">	<thead>		<tr>			<th>说明</th>			<th>名字</th>			<th>参数列表</th>		</tr>	</thead><tr>
 <td><a  title=" A.正常情况: { a, b, c, d, e, f, g, h, i, j, k, l, }
