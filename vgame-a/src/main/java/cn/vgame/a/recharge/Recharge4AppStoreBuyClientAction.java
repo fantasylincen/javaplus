@@ -162,10 +162,12 @@ public class Recharge4AppStoreBuyClientAction extends ActionSupport {
 		
 		String roleId = (String) session.getAttribute("roleId");
 		Role role = Server.getRole(roleId);
+		
+		dto.setProductId(product_id);
+
 		long coin = getCoinAdd();
 
 		dto.setId(transaction_id);
-		dto.setProductId(product_id);
 		dto.setRoleId(roleId);
 		dto.setNick(role.getNick());
 		dto.setCoin(coin);
