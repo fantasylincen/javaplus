@@ -28,7 +28,7 @@ public final class InitThread extends Thread {
 		Log.d(getString("dbPath"));
 		Log.d(getString("tokenKey"));
 		Log.d(getString("host"));
-		Log.d(getString("isClientTest"));
+		Log.d(getString("isTest"));
 		Log.d(getString("webContextRoot"));
 		Log.d(getString("zoneId"));
 		Log.d(getString("serverIdentity"));
