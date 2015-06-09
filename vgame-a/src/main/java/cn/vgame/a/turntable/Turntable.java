@@ -133,8 +133,9 @@ public class Turntable {
 			chuFaTunFenShiChang = kv.getInt("CHU_FA_TUN_FEN_SHI_CHANG");
 			kuCun = kv.getLong("KU_CUN");
 			ganSheSec = kv.getString("GAN_SHE_SEC");
-			if(ganSheSec == null)
+			if(ganSheSec == null || ganSheSec.equals("0")) {
 				ganSheSec= "0:" + System.currentTimeMillis();
+			}
 		}
 
 		private void saveToDb() {
