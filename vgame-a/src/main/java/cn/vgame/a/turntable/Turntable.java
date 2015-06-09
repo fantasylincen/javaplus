@@ -197,7 +197,7 @@ public class Turntable {
 		 * @return
 		 */
 		public int getGetGanSheRemainSec() {
-			if (ganSheSec == null || ganSheSec.isEmpty()) {
+			if (ganSheSec == null || ganSheSec.isEmpty() || ganSheSec.equals("0")) {
 				return 0;
 			}
 
