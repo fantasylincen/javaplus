@@ -134,7 +134,7 @@ public class Turntable {
 			kuCun = kv.getLong("KU_CUN");
 			ganSheSec = kv.getString("GAN_SHE_SEC");
 			if(ganSheSec == null)
-				ganSheSec= "0";
+				ganSheSec= "0:" + System.currentTimeMillis();
 		}
 
 		private void saveToDb() {
