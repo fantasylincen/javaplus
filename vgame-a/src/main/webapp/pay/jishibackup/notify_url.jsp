@@ -1,3 +1,13 @@
+<%@page import="cn.vgame.a.gen.dto.MongoGen.ZfbOrderFinishDto"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.ZfbOrderFinishDao"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.RoleDto"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.RoleDao"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.ZfbOrderDto"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.ZfbOrderDao"%>
+<%@page import="cn.vgame.a.account.Role"%>
+<%@page import="cn.vgame.a.Server"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.Daos"%>
+<%@page import="cn.javaplus.log.Log"%>
 <%
 /* *
  功能：支付宝服务器异步通知页面
@@ -48,6 +58,8 @@
 
 	//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 
+	Log.d("some one enter notify_url.jsp");
+
 	if(AlipayNotify.verify(params)){//验证成功
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//请在这里加上商户的业务逻辑程序代码
@@ -58,20 +70,56 @@
 			//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
-				
+				Log.d("TRADE_FINISHED");
 			//注意：
 			//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 		} else if (trade_status.equals("TRADE_SUCCESS")){
 			//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
-				
+				Log.d("TRADE_SUCCESS");
 			//注意：
 			//付款完成后，支付宝系统发送该交易状态通知
 		}
 
 		//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		ZfbOrderDao dao = Daos.getZfbOrderDao();
+		ZfbOrderDto dto = dao.get(out_trade_no);
+		String roleId = dto.getRoleId();
+
+
+
+		Role role = Server.getRole(roleId);
+		long add = dto.getCount();
+		role.addCoin(add);
+		role.addRechargeHistory(add);
+		
+		
+		Log.d("recharge success", role.getId(), role.getNick(), add,
+				role.getCoin());
+		
+		
+		dao.delete(dto);
+		
+		ZfbOrderFinishDao fDao = Daos.getZfbOrderFinishDao();
+		ZfbOrderFinishDto d1 = fDao.createDTO();
+		d1.setCount(dto.getCount());
+		d1.setId(dto.getId());
+		d1.setPrice(dto.getPrice());
+		d1.setTime(dto.getTime());
+		d1.setUserId(dto.getRoleId());
+		fDao.save(d1);
+		
+		
 		out.println("success");	//请不要修改或删除
 
 		//////////////////////////////////////////////////////////////////////////////////////////

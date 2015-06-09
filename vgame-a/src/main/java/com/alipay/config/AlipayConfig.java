@@ -17,7 +17,8 @@ public class AlipayConfig {
 	public static String seller_id = partner;
 	
 	// 商户的私钥
-	public static String private_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC9X0FOOYZjp5tiE59K2RwV6GyO/nkFhxgNhza8Ram7qEDo9oL5gkN/pADO2B+AG45ml/tmmnyK+KZnsDb5sA/6odi/38xZo3WLdX/I++KhsFmq06Se6BpqD195Nx7FPN2ehijfdMbd6jdjJHwR+9lrsNYnC3iJge3ZqS5sIMzccwIDAQAB";
+	public static String private_key = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALl07+aVNocjunFTxGzGTkVYDSePWnEBQTi5rDI+UH5fwurSB5adBqa22U9te0JREriGxNLO92YWxbM5LDDhjsf6P13ykkJJEpEMt1bECNx/e+EIIU1skREsvSzx3uHY3doDsI6f+kJGH0dAaFqk88mYdV+fbv9+KVQCh+hcqaAlAgMBAAECgYArEoqpPhyE9HpX2cG0FbaWCmY7uuKhfk4ck5r3rFtbjnghu5gBlgS2cZ81AFNxSo0TiFFsOJ9i+YT/JBcsXyaezAZ0utEg2ebEEoERtQPf3ffNBwUybfWi9s/G5Q2gCqXMWT7U9aKeOV/s9TrVSHpbdEAZwtmBfqgFyhnOxA4S3QJBAOh2QIue76ZLRc4HLJWEWueBrv5V/CD67PIKfD+EoL3FojFBU73l2LPmKEbwHs1tDFCPRZQ8kD0gn2gYnqCbzmMCQQDMPD5/QZHbg9V5gFhdamfDNRhgLBGmaELMZ3sukWbcD2ewEgzO8mx/bxZPZplVL6cE7v+sLsdzD7pv9QAR+/nXAkEAtbi7fGoirbzqNMUm9TsiVRfr1KcjEiUWVaAcwQrNHY0B3b9T1392iCvEELBlY/F7Tv6xRdCScTavZpDYcHVcQQJAKm9mCOjl1nd49ordUWOXda7lhq4BaNMG9hOWO6HIfnbQ83t8n88tDflV6F+IAnQpPtQt2WfK1zRwZ2y/e/0f9wJAE6o9FjeUCoYk+px1YgPFvNlpAIu3+ED9TxSdf0aEzObbqvQ+RlNdKdFGPhRvl+rbIQinAPeKJFMNHjO6/PxT/Q==";
+	
 	
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	

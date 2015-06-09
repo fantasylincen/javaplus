@@ -92,6 +92,9 @@ a:hover {
 	<img src="recharge/zfb.png">
 	<%
 		String roleId = (String) session.getAttribute("roleId");
+		if(roleId==null && Server.getConfig().getBoolean("isDebug")) {
+			roleId = "VC100031001427";
+		}
 		Role role = Server.getRole(roleId);
 	%>
 	您正在为
@@ -102,6 +105,9 @@ a:hover {
 	<%
 		for (Row r : Xml.getSheet("recharge-A").getAll()) {
 			int id = r.getInt("id");
+			double rmb = r.getDouble("rmb");
+			boolean isDebug = Server.getConfig().getBoolean("isDebug");
+			
 	%>
 			<form id="contacts-form" name=form<%=id %> action=pay/jishi/alipayapi.jsp
 			method=post target="_blank">
@@ -110,7 +116,7 @@ a:hover {
 				<input type="hidden" name="WIDsubject" value="game coin" /> 
 				<input type="hidden" name="WIDbody" value="buy game coin" /> 
 				<input type="hidden" name="WIDshow_url" value="recharge/rechargeSuccess.jsp" /> 
-				<input type="hidden" name="WIDtotal_fee" value="0.01" /> 
+				<input type="hidden" name="WIDtotal_fee" value=<%=isDebug? "0.01" : (rmb + "") %> /> 
 				<input id="id" name="id" type="hidden" value="<%=id %>" /> <%=r.get("dsc") %>
 				<a href="javascript:form<%=id %>.submit();"></a>
 					
