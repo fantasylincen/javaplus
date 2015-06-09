@@ -1,3 +1,4 @@
+<%@page import="cn.javaplus.log.Log"%>
 <%@page import="cn.javaplus.excel.Row"%>
 <%@page import="cn.javaplus.excel.Sheet"%>
 <%@page import="cn.vgame.share.Xml"%>
@@ -52,8 +53,12 @@
 		//需http://格式的完整路径，不能加?id=123这类自定义参数
 
 		//页面跳转同步通知页面路径
-		String return_url = head + "/recharge/rechargeSuccess.jsp";
+		String return_url = head + "/recharge/recharge.jsp";
 		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+
+		Log.d("notify_url", notify_url);
+		Log.d("return_url", return_url);
+
 		//商户订单号
 		String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
 		//商户网站订单系统中唯一订单号，必填		

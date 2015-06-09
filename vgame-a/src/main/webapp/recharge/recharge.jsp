@@ -47,7 +47,7 @@ img {
 
 body {
 	color: #76502F;
-	background: #222222;
+	background: #FFFFFF;
 	text-align: center
 }
 
