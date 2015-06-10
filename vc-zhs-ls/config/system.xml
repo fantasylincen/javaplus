@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<game_port>9000</game_port>
+	<user_port>8001</user_port>
+	<recharge_port>10001</recharge_port>
+	<version>v3.6.0.1</version>
+</config>
+
