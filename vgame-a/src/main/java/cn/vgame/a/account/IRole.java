@@ -30,4 +30,6 @@ public interface IRole {
 
 	void toBank(long coin);
 
+	void addCoinLog(long coin, Object from, String dsc);
+
 }

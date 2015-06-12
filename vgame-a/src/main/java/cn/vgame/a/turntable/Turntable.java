@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Timer;
 
 import cn.javaplus.collections.list.Lists;
 import cn.javaplus.collections.map.Maps;
@@ -15,7 +14,6 @@ import cn.javaplus.excel.Sheet;
 import cn.javaplus.log.Log;
 import cn.javaplus.random.WeightFetcher;
 import cn.javaplus.time.Time;
-import cn.javaplus.time.taskutil.TaskSafety;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.account.IRole;
@@ -46,6 +44,54 @@ import com.alibaba.fastjson.JSONObject;
 
 public class Turntable {
 
+	private final class TestTask extends TurntableTask {
+		private TestTask(long delay, long period) {
+			super(delay, period);
+		}
+
+		@Override
+		public void runSafty() {
+			Log.d(getCd());
+		}
+
+		@Override
+		public TurntableTask copy() {
+			return new TestTask(1000, 1000);
+		}
+	}
+
+	public class CoinInOut {
+
+		private long caiJinOut;
+		private long out;
+		private long in;
+
+		public void addCaiJinOut(long add) {
+			this.caiJinOut = add;
+		}
+
+		public long getOut() {
+			return out;
+		}
+
+		public long getIn() {
+			return in;
+		}
+
+		public long getCaiJinOut() {
+			return caiJinOut;
+		}
+
+		public void addIn(long add) {
+			in += add;
+		}
+
+		public void addOut(long add) {
+			out += add;
+		}
+
+	}
+
 	/**
 	 * 小彩金奖励
 	 * 
@@ -60,6 +106,7 @@ public class Turntable {
 
 		/**
 		 * 这次压了多少注
+		 * 
 		 * @return
 		 */
 		public long getCountThisTime() {
@@ -72,6 +119,7 @@ public class Turntable {
 
 		/**
 		 * 角色ID
+		 * 
 		 * @return
 		 */
 		public String getRoleId() {
@@ -88,6 +136,7 @@ public class Turntable {
 
 		/**
 		 * 获得彩金比例
+		 * 
 		 * @return
 		 */
 		public double getPercent() {
@@ -96,11 +145,12 @@ public class Turntable {
 
 		public void setReceive(long receive) {
 			this.receive = receive;
-			
+
 		}
-		
+
 		/**
 		 * 最终获得了好多彩金
+		 * 
 		 * @return
 		 */
 		public long getReceive() {
@@ -133,8 +183,8 @@ public class Turntable {
 			chuFaTunFenShiChang = kv.getInt("CHU_FA_TUN_FEN_SHI_CHANG");
 			kuCun = kv.getLong("KU_CUN");
 			ganSheSec = kv.getString("GAN_SHE_SEC");
-			if(ganSheSec == null || ganSheSec.equals("0")) {
-				ganSheSec= "0:" + System.currentTimeMillis();
+			if (ganSheSec == null || ganSheSec.equals("0")) {
+				ganSheSec = "0:" + System.currentTimeMillis();
 			}
 		}
 
@@ -197,7 +247,8 @@ public class Turntable {
 		 * @return
 		 */
 		public int getGetGanSheRemainSec() {
-			if (ganSheSec == null || ganSheSec.isEmpty() || ganSheSec.equals("0")) {
+			if (ganSheSec == null || ganSheSec.isEmpty()
+					|| ganSheSec.equals("0")) {
 				return 0;
 			}
 
@@ -486,12 +537,22 @@ public class Turntable {
 	/**
 	 * 机器人下注
 	 */
-	public class RobotTask extends TaskSafety {
+	public class RobotTask extends TurntableTask {
+
+		public RobotTask(long delay, long period) {
+			super(delay, period);
+		}
 
 		@Override
 		public void runSafty() {
 			RobotManager manager = Server.getRobotManager();
 			manager.randomCommit();
+			Log.d("robot commit");
+		}
+
+		@Override
+		public TurntableTask copy() {
+			return new RobotTask(getDelay(), getPeriod());
 		}
 
 	}
@@ -522,6 +583,46 @@ public class Turntable {
 		return mustGenerateId == id;
 	}
 
+	private void submitAnyThing() {
+
+		KeyValueSaveOnly kv = Server.getKeyValueSaveOnly();
+		kv.add("SYSTEM_COIN_IN", inOut.getIn());
+		kv.add("SYSTEM_COIN_OUT", inOut.getOut());
+
+		kv.add("TURNTABLE_ROUND", 1); // 总回合数 + 1
+
+		List<String> allTypes = TurntableUtil.getAllTypes();
+		for (String type : allTypes) {
+			kv.add("SUBMIT_COUNT_HISTOYR:" + type, getCountThisTime(type));
+		}
+
+		// 彩金池加入彩金
+		if (!isSomeOneGetCaiJin)
+			addCaiJinToCaiJinChi();
+
+		updateKuCun();
+	}
+
+	private void initFields() {
+
+		rankingList = new RankingList();
+		result = null;
+		id = Util.ID.createId();
+		switchs = new SwitchAll();
+		timeStart = System.currentTimeMillis();
+		isLock = false;
+		inOut = new CoinInOut();
+		settlements = Maps.newHashMap();
+		xiaoCaiJins = Maps.newHashMap();
+		caiJinNotice = null;
+
+		isSomeOneGetCaiJin = false;
+
+		randomX();
+
+		Server.getRobotManager().clearAllSwitchs();
+	}
+
 	private final class WeightFetcherImplementation implements
 			WeightFetcher<Row> {
 		@Override
@@ -533,6 +634,70 @@ public class Turntable {
 					+ randomXNumber)
 					+ weightAdd;
 		}
+	}
+
+	/**
+	 * 更新库存
+	 */
+	private void updateKuCun() {
+		ZhuangManager z = Server.getZhuangManager();
+		Zhuang zh = z.getZhuang();
+		if (zh == null) {
+			long profit = inOut.getIn() - inOut.getOut();
+			Controller c = getController();
+			long now = c.getKuCun();
+			long old = now;
+			now += profit;
+			c.setKuCun(now);
+
+			if (isChanged(now, old)) {
+				Events.dispatch(new KuCunToZeroEvent(now));
+			}
+			Events.dispatch(new KuCunUpdateEvent(now));
+		}
+	}
+
+	/**
+	 * 两个数的正负性相反
+	 * 
+	 * @param now
+	 * @param old
+	 * @return
+	 */
+	private boolean isChanged(long now, long old) {
+		if (old == 0 || now == 0)
+			return true;
+		old /= Math.abs(old);
+		now /= Math.abs(now);
+		return old * now < 0;
+	}
+
+	private void addCaiJinToCaiJinChi() {
+
+		if (result == null)
+			return;
+
+		long in = inOut.getIn() - inOut.getOut() - inOut.getCaiJinOut();
+		in = Math.max(in, 0);
+
+		String base = Server.getConst().getString("CAI_JIN_SCALE");
+
+		String[] s = base.split("\\-");
+		double min = new Double(s[0]);
+		double max = new Double(s[1]);
+
+		long add = (long) (Util.Random.get(min, max) * in);
+		caiJin = getCaiJin() + add;
+
+		saveCaiJinToDb();
+	}
+
+	/**
+	 * 随机倍率, 在x表中随机
+	 */
+	private void randomX() {
+
+		randomXNumber = Util.Random.get(1, 5);
 	}
 
 	private static final class IProfitImplementation implements IProfit {
@@ -555,7 +720,7 @@ public class Turntable {
 			long reduce = o.getReduce();
 			long caiJin = o.getCaiJin();
 
-			long l = add + caiJin/* - reduce*/;
+			long l = add + caiJin/* - reduce */;
 			return (int) l;
 		}
 
@@ -590,7 +755,16 @@ public class Turntable {
 		}
 	}
 
-	public class RestartTask extends TaskSafety {
+	public class RoundEndTask extends TurntableTask {
+
+		@Override
+		public TurntableTask copy() {
+			return new RoundEndTask(getDelay(), getPeriod());
+		}
+
+		public RoundEndTask(long delay, long period) {
+			super(delay, period);
+		}
 
 		@Override
 		protected void process(Exception e) {
@@ -600,140 +774,43 @@ public class Turntable {
 
 		@Override
 		public void runSafty() {
+			boolean jinShaYuThisTime = isJinShaYuThisTime();
+
 			submitAnyThing();
 			initFields();
+
 			Log.d("restart turn table");
-		}
-
-		private void submitAnyThing() {
-
-			KeyValueSaveOnly kv = Server.getKeyValueSaveOnly();
-			kv.add("SYSTEM_COIN_IN", coinIn);
-			kv.add("SYSTEM_COIN_OUT", coinOut);
-
-			kv.add("TURNTABLE_ROUND", 1); // 总回合数 + 1
-
-			List<String> allTypes = TurntableUtil.getAllTypes();
-			for (String type : allTypes) {
-				kv.add("SUBMIT_COUNT_HISTOYR:" + type, getCountThisTime(type));
-			}
-
-			// 彩金池加入彩金
-			if (!isSomeOneGetCaiJin)
-				addCaiJinToCaiJinChi();
-
-			updateKuCun();
-		}
-
-		/**
-		 * 更新库存
-		 */
-		private void updateKuCun() {
-			ZhuangManager z = Server.getZhuangManager();
-			Zhuang zh = z.getZhuang();
-			if (zh == null) {
-				long profit = coinIn - coinOut;
-				Controller c = getController();
-				long now = c.getKuCun();
-				long old = now;
-				now += profit;
-				c.setKuCun(now);
-
-				if (isChanged(now, old)) {
-					Events.dispatch(new KuCunToZeroEvent(now));
-				}
-				Events.dispatch(new KuCunUpdateEvent(now));
+			if (jinShaYuThisTime) {
+				int pauseSec = Server.getConst().getInt("JIN_SHA_YU_PAUSE_SEC");
+				timer.pause(pauseSec * 1000L);
 			}
 		}
 
 		/**
-		 * 两个数的正负性相反
+		 * 这次是不是出了金鲨鱼
 		 * 
-		 * @param now
-		 * @param old
 		 * @return
 		 */
-		private boolean isChanged(long now, long old) {
-			if (old == 0 || now == 0)
-				return true;
-			old /= Math.abs(old);
-			now /= Math.abs(now);
-			return old * now < 0;
-		}
-
-		private void addCaiJinToCaiJinChi() {
-			// if (result == null)
-			// return;
-			// List<Row> rs = result.getResult();
-			// Row first = rs.get(0);
-			// String s = first.get("type");
-			//
-			// StaticDataAdaptor xml = Server.getXml();
-			// Sheet sheet = xml.get("x");
-			// Row row = sheet.get(s);
-			//
-			// int x = getX(row.get("type"));
-			//
-			// int base = Server.getConst().getInt("CAI_JIN_BASE");
-			//
-			// long add = x * base;
-			//
-			// caiJin = getCaiJin() + add;
-			//
-			// saveCaiJinToDb();
-
+		private boolean isJinShaYuThisTime() {
 			if (result == null)
-				return;
-
-			long in = coinIn - coinOut;
-			in = Math.max(in, 0);
-
-			String base = Server.getConst().getString("CAI_JIN_SCALE");
-
-			String[] s = base.split("\\-");
-			double min = new Double(s[0]);
-			double max = new Double(s[1]);
-
-			long add = (long) (Util.Random.get(min, max) * in);
-			caiJin = getCaiJin() + add;
-
-			saveCaiJinToDb();
-
+				return false;
+			List<Row> rs = result.getResult();
+			Row row = rs.get(0);
+			String type = row.get("type");
+			return type.equals("C");
 		}
-
-
-		private void initFields() {
-
-			rankingList = new RankingList();
-			result = null;
-			id = Util.ID.createId();
-			switchs = new SwitchAll();
-			timeStart = System.currentTimeMillis();
-			isLock = false;
-			coinIn = 0;
-			coinOut = 0;
-			settlements = Maps.newHashMap();
-			xiaoCaiJins = Maps.newHashMap();
-			caiJinNotice = null;
-
-			isSomeOneGetCaiJin = false;
-
-			randomX();
-
-			Server.getRobotManager().clearAllSwitchs();
-		}
-
-		/**
-		 * 随机倍率, 在x表中随机
-		 */
-		private void randomX() {
-
-			randomXNumber = Util.Random.get(1, 5);
-		}
-
 	}
 
-	public class GenerateResultTask extends TaskSafety {
+	public class GenerateResultTask extends TurntableTask {
+
+		@Override
+		public TurntableTask copy() {
+			return new GenerateResultTask(getDelay(), getPeriod());
+		}
+
+		public GenerateResultTask(long delay, long period) {
+			super(delay, period);
+		}
 
 		@Override
 		protected void process(Exception e) {
@@ -762,7 +839,7 @@ public class Turntable {
 			Zhuang zh = z.getZhuang();
 			if (zh != null) {
 
-				long profit = coinIn - coinOut;
+				long profit = inOut.getIn() - inOut.getOut();
 				if (rankingList != null) {
 					IProfit buildProfit = buildProfit(zh, profit);
 					rankingList.setZhuang(buildProfit);
@@ -784,7 +861,7 @@ public class Turntable {
 
 		private void settlementForAllRoles() {
 
-			generateXiaoCaiJins();//计算所有用户可以获得多少小彩金
+			generateXiaoCaiJins();// 计算所有用户可以获得多少小彩金
 
 			Set<String> keySet = switchs.keySet();
 			for (String roleId : keySet) {
@@ -794,13 +871,21 @@ public class Turntable {
 				SettlementResult result = settlement(
 						Turntable.this.result.getResult(), role, sw);
 				rankingList.add(result);
-				if (!(role instanceof TestRole)) {
-					coinIn += result.getReduce();
-					coinOut += result.getAdd();
+
+				boolean isRobot = Server.getRobotManager()
+						.isRobot(role.getId());
+				boolean isTestRole = role instanceof TestRole;
+
+				if (!isTestRole && !isRobot) {
+
+					inOut.addIn(result.getReduce());
+					inOut.addOut(result.getAdd());
+					inOut.addCaiJinOut(result.getCaiJin()
+							+ result.getXiaoCaiJinAdd());
 				}
 				settlements.put(role.getId(), result);
 			}
-			
+
 			removeXiaoCaiJin();
 		}
 
@@ -834,15 +919,14 @@ public class Turntable {
 
 			long countAll = getXiaoCaiJinCountAll();
 
-			
 			String base = Server.getConst().getString("CAI_JIN_SCALE_SMALL");
 
 			String[] ss = base.split("\\-");
 			double min = new Double(ss[0]);
 			double max = new Double(ss[1]);
-			
+
 			double caiJinPercentAll = Util.Random.get(min, max);
-			
+
 			for (XiaoCaiJinReward r : xiaoCaiJins.values()) {
 				double c = r.getCountThisTime();
 				double percent = c / countAll * caiJinPercentAll;
@@ -934,15 +1018,14 @@ public class Turntable {
 	private SwitchAll switchs;
 	private String id;
 	private Result result;
-	private ITimer timer;
+	private TurntableTimer timer;
 
 	/** 随机倍率序号 */
 	private int randomXNumber = 1;
 
 	private boolean isLock;
 
-	private long coinIn; // 金币输入
-	private long coinOut; // 金币输出
+	private CoinInOut inOut = new CoinInOut();
 
 	// 管理员配置的权重
 	private Map<Integer, Integer> weightByGm = loadFromDB();
@@ -984,6 +1067,7 @@ public class Turntable {
 		}
 		dao.save(dto);
 	}
+
 	public Controller getController() {
 		if (controller == null)
 			controller = new Controller();
@@ -995,9 +1079,18 @@ public class Turntable {
 			timer.cancel();
 		}
 		timer = new MyTimer();
+
+		initFields();
+
 		addGenerateResultTask();
 		addRestartTask();
 		addRobotTask();
+
+//		addTestTask();
+	}
+
+	void addTestTask() {
+		timer.scheduleAtFixedRate(new TestTask(1000, 1000));
 	}
 
 	public int getWeight(Row row) {
@@ -1014,9 +1107,10 @@ public class Turntable {
 
 		String string = Server.getConst().getString("ROBOT_COMMIT_SEC");
 		List<Integer> is = Util.Collection.getIntegers(string);
-		for (Integer sec : is) {
+		for (int sec : is) {
 
-			timer.scheduleAtFixedRate(new RobotTask(), sec, sum);
+			timer.scheduleAtFixedRate(new RobotTask(sec * 1000, sum));
+			Log.d("add robot task", sec);
 		}
 	}
 
@@ -1025,7 +1119,7 @@ public class Turntable {
 		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
 
 		long sum = cd + jcd;
-		timer.scheduleAtFixedRate(new RestartTask(), 0, sum);
+		timer.scheduleAtFixedRate(new RoundEndTask(sum, sum));
 	}
 
 	private void addGenerateResultTask() {
@@ -1034,10 +1128,13 @@ public class Turntable {
 
 		isLock = true; // 锁定所有用户不可再下注
 		long sum = cd + jcd;
-		timer.scheduleAtFixedRate(new GenerateResultTask(), cd, sum);
+		timer.scheduleAtFixedRate(new GenerateResultTask(cd - 1900, sum));
 	}
 
 	public long getCd() {
+//		if(result != null) {
+//			return 0;
+//		}
 		long cd = Server.getConst().getLong("CD");
 		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
 
@@ -1093,11 +1190,12 @@ public class Turntable {
 
 			// if (!Server.getRobotManager().isRobot(role.getId())) {
 
-			coinIn += result.getReduce();
-			coinOut += result.getAdd();
+			inOut.addIn(result.getReduce());
+			inOut.addOut(result.getAdd());
 			// }
 
-			return new PlayResult(this.result.getResult(), role.getCoin(), null, 0);
+			return new PlayResult(this.result.getResult(), role.getCoin(),
+					null, 0);
 		} else {
 			throw new ErrorResult(10011).toException();
 		}
@@ -1220,6 +1318,7 @@ public class Turntable {
 
 		// Log.d(role.getId(), r.getReduce(), s);
 		role.reduceCoin(reduce);// 把所有压了的金币扣了
+		Log.d("reduce for bet", role.getId(), role.getNick(), reduce);
 
 		long add = 0;
 		for (Row row : randoms) {
@@ -1247,7 +1346,7 @@ public class Turntable {
 			isSomeOneGetCaiJin = true;
 			saveCaiJinLog(role, settlementCaiJin, false);
 		}
-		
+
 		long xiaoCaiJinAdd = settlementXiaoCaiJin(role, first);
 
 		r.setAdd(add);
@@ -1258,23 +1357,24 @@ public class Turntable {
 
 	private long settlementXiaoCaiJin(IRole role, Row first) {
 		XiaoCaiJinReward rwd = xiaoCaiJins.get(role.getId());
-		if(rwd == null)
+		if (rwd == null)
 			return 0;
-		
+
 		long cj = getCaiJin();
-		
+
 		long receive = (long) (rwd.getPercent() * cj);
-		
+
 		rwd.setReceive(receive);
-		
+
 		role.addCoin(receive);
-		
+
 		saveCaiJinLog(role, receive, true);
-		
+
 		return receive;
 	}
 
-	private void saveCaiJinLog(IRole role, long settlementCaiJin, boolean isSmall) {
+	private void saveCaiJinLog(IRole role, long settlementCaiJin,
+			boolean isSmall) {
 		CaiJinLogDao dao = Daos.getCaiJinLogDao();
 		CaiJinLogDto dto = dao.createDTO();
 		dto.setNick(role.getNick());
@@ -1300,6 +1400,12 @@ public class Turntable {
 		}
 
 		RobotManager manager = Server.getRobotManager();
+
+		if (manager.isRobot(role.getId())) { // 2015年6月11日 14:59:20 林岑加 如果是机器人,
+												// 就不要获得彩金
+			return 0;
+		}
+
 		if (manager.hasMustTo()) {
 			if (manager.isCaiJinMustTo(role.getId())) {
 				return settlementCj(role, s, row);
@@ -1326,6 +1432,12 @@ public class Turntable {
 		}
 
 		RobotManager manager = Server.getRobotManager();
+
+		if (manager.isRobot(role.getId())) { // 2015年6月11日 14:59:20 林岑加 如果是机器人,
+												// 就不要获得彩金
+			return 0;
+		}
+
 		boolean hasMustTo = manager.hasMustTo();
 
 		int c = s.getC();
@@ -1400,6 +1512,7 @@ public class Turntable {
 			return 0;
 		long add = byType * getX(type);
 		role.addCoin(add);
+		Log.d("settlement coin", role.getId(), role.getNick(), add, type);
 		return add;
 	}
 
@@ -1558,28 +1671,42 @@ public class Turntable {
 		if (result == null)
 			return new PlayOnceError(this, "result not found");
 
-		SettlementResult result = settlements.get(role.getId());
+		SettlementResult result = getResult(role);
 		List<Row> rst = this.result.getResult();
-		if (result == null) {
-			commitUserSwitchs(role.getId(), sw);
-			result = settlement(rst, role, sw);// 结算给当前用户
-
-			if (!Server.getZhuangManager().isZhuang(role.getId())) {
-				rankingList.add(result);// 不是庄家的时候, 才加入排行榜, 不然结算界面会显示庄家排名
-			}
-
-			if (!(role instanceof TestRole)) {
-				coinIn += result.getReduce();
-				coinOut += result.getAdd();
-			}
-			settlements.put(role.getId(), result);
-		}
+//		if (result == null) {
+//			commitUserSwitchs(role.getId(), sw);
+//			result = settlement(rst, role, sw);// 结算给当前用户
+//
+//			if (!Server.getZhuangManager().isZhuang(role.getId())) {
+//				rankingList.add(result);// 不是庄家的时候, 才加入排行榜, 不然结算界面会显示庄家排名
+//			}
+//
+//			boolean isRobot = Server.getRobotManager().isRobot(role.getId());
+//			boolean isTestRole = role instanceof TestRole;
+//
+//			if (!isTestRole && !isRobot) {
+//
+//				inOut.addIn(result.getReduce());
+//				inOut.addOut(result.getAdd());
+//				inOut.addCaiJinOut(result.getCaiJin()
+//						+ result.getXiaoCaiJinAdd());
+//			}
+//
+//			settlements.put(role.getId(), result);
+//		}
+		
+		if(result == null)
+			return new PlayResult(rst, 0, caiJinNotice, 0);
 
 		long coin = role.getCoin();
-		
+
 		long caiJin = result.getCaiJin() + result.getXiaoCaiJinAdd();
-		
+
 		return new PlayResult(rst, coin, caiJinNotice, caiJin);
+	}
+
+	private SettlementResult getResult(IRole role) {
+		return settlements.get(role.getId());
 	}
 
 	/**

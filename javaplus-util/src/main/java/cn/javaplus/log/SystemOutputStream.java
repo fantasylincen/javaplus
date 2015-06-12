@@ -1,6 +1,6 @@
 package cn.javaplus.log;
 
-public class SystemOutPutStream implements IPrintStream {
+public class SystemOutputStream implements IPrintStream {
 
 	@Override
 	public void println(Object obj) {

@@ -72,4 +72,9 @@ public class TestRole implements IRole {
 
 	}
 
+	@Override
+	public void addCoinLog(long coin, Object from, String dsc) {
+		
+	}
+
 }

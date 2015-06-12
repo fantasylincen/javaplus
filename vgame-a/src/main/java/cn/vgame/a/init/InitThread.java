@@ -2,7 +2,6 @@ package cn.vgame.a.init;
 
 import cn.javaplus.log.Log;
 import cn.javaplus.log.Out;
-import cn.javaplus.util.Util;
 import cn.javaplus.web.WebContentFethcer;
 import cn.vgame.a.Server;
 import cn.vgame.a.config.GameProperties;
@@ -10,6 +9,7 @@ import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.MongoDbProperties;
 import cn.vgame.a.log.MongoDbLogOutput;
 import cn.vgame.a.turntable.Turntable;
+import cn.vgame.share.FileLogger;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -35,6 +35,8 @@ public final class InitThread extends Thread {
 		Log.d(getString("zoneId"));
 		Log.d(getString("serverIdentity"));
 		Log.d(getString("isDebug"));
+		Log.d(getString("isShowZfb"));
+		Log.d(getString("logFilePath"));
 	}
 
 	private Object getString(String key) {
@@ -42,7 +44,8 @@ public final class InitThread extends Thread {
 	}
 
 	private void setLogToDb() {
-		Out out = new MongoDbLogOutput();
+//		Out out = new MongoDbLogOutput();
+		Out out = new FileLogger(Server.getConfig().getString("logFilePath"));
 		Log.setOut(out);
 		Log.setErr(out);
 	}

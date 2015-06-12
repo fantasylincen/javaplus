@@ -115,7 +115,7 @@ a:hover {
 				<input type="hidden" name="WIDout_trade_no" value="<%=Util.ID.createId()%>" /> 
 				<input type="hidden" name="WIDsubject" value="game coin" /> 
 				<input type="hidden" name="WIDbody" value="buy game coin" /> 
-				<input type="hidden" name="WIDshow_url" value="recharge/rechargeSuccess.jsp" /> 
+				<input type="hidden" name="WIDshow_url" value="recharge/recharge.jsp" /> 
 				<input type="hidden" name="WIDtotal_fee" value=<%=isDebug? "0.01" : (rmb + "") %> /> 
 				<input id="id" name="id" type="hidden" value="<%=id %>" /> <%=r.get("dsc") %>
 				<a href="javascript:form<%=id %>.submit();"></a>

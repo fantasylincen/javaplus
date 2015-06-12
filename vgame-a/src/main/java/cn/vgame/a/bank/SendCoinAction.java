@@ -1,6 +1,7 @@
 package cn.vgame.a.bank;
 
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
+import cn.vgame.a.result.ErrorResult;
 
 /**
  * 赠送金豆
@@ -28,6 +29,10 @@ public class SendCoinAction extends JsonActionAfterRoleEnterGame {
 	
 	@Override
 	public Object run() {
+		String id = role.getId();
+		if(id.equals(roleId)) {
+			throw new ErrorResult(10109).toException();
+		}
 		role.sendCoin(roleId, coin, password);
 		return new BankResult(role);
 	}

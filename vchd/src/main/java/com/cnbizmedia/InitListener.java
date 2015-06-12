@@ -109,7 +109,10 @@ public class InitListener implements ServletContextListener {
 		add(ls, "webContextRoot", "vgame-a", true, "游戏服务器路径");
 		add(ls, "serverIdentity", "xxxxxxxxxxxxxxx", true, "游戏服务器身份标识");
 		add(ls, "host", "192.168.140.172", true, "服务器IP");
-		add(ls, "isClientTest", "vgame-a", true, "游戏服务器路径");
+		add(ls, "isDebug", "true", true, "是否是调试模式");
+		add(ls, "webContextRoot", "vgame-a", true, "游戏服务器路径");
+		add(ls, "isShowZfb", "false", true, "支付宝支付界面是否显示");
+		add(ls, "logFilePath", "/root/vgame-a-logs", false, "服务器日志文件路径");
 		return ls;
 	}
 

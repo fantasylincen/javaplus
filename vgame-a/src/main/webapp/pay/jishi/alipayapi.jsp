@@ -62,15 +62,17 @@
 		//商户订单号
 		String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
 		//商户网站订单系统中唯一订单号，必填		
-		//充值的VB数量
-		int id = new Integer(new String(request.getParameter("id").getBytes("ISO-8859-1"),"UTF-8"));
-		
 		//订单名称
 		String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
 		//必填
 		//付款金额
 		String total_fee = new String(request.getParameter("WIDtotal_fee").getBytes("ISO-8859-1"),"UTF-8");
-		//必填
+		//必填
+
+		String id = new String(request.getParameter("id").getBytes("ISO-8859-1"),"UTF-8");
+		
+	//	Log.d("aaaaaaaaaaaaaaaas", total_fee);
+		
 		//商品展示地址
 		String show_url = new String(request.getParameter("WIDshow_url").getBytes("ISO-8859-1"),"UTF-8");
 		//必填，需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html

@@ -232,7 +232,7 @@
 
 		sb.append("<td>");
 
-		if (robot.isCommitJinSha()) {
+	/* 	if (robot.isCommitJinSha()) {
 			if (manager.isCaiJinMustTo(robot.getId())) {
 				sb.append("<a href=\"caiJinMustTo\">取消</a>");
 			} else {
@@ -241,7 +241,9 @@
 			}
 		} else {
 			sb.append("-");
-		}
+		} */
+		sb.append("-");
+		
 		sb.append("</td>");
 
 		sb.append("</tr>");

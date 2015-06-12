@@ -1,10 +1,15 @@
 package cn.vgame.a.account;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.bag.Bag;
 import cn.vgame.a.bank.Bank;
+import cn.vgame.a.gen.dto.MongoGen.CoinLogDao;
+import cn.vgame.a.gen.dto.MongoGen.CoinLogDto;
 import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.MongoMap;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao;
@@ -17,6 +22,8 @@ import cn.vgame.share.KeyValue;
 import cn.vgame.share.KeyValueSaveOnly;
 
 public class Role implements IRole {
+
+	private static final SimpleDateFormat SF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	private final class KeyValueSaveOnlyImplementation implements
 			KeyValueSaveOnly {
@@ -279,8 +286,11 @@ public class Role implements IRole {
 		if (!status.isCanReceive()) {
 			throw new ErrorResult(10013).toException();
 		}
-		addCoin(status.getCoin());
+		long coin = status.getCoin();
+		addCoin(coin);
 		markReceive();
+		
+		addCoinLog(coin, "system", "receive coin");
 	}
 
 	public boolean hasJinYan() {
@@ -337,6 +347,8 @@ public class Role implements IRole {
 
 		Log.d("send coin", getId(), getNick(), getCoin(), otherRole.getId(),
 				otherRole.getNick(), otherRole.getCoin());
+		
+		otherRole.addCoinLog(coin, getId(), "send coin");
 	}
 
 	/**
@@ -419,8 +431,30 @@ public class Role implements IRole {
 		dao.save(dto);
 	}
 
-	public void addRechargeHistory(long add) {
+	/**
+	 * @param add
+	 * @param from 充值渠道
+	 */
+	public void addRechargeHistory(long add, String from) {
 		dto.setRechargeHistory(dto.getRechargeHistory() + add);
 		Daos.getRoleDao().save(dto);
+		
+		addCoinLog(add, from, "recharge");
+	}
+
+	@Override
+	public void addCoinLog(long coin, Object from, String dsc) {
+		CoinLogDao dao = Daos.getCoinLogDao();
+		CoinLogDto dto = dao.createDTO();
+		Date dt = new Date(System.currentTimeMillis());
+
+		dto.setCoin(coin);
+		dto.setId(Util.ID.createId());
+		dto.setDsc(dsc);
+		dto.setFrom(from + "");
+		dto.setTime(SF.format(dt));
+		dto.setTo(getId());
+		dto.setFromTo(from + "|" + getId());
+		dao.save(dto);
 	}
 }

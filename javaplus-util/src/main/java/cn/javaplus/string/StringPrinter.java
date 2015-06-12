@@ -3,7 +3,9 @@ package cn.javaplus.string;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class StringPrinter {
+import cn.javaplus.log.IPrintStream;
+
+public class StringPrinter implements IPrintStream{
 
 	private StringWriter sw = new StringWriter();
 	private PrintWriter out = new PrintWriter(sw);

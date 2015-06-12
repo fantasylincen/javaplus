@@ -157,8 +157,19 @@ function juge(form){
 
 					<td><input id="reason" name="reason" type="text" /></td>
 				</tr>
+				<tr>
+					<td><br></td>
+					<td><br></td>
+				</tr>
+				<tr>
+					<td><a href="coinLog.jsp?roleId=<%=role.getId()%>&page=1&countEvery=14">查看金豆记录</a></td>
+
+					<td></td>
+				</tr>
 			</tbody>
 		</table>
+		<br>
+		<br>
 		<input type="submit" value="保存" /> &nbsp;&nbsp;&nbsp;&nbsp; <a
 			href="queryUsers.jsp"> 返回</a> <br>
 

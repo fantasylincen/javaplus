@@ -102,10 +102,12 @@ public class SetUserAction extends ActionSupport {
 
 		if (reduceCoin > 0) {
 			role.reduceCoin(reduceCoin);
+			role.addCoinLog(-reduceCoin, gmUserId, "gm reduce");
 		}
 
 		if (addCoin > 0) {
 			role.addCoin(addCoin);
+			role.addCoinLog(addCoin, gmUserId, "gm add");
 		}
 
 		long coinNow = role.getCoin();

@@ -1,5 +1,6 @@
 package cn.vgame.a.turntable;
 
+import cn.javaplus.log.Log;
 import cn.vgame.a.Server;
 import cn.vgame.a.account.IRole;
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
@@ -122,7 +123,9 @@ public class GetAllSwitchsAction extends JsonActionAfterRoleEnterGame {
 		private final IRole role;
 
 		public long getCd() {
-			return Turntable.getInstance().getCd();
+			long cd = Turntable.getInstance().getCd();
+			Log.d("cd", cd);
+			return cd;
 		}
 		
 		public GetTableDataResult(IRole role) {

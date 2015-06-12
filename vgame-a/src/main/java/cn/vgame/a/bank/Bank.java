@@ -111,6 +111,8 @@ public class Bank {
 
 		role.reduceCoin(coin);
 
+		role.addCoinLog(-coin, "bank", "to bank");
+		
 		dto.setBankCoin(coin + dto.getBankCoin());
 
 		Daos.getRoleDao().save(dto);
@@ -125,6 +127,7 @@ public class Bank {
 		dto.setBankCoin(dto.getBankCoin() - coin);
 
 		role.addCoin(coin);
+		role.addCoinLog(coin, "bank", "from bank");
 
 		Daos.getRoleDao().save(dto);
 	}

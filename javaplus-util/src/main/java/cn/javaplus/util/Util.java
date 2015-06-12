@@ -1243,7 +1243,8 @@ public class Util {
 		public static List<String> getLines(java.io.File file) {
 			FileLinesReader f;
 			try {
-				f = new FileLinesReader(new InputStreamReader(new FileInputStream(file), "utf8"));
+				f = new FileLinesReader(new InputStreamReader(
+						new FileInputStream(file), "utf8"));
 			} catch (java.lang.Exception e) {
 				throw Util.Exception.toRuntimeException(e);
 			}
@@ -1256,7 +1257,8 @@ public class Util {
 			try {
 				s = r.openStream();
 
-				bufferedReader = new BufferedReader(new InputStreamReader(s, "utf8"));
+				bufferedReader = new BufferedReader(new InputStreamReader(s,
+						"utf8"));
 				StringBuffer sb = new StringBuffer();
 				read(sb, bufferedReader);
 				return sb.toString();
@@ -1377,6 +1379,12 @@ public class Util {
 			} finally {
 				Closer.close(fw);
 			}
+		}
+
+		public static void mkdirs(String path) {
+			java.io.File file = new java.io.File(path);
+			if (!file.exists())
+				file.mkdirs();
 		}
 
 	}

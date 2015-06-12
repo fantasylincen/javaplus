@@ -175,7 +175,7 @@ public class Recharge4AppStoreBuyClientAction extends ActionSupport {
 		
 
 		role.addCoin(coin);
-		role.addRechargeHistory(coin);
+		role.addRechargeHistory(coin, "appstore");
 
 
 		Log.d("recharge success", role.getId(), role.getNick(), coin,

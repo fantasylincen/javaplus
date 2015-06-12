@@ -1,5 +1,7 @@
 package cn.vgame.a.turntable;
 
+import cn.javaplus.log.Log;
+
 public class PlayOnceError {
 
 	/**
@@ -18,7 +20,10 @@ public class PlayOnceError {
 	}
 
 	public long getCd() {
-		return this.turntable.getCd();
+		
+		long cd = this.turntable.getCd();
+		Log.d("error request", cd);
+		return cd;
 	}
 
 }

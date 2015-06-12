@@ -10,16 +10,14 @@ import cn.vgame.a.gen.dto.MongoGen.ZfbOrderDto;
 import cn.vgame.share.Xml;
 
 public class ZfbRechargeManager {
-	/**
-	 * @param pars
-	 * @param vb V币
-	 */
-	public void createZfbOrder(Map<String, String> pars, int id, String roleId) {
+	
+	public void createZfbOrder(Map<String, String> pars, String idd, String roleId) {
+		
+		int id = new Integer(idd);
 		
 		ZfbOrderDao dao = Daos.getZfbOrderDao();
 		ZfbOrderDto dto = dao.createDTO();
 		dto.setId(pars.get("out_trade_no"));
-		
 		Sheet sheet = Xml.getSheet("recharge-A");
 		Row row = sheet.get(id);
 		int jinDou = row.getInt("jinDou");
@@ -30,4 +28,5 @@ public class ZfbRechargeManager {
 		
 		dao.save(dto);
 	}
+
 }

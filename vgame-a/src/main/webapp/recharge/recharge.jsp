@@ -1,4 +1,6 @@
 
+<%@page import="cn.javaplus.log.Log"%>
+<%@page import="cn.javaplus.excel.Sheet"%>
 <%@page import="cn.vgame.share.Xml"%>
 <%@page import="cn.javaplus.excel.Row"%>
 <%@page import="cn.vgame.a.account.Role"%>
@@ -7,360 +9,367 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Cache-Control" content="no-cache"/>
-    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <style type="text/css">
-		input:focus{
-		    outline:none;
-		}
-	body {
-		-webkit-tap-highlight-color:rgba(0,0,0,0);
-		-webkit-user-select:none;
-		user-select:none;
-	}
-        .container {
-            width:100%;
-            text-align: center;
-        }
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport"
+	content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<style type="text/css">
+input:focus {
+	outline: none;
+}
 
-	.phone-no {
-		border-bottom: #cccccc 1px solid;
-		border-top: #cccccc 1px solid;
-		margin: 10px 0px;
-		text-align: left;
-		height: 45px;
-		background-color:#ffffff;
-	}
-	.phone-no input{
-		border:none;
-		border-radius: 3px;
-		width: 180px;
-		height: 100%;
-		padding-left: 10px;
-		font-size:18px;
-		font-family:"Microsoft YaHei";
-		line-height:45px;
-	}
+body {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-user-select: none;
+	user-select: none;
+}
 
-	#cards {
-		margin:10px;
-		padding:0px;
-		list-style-type:none;
-	}
-	.cards-li{
-		float:left;
-		border: #cccccc 1px solid;
-		border-radius: 1px;
-		width: 45%;
-		margin:5px;
-		font-family:"Microsoft YaHei";
-		font-size:15px;
-		background-color:#ffffff;
-		color:#666666;
-		line-height: 45px;
-        height:45px;
-	}
-	.div-rotate {
-		display: inline-block;
-		-o-transform: rotate(320deg); 
-		-webkit-transform: rotate(320deg); 
-		-moz-transform: rotate(320deg);
-		background-color: #00ff00;
-	}
-	.div-ru{
-		background-color: #e94643;
-		color:#ffffff;
-		float: right;
-		font-size: 12px;
-		padding: 2px 5px;
-		font-family:"Microsoft YaHei";
-		line-height: 14px;
-	}
-	.select{
-		background-position:right;
-		background-position-y: bottom;
-		border: #e94643 2px solid;
-		margin: 4px;
-	}
-	#tip {
-		text-align:left;
-		margin: 10px 15px;
-		font-size: 15px;
-		font-family: SimHei;
-	}
-	#really {
-		text-align:left;
-		margin: 0px 15px;
-		font-size: 15px;
-		clear: both;
-		padding-top: 10px;
-		display: none;
-		font-family: SimHei;
-	}
-	.font-acc{
-		color:#e94643;
-	}
-	#history {
-		text-align:left;
-		margin: -10px 0px;
-		font-size: 13px;
-		position:fixed;
-		height:60%;
-		overflow:auto;
-        width:100%;
-	}
-	.history-hide{
-		display:none;
-	}
-	.warning {
-		color:#d00000;
-	}
-	.alert-box{
-		color: #fff;
-		top:20%;
-		left:10%;
-		width:80%;
-		height:60%;
-	}
-	.alert-box text-div{
-		margin: 10px 0px;
-	}
-	.alert-box button{
-		width: 100%;
-		margin: 10px 0px;
-		display: block;
-	}
-	.bank-list{
-		margin: 0px;
-		padding: 0px;
-	}
-	.bank-list li{
-		margin-right: 10px;
-		padding-left:10px;
-		line-height:43px;
-		overflow:hidden;
-		font-size: 15px;
-	}
-	.head{
-		line-height: 45px;
-		border:0px;
-		height:45px;
-	   	vertical-align:middle;
-	   	text-align:center;
-		width: 100%;
-		position: relative;
-		background-color:#f2f2f2;
-	}
-	.head-content{
-			background-size: 67px;
-			background-color: #e94643;
-			margin: 0px;
-			color:#ffffff;
-	}
-	.btn-orange-disable{
-		margin-top: 15px;
-		border-radius:3px;
-		height: 43px;
-		line-height: 33px;
-		font-size: 18px;
-		border:0px;
-	   	text-align: center;
-		cursor: pointer;
-		color: #ffcbca;
-		width: 100%;
-		background-color:#ff8d8b;
-		box-sizing:border-box;
-	}
-	.btn-orange{
-		margin-top: 15px;
-		border-radius:3px;
-		height: 43px;
-		line-height: 33px;
-		font-size: 18px;
-		border:0px;
-	   	text-align: center;
-		cursor: pointer;
-		color: #fff;
-		width: 100%;
-		background-color:#e94643;
-		box-sizing:border-box;
-	}
-	.copy-right-sub {
-		color: #b3b3b3;
-	   	font-size: 12px;
-	   	text-shadow: 0 1px 1px #fff;
-		margin: 0 auto;
-		text-align: center;
-		padding-top:10px;
-		width:100%;
-		bottom: 0;
-		top:auto;
-	}
-	.more-card{
-		float: right;
-		display: block;
-		background: url("https://www.baifubao.com/static/mobile/mobile-pay/style/images/arrow_down.png") no-repeat 15px 18px;
-		height: 100%;
-		width: 43px;
-		border-left: #cccccc 1px solid;
-	}
-	.more-card-click{
-		background: url("https://www.baifubao.com/static/mobile/mobile-pay/style/images/arrow_up.png") no-repeat 15px 18px;
-	}
-	.attru {
-		color:#666666;
-	}
-	#a_go_back{
-		position: absolute;
-		display: inline-block;
-		height: 13px;
-		width: 13px;
-		top: 15px;
-		left: 15px;
-		border-top: solid 2px #fff;
-		border-left: solid 2px #fff;
-		-webkit-transform: rotate(-45deg);
-		transform: rotate(-45deg);
-		display: none;
-	}
-	::-webkit-input-placeholder { font-family: SimHei;font-size:15px;}
-	input:-moz-placeholder {font-family: SimHei;}
-    </style>
+.container {
+	width: 100%;
+	text-align: center;
+}
+
+.phone-no {
+	border-bottom: #cccccc 1px solid;
+	border-top: #cccccc 1px solid;
+	margin: 10px 0px;
+	text-align: left;
+	height: 45px;
+	background-color: #ffffff;
+}
+
+.phone-no input {
+	border: none;
+	border-radius: 3px;
+	width: 180px;
+	height: 100%;
+	padding-left: 10px;
+	font-size: 18px;
+	font-family: "Microsoft YaHei";
+	line-height: 45px;
+}
+
+#cards {
+	margin: 10px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+.cards-li {
+	float: left;
+	border: #cccccc 1px solid;
+	border-radius: 1px;
+	width: 45%;
+	margin: 5px;
+	font-family: "Microsoft YaHei";
+	font-size: 15px;
+	background-color: #ffffff;
+	color: #666666;
+	line-height: 45px;
+	height: 45px;
+}
+
+.div-rotate {
+	display: inline-block;
+	-o-transform: rotate(320deg);
+	-webkit-transform: rotate(320deg);
+	-moz-transform: rotate(320deg);
+	background-color: #00ff00;
+}
+
+.div-ru {
+	background-color: #e94643;
+	color: #ffffff;
+	float: right;
+	font-size: 12px;
+	padding: 2px 5px;
+	font-family: "Microsoft YaHei";
+	line-height: 14px;
+}
+
+.select {
+	background-position: right;
+	background-position-y: bottom;
+	border: #e94643 2px solid;
+	margin: 4px;
+}
+
+#tip {
+	text-align: left;
+	margin: 10px 15px;
+	font-size: 15px;
+	font-family: SimHei;
+}
+
+#really {
+	text-align: left;
+	margin: 0px 15px;
+	font-size: 15px;
+	clear: both;
+	padding-top: 10px;
+	display: none;
+	font-family: SimHei;
+}
+
+.font-acc {
+	color: #e94643;
+}
+
+#history {
+	text-align: left;
+	margin: -10px 0px;
+	font-size: 13px;
+	position: fixed;
+	height: 60%;
+	overflow: auto;
+	width: 100%;
+}
+
+.history-hide {
+	display: none;
+}
+
+.warning {
+	color: #d00000;
+}
+
+.alert-box {
+	color: #fff;
+	top: 20%;
+	left: 10%;
+	width: 80%;
+	height: 60%;
+}
+
+.alert-box text-div {
+	margin: 10px 0px;
+}
+
+.alert-box button {
+	width: 100%;
+	margin: 10px 0px;
+	display: block;
+}
+
+.bank-list {
+	margin: 0px;
+	padding: 0px;
+}
+
+.bank-list li {
+	margin-right: 10px;
+	padding-left: 10px;
+	line-height: 43px;
+	overflow: hidden;
+	font-size: 15px;
+}
+
+.head {
+	line-height: 45px;
+	border: 0px;
+	height: 45px;
+	vertical-align: middle;
+	text-align: center;
+	width: 100%;
+	position: relative;
+	background-color: #f2f2f2;
+}
+
+.head-content {
+	background-size: 67px;
+	background-color: #e94643;
+	margin: 0px;
+	color: #ffffff;
+}
+
+.btn-orange-disable {
+	margin-top: 15px;
+	border-radius: 3px;
+	height: 43px;
+	line-height: 33px;
+	font-size: 18px;
+	border: 0px;
+	text-align: center;
+	cursor: pointer;
+	color: #ffcbca;
+	width: 100%;
+	background-color: #ff8d8b;
+	box-sizing: border-box;
+}
+
+.btn-orange {
+	margin-top: 15px;
+	border-radius: 3px;
+	height: 43px;
+	line-height: 33px;
+	font-size: 18px;
+	border: 0px;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	width: 100%;
+	background-color: #e94643;
+	box-sizing: border-box;
+}
+
+.copy-right-sub {
+	color: #b3b3b3;
+	font-size: 12px;
+	text-shadow: 0 1px 1px #fff;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 10px;
+	width: 100%;
+	bottom: 0;
+	top: auto;
+}
+
+.more-card {
+	float: right;
+	display: block;
+	background:
+		url("https://www.baifubao.com/static/mobile/mobile-pay/style/images/arrow_down.png")
+		no-repeat 15px 18px;
+	height: 100%;
+	width: 43px;
+	border-left: #cccccc 1px solid;
+}
+
+.more-card-click {
+	background:
+		url("https://www.baifubao.com/static/mobile/mobile-pay/style/images/arrow_up.png")
+		no-repeat 15px 18px;
+}
+
+.attru {
+	color: #666666;
+}
+
+#a_go_back {
+	position: absolute;
+	display: inline-block;
+	height: 13px;
+	width: 13px;
+	top: 15px;
+	left: 15px;
+	border-top: solid 2px #fff;
+	border-left: solid 2px #fff;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	display: none;
+}
+
+::-webkit-input-placeholder {
+	font-family: SimHei;
+	font-size: 15px;
+}
+
+input:-moz-placeholder {
+	font-family: SimHei;
+}
+</style>
 </head>
 <body style="margin:0px;background-color:#f2f2f2">
 
 
-<div class="head">
+	<div class="head">
 
-<%
-		String roleId = (String) session.getAttribute("roleId");
-		if(roleId==null && Server.getConfig().getBoolean("isDebug")) {
-			roleId = "VC100031001427";
-		}
-		Role role = Server.getRole(roleId);
-	%>
-	<h1 class="head-content" style="font-size:20px; margin:0px">您正在为[<%=role.getNick()%>]充值</h1>
-	<a id="a_go_back" href="javascript:void(0);"></a>
-</div>
-
-
-<div class="container" id="containerID">
-	<div id="advertiseDiv" style="margin-left:15px; text-align:left;margin-top:10px;font-family: SimHei;font-size:15px;text-shadow: 0 1px 1px #fff;">
-    </div>
-	<div class="phone-no" style="display: none">
-		<a href="javascript:;" class="more-card"></a>
-		<span>
-			<input id="ph-no" autocomplete="off" type="tel" placeholder="请输入手机号" maxlength="13"/>
-			<img src="https://www.baifubao.com/static/mobile/mobile-pay/style/images/delete_num.png"  width="23" height="23" style="display:none;vertical-align: middle;float:right;margin: 10px;" onclick="clearPrev(this)">
-		</span>
-	</div>
-	<div id="history" class="history-hide">
-	<ul id="his_phone" onclick="javascript:hideHistory()" class="bank-list clearfix" id="bank-ul" style="background-color: #ffffff;border-bottom: #cccccc 1px solid;border-left: #cccccc 1px solid;border-right: #cccccc 1px solid;">
-	<li onclick="javascript:changePhone(15022005630)">15022005630</li>
-	</ul>
+		<%
+			String roleId = request.getParameter("roleId");
+			if(roleId==null && Server.getConfig().getBoolean("isDebug")) {
+				roleId = "VC100031001427";
+			}
+			Role role = Server.getRole(roleId);
+			Log.d(session.getId(), role.getNick(), Server.getConfig().getBoolean("isDebug"));
+		%>
+		<h1 class="head-content" style="font-size:20px; margin:0px">
+			您正在为[<%=role.getNick()%>]充值
+		</h1>
+		<a id="a_go_back" href="javascript:void(0);"></a>
 	</div>
 
-	<div id="tip"></div>
-	<div>
-		<ul id="cards">
-		<!-- 
-			<li id="am-30" onclick="javascript:clickMe(this, 30)" class="cards-li">
-				<span id="face_amount-30">30元</span>
-			</li>
-			<li id="am-50" onclick="javascript:clickMe(this, 50)" class="cards-li" style="float:right">
-				<span id="face_amount-50">50元</span>
-			</li>
-			<li id="am-100" onclick="javascript:clickMe(this, 100)" class="cards-li" style="clear: left;">
-				<span id="face_amount-100">100元</span>
-			</li>
-			<li id="am-300" onclick="javascript:clickMe(this, 300)" class="cards-li" style="float:right">
-				<span id="face_amount-300">300元</span>
-			</li>
+
+	<div class="container" id="containerID">
+		<div id="advertiseDiv"
+			style="margin-left:15px; text-align:left;margin-top:10px;font-family: SimHei;font-size:15px;text-shadow: 0 1px 1px #fff;">
+		</div>
+		<div class="phone-no" style="display: none">
+			<a href="javascript:;" class="more-card"></a> <span> <input
+				id="ph-no" autocomplete="off" type="tel" placeholder="请输入手机号"
+				maxlength="13" /> <img
+				src="https://www.baifubao.com/static/mobile/mobile-pay/style/images/delete_num.png"
+				width="23" height="23"
+				style="display:none;vertical-align: middle;float:right;margin: 10px;"
+				onclick="clearPrev(this)"> </span>
+		</div>
+		<div id="history" class="history-hide">
+			<ul id="his_phone" onclick="javascript:hideHistory()"
+				class="bank-list clearfix" id="bank-ul"
+				style="background-color: #ffffff;border-bottom: #cccccc 1px solid;border-left: #cccccc 1px solid;border-right: #cccccc 1px solid;">
+				<li onclick="javascript:changePhone(15022005630)">15022005630</li>
+			</ul>
+		</div>
+
+		<div id="tip"></div>
+		<div>
+			<ul id="cards">
 			
-			<li id="am-100" onclick="javascript:clickMe(this, 100)" class="cards-li" style="clear: left;">
-				<span id="face_amount-100">100元</span>
-			</li>
-			<li id="am-300" onclick="javascript:clickMe(this, 300)" class="cards-li" style="float:right">
-				<span id="face_amount-300">300元</span>
-			</li>
-			
-			<li id="am-100" onclick="javascript:clickMe(this, 100)" class="cards-li" style="clear: left;">
-				<span id="face_amount-100">100元</span>
-			</li>
-			<li id="am-300" onclick="javascript:clickMe(this, 300)" class="cards-li" style="float:right">
-				<span id="face_amount-300">300元</span>
-			</li>
-			 -->
-			
-			
-			
-			<%
-				for (Row r : Xml.getSheet("recharge-A").getAll()) {
-					int id = r.getInt("id");
-					int jinDou = r.getInt("jinDou");
-					int rmb = (int)r.getDouble("rmb");
-					boolean isDebug = Server.getConfig().getBoolean("isDebug");
-			%>
-			
-				<li id="am-<%=rmb %>" onclick="javascript:clickMe(this, <%=rmb %>)" class="cards-li" >
-					<span id="face_amount-<%=rmb %>"><%=rmb %>元(<%=jinDou %>金豆)</span>
-					<span id="dis-<%=rmb %>" class="div-ru" style="display:none">88折</span>	
-				</li>
-			<%
+				<%
+				int i = 0;
+					for (Row r : Xml.getSheet("recharge-A").getAll()) {
+							int id = r.getInt("id");
+							int jinDou = r.getInt("jinDou");
+							int rmb = (int)r.getDouble("rmb");
+							
+				%>
+
+					<li id="am-<%=rmb%>" onclick="javascript:clickMe(this, <%=rmb%>, <%=id%>)"
+						class="cards-li"><span id="face_amount-<%=rmb%>"><%=rmb%>元(<%=jinDou%>金豆)</span>
+						<span id="dis-<%=rmb%>" class="div-ru" style="display:none">88折</span>
+					</li>
+				<%	
 				}
-			%>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		</ul>
-	</div>
-	<div id="really"><span>实付金额：</span><span class="font-acc">15</span>元</div>
-	<div style="padding:0px 15px">
-		<button class="btn-orange input-submit" id="go-sumbit" data-ac="btn-orange-hover"  onclick="charge()">立即充值</button>
-	</div>
-</div>
+				%>
 
-<form id="my_form" action="../pay/jishi/alipayapi.jsp" method="post">
-	<input type="hidden" name="price" id="my_price" value="3000"/>
-    <input type="hidden" name="invite_code" id="ipt_invite" value=""/>
-    
-    
-    
-    
-    <input type="hidden" name="WIDout_trade_no" value="<%=Util.ID.createId()%>" /> 
-	<input type="hidden" name="WIDsubject" value="game coin" /> 
-	<input type="hidden" name="WIDbody" value="buy game coin" /> 
-	<input type="hidden" name="WIDshow_url" value="recharge/rechargeSuccess.jsp" /> 
-	
-	
-	
-	<input type="hidden" name="WIDtotal_fee" value="0.01" /> 
-	<input id="id" name="id" type="hidden" value="1" />
-					
-    
-</form>
+			</ul>
+		</div>
+		<div id="really">
+			<span>实付金额：</span><span class="font-acc">15</span>元
+		</div>
+		<div style="padding:0px 15px">
+			<button class="btn-orange input-submit" id="go-sumbit"
+				data-ac="btn-orange-hover" onclick="charge()">立即充值</button>
+		</div>
+	</div>
+
+	<form id="my_form" action="../pay/jishi/alipayapi.jsp" method="post">
+		<input type="hidden" name="price" id="my_price" value="3000" /> <input
+			type="hidden" name="invite_code" id="ipt_invite" value="" /> <input
+			type="hidden" name="WIDout_trade_no" value="<%=Util.ID.createId()%>" />
+		<input type="hidden" name="WIDsubject" value="game coin" /> <input
+			type="hidden" name="WIDbody" value="buy game coin" /> <input
+			type="hidden" name="WIDshow_url" value="recharge/recharge.jsp" /> <input
+			type="hidden" name="WIDtotal_fee" id="WIDtotal_fee" /><input
+			type="hidden" name="id" id="id" />
+
+	</form>
 
 	<div class="copy-right-sub">
-	<div id="myfooter">
-            <div style="position:relative;font-family:SimHei;font-size:13px;">
-        重庆商界互娱网络技术有限公司&copy2015 19vc.com
-        </div> 
-        </div>
-    </div>
-	<script src="https://www.baifubao.com/static/mobile/mobile-pay/js/zepto.js" charset="utf-8"></script>
-	<script src="https://www.baifubao.com/static/mobile/mobile-pay/js/dialog.js" charset="utf-8"></script>
-	<script src="https://www.baifubao.com/content/mywallet/h5/advertise.js" charset="gb2312"></script>
-	<script src="https://www.baifubao.com/content/mywallet/h5/huodong/qianbao_invite_code.min.js"></script>
+		<div id="myfooter">
+			<div style="position:relative;font-family:SimHei;font-size:13px;">
+				重庆商界互娱网络技术有限公司&copy2015 19vc.com</div>
+		</div>
+	</div>
+	<script
+		src="https://www.baifubao.com/static/mobile/mobile-pay/js/zepto.js"
+		charset="utf-8"></script>
+	<script
+		src="https://www.baifubao.com/static/mobile/mobile-pay/js/dialog.js"
+		charset="utf-8"></script>
+	<script src="https://www.baifubao.com/content/mywallet/h5/advertise.js"
+		charset="gb2312"></script>
+	<script
+		src="https://www.baifubao.com/content/mywallet/h5/huodong/qianbao_invite_code.min.js"></script>
 	<script>
 		if(document.URL.indexOf("advertise") >=0 )   $("#advertise").show();
 		var hd_price = 0;
@@ -373,38 +382,16 @@
 
 		var defaultAm = 50;
 		
-		
-		
-		
-			<%
-				for (Row r : Xml.getSheet("recharge-A").getAll()) {
+			<%for (Row r : Xml.getSheet("recharge-A").getAll()) {
 					int rmb = (int)r.getDouble("rmb");
 					
 					out.println("var am" + rmb + " = $(\"#am-" + rmb + "\");");
 					out.println("var dis" + rmb + " = $(\"#dis-" + rmb + "\");");
 					out.println("var face_amount" + rmb + " = $(\"#face_amount-" + rmb + "\");");
-				}
-			%>
-		
-		/* 
-		
-		
-		var am30 = $("#am-30"); 
-		var am50 = $("#am-50"); 
-		var am100 = $("#am-100"); 
-		var am300 = $("#am-300");
-		var dis30 = $("#dis-30"); 
-		var dis50 = $("#dis-50"); 
-		var dis100 = $("#dis-100"); 
-		var dis300 = $("#dis-300");
-		var face_amount30 = $("#face_amount-30");
-		var face_amount50 = $("#face_amount-50");
-		var face_amount100 = $("#face_amount-100");
-		var face_amount300 = $("#face_amount-300"); */
+				}%>
 		
 		var btnSubmit = $("#go-sumbit");
 		var btnSubmitDisable = $("#go-sumbit-disable");
-		am50.addClass("select");	
 
 	    function localStorageGet(key){
 			try {
@@ -447,15 +434,13 @@
 		}
 		function clearAll(){
 		
-			<%
-				for (Row r : Xml.getSheet("recharge-A").getAll()) {
+			<%for (Row r : Xml.getSheet("recharge-A").getAll()) {
 					int rmb = (int)r.getDouble("rmb");
 					
 					out.println("am" + rmb + ".removeClass(\"select\");");
 					out.println("dis" + rmb + ".hide();");
 					out.println("face_amount" + rmb + ".css(\"margin-left\", \"0px\");");
-				}
-			%>
+				}%>
 		
 		
 		}
@@ -494,7 +479,7 @@
 		$("#his_phone").bind("touchmove", function(event){
 			event.stopPropagation();
 		});
-		function clickMe(me, am) {
+		function clickMe(me, am, id) {
 			clearAll();
 			$(me).addClass("select");
 			if( remap[am] != null) {
@@ -507,6 +492,20 @@
 				$("#face_amount-"+ am).css("margin-left", "30px");	
 				$("#dis-"+am).show();
 			}
+			<%
+				if(Server.getConfig().getBoolean("isDebug")) {
+			%>
+					document.getElementById("WIDtotal_fee").value=0.01;
+			<%
+				} else {
+			%>
+					document.getElementById("WIDtotal_fee").value=am;
+			<%
+				}
+			%>
+			
+			document.getElementById("id").value=id;
+            
 		}
 		function clearPrev(ele) {
 			$(ele).prev().val("");
@@ -515,6 +514,10 @@
 			checkCanCharge();
 		}
 		function charge() {
+			if(document.getElementById("WIDtotal_fee").value == "") {
+				alert("请选择金额");
+				return ;
+			}
 			var phones = localStorageGet("contact");//部分设备localStorage无法访问处理办法
 
 			if(phones == null) {
@@ -538,7 +541,6 @@
             		else
                 		$("#ipt_invite").remove();
 			$("#my_form")[0].submit();
-
 		}
 		var myPhone = $("#ph-no");
 		function checkCanCharge(){
@@ -757,4 +759,5 @@
 </html>
 
 <!--27745516350475683850060917-->
-<script> var _trace_page_logid = 2774551635; </script><!--27745516350863448586060917-->
+<script> var _trace_page_logid = 2774551635; </script>
+<!--27745516350863448586060917-->

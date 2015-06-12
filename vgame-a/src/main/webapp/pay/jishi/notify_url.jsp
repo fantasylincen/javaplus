@@ -101,7 +101,7 @@
 		Role role = Server.getRole(roleId);
 		long add = dto.getCount();
 		role.addCoin(add);
-		role.addRechargeHistory(add);
+		role.addRechargeHistory(add, "zfb");
 		
 		
 		Log.d("recharge success", role.getId(), role.getNick(), add,

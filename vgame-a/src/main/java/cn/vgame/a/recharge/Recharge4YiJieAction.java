@@ -246,7 +246,7 @@ public class Recharge4YiJieAction extends ActionSupport {
 		Role role = Server.getRole(roleId);
 		long add = getCoinAdd();
 		role.addCoin(add);
-		role.addRechargeHistory(add);
+		role.addRechargeHistory(add, "yijie");
 		
 		this.dto.setRoleId(roleId);
 		this.dto.setNick(role.getNick());

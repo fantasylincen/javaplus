@@ -19,7 +19,7 @@ public class Log {
 		String time = buildTime();
 		String[] split = head.split("\\.");
 		head = split[split.length - 2] + "." + split[split.length - 1];
-		out.println("[" + time + "][" + head + "]" + m);
+		out.println(time + "|" + head + "|" + m);
 	}
 
 	public static void setOut(Out out) {

@@ -82,6 +82,8 @@ public class BuyAction extends JsonActionAfterRoleEnterGame {
 
 		role.reduceCoin(priceAll);
 		role.getBag().add(type, count);
+		
+		role.addCoinLog(-priceAll, "market", "buy");
 
 		return new BuyResult(type);
 	}

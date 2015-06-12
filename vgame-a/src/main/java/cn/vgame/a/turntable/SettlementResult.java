@@ -23,11 +23,6 @@ public class SettlementResult implements IProfit {
 		return getNick() + " add:" + (getAdd() - getReduce() + getCaiJin());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see cn.vgame.a.turntable.IProfit#getAdd()
-	 */
 	@Override
 	public long getAdd() {
 		return add;
