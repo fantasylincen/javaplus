@@ -191,4 +191,8 @@ public class GetPlayResultAction extends JsonActionAfterRoleEnterGame implements
 		return Turntable.getInstance().getPlayResult(role, this);
 	}
 
+	@Override
+	public String toString() {
+		return TurntableUtil.toString(this);
+	}
 }

@@ -7,6 +7,10 @@ public class SwitchsImpl implements ISwitchs {
 
 	private final CommitMySwitchsAction a;
 
+	@Override
+	public String toString() {
+		return TurntableUtil.toString(this);
+	}
 	public SwitchsImpl(CommitMySwitchsAction a) {
 		this.a = a;
 	}

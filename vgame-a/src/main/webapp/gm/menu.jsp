@@ -46,7 +46,7 @@
 	<a href="rechargeLogs.jsp">充值记录</a>
 	<br>
 	<br>
-	<a href="consoleLogs.jsp">控制台日志</a>
+	<a href="consoleLogList.jsp">控制台日志</a>
 	<br>
 	<br>
 </body>

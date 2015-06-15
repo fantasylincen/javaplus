@@ -15,8 +15,12 @@ public class TurntableUtil {
 
 	public static class SwitchsTemp implements ISwitchs {
 
-		
 		Counter<String> allCounts = new Counter<String>();
+
+		@Override
+		public String toString() {
+			return TurntableUtil.toString(this);
+		}
 
 		/**
 		 * A 2 飞禽
@@ -105,80 +109,86 @@ public class TurntableUtil {
 		public void add(String type, int byType) {
 			allCounts.add(type, byType);
 		}
-}
+
+	}
 
 	public static class EmptySwitch implements ISwitchs {
 
 		@Override
 		public int getA() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getB() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getC() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getD() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getE() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getF() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getG() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getH() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getI() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getJ() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getK() {
-			
+
 			return 0;
 		}
 
 		@Override
 		public int getL() {
-			
+
 			return 0;
+		}
+
+		@Override
+		public String toString() {
+			return TurntableUtil.toString(this);
 		}
 
 	}
@@ -212,13 +222,10 @@ public class TurntableUtil {
 		types.remove("D");
 		return types;
 	}
-	
 
 	public static List<String> getAllTypes() {
 		return Lists.newArrayList(getTypes());
 	}
-	
-	
 
 	@SuppressWarnings("unchecked")
 	private static List<String> getTypes() {
@@ -237,6 +244,13 @@ public class TurntableUtil {
 		}
 		CacheManager.put(key, 30000, ls);
 		return ls;
+	}
+
+	public static String toString(ISwitchs s) {
+		return "A:" + s.getA() + "#B:" + s.getB() + "#C:" + s.getC() + "#D:"
+				+ s.getD() + "#E:" + s.getE() + "#F:" + s.getF() + "#G:"
+				+ s.getG() + "#H:" + s.getH() + "#I:" + s.getI() + "#J:"
+				+ s.getJ() + "#K:" + s.getK() + "#L:" + s.getL();
 	}
 
 	public static int getByType(ISwitchs s, String type) {
@@ -282,11 +296,11 @@ public class TurntableUtil {
 	}
 
 	public static ISwitchs add(ISwitchs s1, ISwitchs s2) {
-		if(s1 == null)
+		if (s1 == null)
 			s1 = new EmptySwitch();
-		if(s2 == null)
+		if (s2 == null)
 			s2 = new EmptySwitch();
-		
+
 		SwitchsTemp t = new SwitchsTemp();
 		List<String> types = getTypes();
 		for (String type : types) {

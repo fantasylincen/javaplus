@@ -42,7 +42,7 @@ public class Result {
 
 			@Override
 			public Object get(Row t) {
-				return Util.Chinese.getPinYinHump(t.get("dsc"));
+				return /*Util.Chinese.getPinYinHump(*/t.get("dsc")/*)*/;
 			}
 		};
 		return Util.Collection.linkWith(",", result, ss);

@@ -1,8 +1,5 @@
 package cn.vgame.a.turntable;
 
-import com.alibaba.fastjson.JSON;
-
-import cn.javaplus.log.Log;
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
 import cn.vgame.a.turntable.GetAllSwitchsAction.GetTableDataResult;
 import cn.vgame.a.turntable.swt.ISwitchs;
@@ -23,6 +20,10 @@ public class SynchronizeDataAction extends JsonActionAfterRoleEnterGame {
 
 		public SwitchsImpl2(SynchronizeDataAction a) {
 			a2 = a;
+		}
+		@Override
+		public String toString() {
+			return TurntableUtil.toString(this);
 		}
 
 		public int getA() {
@@ -73,10 +74,6 @@ public class SynchronizeDataAction extends JsonActionAfterRoleEnterGame {
 			return a2.getL();
 		}
 
-		@Override
-		public String toString() {
-			return JSON.toJSONString(this);
-		}
 	}
 
 	int a;

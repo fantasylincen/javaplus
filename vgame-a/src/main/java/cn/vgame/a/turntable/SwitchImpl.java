@@ -18,6 +18,10 @@ public class SwitchImpl implements ISwitchs {
 	int k;
 	int l;
 
+	@Override
+	public String toString() {
+		return TurntableUtil.toString(this);
+	}
 	public int getA() {
 		return a;
 	}

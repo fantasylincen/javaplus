@@ -1,9 +1,8 @@
 package cn.vgame.a.log;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cn.javaplus.collections.list.Lists;
@@ -12,82 +11,79 @@ import cn.vgame.a.Server;
 
 public class ConsoleLog {
 
-	private long time;
+	private final String log;
+	private String date;
 
-	public ConsoleLog(String log) {
-		String[] s = log.split("\\|");
-		String t = s[0].split("\\.")[0];
-		try {
-			time = DATE_FORMAT.parse(t).getTime();
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
+	public ConsoleLog(File file, String log) {
+		this.log = log;
+		date = file.getName().split("\\.")[0];
 	}
 
+	@Override
+	public String toString() {
+		String translate = Translate.translate(log);
+		return date + " " + translate;
+	}
+
+
 	/**
-	 * 获得N分钟之前的日志
+	 * 获得最后N条日志记录
 	 * 
 	 * @param min
 	 * @return
 	 */
-	public static List<ConsoleLog> get(int min) {
-		
-		List<File> files = getFiles();
+	public static List<ConsoleLog> get(String fileName, int count, String find) {
+
+//		List<File> files = getFiles();
 		ArrayList<ConsoleLog> ls = Lists.newArrayList();
-		for (File file : files) {
-			if(isIn(min, file)) {
-				ls.addAll(getLogs(file, min));
+//		Collections.reverse(files);
+//		for (File f : files) {
+		
+		File f = getFile(fileName);
+		
+			List<ConsoleLog> logs = getLogs(f);
+			Collections.reverse(logs);
+			for (ConsoleLog l : logs) {
+				String s = l.toString();
+				s = s.toLowerCase();
+				String regex = ".*" + find + ".*";
+				regex = regex.toLowerCase();
+				if (s.matches(regex))
+					ls.add(l);
+				if (ls.size() >= count) {
+					break;
+				}
 			}
-		}
+//		}
 		return ls;
 	}
-
-	private static boolean isIn(int min, File file) {
-		String name = file.getName();
-		String[] ss = name.split("\\.");
-		String date = ss[0].trim();
-		long time;
-		try {
-			java.util.Date p = DATE_FORMAT.parse(date);
-			time = p.getTime();
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-
-		return isIn(min, time);
+	
+	
+	public static void main(String[] args) {
+		String s = "at cn.vgame.a.result.ErrorResult.toException(ErrorResult.java:66)";
+		System.out.println(s.toLowerCase().matches(".*exception.*"));
 	}
 
-	private static boolean isIn(int min, long time) {
-		long now = System.currentTimeMillis();
-		long start = now - min * 60 * 1000;
-		
-		return time > start;
+	private static File getFile(String fileName) {
+		String file = Server.getConfig().getString("logFilePath") + "/" + fileName;
+		File file2 = new File(file);
+		return file2;
 	}
 
-	private static List<File> getFiles() {
+	public static List<File> getFiles() {
 		String file = Server.getConfig().getString("logFilePath");
 		File file2 = new File(file);
 		return Lists.newArrayList(file2.listFiles());
 	}
 
-	private static List<ConsoleLog> getLogs(File file, int min) {
+	private static List<ConsoleLog> getLogs(File file) {
 		List<String> logs = Util.File.getLines(file);
 		ArrayList<ConsoleLog> ls = Lists.newArrayList();
 		for (String log : logs) {
-			ConsoleLog l = new ConsoleLog(log);
-			if(isIn(min, l.getTime())) {
-				ls.add(l);
-			}
+			ConsoleLog l = new ConsoleLog(file, log);
+			ls.add(l);
 		}
 		return ls;
 	}
-
-
-	private long getTime() {
-		return time;
-	}
-
-	static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd");
 
 }

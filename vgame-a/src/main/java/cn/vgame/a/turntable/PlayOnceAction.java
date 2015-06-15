@@ -54,6 +54,10 @@ public class PlayOnceAction extends JsonActionAfterRoleEnterGame implements ISwi
 	int k;
 	int l;
 
+	@Override
+	public String toString() {
+		return TurntableUtil.toString(this);
+	}
 	/**
 	 * A 2 飞禽
 	 */

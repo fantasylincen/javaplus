@@ -33,6 +33,10 @@ public class SwitchAll implements ISwitchs {
 		}
 		return sum;
 	}
+	@Override
+	public String toString() {
+		return TurntableUtil.toString(this);
+	}
 
 	/**
 	 * A 2 飞禽

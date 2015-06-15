@@ -1,6 +1,10 @@
 package cn.vgame.share;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,10 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import cn.javaplus.collections.set.Sets;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
 import cn.javaplus.log.Log;
 import cn.javaplus.util.Closer;
+import cn.javaplus.util.Util;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
@@ -25,6 +31,7 @@ public abstract class AbstractJsonAction extends ActionSupport {
 	protected HttpServletResponse response;
 	protected HttpServletRequest request;
 	protected HttpSession session;
+	private static Set<String> set;
 
 	public AbstractJsonAction() {
 		super();
@@ -36,48 +43,103 @@ public abstract class AbstractJsonAction extends ActionSupport {
 		response.setCharacterEncoding("utf8");
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
-		
-		Log.d("vgame SessionID:" + session.getId());
-		
+
+		// Log.d("vgame SessionID:" + session.getId());
+
 		StringBuffer url = request.getRequestURL();
 		Log.d(url);
-		
+
 		PrintWriter out = response.getWriter();
 		Object r;
 		try {
 			r = exec();
 			String jsonString = toJSONString(r);
 			out.println(jsonString);
-			
+
 		} catch (GameException e) {
-			
+
 			String s = toJSONString(e.getErrorResult());
 			out.println(s);
 			Log.e(s);
-			e.printStackTrace();
-			
+			e(e);
 		} catch (Throwable e) {
-			
+
 			String simpleName = e.getClass().getSimpleName();
 			String message = e.getMessage();
 			IErrorResult rr = buildErrorResult(simpleName, message);
 			String s = toJSONString(rr);
-			
+
 			out.println(s);
 			Log.e(s);
-			e.printStackTrace();
+			e(e);
 		} finally {
 			out.flush();
 			Closer.close(out);
 		}
-	
+
 		return SUCCESS;
 	}
 
-	protected abstract IErrorResult buildErrorResult(String simpleName, String message);
+	private void e(Throwable e) {
+		StringWriter out = null;
+		PrintWriter pw = null;
+
+		try {
+			out = new StringWriter();
+			pw = new PrintWriter(out);
+			e.printStackTrace(pw);
+			String temp = out.toString();
+			String[] split = temp.split("\r");
+			for (int i = 0; i < split.length; i++) {
+
+				String s = split[i];
+				if (exclude(s)) {
+					continue;
+				}
+				String trim = s.trim();
+				if (!trim.isEmpty())
+					Log.e(trim);
+			}
+		} finally {
+			Closer.close(out, pw);
+		}
+
+	}
+
+	private boolean exclude(String s) {
+		Set<String> excludes = getExcluds();
+		for (String sss : excludes) {
+			if (s.contains(sss)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private Set<String> getExcluds() {
+		if (set != null)
+			return set;
+
+		set = Sets.newHashSet();
+
+		URL resource = AbstractJsonAction.class.getResource("excludes.txt");
+		List<String> ps = Util.File.getLines(resource);
+
+		for (String s : ps) {
+			String trim = s.trim();
+			if (!trim.isEmpty())
+				set.add(trim);
+		}
+
+		return set;
+	}
+
+	protected abstract IErrorResult buildErrorResult(String simpleName,
+			String message);
 
 	/**
-	 * 获取常量表里面  的constName常量
+	 * 获取常量表里面 的constName常量
+	 * 
 	 * @param constName
 	 */
 	protected final int getConstInt(String constName) {
@@ -85,7 +147,8 @@ public abstract class AbstractJsonAction extends ActionSupport {
 	}
 
 	/**
-	 * 获取常量表里面  的constName常量
+	 * 获取常量表里面 的constName常量
+	 * 
 	 * @param constName
 	 */
 	protected final double getConstDouble(String constName) {
@@ -93,7 +156,8 @@ public abstract class AbstractJsonAction extends ActionSupport {
 	}
 
 	/**
-	 * 获取常量表里面  的constName常量
+	 * 获取常量表里面 的constName常量
+	 * 
 	 * @param constName
 	 */
 	protected final String getConstString(String constName) {
@@ -101,7 +165,8 @@ public abstract class AbstractJsonAction extends ActionSupport {
 	}
 
 	/**
-	 * 获取常量表里面  的constName常量
+	 * 获取常量表里面 的constName常量
+	 * 
 	 * @param constName
 	 */
 	protected final boolean getConstBoolean(String constName) {
@@ -114,6 +179,7 @@ public abstract class AbstractJsonAction extends ActionSupport {
 
 	/**
 	 * 获取系统配置表里面某个sheet
+	 * 
 	 * @param sheetName
 	 * @return
 	 */

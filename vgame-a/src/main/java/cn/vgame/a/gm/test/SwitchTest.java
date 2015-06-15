@@ -1,5 +1,6 @@
 package cn.vgame.a.gm.test;
 
+import cn.vgame.a.turntable.TurntableUtil;
 import cn.vgame.a.turntable.swt.ISwitchs;
 
 public class SwitchTest implements ISwitchs {
@@ -17,6 +18,10 @@ public class SwitchTest implements ISwitchs {
 	int j;
 	int k;
 	int l;
+	@Override
+	public String toString() {
+		return TurntableUtil.toString(this);
+	}
 
 	public int getA() {
 		return a;

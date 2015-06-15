@@ -852,6 +852,7 @@ public class Turntable {
 				} else {
 					role.addCoin(profit);
 				}
+				Log.d(role.getId(), role.getNick(), buildResult(), profit);
 			}
 		}
 
@@ -864,29 +865,48 @@ public class Turntable {
 			generateXiaoCaiJins();// 计算所有用户可以获得多少小彩金
 
 			Set<String> keySet = switchs.keySet();
+			List<Row> r = Turntable.this.result.getResult();
 			for (String roleId : keySet) {
 				IRole role = Server.getRole(roleId);
 				ISwitchs sw = switchs.get(roleId);
 
-				SettlementResult result = settlement(
-						Turntable.this.result.getResult(), role, sw);
+				SettlementResult result = settlement(r, role, sw);
 				rankingList.add(result);
 
-				boolean isRobot = Server.getRobotManager()
-						.isRobot(role.getId());
+				RobotManager rm = Server.getRobotManager();
+				boolean isRobot = rm.isRobot(roleId);
 				boolean isTestRole = role instanceof TestRole;
+
+				long xcjadd = result.getXiaoCaiJinAdd();
+				long cj = result.getCaiJin();
+				long rdc = result.getReduce();
+				long add = result.getAdd();
+
+				if (!isTestRole) {
+					Log.d("bet", roleId, isRobot ? "robot" : "player",
+							role.getNick(), sw, buildResult(), "-" + rdc, "+" + add, cj,
+							xcjadd);
+				}
 
 				if (!isTestRole && !isRobot) {
 
-					inOut.addIn(result.getReduce());
-					inOut.addOut(result.getAdd());
-					inOut.addCaiJinOut(result.getCaiJin()
-							+ result.getXiaoCaiJinAdd());
+					inOut.addIn(rdc);
+					inOut.addOut(add);
+					inOut.addCaiJinOut(cj + xcjadd);
 				}
-				settlements.put(role.getId(), result);
+				settlements.put(roleId, result);
 			}
 
 			removeXiaoCaiJin();
+		}
+
+		private String buildResult() {
+			List<Row> r = Turntable.this.result.getResult();
+			StringBuilder sb = new StringBuilder();
+			for (Row row : r) {
+				sb.append(row.get("type"));
+			}
+			return sb.toString();
 		}
 
 		private void removeXiaoCaiJin() {
@@ -1086,7 +1106,7 @@ public class Turntable {
 		addRestartTask();
 		addRobotTask();
 
-//		addTestTask();
+		// addTestTask();
 	}
 
 	void addTestTask() {
@@ -1132,9 +1152,9 @@ public class Turntable {
 	}
 
 	public long getCd() {
-//		if(result != null) {
-//			return 0;
-//		}
+		// if(result != null) {
+		// return 0;
+		// }
 		long cd = Server.getConst().getLong("CD");
 		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
 
@@ -1316,9 +1336,7 @@ public class Turntable {
 		r.setRoleId(role.getId());
 		r.setNick(role.getNick());
 
-		// Log.d(role.getId(), r.getReduce(), s);
 		role.reduceCoin(reduce);// 把所有压了的金币扣了
-		Log.d("reduce for bet", role.getId(), role.getNick(), reduce);
 
 		long add = 0;
 		for (Row row : randoms) {
@@ -1512,7 +1530,6 @@ public class Turntable {
 			return 0;
 		long add = byType * getX(type);
 		role.addCoin(add);
-		Log.d("settlement coin", role.getId(), role.getNick(), add, type);
 		return add;
 	}
 
@@ -1673,29 +1690,29 @@ public class Turntable {
 
 		SettlementResult result = getResult(role);
 		List<Row> rst = this.result.getResult();
-//		if (result == null) {
-//			commitUserSwitchs(role.getId(), sw);
-//			result = settlement(rst, role, sw);// 结算给当前用户
-//
-//			if (!Server.getZhuangManager().isZhuang(role.getId())) {
-//				rankingList.add(result);// 不是庄家的时候, 才加入排行榜, 不然结算界面会显示庄家排名
-//			}
-//
-//			boolean isRobot = Server.getRobotManager().isRobot(role.getId());
-//			boolean isTestRole = role instanceof TestRole;
-//
-//			if (!isTestRole && !isRobot) {
-//
-//				inOut.addIn(result.getReduce());
-//				inOut.addOut(result.getAdd());
-//				inOut.addCaiJinOut(result.getCaiJin()
-//						+ result.getXiaoCaiJinAdd());
-//			}
-//
-//			settlements.put(role.getId(), result);
-//		}
-		
-		if(result == null)
+		// if (result == null) {
+		// commitUserSwitchs(role.getId(), sw);
+		// result = settlement(rst, role, sw);// 结算给当前用户
+		//
+		// if (!Server.getZhuangManager().isZhuang(role.getId())) {
+		// rankingList.add(result);// 不是庄家的时候, 才加入排行榜, 不然结算界面会显示庄家排名
+		// }
+		//
+		// boolean isRobot = Server.getRobotManager().isRobot(role.getId());
+		// boolean isTestRole = role instanceof TestRole;
+		//
+		// if (!isTestRole && !isRobot) {
+		//
+		// inOut.addIn(result.getReduce());
+		// inOut.addOut(result.getAdd());
+		// inOut.addCaiJinOut(result.getCaiJin()
+		// + result.getXiaoCaiJinAdd());
+		// }
+		//
+		// settlements.put(role.getId(), result);
+		// }
+
+		if (result == null)
 			return new PlayResult(rst, 0, caiJinNotice, 0);
 
 		long coin = role.getCoin();

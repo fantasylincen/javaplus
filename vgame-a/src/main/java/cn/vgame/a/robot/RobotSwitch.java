@@ -48,9 +48,7 @@ public class RobotSwitch implements ISwitchs {
 
 	@Override
 	public String toString() {
-		return "RobotSwitch [a=" + a + ", b=" + b + ", c=" + c + ", d=" + d
-				+ ", e=" + e + ", f=" + f + ", g=" + g + ", h=" + h + ", i="
-				+ i + ", j=" + j + ", k=" + k + ", l=" + l + "]";
+		return TurntableUtil.toString(this);
 	}
 
 	int a;

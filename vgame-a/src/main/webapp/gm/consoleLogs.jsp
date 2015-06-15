@@ -17,68 +17,91 @@
 <body>
 
 	<%!public String buildTimeScope(HttpSession session,
-			HttpServletRequest request, int min, String dsc) {
+			HttpServletRequest request, int count, String dsc) {
 
-		if (ParameterUtil.getParameter(request, session,
-				"console-log-select-min") == null) {
-			session.setAttribute("console-log-select-min", "10");
+		if (ParameterUtil.getParameter(request, session, "count") == null) {
+			session.setAttribute("count", "40");
 		}
 
-		String mm = ParameterUtil.getParameter(request, session,
-				"console-log-select-min");
+		String ct = ParameterUtil.getParameter(request, session, "count");
 
-		int minn = new Integer(mm);
+		int cnt = new Integer(ct);
 
-		if (minn == min) {
-			return "<span style=\"font-weight:bold;\">" + dsc + "</span>&nbsp;&nbsp;";
+		if (cnt == count) {
+			return "<span style=\"font-weight:bold;\">" + dsc
+					+ "</span>&nbsp;&nbsp;";
 		} else {
-			return "<a href=\"consoleLogs.jsp?console-log-select-min=" + min + "\">" + dsc
+			return "<a href=\"consoleLogs.jsp?count=" + count + "\">" + dsc
 					+ "</a>&nbsp;&nbsp;";
 		}
 
 	}%>
 	<div>
-	
+
 		<%
-			String min = ParameterUtil.getParameter(request, session, "console-log-select-min");
-			if(min != null) {
-				session.setAttribute("console-log-select-min", min);
+			String find = ParameterUtil.getParameter(request, session,
+					"console-log-find");
+			if (find == null) {
+				find = "";
 			}
-		 %>
-	
-		<%=buildTimeScope(session, request, 10, "10分钟")%>
-		<%=buildTimeScope(session, request, 30, "30分钟")%>
-		<%=buildTimeScope(session, request, 60, "1小时")%>
-		<%=buildTimeScope(session, request, 120, "2小时")%>
-		<%=buildTimeScope(session, request, 300, "5小时")%>
-		<%=buildTimeScope(session, request, 600, "10小时")%>
-		<%=buildTimeScope(session, request, 1440, "1天")%>
+		%>
+		
+		
+		<%
+			String fileName = ParameterUtil.getParameter(request, session,
+					"console-log-file-name");
+			if (fileName == null) {
+				fileName = "";
+			}
+		%>
+
+		<%=buildTimeScope(session, request, 40, "40条")%>
+		<%=buildTimeScope(session, request, 100, "100条")%>
+		<%=buildTimeScope(session, request, 200, "200条")%>
+		<%=buildTimeScope(session, request, 500, "500条")%>
+		<%=buildTimeScope(session, request, 1000, "1000条")%>
+		<%=buildTimeScope(session, request, 2000, "2000条")%>
+		<%=buildTimeScope(session, request, 5000, "5000条")%>
+
+		<br> <br>
+		
+		<form name="jump" action="consoleLogs.jsp" method="post">
+			<input type="text" name="console-log-find" id="console-log-find" value="<%=find%>" /> <a href="javascript:jump.submit();">查找</a>
+		</form>
+
+		<a href="consoleLogs.jsp">刷新</a> &nbsp;&nbsp;&nbsp; <a href="consoleLogList.jsp">返回</a><br>
 		<br>
-		<br>
+
+		<%
+			String cnt = ParameterUtil.getParameter(request, session, "count");
+			if (cnt != null) {
+				session.setAttribute("count", cnt);
+			}
+		%>
 	</div>
 
-	<table border="1">
 
-		<tbody>
 
-			<%
-				List<ConsoleLog> logs = ConsoleLog.get(new Integer(min));
-				for (ConsoleLog log : logs) {
-			%>
-					<tr>
-						<td><%=log.toString()%></td>
-					</tr>
-			<%
-				}
-			%>
+	<%
+		List<ConsoleLog> logs = ConsoleLog.get(fileName, new Integer(cnt), find);
 
-		</tbody>
+		if (logs.isEmpty()) {
+			out.println("没有记录");
+		} else {
 
-	</table>
+			for (ConsoleLog log : logs) {
+	%>
+	<%=log.toString()%>
+	<br>
+	<%
+		}
+		}
+	%>
+
+
 
 
 	<br>
 	<br>
-	<a href="menu.jsp">返回</a>
 </body>
 </html>

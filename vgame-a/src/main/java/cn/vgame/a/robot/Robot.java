@@ -120,7 +120,7 @@ public class Robot {
 
 	private int getRandomCoin() {
 		String value = "ROBOT_COMMIT_COIN";
-		return getRandomConstValue(value) / 100 * 100;
+		return getRandomConstValue(value) / 10 * 10;
 	}
 
 	private Row getRandomRow() {

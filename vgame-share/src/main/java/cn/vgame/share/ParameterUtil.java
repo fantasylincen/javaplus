@@ -20,6 +20,8 @@ public class ParameterUtil {
 			session.setAttribute(parameterName, p);
 			return p;
 		}
-		return (String) session.getAttribute(parameterName);
+		String attribute = (String) session.getAttribute(parameterName);
+//		System.out.println(parameterName + " "+ attribute);
+		return attribute;
 	}
 }
