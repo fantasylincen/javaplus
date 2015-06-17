@@ -72,7 +72,9 @@ public class CreateRoleAction extends JsonAction {
 	}
 
 	private RoleDto createNewUser(String userId) {
+		
 		RoleDao dao = Daos.getRoleDao();
+		
 		RoleDto dto = dao.createDTO();
 		dto.setId(RoleIdGenerator.createRoleId());
 		dto.setNick(nick);
