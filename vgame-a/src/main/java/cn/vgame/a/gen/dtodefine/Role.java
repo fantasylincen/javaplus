@@ -29,6 +29,12 @@ interface Role {
 	long getCoin();
 
 	/**
+	 * 奖券
+	 * @return
+	 */
+	long getJiangQuan();
+	
+	/**
 	 * 银行密码
 	 */
 	String getBankPassword();

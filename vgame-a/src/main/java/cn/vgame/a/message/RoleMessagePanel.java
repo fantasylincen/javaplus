@@ -31,6 +31,10 @@ public class RoleMessagePanel {
 		return role.getCoin();
 	}
 
+	public long getJiangQuan() {
+		return role.getJiangQuan();
+	}
+
 	public long getCd() {
 		CoinStatus ss = role.getCoinStatus();
 		return ss.getCd();

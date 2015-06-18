@@ -23,7 +23,8 @@ import cn.vgame.share.KeyValueSaveOnly;
 
 public class Role implements IRole {
 
-	private static final SimpleDateFormat SF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final SimpleDateFormat SF = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss");
 
 	private final class KeyValueSaveOnlyImplementation implements
 			KeyValueSaveOnly {
@@ -38,6 +39,11 @@ public class Role implements IRole {
 			getKeyValueDaily().add(key, add);
 			getKeyValueForever().add(key, add);
 		}
+	}
+
+	@Override
+	public long getJiangQuan() {
+		return dto.getJiangQuan();
 	}
 
 	public class KeyValueForever implements KeyValue {
@@ -289,7 +295,7 @@ public class Role implements IRole {
 		long coin = status.getCoin();
 		addCoin(coin);
 		markReceive();
-		
+
 		addCoinLog(coin, "system", "receive coin");
 	}
 
@@ -347,7 +353,7 @@ public class Role implements IRole {
 
 		Log.d("send coin", getId(), getNick(), getCoin(), otherRole.getId(),
 				otherRole.getNick(), otherRole.getCoin());
-		
+
 		otherRole.addCoinLog(coin, getId(), "send coin");
 	}
 
@@ -433,12 +439,13 @@ public class Role implements IRole {
 
 	/**
 	 * @param add
-	 * @param from 充值渠道
+	 * @param from
+	 *            充值渠道
 	 */
 	public void addRechargeHistory(long add, String from) {
 		dto.setRechargeHistory(dto.getRechargeHistory() + add);
 		Daos.getRoleDao().save(dto);
-		
+
 		addCoinLog(add, from, "recharge");
 	}
 

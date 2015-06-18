@@ -77,4 +77,9 @@ public class TestRole implements IRole {
 		
 	}
 
+	@Override
+	public long getJiangQuan() {
+		return 0;
+	}
+
 }

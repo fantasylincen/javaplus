@@ -2,6 +2,8 @@ package cn.vgame.a.turntable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,6 +158,28 @@ public class Turntable {
 	}
 
 	public class Controller {
+
+		private final class TunFenComparator implements
+				Comparator<String> {
+			@Override
+			public int compare(String o1, String o2) {
+				long l1 = getLose(o1);
+				long l2 = getLose(o2);
+				
+				return (int) (l1 - l2);
+			}
+		}
+
+		private final class TuFenComparator implements
+				Comparator<String> {
+			@Override
+			public int compare(String o1, String o2) {
+				long l1 = getLose(o1);
+				long l2 = getLose(o2);
+				
+				return (int) (l2 - l1);
+			}
+		}
 
 		private boolean isQiangZhiTunFen;
 		private long maxKuCun;
@@ -464,19 +488,21 @@ public class Turntable {
 		 * 生成一个强制吐分结果
 		 */
 		private Row createTuFenRow(List<Row> all) {
-			long maxLose = Long.MIN_VALUE;// 最大吐分值
-			String maxLoseType = null;
+			TuFenComparator c = new TuFenComparator();
+			return getTunTuFenRow(c, all);
+		}
+
+		private Row getTunTuFenRow(Comparator<String> c, List<Row> all) {
+
 			List<String> types = TurntableUtil.getAllTypesWithOutAAndD();
 			types = Lists.newArrayList(types);
 			Util.Collection.upset(types);
-			for (String type : types) {
-				long lose = getLose(type);
-				if (lose > maxLose) {
-					maxLose = lose;
-					maxLoseType = type;
-				}
-			}
-			return findRandomOneByType(maxLoseType, all);
+			Collections.sort(types, c);
+			
+			List<String> sub = Util.Collection.sub(types, 3);
+			Util.Collection.upset(sub);
+			String randomOne = sub.get(0);
+			return findRandomOneByType(randomOne, all);
 		}
 
 		private Row findRandomOneByType(String type, List<Row> all) {
@@ -503,19 +529,8 @@ public class Turntable {
 		 * 生成一个强制吞分结果
 		 */
 		private Row createTunFenRow(List<Row> all) {
-			long minLose = Long.MAX_VALUE;// 最小吐分值
-			String minLoseType = null;
-			List<String> types = TurntableUtil.getAllTypesWithOutAAndD();
-			types = Lists.newArrayList(types);
-			Util.Collection.upset(types);
-			for (String type : types) {
-				long lose = getLose(type);
-				if (lose < minLose) {
-					minLose = lose;
-					minLoseType = type;
-				}
-			}
-			return findRandomOneByType(minLoseType, all);
+			TunFenComparator c = new TunFenComparator();
+			return getTunTuFenRow(c, all);
 		}
 
 		/**
@@ -566,20 +581,12 @@ public class Turntable {
 	 * @return
 	 */
 	private long getLose(String type) {
-		long countAll = getCountAllByType(type);
+		long countAll = switchs.getByTypeWithOutRobot(type);
+//		Log.d(countAll, type);
 		countAll *= getX(type);
 		return countAll;
 	}
 
-	/**
-	 * 当前指定类型的灯, 总共被下注多少个
-	 * 
-	 * @param type
-	 * @return
-	 */
-	private long getCountAllByType(String type) {
-		return TurntableUtil.getByType(switchs, type);
-	}
 
 	public boolean isMustGenerate(int id) {
 		return mustGenerateId == id;

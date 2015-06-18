@@ -4,12 +4,13 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.javaplus.collections.map.Maps;
+import cn.vgame.a.Server;
+import cn.vgame.a.robot.RobotManager;
 import cn.vgame.a.turntable.TurntableUtil;
 
 public class SwitchAll implements ISwitchs {
 
 	Map<String, ISwitchs> ss = Maps.newConcurrentMap();
-	
 
 	public ISwitchs get(String id) {
 		return ss.get(id);
@@ -22,10 +23,10 @@ public class SwitchAll implements ISwitchs {
 	public void save(String id, ISwitchs s) {
 
 		ss.put(id, s);
-		
+
 	}
 
-	private int getByType(String type) {
+	public int getByType(String type) {
 		int sum = 0;
 		for (ISwitchs a : ss.values()) {
 			int byType = TurntableUtil.getByType(a, type);
@@ -33,6 +34,22 @@ public class SwitchAll implements ISwitchs {
 		}
 		return sum;
 	}
+
+	public long getByTypeWithOutRobot(String type) {
+		int sum = 0;
+		RobotManager rm = Server.getRobotManager();
+
+		Set<String> roleIds = ss.keySet();
+		for (String roleId : roleIds) {
+			if (!rm.isRobot(roleId)) {
+				ISwitchs a = ss.get(roleId);
+				int byType = TurntableUtil.getByType(a, type);
+				sum += byType;
+			}
+		}
+		return sum;
+	}
+
 	@Override
 	public String toString() {
 		return TurntableUtil.toString(this);
@@ -122,7 +139,6 @@ public class SwitchAll implements ISwitchs {
 		return getByType("L");
 	}
 
-
 	public ISwitchs remove(String id) {
 		return ss.remove(id);
 	}
@@ -130,4 +146,5 @@ public class SwitchAll implements ISwitchs {
 	public Set<String> keySet() {
 		return ss.keySet();
 	}
+
 }

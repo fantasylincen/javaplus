@@ -110,6 +110,8 @@
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByNickFuzzy(String nick) {						nick = nick.replaceAll("\\*", ".*");			nick = "^" + nick + "$";			BasicDBObject o = new BasicDBObject("nick", Pattern.compile(nick, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByCoin(long coin) {						BasicDBObject o = new BasicDBObject("coin", coin);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("coin", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByJiangQuan(long jiangQuan) {						BasicDBObject o = new BasicDBObject("jiangQuan", jiangQuan);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findJiangQuanBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("jiangQuan", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByBankPassword(String bankPassword) {						BasicDBObject o = new BasicDBObject("bankPassword", bankPassword);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByBankPasswordFuzzy(String bankPassword) {						bankPassword = bankPassword.replaceAll("\\*", ".*");			bankPassword = "^" + bankPassword + "$";			BasicDBObject o = new BasicDBObject("bankPassword", Pattern.compile(bankPassword, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByCreateTime(long createTime) {						BasicDBObject o = new BasicDBObject("createTime", createTime);			return new RoleDtoCursor(collection.find(o));		}
@@ -425,6 +427,7 @@
 		private boolean isRobot = false;
 		private String nick = "";
 		private long coin = 0;
+		private long jiangQuan = 0;
 		private String bankPassword = "";
 		private long createTime = 0;
 		private long bankCoin = 0;
@@ -439,6 +442,7 @@
 			isRobot = MongoGen.copy(src.isRobot);			
 			nick = MongoGen.copy(src.nick);			
 			coin = MongoGen.copy(src.coin);			
+			jiangQuan = MongoGen.copy(src.jiangQuan);			
 			bankPassword = MongoGen.copy(src.bankPassword);			
 			createTime = MongoGen.copy(src.createTime);			
 			bankCoin = MongoGen.copy(src.bankCoin);			
@@ -453,6 +457,7 @@
 		public boolean getIsRobot() {			return this.isRobot;		}
 		public String getNick() {			return this.nick;		}
 		public long getCoin() {			return this.coin;		}
+		public long getJiangQuan() {			return this.jiangQuan;		}
 		public String getBankPassword() {			return this.bankPassword;		}
 		public long getCreateTime() {			return this.createTime;		}
 		public long getBankCoin() {			return this.bankCoin;		}
@@ -467,6 +472,7 @@
 		public void setIsRobot(boolean isRobot) {			this.isRobot = isRobot;		}
 		public void setNick(String nick) {			this.nick = nick;		}
 		public void setCoin(long coin) {			this.coin = coin;		}
+		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		public void setBankPassword(String bankPassword) {			this.bankPassword = bankPassword;		}
 		public void setCreateTime(long createTime) {			this.createTime = createTime;		}
 		public void setBankCoin(long bankCoin) {			this.bankCoin = bankCoin;		}
@@ -482,6 +488,7 @@
 			o.put("isRobot", MongoGen.toObject(isRobot));			
 			o.put("nick", MongoGen.toObject(nick));			
 			o.put("coin", MongoGen.toObject(coin));			
+			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			o.put("bankPassword", MongoGen.toObject(bankPassword));			
 			o.put("createTime", MongoGen.toObject(createTime));			
 			o.put("bankCoin", MongoGen.toObject(bankCoin));			
@@ -496,6 +503,7 @@
 			isRobot = getBoolean(o, "isRobot");
 			nick = getString(o, "nick");
 			coin = getLong(o, "coin");
+			jiangQuan = getLong(o, "jiangQuan");
 			bankPassword = getString(o, "bankPassword");
 			createTime = getLong(o, "createTime");
 			bankCoin = getLong(o, "bankCoin");
@@ -517,9 +525,11 @@
 
 
 
+
 		MongoMap<String> loadKeyValueDaily(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueDaily");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 		MongoMap<String> loadKeyValueForever(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueForever");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 
+
 
 
 

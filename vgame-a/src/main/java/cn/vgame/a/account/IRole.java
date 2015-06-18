@@ -32,4 +32,6 @@ public interface IRole {
 
 	void addCoinLog(long coin, Object from, String dsc);
 
+	long getJiangQuan();
+
 }
