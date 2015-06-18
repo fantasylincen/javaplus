@@ -7,6 +7,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 String roleId = request.getParameter("roleId");
 
+if(Server.getConfig().getBoolean("isDebug") && roleId == null) {
+	roleId = "r100031000092";
+}
 Role role = Server.getRole(roleId);
 long jiangQuan = role.getJiangQuan();
 %>
@@ -28,27 +31,38 @@ long jiangQuan = role.getJiangQuan();
 	-->
 
   </head>
-  
+  <center>
   <body>
-     <table>
+  <input id="jiangQuan" value="<%=jiangQuan%>" style="display:none;">
+     <table>	
      <tr>
      <td>
      <img src="images/iphone.jpg"  onclick="show1();">
+     <h2>  &nbsp;&nbsp;&nbsp;&nbsp;iPhone 6</h2>
+     </td>
+     <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+      <td>
+      <img src="images/iphone.jpg"  onclick="show2();">
+      <h2>iPhone 6plus</h2>
      </td>
      </tr>
      <tr>
      <td>
-     <img src="images/iphone.jpg"  onclick="show2();">
+     <img src="images/huafei.png"  onclick="show2();">
+     <h5>50话费(电信、联通、移动)</h5>
      </td>
      </tr>
      </table>
   </body>
-  
+  </center>
   <script lanuage="javascript">
   function show1()
  	{
- 	var jiangQuan=document.getElementById("<%=jiangQuan%>").value ;
- 	if(jiangQuan>=1000){
+    
+ 	if(document.getElementById("jiangQuan").value>1000){
  		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
  		}else{
  		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖卷！");
@@ -57,6 +71,7 @@ long jiangQuan = role.getJiangQuan();
  	
   function show2()
  	{
+ 		
  		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
  	}
   </script>
