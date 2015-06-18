@@ -15,7 +15,7 @@ import cn.vgame.a.gen.dto.MongoGen.RoleDto;
 public class RobotManager {
 
 	Map<String, Robot> robots = Maps.newConcurrentMap();
-	private Object mustToId;
+//	private Object mustToId;
 
 	public RobotManager() {
 		loadFromDb();
@@ -54,35 +54,35 @@ public class RobotManager {
 		return robots.values();
 	}
 
-	/**
-	 * 彩金是否一定给这个机器人 id: 机器人的id
-	 */
-	public boolean isCaiJinMustTo(String id) {
-		if (!hasMustTo())
-			return false;
-		return mustToId.equals(id);
-	}
+//	/**
+//	 * 彩金是否一定给这个机器人 id: 机器人的id
+//	 */
+//	public boolean isCaiJinMustTo(String id) {
+//		if (!hasMustTo())
+//			return false;
+//		return mustToId.equals(id);
+//	}
 
-	/**
-	 * 本轮是否有必得彩金的机器人
-	 */
-	public boolean hasMustTo() {
-		return mustToId != null;
-	}
+//	/**
+//	 * 本轮是否有必得彩金的机器人
+//	 */
+//	public boolean hasMustTo() {
+//		return mustToId != null;
+//	}
 
-	/**
-	 * 清空本轮必得彩金的机器人
-	 */
-	public void clear() {
-		mustToId = null;
-		for (Robot r : getRobots()) {
-			r.clear();
-		}
-	}
+//	/**
+//	 * 清空本轮必得彩金的机器人
+//	 */
+//	public void clear() {
+//		mustToId = null;
+//		for (Robot r : getRobots()) {
+//			r.clear();
+//		}
+//	}
 
-	public void setCaiJinMustTo(String id2) {
-		this.mustToId = id2;
-	}
+//	public void setCaiJinMustTo(String id2) {
+//		this.mustToId = id2;
+//	}
 
 	/**
 	 * 是否是机器人

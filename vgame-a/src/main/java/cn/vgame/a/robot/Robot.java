@@ -4,7 +4,6 @@ import java.util.List;
 
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
-import cn.javaplus.log.Log;
 import cn.javaplus.random.WeightFetcher;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
@@ -17,7 +16,7 @@ import cn.vgame.share.Xml;
 
 public class Robot {
 
-	private RobotSwitch switchs;
+	private RobotSwitch switchs = new RobotSwitch();;
 	private final String roleId;
 
 	public Robot(String roleId) {
@@ -49,6 +48,7 @@ public class Robot {
 
 	/**
 	 * 是否压注了金鲨
+	 * 
 	 * @return
 	 */
 	public boolean isCommitJinSha() {
@@ -95,7 +95,7 @@ public class Robot {
 	public void randomCommit() {
 		Turntable ins = Turntable.getInstance();
 		ISwitchs randomSwitchs = randomSwitchs();
-//		Log.d(getId(), TurntableUtil.getCountAll(randomSwitchs));
+		// Log.d(getId(), TurntableUtil.getCountAll(randomSwitchs));
 		switchs.add(randomSwitchs);
 		ins.commitUserSwitchs(getId(), switchs);
 	}
@@ -108,13 +108,13 @@ public class Robot {
 			int coin = getRandomCoin();
 			long coinNow = getCoin();
 			long need = TurntableUtil.getCountAll(this.switchs);
-			
+
 			if (coinNow < need + coin) {
 				break;
 			}
 			switchs.add(row.get("type"), coin);
 		}
-//		Log.d("robot random switch", getId(), getNick(), switchs);
+		// Log.d("robot random switch", getId(), getNick(), switchs);
 		return switchs;
 	}
 
@@ -140,10 +140,6 @@ public class Robot {
 		String ss = Server.getConst().getString(value);
 		List<Integer> is = Util.Collection.getIntegers(ss);
 		return Util.Random.get(is.get(0), is.get(1));
-	}
-
-	public void clear() {
-		this.switchs = null;
 	}
 
 	public void clearSwitchs() {

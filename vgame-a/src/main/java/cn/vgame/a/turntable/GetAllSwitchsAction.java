@@ -124,7 +124,7 @@ public class GetAllSwitchsAction extends JsonActionAfterRoleEnterGame {
 
 		public long getCd() {
 			long cd = Turntable.getInstance().getCd();
-//			Log.d("cd", cd);
+			Log.d(role.getId(), role.getNick(), "cd", cd);
 			return cd;
 		}
 		

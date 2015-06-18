@@ -14,6 +14,7 @@ import cn.javaplus.excel.Sheet;
 import cn.javaplus.log.Log;
 import cn.javaplus.random.WeightFetcher;
 import cn.javaplus.time.Time;
+import cn.javaplus.time.taskutil.TaskSafety;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.account.IRole;
@@ -44,19 +45,14 @@ import com.alibaba.fastjson.JSONObject;
 
 public class Turntable {
 
-	private final class TestTask extends TurntableTask {
-		private TestTask(long delay, long period) {
-			super(delay, period);
-		}
+	private final class TestTask {
 
-		@Override
-		public void runSafty() {
-			Log.d(getCd());
-		}
-
-		@Override
-		public TurntableTask copy() {
-			return new TestTask(1000, 1000);
+		public void run() {
+			try {
+				Log.d("test task", getCd());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -537,11 +533,11 @@ public class Turntable {
 	/**
 	 * 机器人下注
 	 */
-	public class RobotTask extends TurntableTask {
+	public class RobotTask extends TaskSafety {
 
-		public RobotTask(long delay, long period) {
-			super(delay, period);
-		}
+		// public RobotTask(long delay, long period) {
+		// super(delay, period);
+		// }
 
 		@Override
 		public void runSafty() {
@@ -551,9 +547,15 @@ public class Turntable {
 		}
 
 		@Override
-		public TurntableTask copy() {
-			return new RobotTask(getDelay(), getPeriod());
+		protected void process(Exception e) {
+			Log.e(e);
+			e.printStackTrace();
 		}
+		//
+		// @Override
+		// public TurntableTask copy() {
+		// return new RobotTask(getDelay(), getPeriod());
+		// }
 
 	}
 
@@ -755,16 +757,16 @@ public class Turntable {
 		}
 	}
 
-	public class RoundEndTask extends TurntableTask {
+	public class RoundEndTask extends TaskSafety {
 
-		@Override
-		public TurntableTask copy() {
-			return new RoundEndTask(getDelay(), getPeriod());
-		}
-
-		public RoundEndTask(long delay, long period) {
-			super(delay, period);
-		}
+		// @Override
+		// public TurntableTask copy() {
+		// return new RoundEndTask(getDelay(), getPeriod());
+		// }
+		//
+		// public RoundEndTask(long delay, long period) {
+		// super(delay, period);
+		// }
 
 		@Override
 		protected void process(Exception e) {
@@ -778,39 +780,42 @@ public class Turntable {
 
 			submitAnyThing();
 			initFields();
+			
+			mustGenerateId = -1;
 
-			Log.d("restart turn table");
+			Log.d("round end, restart turn table");
 			if (jinShaYuThisTime) {
 				int pauseSec = Server.getConst().getInt("JIN_SHA_YU_PAUSE_SEC");
 				timer.pause(pauseSec * 1000L);
 			}
 		}
 
-		/**
-		 * 这次是不是出了金鲨鱼
-		 * 
-		 * @return
-		 */
-		private boolean isJinShaYuThisTime() {
-			if (result == null)
-				return false;
-			List<Row> rs = result.getResult();
-			Row row = rs.get(0);
-			String type = row.get("type");
-			return type.equals("C");
-		}
 	}
 
-	public class GenerateResultTask extends TurntableTask {
+	/**
+	 * 这次是不是出了金鲨鱼
+	 * 
+	 * @return
+	 */
+	private boolean isJinShaYuThisTime() {
+		if (result == null)
+			return false;
+		List<Row> rs = result.getResult();
+		Row row = rs.get(0);
+		String type = row.get("type");
+		return type.equals("C") || type.equals("B");
+	}
 
-		@Override
-		public TurntableTask copy() {
-			return new GenerateResultTask(getDelay(), getPeriod());
-		}
+	public class GenerateResultTask extends TaskSafety {
 
-		public GenerateResultTask(long delay, long period) {
-			super(delay, period);
-		}
+		// @Override
+		// public TurntableTask copy() {
+		// return new GenerateResultTask(getDelay(), getPeriod());
+		// }
+		//
+		// public GenerateResultTask(long delay, long period) {
+		// super(delay, period);
+		// }
 
 		@Override
 		protected void process(Exception e) {
@@ -830,8 +835,6 @@ public class Turntable {
 			Server.getKeyValueSaveOnly().add("TURNTABLE_GENERATE_TIMES", 1);
 			Log.d("generate reward", result);
 			saveToHistory();
-			mustGenerateId = -1;
-			Server.getRobotManager().clear();
 		}
 
 		private void settlementForZhuang() { // 结算庄家盈亏
@@ -884,8 +887,8 @@ public class Turntable {
 
 				if (!isTestRole) {
 					Log.d("bet", roleId, isRobot ? "robot" : "player",
-							role.getNick(), sw, buildResult(), "-" + rdc, "+" + add, cj,
-							xcjadd);
+							role.getNick(), sw, buildResult(), "-" + rdc, "+"
+									+ add, cj, xcjadd);
 				}
 
 				if (!isTestRole && !isRobot) {
@@ -1038,7 +1041,7 @@ public class Turntable {
 	private SwitchAll switchs;
 	private String id;
 	private Result result;
-	private TurntableTimer timer;
+	private MyTimer timer;
 
 	/** 随机倍率序号 */
 	private int randomXNumber = 1;
@@ -1096,21 +1099,39 @@ public class Turntable {
 
 	public void init() {
 		if (timer != null) {
-			timer.cancel();
+			timer.stop();
 		}
 		timer = new MyTimer();
 
 		initFields();
 
-		addGenerateResultTask();
-		addRestartTask();
-		addRobotTask();
+		long cd = Server.getConst().getLong("CD");
+		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
 
-		// addTestTask();
-	}
+		isLock = true; // 锁定所有用户不可再下注
+		long sum = cd + jcd;
+		timer.setBaseTask(new GenerateResultTask(), cd, sum);
 
-	void addTestTask() {
-		timer.scheduleAtFixedRate(new TestTask(1000, 1000));
+		timer.appendTask(new RoundEndTask(), jcd);
+
+		String string = Server.getConst().getString("ROBOT_COMMIT_SEC");
+		List<Integer> is = Util.Collection.getIntegers(string);
+		for (int sec : is) {
+
+			timer.appendTask(new RobotTask(), sec * 1000 - cd);
+			Log.d("add robot task", sec);
+		}
+
+		timer.start();
+
+//		new Thread() {
+//			public void run() {
+//				while (true) {
+//					new TestTask().run();
+//					Util.Thread.sleep(1000);
+//				}
+//			};
+//		}.start();
 	}
 
 	public int getWeight(Row row) {
@@ -1119,53 +1140,29 @@ public class Turntable {
 		return row.getInt(c);
 	}
 
-	private void addRobotTask() {
-		long cd = Server.getConst().getLong("CD");
-		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
-
-		long sum = cd + jcd;
-
-		String string = Server.getConst().getString("ROBOT_COMMIT_SEC");
-		List<Integer> is = Util.Collection.getIntegers(string);
-		for (int sec : is) {
-
-			timer.scheduleAtFixedRate(new RobotTask(sec * 1000, sum));
-			Log.d("add robot task", sec);
-		}
-	}
-
-	private void addRestartTask() {
-		long cd = Server.getConst().getLong("CD");
-		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
-
-		long sum = cd + jcd;
-		timer.scheduleAtFixedRate(new RoundEndTask(sum, sum));
-	}
-
-	private void addGenerateResultTask() {
-		long cd = Server.getConst().getLong("CD");
-		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
-
-		isLock = true; // 锁定所有用户不可再下注
-		long sum = cd + jcd;
-		timer.scheduleAtFixedRate(new GenerateResultTask(cd - 1900, sum));
-	}
-
 	public long getCd() {
 		// if(result != null) {
 		// return 0;
 		// }
-		long cd = Server.getConst().getLong("CD");
-		long jcd = Server.getConst().getLong("JIE_SUAN_CD");
-
-		long m = System.currentTimeMillis();
-		long t = m - timeStart;
-
-		long rt = cd - t;
-		if (rt < 0)
-			return cd + jcd + rt;
-
-		return rt;
+		// long cd = Server.getConst().getLong("CD");
+		// long jcd = Server.getConst().getLong("JIE_SUAN_CD");
+		//
+		// long m = System.currentTimeMillis();
+		// long t = m - timeStart;
+		//
+		// boolean jinShaYuThisTime = isJinShaYuThisTime();
+		//
+		// long rt = cd - t;
+		// if (jinShaYuThisTime) {
+		// int pauseSec = Server.getConst().getInt("JIN_SHA_YU_PAUSE_SEC");
+		// rt += pauseSec * 1000L;
+		// }
+		//
+		// if (rt < 0)
+		// return cd + jcd + rt;
+		//
+		// return rt;
+		return timer.getBaseTaskCd() + 1900;
 	}
 
 	public void commitUserSwitchs(String id, ISwitchs s) {
@@ -1424,14 +1421,14 @@ public class Turntable {
 			return 0;
 		}
 
-		if (manager.hasMustTo()) {
-			if (manager.isCaiJinMustTo(role.getId())) {
-				return settlementCj(role, s, row);
-			}
-			return 0;
-		} else {
+//		if (manager.hasMustTo()) {
+//			if (manager.isCaiJinMustTo(role.getId())) {
+//				return settlementCj(role, s, row);
+//			}
+//			return 0;
+//		} else {
 			return settlementCj(role, s, row);
-		}
+//		}
 
 	}
 
@@ -1456,7 +1453,7 @@ public class Turntable {
 			return 0;
 		}
 
-		boolean hasMustTo = manager.hasMustTo();
+//		boolean hasMustTo = manager.hasMustTo();
 
 		int c = s.getC();
 		if (c <= 0) { // 没有压金鲨
@@ -1479,7 +1476,7 @@ public class Turntable {
 
 		long condition = cst.getLong("CAI_JIN_CONDITION");
 
-		if (!hasMustTo && c < condition) {
+		if (/*!hasMustTo &&*/ c < condition) {
 			return 0;
 		}
 
@@ -1616,8 +1613,8 @@ public class Turntable {
 	 *            猴子 L 6 0-0 兔子
 	 * @return
 	 */
-	public int getCountHistory(String type) {
-		return Server.getKeyValueForever().getInt(
+	public long getCountHistory(String type) {
+		return Server.getKeyValueForever().getLong(
 				"SUBMIT_COUNT_HISTOYR:" + type);
 	}
 
@@ -1712,10 +1709,10 @@ public class Turntable {
 		// settlements.put(role.getId(), result);
 		// }
 
+		long coin = role.getCoin();
+
 		if (result == null)
 			return new PlayResult(rst, 0, caiJinNotice, 0);
-
-		long coin = role.getCoin();
 
 		long caiJin = result.getCaiJin() + result.getXiaoCaiJinAdd();
 

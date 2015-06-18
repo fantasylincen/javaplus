@@ -28,6 +28,7 @@ public abstract class TaskSafety extends TimerTask {
 	 * @param e
 	 */
 	protected  void process(Exception e) {
+		
 	}
 
 	protected void printBeforeRun(){

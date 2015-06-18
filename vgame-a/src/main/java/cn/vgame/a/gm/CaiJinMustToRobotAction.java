@@ -45,7 +45,7 @@ public class CaiJinMustToRobotAction extends ActionSupport {
 		response.setCharacterEncoding("utf8");
 		
 		String id2 = getId();
-		Server.getRobotManager().setCaiJinMustTo(id2);
+//		Server.getRobotManager().setCaiJinMustTo(id2); 2015年6月17日 17:58:16
 		
 		Turntable is = Turntable.getInstance();
 		is.setMustGenerateId(getRandomJinShaId());
