@@ -31,14 +31,29 @@ long jiangQuan = role.getJiangQuan();
 	-->
 
   </head>
+  <body>
+  <table>
+   <tr>
+     <td>
+     <img src="images/hengfu.png"  >
+     </td>
+     </tr>
+     <tr>
+     <td>
+     <h2 style="color: red">尊敬的XX:欢迎你来到兑换区，当前你的奖券：1000</h2>
+     </td>
+     </tr>
+  </table>
+  </body>
   <center>
   <body>
   <input id="jiangQuan" value="<%=jiangQuan%>" style="display:none;">
-     <table>	
+     <table>
      <tr>
      <td>
      <img src="images/iphone.jpg"  onclick="show1();">
-     <h2>  &nbsp;&nbsp;&nbsp;&nbsp;iPhone 6</h2>
+     <h3>iPhone 6/10000奖券</h3>
+     
      </td>
      <td>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -46,13 +61,35 @@ long jiangQuan = role.getJiangQuan();
      </td>
       <td>
       <img src="images/iphone.jpg"  onclick="show2();">
-      <h2>iPhone 6plus</h2>
+      <h4>iPhone 6plus/12000奖券</h4>
      </td>
      </tr>
      <tr>
      <td>
      <img src="images/huafei.png"  onclick="show2();">
-     <h5>50话费(电信、联通、移动)</h5>
+     <h5>50话费(电信、联通、移动)/500奖券</h5>
+     </td>
+      <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+     <td>
+     <img src="images/huafei.png"  onclick="show2();">
+     <h5>100话费(电信、联通、移动)/1000奖券</h5>
+     </td>
+     </tr>
+     <tr>
+     <td>
+     <img src="images/E.png"  onclick="show2();">
+     <h5>&nbsp;&nbsp;&nbsp;京东E卡/100奖券</h5>
+     </td>
+      <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+     <td>
+     <img src="images/computer.png" width="200" height="200	" onclick="show2();">
+     <h5> &nbsp;&nbsp;机器人笔记本/100000奖券</h5>
      </td>
      </tr>
      </table>
