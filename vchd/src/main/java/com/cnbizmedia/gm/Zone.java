@@ -52,14 +52,16 @@ public class Zone {
 	public GameXml getGameXml() {
 		GameXmlFileDto gxl = dto.getGameXmlFile();
 		if(gxl == null)
-			throw new RuntimeException("please upload server xml file");
+			return null;
+//			throw new RuntimeException("please upload server xml file");
 		return new GameXml(gxl);
 	}
 
 	public ClientXml getClientXml() {
 		GameXmlFileDto gxl = dto.getClientXmlFile();
 		if(gxl == null)
-			throw new RuntimeException("please upload client xml file");
+			return null;
+//			throw new RuntimeException("please upload client xml file");
 		return new ClientXml(gxl);
 	}
 

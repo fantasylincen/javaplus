@@ -33,6 +33,29 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class Recharge4YiJieAction extends ActionSupport {
 
+	public class Add {
+		long coin;
+		long jiangQuan;
+		public Add(Row row) {
+
+			coin =  row.getInt("jinDou");
+			jiangQuan = row.getInt("jiangQuan");
+		}
+		public long getCoin() {
+			return coin;
+		}
+		public void setCoin(long coin) {
+			this.coin = coin;
+		}
+		public long getJiangQuan() {
+			return jiangQuan;
+		}
+		public void setJiangQuan(long jiangQuan) {
+			this.jiangQuan = jiangQuan;
+		}
+
+	}
+
 	private static final long serialVersionUID = 5948951589183031863L;
 
 	public static final String KEY = "V4I9FSEJKPA2MWNSKVVFBXEW758F9HIM";
@@ -244,35 +267,37 @@ public class Recharge4YiJieAction extends ActionSupport {
 		String roleId = getCbi();
 
 		Role role = Server.getRole(roleId);
-		long add = getCoinAdd();
-		role.addCoin(add);
-		role.addRechargeHistory(add, "yijie");
+		Add a = getAdd();
+		role.addCoin(a.getCoin());
+		role.addRechargeHistory(a.getCoin(), "yijie");
+		role.addJiangQuan(a.getJiangQuan());
 		
 		this.dto.setRoleId(roleId);
 		this.dto.setNick(role.getNick());
-		this.dto.setCoin(add);
+		this.dto.setCoin(a.getCoin());
+		this.dto.setJiangQuan(a.getJiangQuan());
 		
-		Log.d("recharge success", role.getId(), role.getNick(), add,
+		Log.d("recharge success", role.getId(), role.getNick(), a.getCoin(),
 				role.getCoin());
 		Daos.getYiJieRechargeLogDao().save(this.dto);
 	}
 
-	private long getCoinAdd() {
+	private Add getAdd() {
 		double rmmb = (getFee() + 0) / 100;
-		Sheet sheet = Server.getXml().get("recharge-A");
+		Sheet sheet = Server.getXml().get("recharge-yi-jie");
 		List<Row> all = sheet.getAll();
 		for (Row row : all) {
 			double rmb = row.getDouble("rmb");
 			if (Math.abs(rmb - rmmb) < 0.001) {
-				return row.getInt("jinDou");
+				return new Add(row);
 			}
 		}
 		return getLast(all);
 	}
 
-	private long getLast(List<Row> all) {
+	private Add getLast(List<Row> all) {
 		Row row = all.get(all.size() - 1);
-		return row.getInt("jinDou");
+		return new Add(row);
 	}
 
 	private void checkSt() {

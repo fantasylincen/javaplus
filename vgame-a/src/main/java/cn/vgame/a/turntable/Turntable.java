@@ -159,24 +159,22 @@ public class Turntable {
 
 	public class Controller {
 
-		private final class TunFenComparator implements
-				Comparator<String> {
+		private final class TunFenComparator implements Comparator<String> {
 			@Override
 			public int compare(String o1, String o2) {
 				long l1 = getLose(o1);
 				long l2 = getLose(o2);
-				
+
 				return (int) (l1 - l2);
 			}
 		}
 
-		private final class TuFenComparator implements
-				Comparator<String> {
+		private final class TuFenComparator implements Comparator<String> {
 			@Override
 			public int compare(String o1, String o2) {
 				long l1 = getLose(o1);
 				long l2 = getLose(o2);
-				
+
 				return (int) (l2 - l1);
 			}
 		}
@@ -498,7 +496,7 @@ public class Turntable {
 			types = Lists.newArrayList(types);
 			Util.Collection.upset(types);
 			Collections.sort(types, c);
-			
+
 			List<String> sub = Util.Collection.sub(types, 3);
 			Util.Collection.upset(sub);
 			String randomOne = sub.get(0);
@@ -582,11 +580,10 @@ public class Turntable {
 	 */
 	private long getLose(String type) {
 		long countAll = switchs.getByTypeWithOutRobot(type);
-//		Log.d(countAll, type);
+		// Log.d(countAll, type);
 		countAll *= getX(type);
 		return countAll;
 	}
-
 
 	public boolean isMustGenerate(int id) {
 		return mustGenerateId == id;
@@ -787,7 +784,7 @@ public class Turntable {
 
 			submitAnyThing();
 			initFields();
-			
+
 			mustGenerateId = -1;
 
 			Log.d("round end, restart turn table");
@@ -1131,14 +1128,14 @@ public class Turntable {
 
 		timer.start();
 
-//		new Thread() {
-//			public void run() {
-//				while (true) {
-//					new TestTask().run();
-//					Util.Thread.sleep(1000);
-//				}
-//			};
-//		}.start();
+		// new Thread() {
+		// public void run() {
+		// while (true) {
+		// new TestTask().run();
+		// Util.Thread.sleep(1000);
+		// }
+		// };
+		// }.start();
 	}
 
 	public int getWeight(Row row) {
@@ -1352,6 +1349,7 @@ public class Turntable {
 		Row first = randoms.get(0);
 		try {
 			settlementCaiJin = settlementCaiJin(role, s, first);
+			addJiangQuan(settlementCaiJin, role);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1371,10 +1369,27 @@ public class Turntable {
 
 		long xiaoCaiJinAdd = settlementXiaoCaiJin(role, first);
 
+		addJiangQuan(xiaoCaiJinAdd, role);
+
 		r.setAdd(add);
 		r.setXiaoCaiJinAdd(xiaoCaiJinAdd);
 
 		return r;
+	}
+
+	/**
+	 * 根据彩金增加奖券
+	 * 
+	 * @param caiJin
+	 * @param role
+	 */
+	private void addJiangQuan(long caiJin, IRole role) {
+		Const cc = Server.getConst();
+		int min = cc.getInt("JIANG_QUAN_CAI_JIN_MIN");
+		if(caiJin < min)
+			return;
+		double scale = cc.getDouble("JIANG_QUAN_SCALE");
+		role.addJiangQuan((long) (scale * caiJin));
 	}
 
 	private long settlementXiaoCaiJin(IRole role, Row first) {
@@ -1428,14 +1443,14 @@ public class Turntable {
 			return 0;
 		}
 
-//		if (manager.hasMustTo()) {
-//			if (manager.isCaiJinMustTo(role.getId())) {
-//				return settlementCj(role, s, row);
-//			}
-//			return 0;
-//		} else {
-			return settlementCj(role, s, row);
-//		}
+		// if (manager.hasMustTo()) {
+		// if (manager.isCaiJinMustTo(role.getId())) {
+		// return settlementCj(role, s, row);
+		// }
+		// return 0;
+		// } else {
+		return settlementCj(role, s, row);
+		// }
 
 	}
 
@@ -1460,7 +1475,7 @@ public class Turntable {
 			return 0;
 		}
 
-//		boolean hasMustTo = manager.hasMustTo();
+		// boolean hasMustTo = manager.hasMustTo();
 
 		int c = s.getC();
 		if (c <= 0) { // 没有压金鲨
@@ -1483,7 +1498,7 @@ public class Turntable {
 
 		long condition = cst.getLong("CAI_JIN_CONDITION");
 
-		if (/*!hasMustTo &&*/ c < condition) {
+		if (/* !hasMustTo && */c < condition) {
 			return 0;
 		}
 
@@ -1566,14 +1581,14 @@ public class Turntable {
 	 * 今日金币输入
 	 */
 	public long getCoinInToday() {
-		return Server.getKeyValueForever().getLong("SYSTEM_COIN_IN");
+		return Server.getKeyValueDaily().getLong("SYSTEM_COIN_IN");
 	}
 
 	/**
 	 * 今日金币输出
 	 */
 	public long getCoinOutToday() {
-		return Server.getKeyValueForever().getLong("SYSTEM_COIN_OUT");
+		return Server.getKeyValueDaily().getLong("SYSTEM_COIN_OUT");
 	}
 
 	/**

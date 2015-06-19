@@ -34,4 +34,6 @@ public interface IRole {
 
 	long getJiangQuan();
 
+	void addJiangQuan(long add);
+
 }

@@ -8,6 +8,7 @@ import com.cnbizmedia.config.GameProperties;
 import com.cnbizmedia.gen.dto.MongoGen.KeyValueDto;
 import com.cnbizmedia.gen.dto.MongoGen.ZoneDto;
 import com.cnbizmedia.gm.Zone;
+import com.cnbizmedia.gm.gamexml.ClientXml;
 import com.cnbizmedia.gm.gamexml.GameXml;
 
 public class ZoneUtil {
@@ -17,6 +18,7 @@ public class ZoneUtil {
 
 		Log.d("projectId", pid);
 		Log.d("zoneId", dto.getId());
+		Log.d("name", dto.getName());
 		Log.d("serverConfigKey", serverConfigKey);
 		
 		JSONObject obj = new JSONObject();
@@ -52,6 +54,10 @@ public class ZoneUtil {
 	public static int getGameXmlVersion(String projectId, String zoneId) {
 		Zone zone = Server.getProjectManager().getZone(projectId, zoneId);
 		GameXml gameXml = zone.getGameXml();
+		if(gameXml == null) {
+			return 0;
+//			throw new RuntimeException("game xml not found! please upload game xml file!");
+		}
 		int version = gameXml.getVersion();
 		return version;
 	}
@@ -87,9 +93,12 @@ public class ZoneUtil {
 	 * @param zoneId
 	 * @return
 	 */
-	private static Object getClientXmlVersion(String pid, String zoneId) {
+	private static int getClientXmlVersion(String pid, String zoneId) {
 		Zone zone = Server.getProjectManager().getZone(pid, zoneId);
-		int version = zone.getClientXml().getVersion();
+		ClientXml clientXml = zone.getClientXml();
+		if(clientXml == null)
+			return 0;
+		int version = clientXml.getVersion();
 		return version;
 	}
 

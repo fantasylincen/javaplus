@@ -39,6 +39,23 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class Recharge4AppStoreBuyClientAction extends ActionSupport {
 
+	public class Add {
+
+		private final Row row;
+
+		public Add(Row row) {
+			this.row = row;
+		}
+
+		long getCoin(){
+			return row.getInt("jinDou");
+		}
+		long getJiangQuan(){
+			return row.getInt("jiangQuan");
+		}
+
+	}
+
 	/**
 	 * 
 	 */
@@ -165,20 +182,21 @@ public class Recharge4AppStoreBuyClientAction extends ActionSupport {
 		
 		dto.setProductId(product_id);
 
-		long coin = getCoinAdd();
+		Add add = getAdd();
 
 		dto.setId(transaction_id);
 		dto.setRoleId(roleId);
 		dto.setNick(role.getNick());
-		dto.setCoin(coin);
+		dto.setCoin(add.getCoin());
 		dto.setFee(getFee());
+		dto.setJiangQuan(add.getJiangQuan());
 		
 
-		role.addCoin(coin);
-		role.addRechargeHistory(coin, "appstore");
+		role.addCoin(add.getCoin());
+		role.addRechargeHistory(add.getCoin(), "appstore");
+		role.addJiangQuan(add.getJiangQuan());
 
-
-		Log.d("recharge success", role.getId(), role.getNick(), coin,
+		Log.d("recharge success", role.getId(), role.getNick(), add.getCoin(),
 				role.getCoin());
 		Daos.getAppStoreRechargeLogDao().save(this.dto);
 	}
@@ -187,18 +205,18 @@ public class Recharge4AppStoreBuyClientAction extends ActionSupport {
 	 * 人民币 分
 	 */
 	private int getFee() {
-		Sheet sheet = Server.getXml().get("recharge-D");
+		Sheet sheet = Server.getXml().get("recharge-appstore");
 		String productId = dto.getProductId();
 		Row row = find(productId, sheet);
 		double yuan = row.getDouble("rmb");
 		return (int) (yuan * 100);
 	}
 
-	private long getCoinAdd() {
-		Sheet sheet = Server.getXml().get("recharge-D");
+	private Add getAdd() {
+		Sheet sheet = Server.getXml().get("recharge-appstore");
 		String productId = dto.getProductId();
 		Row row = find(productId, sheet);
-		return row.getInt("jinDou");
+		return new Add(row);
 	}
 
 

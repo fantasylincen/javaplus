@@ -316,7 +316,7 @@ input:-moz-placeholder {
 			
 				<%
 				int i = 0;
-					for (Row r : Xml.getSheet("recharge-A").getAll()) {
+					for (Row r : Xml.getSheet("recharge-zfb").getAll()) {
 							int id = r.getInt("id");
 							int jinDou = r.getInt("jinDou");
 							int rmb = (int)r.getDouble("rmb");
@@ -382,7 +382,7 @@ input:-moz-placeholder {
 
 		var defaultAm = 50;
 		
-			<%for (Row r : Xml.getSheet("recharge-A").getAll()) {
+			<%for (Row r : Xml.getSheet("recharge-zfb").getAll()) {
 					int rmb = (int)r.getDouble("rmb");
 					
 					out.println("var am" + rmb + " = $(\"#am-" + rmb + "\");");
@@ -434,7 +434,7 @@ input:-moz-placeholder {
 		}
 		function clearAll(){
 		
-			<%for (Row r : Xml.getSheet("recharge-A").getAll()) {
+			<%for (Row r : Xml.getSheet("recharge-zfb").getAll()) {
 					int rmb = (int)r.getDouble("rmb");
 					
 					out.println("am" + rmb + ".removeClass(\"select\");");

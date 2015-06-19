@@ -32,4 +32,10 @@ interface ZfbOrder {
 	 * 被充值角色ID
 	 */
 	String getRoleId();
+	
+	/**
+	 * 奖券
+	 * @return
+	 */
+	long getJiangQuan();
 }

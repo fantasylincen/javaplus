@@ -32,4 +32,10 @@ interface ZfbOrderFinish {
 	 * 被充值用户ID
 	 */
 	String getUserId();
+	
+	/**
+	 * 奖券
+	 * @return
+	 */
+	long getJiangQuan();
 }

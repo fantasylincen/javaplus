@@ -82,4 +82,9 @@ public class TestRole implements IRole {
 		return 0;
 	}
 
+	@Override
+	public void addJiangQuan(long add) {
+		
+	}
+
 }

@@ -448,6 +448,18 @@ public class Role implements IRole {
 
 		addCoinLog(add, from, "recharge");
 	}
+	
+	/**
+	 * 增加奖券
+	 * @param add
+	 */
+	@Override
+	public void addJiangQuan(long add) {
+		if(add == 0)
+			return;
+		dto.setJiangQuan(dto.getJiangQuan() + add);
+		Daos.getRoleDao().save(dto);
+	}
 
 	@Override
 	public void addCoinLog(long coin, Object from, String dsc) {

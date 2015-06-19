@@ -105,7 +105,7 @@
 	<%!
 	
 		public double getFee(int id) {
-			Sheet sheet = Xml.getSheet("recharge-A");
+			Sheet sheet = Xml.getSheet("recharge-zfb");
 			Row row = sheet.get(id);
 			
 			boolean isDebug = Server.getConfig().getBoolean("isDebug");
