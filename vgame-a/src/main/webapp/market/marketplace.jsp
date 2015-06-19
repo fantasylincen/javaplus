@@ -38,68 +38,90 @@ long coin = role.getCoin();//金豆
   </head>
   <body>
   <table>
-   <tr>
-     <td>
-     <img src="images/hengfu.png"  >
-     </td>
-     </tr>
+ 
      <tr>
      <td>
-     <h2 style="color: red">尊敬的<%=nick%>:欢迎你来到兑换区，当前你的奖券：<%=jiangQuan%></h2>
+     <h2 style="color: red">尊敬的<%=nick%>:欢迎你来到兑换区，当前你的奖券：<%=jiangQuan%> <img src="images/jiangquan.png" width="25" height="25"></h2>
      </td>
      </tr>
   </table>
   </body>
-  <center>
-  <body>
+
+  <body  >
   <input id="jiangQuan" value="<%=jiangQuan%>" style="display:none;">
      <table>
-     <tr>
-     <td>
+     <tr >
+     <td style="position: relative ;left:80px;" >
      <img src="images/iphone.jpg"  onclick="show1();">
-     <h3>iPhone 6/10000奖券</h3>
-     
+     <h3>iPhone 6/100000奖券</h3>
+     </td>
+     <td>	
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+     <td style="position: relative ;left:180px;" >
+      <img src="images/iphone.jpg"  onclick="show1();">
+     <h3>iPhone 6/100000奖券</h3>
      </td>
      <td>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+      <td style="position: relative ;left:280px;" >
+      <img src="images/iphone.jpg"  onclick="show2();">
+      <h4>iPhone 6plus/120000奖券</h4>
      </td>
       <td>
-      <img src="images/iphone.jpg"  onclick="show2();">
-      <h4>iPhone 6plus/12000奖券</h4>
+     &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      </tr>
      <tr>
-     <td>
+    <td style="position: relative ;left:80px;" >
      <img src="images/huafei.png"  onclick="show2();">
      <h5>50话费(电信、联通、移动)/500奖券</h5>
      </td>
       <td>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-     <td>
+     <td style="position: relative ;left:180px;" >
+     <img src="images/iphone.jpg"  onclick="show1();">
+     <h3>iPhone 6/100000奖券</h3>
+     </td>
+      <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+    <td style="position: relative ;left:280px;" >
      <img src="images/huafei.png"  onclick="show2();">
      <h5>100话费(电信、联通、移动)/1000奖券</h5>
      </td>
+      <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
      </tr>
      <tr>
-     <td>
+    <td style="position: relative ;left:80px;" >
      <img src="images/E.png"  onclick="show2();">
-     <h5>&nbsp;&nbsp;&nbsp;京东E卡/100奖券</h5>
+     <h4>&nbsp;&nbsp;京东E卡/100奖券</h4>
      </td>
       <td>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-     <td>
-     <img src="images/computer.png" width="200" height="200	" onclick="show2();">
-     <h5> &nbsp;&nbsp;机器人笔记本/100000奖券</h5>
+      <td style="position: relative ;left:180px;" >
+     <img src="images/iphone.jpg"  onclick="show1();">
+     <h3>iPhone 6/100000奖券</h3>
+     </td>
+      <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+    <td style="position: relative ;left:280px;" >
+     <img src="images/iphone.jpg" 	" onclick="show2();">
+     <h5> &nbsp;&nbsp;机器人笔记本/1000000奖券</h5>
+     </td>
+      <td>
+     &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      </tr>
      </table>
   </body>
-  </center>
+
   <script lanuage="javascript">
   function show1()
  	{
