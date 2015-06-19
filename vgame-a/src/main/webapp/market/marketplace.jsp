@@ -59,14 +59,14 @@ long coin = role.getCoin();//金豆
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      <td style="position: relative ;left:180px;" >
-      <img src="images/iphone.jpg"  onclick="show1();">
+      <img src="images/iphone.jpg"  onclick="show2();">
      <h3>iPhone 6/100000奖券</h3>
      </td>
      <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
       <td style="position: relative ;left:280px;" >
-      <img src="images/iphone.jpg"  onclick="show2();">
+      <img src="images/iphone.jpg"  onclick="show3();">
       <h4>iPhone 6plus/120000奖券</h4>
      </td>
       <td>
@@ -75,21 +75,21 @@ long coin = role.getCoin();//金豆
      </tr>
      <tr>
     <td style="position: relative ;left:80px;" >
-     <img src="images/huafei.png"  onclick="show2();">
+     <img src="images/huafei.png"  onclick="show4();">
      <h5>50话费(电信、联通、移动)/500奖券</h5>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      <td style="position: relative ;left:180px;" >
-     <img src="images/iphone.jpg"  onclick="show1();">
+     <img src="images/iphone.jpg"  onclick="show5();">
      <h3>iPhone 6/100000奖券</h3>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
     <td style="position: relative ;left:280px;" >
-     <img src="images/huafei.png"  onclick="show2();">
+     <img src="images/huafei.png"  onclick="show6();">
      <h5>100话费(电信、联通、移动)/1000奖券</h5>
      </td>
       <td>
@@ -98,21 +98,21 @@ long coin = role.getCoin();//金豆
      </tr>
      <tr>
     <td style="position: relative ;left:80px;" >
-     <img src="images/E.png"  onclick="show2();">
-     <h4>&nbsp;&nbsp;京东E卡/100奖券</h4>
+     <img src="images/E.png"  onclick="show7();">
+     <h4>&nbsp;&nbsp;京东E卡/1000奖券</h4>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
       <td style="position: relative ;left:180px;" >
-     <img src="images/iphone.jpg"  onclick="show1();">
+     <img src="images/iphone.jpg"  onclick="show8();">
      <h3>iPhone 6/100000奖券</h3>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
     <td style="position: relative ;left:280px;" >
-     <img src="images/iphone.jpg" 	" onclick="show2();">
+     <img src="images/iphone.jpg" 	" onclick="show9();">
      <h5> &nbsp;&nbsp;机器人笔记本/1000000奖券</h5>
      </td>
       <td>
@@ -126,17 +126,87 @@ long coin = role.getCoin();//金豆
   function show1()
  	{
     
- 	if(document.getElementById("jiangQuan").value>1000){
+ 	if(document.getElementById("jiangQuan").value>=100000){
  		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖卷！");
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
  		}
  	}
  	
   function show2()
  	{
  		
+ 	 	if(document.getElementById("jiangQuan").value>=100000){
  		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	
+ 	  function show3()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=120000){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	  function show4()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=500){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	  function show5()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=100000){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	  function show6()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=1000){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	  function show7()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=1000){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	
+ 	 	  function show8()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=100000){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
+ 	}
+ 	
+ 	 	  function show9()
+ 	{
+ 		
+ 	 	if(document.getElementById("jiangQuan").value>=1000000){
+ 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		}else{
+ 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		}
  	}
   </script>
 
