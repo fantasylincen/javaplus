@@ -60,7 +60,17 @@
 			GameXml xml = zone.getGameXml();
 			String p = "gm/fileDownload?projectId=" + pId + "&zoneId=" + zId;
 
-			if (xml.exist()) {
+			if(xml == null) {
+				out.println("文件版本:&nbsp;&nbsp; - ");
+				out.println("<br>");
+				out.println("<br>");
+				out.println("文件指纹:&nbsp;&nbsp; - ");
+				out.println("<br>");
+				out.println("<br>");
+				out.println("上传时间:&nbsp;&nbsp; - ");
+				out.println("<br>");
+				out.println("<br>");
+			} else if (xml.exist()) {
 
 				out.println("文件版本:&nbsp;&nbsp;" + xml.getVersion());
 				out.println("<br>");
@@ -150,7 +160,18 @@
 			
 			String path = "gm/fileDownloadClientXml?projectId=" + pId + "&zoneId=" + zId;
 
-			if (clientXml.exist()) {
+			if(clientXml == null) {
+				out.println("文件版本:&nbsp;&nbsp; - ");
+				out.println("<br>");
+				out.println("<br>");
+				out.println("文件指纹:&nbsp;&nbsp; - ");
+				out.println("<br>");
+				out.println("<br>");
+				out.println("上传时间:&nbsp;&nbsp; - ");
+				out.println("<br>");
+				out.println("<br>");
+				
+			} else if (clientXml.exist()) {
 
 				out.println("文件版本:&nbsp;&nbsp;" + clientXml.getVersion());
 				out.println("<br>");
