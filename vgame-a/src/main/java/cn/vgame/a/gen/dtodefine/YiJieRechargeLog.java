@@ -27,4 +27,5 @@ interface YiJieRechargeLog {
 	String getRoleId();
 	String getNick();
 	long getCoin();
+	long getJiangQuan();
 }

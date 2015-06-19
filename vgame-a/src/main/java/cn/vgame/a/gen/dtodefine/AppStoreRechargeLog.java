@@ -22,4 +22,5 @@ interface AppStoreRechargeLog {
 	String getRoleId();
 	String getNick();
 	long getCoin();
+	long getJiangQuan();
 }

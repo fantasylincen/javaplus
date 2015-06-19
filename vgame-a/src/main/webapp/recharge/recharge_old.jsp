@@ -103,7 +103,7 @@ a:hover {
 
 
 	<%
-		for (Row r : Xml.getSheet("recharge-A").getAll()) {
+		for (Row r : Xml.getSheet("recharge-zfb").getAll()) {
 			int id = r.getInt("id");
 			double rmb = r.getDouble("rmb");
 			boolean isDebug = Server.getConfig().getBoolean("isDebug");

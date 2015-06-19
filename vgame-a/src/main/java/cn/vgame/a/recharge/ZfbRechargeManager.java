@@ -18,13 +18,14 @@ public class ZfbRechargeManager {
 		ZfbOrderDao dao = Daos.getZfbOrderDao();
 		ZfbOrderDto dto = dao.createDTO();
 		dto.setId(pars.get("out_trade_no"));
-		Sheet sheet = Xml.getSheet("recharge-A");
+		Sheet sheet = Xml.getSheet("recharge-zfb");
 		Row row = sheet.get(id);
 		int jinDou = row.getInt("jinDou");
 		dto.setCount(jinDou);
 		dto.setPrice(pars.get("total_fee"));
 		dto.setTime(System.currentTimeMillis());
 		dto.setRoleId(roleId);
+		dto.setJiangQuan(row.getInt("jiangQuan"));
 		
 		dao.save(dto);
 	}

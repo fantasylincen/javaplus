@@ -102,7 +102,7 @@
 		long add = dto.getCount();
 		role.addCoin(add);
 		role.addRechargeHistory(add, "zfb");
-		
+		role.addJiangQuan(dto.getJiangQuan());
 		
 		Log.d("recharge success", role.getId(), role.getNick(), add,
 				role.getCoin());
@@ -117,6 +117,7 @@
 		d1.setPrice(dto.getPrice());
 		d1.setTime(dto.getTime());
 		d1.setUserId(dto.getRoleId());
+		d1.setJiangQuan(dto.getJiangQuan());
 		fDao.save(d1);
 		
 		

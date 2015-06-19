@@ -17,6 +17,7 @@ public class ZoneUtil {
 
 		Log.d("projectId", pid);
 		Log.d("zoneId", dto.getId());
+		Log.d("name", dto.getName());
 		Log.d("serverConfigKey", serverConfigKey);
 		
 		JSONObject obj = new JSONObject();

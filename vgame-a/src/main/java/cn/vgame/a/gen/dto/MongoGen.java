@@ -55,6 +55,8 @@
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public AppStoreRechargeLogDtoCursor findByNickFuzzy(String nick) {						nick = nick.replaceAll("\\*", ".*");			nick = "^" + nick + "$";			BasicDBObject o = new BasicDBObject("nick", Pattern.compile(nick, Pattern.CASE_INSENSITIVE));			return new AppStoreRechargeLogDtoCursor(collection.find(o));		}
 		public AppStoreRechargeLogDtoCursor findByCoin(long coin) {						BasicDBObject o = new BasicDBObject("coin", coin);			return new AppStoreRechargeLogDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public AppStoreRechargeLogDtoCursor findCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("coin", new BasicDBObject("$gte", min).append("$lte", max));			return new AppStoreRechargeLogDtoCursor(collection.find(o));		}
+		public AppStoreRechargeLogDtoCursor findByJiangQuan(long jiangQuan) {						BasicDBObject o = new BasicDBObject("jiangQuan", jiangQuan);			return new AppStoreRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public AppStoreRechargeLogDtoCursor findJiangQuanBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("jiangQuan", new BasicDBObject("$gte", min).append("$lte", max));			return new AppStoreRechargeLogDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public AppStoreRechargeLogDto createDTO() {			return new AppStoreRechargeLogDto();		}			public static class AppStoreRechargeLogDtoCursor implements Iterator<AppStoreRechargeLogDto>, Iterable<AppStoreRechargeLogDto>{				private DBCursor	cursor;			private int pageAll;				public AppStoreRechargeLogDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public AppStoreRechargeLogDto next() {				DBObject next = cursor.next();				AppStoreRechargeLogDto dto = new AppStoreRechargeLogDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<AppStoreRechargeLogDto> iterator() {				return this;			}		}	}
 		public static class CaiJinLogDao {			private DBCollection	collection;			public CaiJinLogDao(DBCollection collection) {			this.collection = collection;		}			public void save(CaiJinLogDto u) {			collection.save(u.toObject());		}			public void delete(CaiJinLogDto u) {			delete(u.getId());		}			public void delete(String id) {			collection.remove(key(id));		}			public CaiJinLogDto get(String id) {			DBObject o = collection.findOne(key(id));			if(o == null) {				return null;			}			CaiJinLogDto x = new CaiJinLogDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String id) {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);			return o;		}			public CaiJinLogDtoCursor find() {			return new CaiJinLogDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public CaiJinLogDtoCursor findById(String id) {			collection.ensureIndex("id");			BasicDBObject o = new BasicDBObject("id", id);			return new CaiJinLogDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public CaiJinLogDtoCursor findByIdFuzzy(String id) {			collection.ensureIndex("id");			id = id.replaceAll("\\*", ".*");			id = "^" + id + "$";			BasicDBObject o = new BasicDBObject("id", Pattern.compile(id, Pattern.CASE_INSENSITIVE));			return new CaiJinLogDtoCursor(collection.find(o));		}
@@ -159,6 +161,8 @@
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public YiJieRechargeLogDtoCursor findByNickFuzzy(String nick) {						nick = nick.replaceAll("\\*", ".*");			nick = "^" + nick + "$";			BasicDBObject o = new BasicDBObject("nick", Pattern.compile(nick, Pattern.CASE_INSENSITIVE));			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
 		public YiJieRechargeLogDtoCursor findByCoin(long coin) {						BasicDBObject o = new BasicDBObject("coin", coin);			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public YiJieRechargeLogDtoCursor findCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("coin", new BasicDBObject("$gte", min).append("$lte", max));			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
+		public YiJieRechargeLogDtoCursor findByJiangQuan(long jiangQuan) {						BasicDBObject o = new BasicDBObject("jiangQuan", jiangQuan);			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public YiJieRechargeLogDtoCursor findJiangQuanBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("jiangQuan", new BasicDBObject("$gte", min).append("$lte", max));			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public YiJieRechargeLogDto createDTO() {			return new YiJieRechargeLogDto();		}			public static class YiJieRechargeLogDtoCursor implements Iterator<YiJieRechargeLogDto>, Iterable<YiJieRechargeLogDto>{				private DBCursor	cursor;			private int pageAll;				public YiJieRechargeLogDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public YiJieRechargeLogDto next() {				DBObject next = cursor.next();				YiJieRechargeLogDto dto = new YiJieRechargeLogDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<YiJieRechargeLogDto> iterator() {				return this;			}		}	}
 		public static class ZfbOrderDao {			private DBCollection	collection;			public ZfbOrderDao(DBCollection collection) {			this.collection = collection;		}			public void save(ZfbOrderDto u) {			collection.save(u.toObject());		}			public void delete(ZfbOrderDto u) {			delete(u.getId());		}			public void delete(String id) {			collection.remove(key(id));		}			public ZfbOrderDto get(String id) {			DBObject o = collection.findOne(key(id));			if(o == null) {				return null;			}			ZfbOrderDto x = new ZfbOrderDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String id) {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);			return o;		}			public ZfbOrderDtoCursor find() {			return new ZfbOrderDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public ZfbOrderDtoCursor findById(String id) {			collection.ensureIndex("id");			BasicDBObject o = new BasicDBObject("id", id);			return new ZfbOrderDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public ZfbOrderDtoCursor findByIdFuzzy(String id) {			collection.ensureIndex("id");			id = id.replaceAll("\\*", ".*");			id = "^" + id + "$";			BasicDBObject o = new BasicDBObject("id", Pattern.compile(id, Pattern.CASE_INSENSITIVE));			return new ZfbOrderDtoCursor(collection.find(o));		}
@@ -170,6 +174,8 @@
 		/**		 * 在min和max之间, 包含min和max		 */		public ZfbOrderDtoCursor findTimeBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("time", new BasicDBObject("$gte", min).append("$lte", max));			return new ZfbOrderDtoCursor(collection.find(o));		}
 		public ZfbOrderDtoCursor findByRoleId(String roleId) {						BasicDBObject o = new BasicDBObject("roleId", roleId);			return new ZfbOrderDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public ZfbOrderDtoCursor findByRoleIdFuzzy(String roleId) {						roleId = roleId.replaceAll("\\*", ".*");			roleId = "^" + roleId + "$";			BasicDBObject o = new BasicDBObject("roleId", Pattern.compile(roleId, Pattern.CASE_INSENSITIVE));			return new ZfbOrderDtoCursor(collection.find(o));		}
+		public ZfbOrderDtoCursor findByJiangQuan(long jiangQuan) {						BasicDBObject o = new BasicDBObject("jiangQuan", jiangQuan);			return new ZfbOrderDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public ZfbOrderDtoCursor findJiangQuanBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("jiangQuan", new BasicDBObject("$gte", min).append("$lte", max));			return new ZfbOrderDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public ZfbOrderDto createDTO() {			return new ZfbOrderDto();		}			public static class ZfbOrderDtoCursor implements Iterator<ZfbOrderDto>, Iterable<ZfbOrderDto>{				private DBCursor	cursor;			private int pageAll;				public ZfbOrderDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public ZfbOrderDto next() {				DBObject next = cursor.next();				ZfbOrderDto dto = new ZfbOrderDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<ZfbOrderDto> iterator() {				return this;			}		}	}
 		public static class ZfbOrderFinishDao {			private DBCollection	collection;			public ZfbOrderFinishDao(DBCollection collection) {			this.collection = collection;		}			public void save(ZfbOrderFinishDto u) {			collection.save(u.toObject());		}			public void delete(ZfbOrderFinishDto u) {			delete(u.getId());		}			public void delete(String id) {			collection.remove(key(id));		}			public ZfbOrderFinishDto get(String id) {			DBObject o = collection.findOne(key(id));			if(o == null) {				return null;			}			ZfbOrderFinishDto x = new ZfbOrderFinishDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String id) {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);			return o;		}			public ZfbOrderFinishDtoCursor find() {			return new ZfbOrderFinishDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public ZfbOrderFinishDtoCursor findById(String id) {			collection.ensureIndex("id");			BasicDBObject o = new BasicDBObject("id", id);			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public ZfbOrderFinishDtoCursor findByIdFuzzy(String id) {			collection.ensureIndex("id");			id = id.replaceAll("\\*", ".*");			id = "^" + id + "$";			BasicDBObject o = new BasicDBObject("id", Pattern.compile(id, Pattern.CASE_INSENSITIVE));			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
@@ -181,6 +187,8 @@
 		/**		 * 在min和max之间, 包含min和max		 */		public ZfbOrderFinishDtoCursor findTimeBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("time", new BasicDBObject("$gte", min).append("$lte", max));			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
 		public ZfbOrderFinishDtoCursor findByUserId(String userId) {						BasicDBObject o = new BasicDBObject("userId", userId);			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public ZfbOrderFinishDtoCursor findByUserIdFuzzy(String userId) {						userId = userId.replaceAll("\\*", ".*");			userId = "^" + userId + "$";			BasicDBObject o = new BasicDBObject("userId", Pattern.compile(userId, Pattern.CASE_INSENSITIVE));			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
+		public ZfbOrderFinishDtoCursor findByJiangQuan(long jiangQuan) {						BasicDBObject o = new BasicDBObject("jiangQuan", jiangQuan);			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public ZfbOrderFinishDtoCursor findJiangQuanBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("jiangQuan", new BasicDBObject("$gte", min).append("$lte", max));			return new ZfbOrderFinishDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public ZfbOrderFinishDto createDTO() {			return new ZfbOrderFinishDto();		}			public static class ZfbOrderFinishDtoCursor implements Iterator<ZfbOrderFinishDto>, Iterable<ZfbOrderFinishDto>{				private DBCursor	cursor;			private int pageAll;				public ZfbOrderFinishDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public ZfbOrderFinishDto next() {				DBObject next = cursor.next();				ZfbOrderFinishDto dto = new ZfbOrderFinishDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<ZfbOrderFinishDto> iterator() {				return this;			}		}	}
 		public static class ZhuangDao {			private DBCollection	collection;			public ZhuangDao(DBCollection collection) {			this.collection = collection;		}			public void save(ZhuangDto u) {			collection.save(u.toObject());		}			public void delete(ZhuangDto u) {			delete(u.getId());		}			public void delete(String id) {			collection.remove(key(id));		}			public ZhuangDto get(String id) {			DBObject o = collection.findOne(key(id));			if(o == null) {				return null;			}			ZhuangDto x = new ZhuangDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String id) {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);			return o;		}			public ZhuangDtoCursor find() {			return new ZhuangDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public ZhuangDtoCursor findById(String id) {			collection.ensureIndex("id");			BasicDBObject o = new BasicDBObject("id", id);			return new ZhuangDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public ZhuangDtoCursor findByIdFuzzy(String id) {			collection.ensureIndex("id");			id = id.replaceAll("\\*", ".*");			id = "^" + id + "$";			BasicDBObject o = new BasicDBObject("id", Pattern.compile(id, Pattern.CASE_INSENSITIVE));			return new ZhuangDtoCursor(collection.find(o));		}
@@ -194,24 +202,28 @@
 		private String roleId = "";
 		private String nick = "";
 		private long coin = 0;
+		private long jiangQuan = 0;
 		public AppStoreRechargeLogDto() {		}				/**		 * Copy new one		 */		public AppStoreRechargeLogDto(AppStoreRechargeLogDto src) {			id = MongoGen.copy(src.id);			
 			productId = MongoGen.copy(src.productId);			
 			fee = MongoGen.copy(src.fee);			
 			roleId = MongoGen.copy(src.roleId);			
 			nick = MongoGen.copy(src.nick);			
 			coin = MongoGen.copy(src.coin);			
+			jiangQuan = MongoGen.copy(src.jiangQuan);			
 		}		public String getId() {			return this.id;		}
 		public String getProductId() {			return this.productId;		}
 		public int getFee() {			return this.fee;		}
 		public String getRoleId() {			return this.roleId;		}
 		public String getNick() {			return this.nick;		}
 		public long getCoin() {			return this.coin;		}
+		public long getJiangQuan() {			return this.jiangQuan;		}
 		public void setId(String id) {			this.id = id;		}
 		public void setProductId(String productId) {			this.productId = productId;		}
 		public void setFee(int fee) {			this.fee = fee;		}
 		public void setRoleId(String roleId) {			this.roleId = roleId;		}
 		public void setNick(String nick) {			this.nick = nick;		}
 		public void setCoin(long coin) {			this.coin = coin;		}
+		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);
 			o.put("id", MongoGen.toObject(id));			
 			o.put("productId", MongoGen.toObject(productId));			
@@ -219,19 +231,23 @@
 			o.put("roleId", MongoGen.toObject(roleId));			
 			o.put("nick", MongoGen.toObject(nick));			
 			o.put("coin", MongoGen.toObject(coin));			
+			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			return o;		}		@Override		public void fromDBObject(DBObject o) {			id = getString(o, "id");
 			productId = getString(o, "productId");
 			fee = getInteger(o, "fee");
 			roleId = getString(o, "roleId");
 			nick = getString(o, "nick");
 			coin = getLong(o, "coin");
+			jiangQuan = getLong(o, "jiangQuan");
 		}
 
 
 
 
 
+
 
+
 
 
 
@@ -577,6 +593,7 @@
 		private String roleId = "";
 		private String nick = "";
 		private long coin = 0;
+		private long jiangQuan = 0;
 		public YiJieRechargeLogDto() {		}				/**		 * Copy new one		 */		public YiJieRechargeLogDto(YiJieRechargeLogDto src) {			ssid = MongoGen.copy(src.ssid);			
 			app = MongoGen.copy(src.app);			
 			cbi = MongoGen.copy(src.cbi);			
@@ -592,6 +609,7 @@
 			roleId = MongoGen.copy(src.roleId);			
 			nick = MongoGen.copy(src.nick);			
 			coin = MongoGen.copy(src.coin);			
+			jiangQuan = MongoGen.copy(src.jiangQuan);			
 		}		public String getSsid() {			return this.ssid;		}
 		public String getApp() {			return this.app;		}
 		public String getCbi() {			return this.cbi;		}
@@ -607,6 +625,7 @@
 		public String getRoleId() {			return this.roleId;		}
 		public String getNick() {			return this.nick;		}
 		public long getCoin() {			return this.coin;		}
+		public long getJiangQuan() {			return this.jiangQuan;		}
 		public void setSsid(String ssid) {			this.ssid = ssid;		}
 		public void setApp(String app) {			this.app = app;		}
 		public void setCbi(String cbi) {			this.cbi = cbi;		}
@@ -622,6 +641,7 @@
 		public void setRoleId(String roleId) {			this.roleId = roleId;		}
 		public void setNick(String nick) {			this.nick = nick;		}
 		public void setCoin(long coin) {			this.coin = coin;		}
+		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();		o.put("_id", ssid);
 			o.put("ssid", MongoGen.toObject(ssid));			
 			o.put("app", MongoGen.toObject(app));			
@@ -638,6 +658,7 @@
 			o.put("roleId", MongoGen.toObject(roleId));			
 			o.put("nick", MongoGen.toObject(nick));			
 			o.put("coin", MongoGen.toObject(coin));			
+			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			return o;		}		@Override		public void fromDBObject(DBObject o) {			ssid = getString(o, "ssid");
 			app = getString(o, "app");
 			cbi = getString(o, "cbi");
@@ -653,6 +674,7 @@
 			roleId = getString(o, "roleId");
 			nick = getString(o, "nick");
 			coin = getLong(o, "coin");
+			jiangQuan = getLong(o, "jiangQuan");
 		}
 
 
@@ -668,7 +690,9 @@
 
 
 
+
 
+
 
 
 
@@ -689,38 +713,46 @@
 		private String price = "";
 		private long time = 0;
 		private String roleId = "";
+		private long jiangQuan = 0;
 		public ZfbOrderDto() {		}				/**		 * Copy new one		 */		public ZfbOrderDto(ZfbOrderDto src) {			id = MongoGen.copy(src.id);			
 			count = MongoGen.copy(src.count);			
 			price = MongoGen.copy(src.price);			
 			time = MongoGen.copy(src.time);			
 			roleId = MongoGen.copy(src.roleId);			
+			jiangQuan = MongoGen.copy(src.jiangQuan);			
 		}		public String getId() {			return this.id;		}
 		public int getCount() {			return this.count;		}
 		public String getPrice() {			return this.price;		}
 		public long getTime() {			return this.time;		}
 		public String getRoleId() {			return this.roleId;		}
+		public long getJiangQuan() {			return this.jiangQuan;		}
 		public void setId(String id) {			this.id = id;		}
 		public void setCount(int count) {			this.count = count;		}
 		public void setPrice(String price) {			this.price = price;		}
 		public void setTime(long time) {			this.time = time;		}
 		public void setRoleId(String roleId) {			this.roleId = roleId;		}
+		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);
 			o.put("id", MongoGen.toObject(id));			
 			o.put("count", MongoGen.toObject(count));			
 			o.put("price", MongoGen.toObject(price));			
 			o.put("time", MongoGen.toObject(time));			
 			o.put("roleId", MongoGen.toObject(roleId));			
+			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			return o;		}		@Override		public void fromDBObject(DBObject o) {			id = getString(o, "id");
 			count = getInteger(o, "count");
 			price = getString(o, "price");
 			time = getLong(o, "time");
 			roleId = getString(o, "roleId");
+			jiangQuan = getLong(o, "jiangQuan");
 		}
 
 
 
 
+
 
+
 
 
 
@@ -731,38 +763,46 @@
 		private String price = "";
 		private long time = 0;
 		private String userId = "";
+		private long jiangQuan = 0;
 		public ZfbOrderFinishDto() {		}				/**		 * Copy new one		 */		public ZfbOrderFinishDto(ZfbOrderFinishDto src) {			id = MongoGen.copy(src.id);			
 			count = MongoGen.copy(src.count);			
 			price = MongoGen.copy(src.price);			
 			time = MongoGen.copy(src.time);			
 			userId = MongoGen.copy(src.userId);			
+			jiangQuan = MongoGen.copy(src.jiangQuan);			
 		}		public String getId() {			return this.id;		}
 		public int getCount() {			return this.count;		}
 		public String getPrice() {			return this.price;		}
 		public long getTime() {			return this.time;		}
 		public String getUserId() {			return this.userId;		}
+		public long getJiangQuan() {			return this.jiangQuan;		}
 		public void setId(String id) {			this.id = id;		}
 		public void setCount(int count) {			this.count = count;		}
 		public void setPrice(String price) {			this.price = price;		}
 		public void setTime(long time) {			this.time = time;		}
 		public void setUserId(String userId) {			this.userId = userId;		}
+		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);
 			o.put("id", MongoGen.toObject(id));			
 			o.put("count", MongoGen.toObject(count));			
 			o.put("price", MongoGen.toObject(price));			
 			o.put("time", MongoGen.toObject(time));			
 			o.put("userId", MongoGen.toObject(userId));			
+			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			return o;		}		@Override		public void fromDBObject(DBObject o) {			id = getString(o, "id");
 			count = getInteger(o, "count");
 			price = getString(o, "price");
 			time = getLong(o, "time");
 			userId = getString(o, "userId");
+			jiangQuan = getLong(o, "jiangQuan");
 		}
 
 
 
 
+
 
+
 
 
 
