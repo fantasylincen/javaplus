@@ -53,6 +53,10 @@ public class ZoneUtil {
 	public static int getGameXmlVersion(String projectId, String zoneId) {
 		Zone zone = Server.getProjectManager().getZone(projectId, zoneId);
 		GameXml gameXml = zone.getGameXml();
+		if(gameXml == null) {
+			return 0;
+//			throw new RuntimeException("game xml not found! please upload game xml file!");
+		}
 		int version = gameXml.getVersion();
 		return version;
 	}
