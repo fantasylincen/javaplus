@@ -8,6 +8,7 @@ import com.cnbizmedia.config.GameProperties;
 import com.cnbizmedia.gen.dto.MongoGen.KeyValueDto;
 import com.cnbizmedia.gen.dto.MongoGen.ZoneDto;
 import com.cnbizmedia.gm.Zone;
+import com.cnbizmedia.gm.gamexml.ClientXml;
 import com.cnbizmedia.gm.gamexml.GameXml;
 
 public class ZoneUtil {
@@ -92,9 +93,12 @@ public class ZoneUtil {
 	 * @param zoneId
 	 * @return
 	 */
-	private static Object getClientXmlVersion(String pid, String zoneId) {
+	private static int getClientXmlVersion(String pid, String zoneId) {
 		Zone zone = Server.getProjectManager().getZone(pid, zoneId);
-		int version = zone.getClientXml().getVersion();
+		ClientXml clientXml = zone.getClientXml();
+		if(clientXml == null)
+			return 0;
+		int version = clientXml.getVersion();
 		return version;
 	}
 
