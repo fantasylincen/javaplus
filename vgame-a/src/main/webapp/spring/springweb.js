@@ -1,8 +1,8 @@
 /**
 *
-*   @Author 孟祥平
+*  
 *
-*   @Description 
+*   
 *       
 *   @See http://www.cnblogs.com/springfield/
 *   @See mengxiangpingx@gmail.com
@@ -124,8 +124,8 @@ function richAlert(msg,title,moveable) {
         }
         divHead.style.width = "100%";
         divHead.style.height = "40px";
-        divHead.style.lineHeight = "25px";
-        divHead.style.fontSize = "14px";        
+        divHead.style.lineHeight = "35px";
+        divHead.style.fontSize = "30px";        
         divHead.style.fontWeight = "bold";
         divHead.style.borderBottom = "1px outset #8989FF";
         divHead.style.color = "white";
