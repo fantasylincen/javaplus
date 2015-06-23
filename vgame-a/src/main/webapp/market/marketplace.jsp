@@ -278,9 +278,9 @@ long coin = role.getCoin();//金豆
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=100000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	
@@ -288,45 +288,45 @@ long coin = role.getCoin();//金豆
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=120000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 			msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	  function show4()
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=500){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	  function show5()
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=100000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 		msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 	    msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	  function show6()
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=1000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 			msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	  function show7()
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=1000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 			msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	
@@ -334,9 +334,9 @@ long coin = role.getCoin();//金豆
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=100000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 			msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
  	
@@ -344,9 +344,9 @@ long coin = role.getCoin();//金豆
  	{
  		
  	 	if(document.getElementById("jiangQuan").value>=1000000){
- 		alert("兑换成功！请与客服QQ：123456789联系领取奖品！谢谢！");
+ 			msgbox('提示','恭喜！您的奖券数量已足够兑换该奖品！请联络客服QQ3107252937登记您的收货地址信息与联络方式，我们将尽快为您寄发礼品！','',null,0,'Warning')
  		}else{
- 		alert("对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！");
+ 		 msgbox('提示','对不起，您的兑换劵不足，不能兑换此奖品，请先集齐兑奖券！','',null,0,'Warning')
  		}
  	}
   </script>
