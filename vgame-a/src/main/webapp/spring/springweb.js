@@ -94,9 +94,9 @@ function richAlert(msg,title,moveable) {
         var dialogWidth = 420;
         var dialogHeight = 300;
         var fontSize = 18;
-        var lineWidth = document.body.clientWidth * 0.7;
+        var lineWidth = document.body.clientWidth * 0.8;
         if ((fontSize * msg.length) < lineWidth) {
-            dialogWidth = parseInt(fontSize * msg.length) + 80;
+            dialogWidth = parseInt(fontSize * msg.length) + 100;
         } else {
             dialogWidth = parseInt(lineWidth);
             dialogHeight += parseInt(((fontSize * msg.length) / lineWidth) * fontSize);
@@ -123,7 +123,7 @@ function richAlert(msg,title,moveable) {
             divHead.appendChild(document.createTextNode("消息"));
         }
         divHead.style.width = "100%";
-        divHead.style.height = "30px";
+        divHead.style.height = "40px";
         divHead.style.lineHeight = "25px";
         divHead.style.fontSize = "14px";        
         divHead.style.fontWeight = "bold";
@@ -131,7 +131,7 @@ function richAlert(msg,title,moveable) {
         divHead.style.color = "white";
         divHead.style.textIndent = "10px";
         divHead.style.backgroundColor = "blue";
-        divHead.style.backgroundImage = "url( /images/headbg.png);";
+        divHead.style.backgroundImage = "url(images/hengtiao.png)";
         divHead.style.cursor = "move";
         divHead.onmousedown = function() {
 
@@ -165,7 +165,7 @@ function richAlert(msg,title,moveable) {
             }
             
             divDialog.style.left = (mouseX - dialogWidth * 0.4) + "px";
-            divDialog.style.top = (mouseY - 10) + "px";            
+            divDialog.style.top = (mouseY - 100) + "px";            
         };
                 
         
@@ -204,9 +204,9 @@ function richAlert(msg,title,moveable) {
     
         var closeButton = document.createElement("img");
         closeButton.style.cursor = "hand";
-        closeButton.setAttribute("src", "images/okButton.png");
-        closeButton.setAttribute("width", "100");
-        closeButton.setAttribute("height", "50");
+        closeButton.setAttribute("src", "images/queding.png");
+        closeButton.setAttribute("width", "120");
+        closeButton.setAttribute("height", "60");
         closeButton.setAttribute("alt", "确定");
         
         //the click event when the dialog is closing.
