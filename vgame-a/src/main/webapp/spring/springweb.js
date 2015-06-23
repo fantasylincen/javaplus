@@ -91,9 +91,9 @@ function richAlert(msg,title,moveable) {
 
         //calculate the width and height of the dialog 
         //depends on the length of the message.
-        var dialogWidth = 320;
-        var dialogHeight = 200;
-        var fontSize = 14;
+        var dialogWidth = 420;
+        var dialogHeight = 300;
+        var fontSize = 18;
         var lineWidth = document.body.clientWidth * 0.7;
         if ((fontSize * msg.length) < lineWidth) {
             dialogWidth = parseInt(fontSize * msg.length) + 80;
@@ -123,7 +123,7 @@ function richAlert(msg,title,moveable) {
             divHead.appendChild(document.createTextNode("消息"));
         }
         divHead.style.width = "100%";
-        divHead.style.height = "25px";
+        divHead.style.height = "30px";
         divHead.style.lineHeight = "25px";
         divHead.style.fontSize = "14px";        
         divHead.style.fontWeight = "bold";
@@ -173,8 +173,8 @@ function richAlert(msg,title,moveable) {
 
         var divContent = document.createElement("div");
         divContent.style.textAlign = "center";
-        divContent.style.padding = "20px";
-        divContent.style.fontSize = "25px";
+        divContent.style.padding = "30px";
+        divContent.style.fontSize = "40px";
 
         if (springweb_typeIsIE) {
             divContent.style.height = parseInt(dialogHeight - 25) + "px";
