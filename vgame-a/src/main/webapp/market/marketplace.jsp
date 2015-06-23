@@ -193,22 +193,22 @@ long coin = role.getCoin();//金豆
      <table>
      <tr >
      <td style="position: relative ;left:80px;" >
-     <img src="images/iphone.jpg"  onclick="show1();">
-     <h3>iPhone 6/100000奖券</h3>
+     <img src="images/10.png"  onclick="show1();" width="250" height="250">
+     <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;88888/1000奖券</h3>
      </td>
      <td>	
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-     <td style="position: relative ;left:180px;" >
-      <img src="images/iphone.jpg"  onclick="show2();">
-     <h3>iPhone 6/100000奖券</h3>
+     <td style="position: relative ;left:100px;" >
+      <img src="images/iphone.jpg"  onclick="show2();" width="250" height="250">
+     <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iPhone 6/100000奖券</h3>
      </td>
      <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-      <td style="position: relative ;left:280px;" >
-      <img src="images/iphone.jpg"  onclick="show3();">
-      <h4>iPhone 6plus/120000奖券</h4>
+      <td style="position: relative ;left:120px;" >
+      <img src="images/iphone.jpg"  onclick="show3();" width="250" height="250">
+      <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iPhone 6plus/120000奖券</h4>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
@@ -216,22 +216,22 @@ long coin = role.getCoin();//金豆
      </tr>
      <tr>
     <td style="position: relative ;left:80px;" >
-     <img src="images/huafei.png"  onclick="show4();">
-     <h5>50话费(电信、联通、移动)/500奖券</h5>
+     <img src="images/huafei.png"  onclick="show4();" width="250" height="250">
+     <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50话费(电信、联通、移动)/500奖券</h5>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-     <td style="position: relative ;left:180px;" >
-     <img src="images/iphone.jpg"  onclick="show5();">
-     <h3>iPhone 6/100000奖券</h3>
+     <td style="position: relative ;left:100px;" >
+     <img src="images/iphone.jpg"  onclick="show5();" width="250" height="250">
+     <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iPhone 6/100000奖券</h3>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-    <td style="position: relative ;left:280px;" >
-     <img src="images/huafei.png"  onclick="show6();">
-     <h5>100话费(电信、联通、移动)/1000奖券</h5>
+    <td style="position: relative ;left:120px;" >
+     <img src="images/huafei.png"  onclick="show6();" width="250" height="250">
+     <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100话费(电信、联通、移动)/1000奖券</h5>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
@@ -239,22 +239,22 @@ long coin = role.getCoin();//金豆
      </tr>
      <tr>
     <td style="position: relative ;left:80px;" >
-     <img src="images/E.png"  onclick="show7();">
-     <h4>&nbsp;&nbsp;京东E卡/1000奖券</h4>
+     <img src="images/E.png"  onclick="show7();" width="250" height="250">
+     <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京东E卡/1000奖券</h4>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-      <td style="position: relative ;left:180px;" >
-     <img src="images/iphone.jpg"  onclick="show8();">
-     <h3>iPhone 6/100000奖券</h3>
+      <td style="position: relative ;left:100px;" >
+     <img src="images/iphone.jpg"  onclick="show8();" width="250" height="250">
+     <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iPhone 6/100000奖券</h3>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
      </td>
-    <td style="position: relative ;left:280px;" >
-     <img src="images/iphone.jpg" 	" onclick="show9();">
-     <h5> &nbsp;&nbsp;机器人笔记本/1000000奖券</h5>
+    <td style="position: relative ;left:120px;" >
+     <img src="images/iphone.jpg" 	" onclick="show9();" width="250" height="250">
+     <h5> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器人笔记本/1000000奖券</h5>
      </td>
       <td>
      &nbsp;&nbsp;&nbsp;&nbsp;
