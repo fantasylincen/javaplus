@@ -54,6 +54,8 @@ long coin = role.getCoin();//金豆
 </style>
 
 <script language="javascript" type="text/javascript">
+
+        //自定义弹出框        
 	function msgbox(title,content,func,cancel,focus,icon){
 		/*		
 		参数列表说明:
