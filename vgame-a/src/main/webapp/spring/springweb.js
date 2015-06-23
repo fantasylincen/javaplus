@@ -75,8 +75,8 @@ function richAlert(msg,title,moveable) {
         divBackground.style.position = "absolute";
         divBackground.style.left = "0px";
         divBackground.style.top = "0px";
-        divBackground.style.width = "100%";
-        divBackground.style.height = "100%";
+        divBackground.style.width = "1px";
+        divBackground.style.height = "1px";
         if (springweb_typeIsChrome || springweb_typeIsFireFox) {
             divBackground.style.backgroundColor = "rgba(0,0,0,0.7)";
         } else {
@@ -91,12 +91,12 @@ function richAlert(msg,title,moveable) {
 
         //calculate the width and height of the dialog 
         //depends on the length of the message.
-        var dialogWidth = 260;
-        var dialogHeight = 120;
+        var dialogWidth = 320;
+        var dialogHeight = 200;
         var fontSize = 14;
         var lineWidth = document.body.clientWidth * 0.7;
         if ((fontSize * msg.length) < lineWidth) {
-            dialogWidth = parseInt(fontSize * msg.length) + 50;
+            dialogWidth = parseInt(fontSize * msg.length) + 80;
         } else {
             dialogWidth = parseInt(lineWidth);
             dialogHeight += parseInt(((fontSize * msg.length) / lineWidth) * fontSize);
@@ -173,8 +173,8 @@ function richAlert(msg,title,moveable) {
 
         var divContent = document.createElement("div");
         divContent.style.textAlign = "center";
-        divContent.style.padding = "15px";
-        divContent.style.fontSize = "12px";
+        divContent.style.padding = "20px";
+        divContent.style.fontSize = "25px";
 
         if (springweb_typeIsIE) {
             divContent.style.height = parseInt(dialogHeight - 25) + "px";
@@ -205,7 +205,8 @@ function richAlert(msg,title,moveable) {
         var closeButton = document.createElement("img");
         closeButton.style.cursor = "hand";
         closeButton.setAttribute("src", "images/okButton.png");
-        
+        closeButton.setAttribute("width", "100");
+        closeButton.setAttribute("height", "50");
         closeButton.setAttribute("alt", "确定");
         
         //the click event when the dialog is closing.
