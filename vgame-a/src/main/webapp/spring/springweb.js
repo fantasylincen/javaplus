@@ -78,7 +78,7 @@ function richAlert(msg,title,moveable) {
         divBackground.style.width = "100%";
         divBackground.style.height = "100%";
         if (springweb_typeIsChrome || springweb_typeIsFireFox) {
-            divBackground.style.backgroundColor = "rgba(0,0,0,0.01)";
+            divBackground.style.backgroundColor = "rgba(0,0,0,0.1)";
         } else {
             divBackground.style.backgroundColor = "#000000";    
             divBackground.style.filter = "alpha(opacity=70)";
