@@ -75,12 +75,12 @@ function richAlert(msg,title,moveable) {
         divBackground.style.position = "absolute";
         divBackground.style.left = "0px";
         divBackground.style.top = "0px";
-        divBackground.style.width = "200%";
-        divBackground.style.height = "200%";
+        divBackground.style.width = "100%";
+        divBackground.style.height = "100%";
         if (springweb_typeIsChrome || springweb_typeIsFireFox) {
             divBackground.style.backgroundColor = "rgba(0,0,0,0.1)";
         } else {
-            divBackground.style.backgroundColor = "#000000";    
+            divBackground.style.backgroundColor = "#F4F4F4";    
             divBackground.style.filter = "alpha(opacity=70)";
         }
         divBackground.style.zIndex = "99";
@@ -178,6 +178,7 @@ function richAlert(msg,title,moveable) {
         divContent.style.textAlign = "center";
         divContent.style.padding = "30px";
         divContent.style.fontSize = "40px";
+        
 
         if (springweb_typeIsIE) {
             divContent.style.height = parseInt(dialogHeight - 25) + "px";
