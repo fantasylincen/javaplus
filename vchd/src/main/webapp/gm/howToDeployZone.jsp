@@ -575,6 +575,12 @@ div.Section0 {
 		</p>
 		<p class=MsoNormal style="text-align:center; ">
 			<span
+				style="mso-spacerun:'yes'; font-family:宋体; font-size:10.5000pt; mso-font-kerning:1.0000pt; ">不过服务器第一次部署完毕的时候, 会报这个错误, 解决办法: 把xxxxxxxxxxxxxxxxxxx这段字符复制下来, 粘贴到管理平台上, 如下图:</span><span
+				style="mso-spacerun:'yes'; font-family:宋体; font-size:10.5000pt; mso-font-kerning:1.0000pt; "><o:p></o:p>
+			</span>
+		</p>
+		<p class=MsoNormal style="text-align:center; ">
+			<span
 				style="mso-spacerun:'yes'; font-family:宋体; font-size:10.5000pt; mso-font-kerning:1.0000pt; ">同步游戏服务器标识符到管理平台</span><span
 				style="mso-spacerun:'yes'; font-family:'Times New Roman'; mso-fareast-font-family:宋体; font-size:10.5000pt; mso-font-kerning:1.0000pt; "><o:p></o:p>
 			</span>
