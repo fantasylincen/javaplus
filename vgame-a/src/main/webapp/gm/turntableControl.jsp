@@ -82,10 +82,10 @@
 		sb.append(t.getCountThisTime(type));
 		sb.append("</td>");
 
-		sb.append("<td>");
+		/* sb.append("<td>");
 		sb.append(t.getCountHistory(type));
 		sb.append("</td>");
-
+ */
 		sb.append("<td>");
 
 		if ("AD".contains(type)) {
@@ -127,7 +127,7 @@
 				<th>类型名</th>
 				<th>倍率</th>
 				<th>本轮下注人数</th>
-				<th>历史下注人数</th>
+				<!-- <th>历史下注人数</th> -->
 				<th>高级功能</th>
 			</tr>
 		</thead>
