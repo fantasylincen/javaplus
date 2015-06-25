@@ -15,6 +15,11 @@ public class RoleIdGenerator {
 		return "VC" + zoneId + "" + createId();
 	}
 
+	public static String createRobotId() {
+		final String zoneId = Server.getZoneId();
+		return "r" + zoneId + "" + createId();
+	}
+
 	private static long createId() {
 		long id = getId();
 		id += Util.Random.get(8, 30);
