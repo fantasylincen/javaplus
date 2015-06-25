@@ -89,6 +89,7 @@ public final class InitThread extends Thread {
 		Log.d(getString("isDebug"));
 		Log.d(getString("isShowZfb"));
 		Log.d(getString("logFilePath"));
+		Log.d(getString("zoneName"));
 	}
 
 	private Object getString(String key) {
