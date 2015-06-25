@@ -71,7 +71,9 @@
 			Zone zone = Server.getProjectManager().getZone(session);
 			out.print(Server.getProjectManager().getProjectName(session)
 					+ " - "
-					+ Server.getProjectManager().getZone(session).getName());
+					+ zone.getDto().getId()
+					+ " - "
+					+ zone.getName());
 		%>
 	</h2>
 	<form id="form2" action="saveSystemProperty" method="post">
