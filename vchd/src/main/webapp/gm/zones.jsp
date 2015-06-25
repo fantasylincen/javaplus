@@ -72,7 +72,13 @@
 			return Lists.newArrayList();
 		}
 		List<ZoneDto> zones = dto.getZones();
-		return Util.Collection.nullToEmpty(zones);
+		zones = Util.Collection.nullToEmpty(zones);
+		Collections.sort(zones, new Comparator<ZoneDto>() {
+			public int compare(ZoneDto o1, ZoneDto o2) {
+				return new Integer(o1.getId()) - new Integer(o2.getId());
+			}
+		});
+		return zones;
 	}%>
 				<%
 					ProjectDao dao = Daos.getProjectDao();
@@ -119,7 +125,8 @@
 
 
 			</table>
-
+<br><br><br>
+	<a href="howToDeployZone.jsp">如何部署新区?</a>
 		</form>
 	</div>
 
