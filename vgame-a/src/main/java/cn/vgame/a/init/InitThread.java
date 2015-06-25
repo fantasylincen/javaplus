@@ -29,8 +29,8 @@ public final class InitThread extends Thread {
 		initMongoDb();
 		setLogToDb();
 		initGameXml();
-		Turntable.getInstance().init();
 		initRobots();
+		Turntable.getInstance().init();
 		printSucessfulMessage();
 	}
 
