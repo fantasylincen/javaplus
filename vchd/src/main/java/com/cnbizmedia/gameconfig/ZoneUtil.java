@@ -80,6 +80,7 @@ public class ZoneUtil {
 		String zoneId = dto.getId();
 
 		obj.put("zoneId", zoneId);
+		obj.put("zoneName", dto.getName());
 		obj.put("gameXmlPath", getGameXmlPath(pid, zoneId));
 		obj.put("zipGameXmlPath", getZipClientXmlPath(pid, zoneId));
 		obj.put("gameXmlVersion", getGameXmlVersion(pid, zoneId));

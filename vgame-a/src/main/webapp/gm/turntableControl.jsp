@@ -86,6 +86,7 @@
 		sb.append(t.getCountHistory(type));
 		sb.append("</td>");
  */
+ 
 		sb.append("<td>");
 
 		if ("AD".contains(type)) {
