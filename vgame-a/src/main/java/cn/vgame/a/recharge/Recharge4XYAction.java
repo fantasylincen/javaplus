@@ -236,7 +236,9 @@ public class Recharge4XYAction extends ActionSupport {
 			}
 		}
 
-		if (Server.getConfig().getBoolean("isDebug"))
+		boolean isDebug = Server.getConfig().getBoolean("isDebug");
+		Log.d("isDebug", isDebug);
+		if (isDebug)
 			return getFirst(all);
 
 		throw new RuntimeException("recharge record not found");
