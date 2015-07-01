@@ -36,20 +36,25 @@ public class Recharge4YiJieAction extends ActionSupport {
 	public class Add {
 		long coin;
 		long jiangQuan;
+
 		public Add(Row row) {
 
-			coin =  row.getInt("jinDou");
+			coin = row.getInt("jinDou");
 			jiangQuan = row.getInt("jiangQuan");
 		}
+
 		public long getCoin() {
 			return coin;
 		}
+
 		public void setCoin(long coin) {
 			this.coin = coin;
 		}
+
 		public long getJiangQuan() {
 			return jiangQuan;
 		}
+
 		public void setJiangQuan(long jiangQuan) {
 			this.jiangQuan = jiangQuan;
 		}
@@ -231,7 +236,7 @@ public class Recharge4YiJieAction extends ActionSupport {
 		response.setCharacterEncoding("utf8");
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
-		
+
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		Log.d(parameterMap);
 
@@ -255,12 +260,11 @@ public class Recharge4YiJieAction extends ActionSupport {
 
 	private void recharge() {
 
-		//如果订单号已经处理过了,就不再 处理
+		// 如果订单号已经处理过了,就不再 处理
 		YiJieRechargeLogDto log = Daos.getYiJieRechargeLogDao().get(getSsid());
-		if(log != null)
+		if (log != null)
 			return;
-		
-		
+
 		checkSign();
 		checkSt();
 
@@ -271,12 +275,12 @@ public class Recharge4YiJieAction extends ActionSupport {
 		role.addCoin(a.getCoin());
 		role.addRechargeHistory(a.getCoin(), "yijie");
 		role.addJiangQuan(a.getJiangQuan());
-		
+
 		this.dto.setRoleId(roleId);
 		this.dto.setNick(role.getNick());
 		this.dto.setCoin(a.getCoin());
 		this.dto.setJiangQuan(a.getJiangQuan());
-		
+
 		Log.d("recharge success", role.getId(), role.getNick(), a.getCoin(),
 				role.getCoin());
 		Daos.getYiJieRechargeLogDao().save(this.dto);
@@ -292,11 +296,14 @@ public class Recharge4YiJieAction extends ActionSupport {
 				return new Add(row);
 			}
 		}
-		return getLast(all);
+		if (Server.getConfig().getBoolean("isDebug"))
+			return getFirst(all);
+
+		throw new RuntimeException("recharge record not found");
 	}
 
-	private Add getLast(List<Row> all) {
-		Row row = all.get(all.size() - 1);
+	private Add getFirst(List<Row> all) {
+		Row row = all.get(0);
 		return new Add(row);
 	}
 
@@ -322,7 +329,7 @@ public class Recharge4YiJieAction extends ActionSupport {
 		String sign = Util.Collection.linkWith("&", items);
 
 		sign = Util.Secure.md5(sign + KEY);
-		
+
 		if (!sign.equals(getSign())) {
 			throw new RuntimeException("sign error" + "," + sign + ","
 					+ getSign() + "," + dto.toString());
