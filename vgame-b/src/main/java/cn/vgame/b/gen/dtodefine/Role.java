@@ -60,6 +60,18 @@ interface Role {
 	 * 是否封号
 	 */
 	boolean getHasFengHao();
+	
+	
+	/**
+	 * 最大关卡数
+	 */
+	int getMaxMissionId();
+	
+	/**
+	 * 键： 关卡ID
+	 * 值: 关卡数据
+	 */
+	MongoMap<MissionData> getMissionData();
 
 	MongoMap<String> getKeyValueDaily();
 

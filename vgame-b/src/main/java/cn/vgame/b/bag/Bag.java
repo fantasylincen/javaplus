@@ -23,26 +23,26 @@ public class Bag {
 		return role;
 	}
 
-	public void add(int type, int count) {
+	public void add(int id, int count) {
 		KeyValue kv = role.getKeyValueForever();
-		kv.add(key(type), count);
+		kv.add(key(id), count);
 	}
 
 	private String key(int type) {
 		return "BAG:" + type;
 	}
 
-	public int getCount(int type) {
+	public int getCount(int id) {
 		KeyValue kv = role.getKeyValueForever();
-		return kv.getInt(key(type));
+		return kv.getInt(key(id));
 	}
 
-	public void remove(int type, int hanHuaNeed) {
+	public void remove(int id, int hanHuaNeed) {
 		KeyValue kv = role.getKeyValueForever();
-		int count = kv.getInt(key(type));
+		int count = kv.getInt(key(id));
 		if (count < hanHuaNeed)
-			throw new ErrorResult(10023, getName(type)).toException();
-		kv.set(key(type), count - hanHuaNeed);
+			throw new ErrorResult(10023, getName(id)).toException();
+		kv.set(key(id), count - hanHuaNeed);
 	}
 
 	private String getName(int type) {

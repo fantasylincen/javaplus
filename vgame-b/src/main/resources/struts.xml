@@ -51,6 +51,10 @@
 		<action name="recommendRoles" class="cn.vgame.b.turntable.RecommendRolesAction" />
 		
 		
+		
+		<action name="getBag" class="cn.vgame.b.turntable.GetBagAction" />
+		
+		
 	</package>
 
 	<!-- 喊话 -->

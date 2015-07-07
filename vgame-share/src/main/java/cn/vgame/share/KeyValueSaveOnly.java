@@ -15,4 +15,7 @@ public interface KeyValueSaveOnly {
 	 * 如果之前变量不存在, 默认初始为0
 	 */
 	void add(Object key, long add);
+	
+	
+
 }

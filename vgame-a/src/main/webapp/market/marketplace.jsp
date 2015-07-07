@@ -5,16 +5,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-String roleId = request.getParameter("roleId");
 
-if(Server.getConfig().getBoolean("isDebug") && roleId == null) {
-	roleId = "r100031000092";
-}
-
-Role role = Server.getRole(roleId);
-long jiangQuan = role.getJiangQuan();
-String nick = role.getNick();//昵称
-long coin = role.getCoin();//金豆
 
 
 %>
@@ -58,18 +49,11 @@ long coin = role.getCoin();//金豆
             setBasePath("spring");                        
         </script>
   <body>
-  <table>
- 
-     <tr>
-     <td>
-     <h2 style="color: red">尊敬的<%=nick%>:欢迎你来到兑换区，当前你的奖券：<%=jiangQuan%> <img src="images/jiangquan.png" width="25" height="25"></h2>
-     </td>
-     </tr>
-  </table>
+  
   </body>
 
   <body  >
-  <input id="jiangQuan" value="<%=jiangQuan%>" style="display:none;">
+
      <table>
      <tr >
      <td style="position: relative ;left:60px;" >
