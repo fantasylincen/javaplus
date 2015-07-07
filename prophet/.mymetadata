@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="prophet"
+  id="myeclipse.1423039259780"
+  context-root="/vchd"
+  j2ee-spec="6.0"
+  archive="prophet.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

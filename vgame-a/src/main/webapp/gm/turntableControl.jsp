@@ -82,10 +82,6 @@
 		sb.append(t.getCountThisTime(type));
 		sb.append("</td>");
 
-		/* sb.append("<td>");
-		sb.append(t.getCountHistory(type));
-		sb.append("</td>");
- */
  
 		sb.append("<td>");
 

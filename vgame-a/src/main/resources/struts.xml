@@ -227,9 +227,6 @@
 			<result type="redirect">/gm/systemInfo.jsp</result>
 		</action>
 		
-		<action name="setGanSheTime" class="cn.vgame.a.gm.SetGanSheTimeAction">
-			<result type="redirect">/gm/systemInfo.jsp</result>
-		</action>
 		<action name="setKuCun" class="cn.vgame.a.gm.SetKuCunAction">
 			<result type="redirect">/gm/systemInfo.jsp</result>
 		</action>

@@ -1,34 +1,30 @@
 package cn.javaplus.stock.apps;
 
-import java.util.List;
-
 import cn.javaplus.stock.analyze.AnalyzeStrategy;
-import cn.javaplus.stock.analyze.StockAnalyzer;
-import cn.javaplus.stock.analyzers.F;
+import cn.javaplus.stock.analyzers.G;
+import cn.javaplus.stock.stock.It;
 import cn.javaplus.stock.stock.Stock1;
 import cn.javaplus.stock.stock.StockReader;
 
 public class AppFindStock {
 
-	public static void main(String[] args) throws Exception {
+	private static final class ItImplementation2 implements It {
+		@Override
+		public void onRead(Stock1 stock) {
 
-		StockReader r = new StockReader();
+			AnalyzeStrategy s = new G();
 
-		List<Stock1> all = r.readShenHuA();
-		// List<Stock> all = Lists.newArrayList(r.read("000895"));
+			if (s.conform(stock)) {
+				System.out.println(stock.getId() + "  -- 收盘日 -- " + stock.getLast().getDate());
+			}
 
-		StockAnalyzer analyzer = new StockAnalyzer();
-
-		AnalyzeStrategy s = new F();
-
-		List<Stock1> stocks = analyzer.analyze(s, all);
-
-		for (Stock1 stock : stocks) {
-
-			System.out.println(stock.getId() + "  -- 收盘日 -- "
-					+ stock.getLast().getDate());
 		}
+	}
 
+	public static void main(String[] args) throws Exception {
+		StockReader r = new StockReader();
+		It it = new ItImplementation2();
+		r.foreachShenHu(it);
 	}
 
 }

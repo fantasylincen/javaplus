@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSessionListener;
 import cn.javaplus.log.Log;
 import cn.vgame.a.Server;
 import cn.vgame.a.account.Role;
+import cn.vgame.a.turntable.Turntable;
 
 public class OnlineCounter extends HttpServlet implements HttpSessionListener {
 	/**
@@ -41,6 +42,7 @@ public class OnlineCounter extends HttpServlet implements HttpSessionListener {
 	}
 
 	public static int getOnlineSize() {
-		return onlineSize;
+//		return onlineSize;
+		return Turntable.getInstance().getRoleCount();
 	}
 }

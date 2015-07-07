@@ -1,3 +1,7 @@
+<%@page import="cn.vgame.a.Server"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao.CoinLogDtoCursor"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.YiJieRechargeLogDto"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.YiJieRechargeLogDao.YiJieRechargeLogDtoCursor"%>
@@ -31,10 +35,12 @@
 			countEve = "22";
 		}
 
-		YiJieRechargeLogDao dao = Daos.getYiJieRechargeLogDao();
-	
 
-		YiJieRechargeLogDtoCursor c = dao.find();
+		
+		CoinLogDao dao = Daos.getCoinLogDao();
+		CoinLogDtoCursor c = dao.findByDsc("recharge");
+
+
 		int cev = new Integer(countEve);
 		int pageInt = new Integer(pg);
 		c.page(pageInt, cev);
@@ -53,17 +59,16 @@
 		<thead>
 			<tr>
 				<th>付费时间</th>
-				<th>到账时间</th>
 				<th>角色ID</th>
 				<th>昵称</th>
-				<th>人民币(分)</th>
-				<th>充值金额</th>
-				<th>操作结果</th>
+				<th>充值金豆</th>
 			</tr>
 		</thead>
 
 		<tbody>
 
+		
+		
 			<%!
 				public String getDate(long t) {
 					SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -71,18 +76,28 @@
 				}
 			%>
 			<%
-				for (YiJieRechargeLogDto dto : c) {
+				for (CoinLogDto dto : c) {
 			%>
 			
 			
 			<tr>
-				<td><%=getDate(dto.getPt())%></td>
-				<td><%=getDate(dto.getCt())%></td>
-				<td><%=dto.getRoleId()%></td>
-				<td><%=dto.getNick()%></td>
-				<td><%=dto.getFee()%></td>
+			<!-- 
+			CoinLogDto dto = dao.createDTO();
+		Date dt = new Date(System.currentTimeMillis());
+
+		dto.setCoin(coin);
+		dto.setId(Util.ID.createId());
+		dto.setDsc(dsc);
+		dto.setFrom(from + "");
+		dto.setTime(SF.format(dt));
+		dto.setTo(getId());
+		dto.setFromTo(from + "|" + getId());
+		dao.save(dto);
+		 -->
+				<td><%=dto.getTime()%></td>
+				<td><%=dto.getTo()%></td>
+				<td><%=Server.getRole(dto.getTo()).getNick()%></td>
 				<td><%=dto.getCoin()%></td>
-				<td><%=dto.getSt() == 1 ? "成功" : "失败"%></td>
 			</tr>
 			<%
 				}

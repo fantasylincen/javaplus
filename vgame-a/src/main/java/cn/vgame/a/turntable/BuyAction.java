@@ -2,6 +2,7 @@ package cn.vgame.a.turntable;
 
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
+import cn.javaplus.log.Log;
 import cn.vgame.a.Server;
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
 import cn.vgame.a.result.ErrorResult;
@@ -82,6 +83,8 @@ public class BuyAction extends JsonActionAfterRoleEnterGame {
 
 		role.reduceCoin(priceAll);
 		role.getBag().add(type, count);
+		
+		Log.d("buy", type, count, priceAll, role.getNick(), role.getId());
 		
 		role.addCoinLog(-priceAll, "market", "buy");
 

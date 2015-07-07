@@ -41,10 +41,12 @@ public class BufferedFrame extends Frame {
 				System.exit(0);
 			}
 		});
+		
+		new PaintThread().start();
 	}
 
 	private void setBounds() {
-		setSize(800, 600);
+		setSize(800, 1000);
 
 		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 		double hw = screensize.getWidth() / 2;
@@ -83,7 +85,7 @@ public class BufferedFrame extends Frame {
 		g.drawImage(image, 0, 0, null);
 	}
 
-	class paintThread extends Thread {
+	class PaintThread extends Thread {
 
 		public void run() {
 			while (true) {

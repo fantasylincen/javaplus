@@ -49,8 +49,19 @@ public class Recharge4XYAction extends ActionSupport {
 
 		public Add(Row row) {
 
-			coin = row.getInt("jinDou");
+			if (isFirstRecharge()) {
+				coin = row.getInt("jinDouFirst");
+			} else {
+				coin = row.getInt("jinDou");
+			}
 			jiangQuan = row.getInt("jiangQuan");
+		}
+
+		/**
+		 * 是否第一次充值
+		 */
+		private boolean isFirstRecharge() {
+			return role.getDto().getRechargeHistory() <= 0;
 		}
 
 		public long getCoin() {
@@ -82,6 +93,7 @@ public class Recharge4XYAction extends ActionSupport {
 	private HttpServletRequest request;
 
 	private HttpSession session;
+	private Role role;
 
 	@Override
 	public String execute() throws Exception {
@@ -149,7 +161,7 @@ public class Recharge4XYAction extends ActionSupport {
 
 			String roleId = getExtra();
 
-			Role role = Server.getRole(roleId);
+			role = Server.getRole(roleId);
 			Add a = getAdd();
 			role.addCoin(a.getCoin());
 			role.addRechargeHistory(a.getCoin(), "xy");

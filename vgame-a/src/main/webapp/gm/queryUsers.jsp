@@ -25,6 +25,8 @@
 					<th>所属帐号</th>
 					<th>昵称</th>
 					<th>金币</th>
+					<th>仓库</th>
+					<th>奖券</th>
 					<th>创建时间</th>
 					<th>机器人</th>
 				</tr>
@@ -54,6 +56,12 @@
 
 		sb.append("<td>");
 		sb.append(dto.getCoin());
+		sb.append("</td>");
+		sb.append("<td>");
+		sb.append(dto.getBankCoin());
+		sb.append("</td>");
+		sb.append("<td>");
+		sb.append(dto.getJiangQuan());
 		sb.append("</td>");
 
 		sb.append("<td>");
