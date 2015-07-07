@@ -41,6 +41,10 @@ public class Role implements IRole {
 		}
 	}
 
+	public long getRechargeHistory() {
+		return dto.getRechargeHistory();
+	}
+
 	@Override
 	public long getJiangQuan() {
 		return dto.getJiangQuan();
@@ -449,17 +453,6 @@ public class Role implements IRole {
 		addCoinLog(add, from, "recharge");
 	}
 	
-	/**
-	 * 增加奖券
-	 * @param add
-	 */
-	@Override
-	public void addJiangQuan(long add) {
-		if(add == 0)
-			return;
-		dto.setJiangQuan(dto.getJiangQuan() + add);
-		Daos.getRoleDao().save(dto);
-	}
 
 	@Override
 	public void addCoinLog(long coin, Object from, String dsc) {
@@ -475,5 +468,28 @@ public class Role implements IRole {
 		dto.setTo(getId());
 		dto.setFromTo(from + "|" + getId());
 		dao.save(dto);
+	}
+
+	/**
+	 * 增加奖券
+	 * @param add
+	 */
+	@Override
+	public void addJiangQuan(long add) {
+		if(add == 0)
+			return;
+		if(add < 0)
+			add = 0;
+		dto.setJiangQuan(dto.getJiangQuan() + add);
+		Daos.getRoleDao().save(dto);
+	}
+	
+	public void reduceJiangQuan(int reduce) {
+		if(reduce == 0)
+			return;
+		if(reduce < 0)
+			reduce = 0;
+		dto.setJiangQuan(dto.getJiangQuan() - reduce);
+		Daos.getRoleDao().save(dto);
 	}
 }

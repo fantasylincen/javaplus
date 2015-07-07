@@ -1,6 +1,4 @@
 package cn.vgame.a.events;import cn.javaplus.events.EventDispatcher;import cn.javaplus.events.Listener;/** * 系统事件派发器 *  * @author 林岑 */public class Events {	private static EventDispatcher dispatcher = new EventDispatcher();	static {		add(cn.vgame.a.account.CreateRoleEvent.class, new cn.vgame.a.account.CreateRoleSendLaba());
-		add(cn.vgame.a.turntable.KuCunToZeroEvent.class, new cn.vgame.a.turntable.KuCunToZeroResetHuiBaoLv());
-		add(cn.vgame.a.turntable.KuCunUpdateEvent.class, new cn.vgame.a.turntable.KuCunUpdateChuFaShouFen());
 		add(cn.vgame.a.account.SelectRoleEnterGameEvent.class, new cn.vgame.a.account.SelectRoleEnterGameCheckHasFengHao());
 		add(cn.vgame.a.account.SelectRoleEnterGameEvent.class, new cn.vgame.a.account.SelectRoleEnterGameCheckIsRobot());
 		add(cn.vgame.a.account.SelectRoleEnterGameEvent.class, new cn.vgame.a.account.SelectRoleEnterGameMarkOnline());

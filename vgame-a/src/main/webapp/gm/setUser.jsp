@@ -120,6 +120,22 @@ function juge(form){
 					<td>扣除喇叭</td>
 					<td><input name="reduceLaBa" value="0" /></td>
 				</tr>
+				
+				
+				
+				<tr>
+					<td>奖券数量</td>
+
+					<td><%=role.getJiangQuan()%></td>
+				</tr>
+				<tr>
+					<td>赠送奖券</td>
+					<td><input name="addJiangQuan" value="0" /></td>
+				</tr>
+				<tr>
+					<td>扣除奖券</td>
+					<td><input name="reduceJiangQuan" value="0" /></td>
+				</tr>
 
 				<tr>
 					<td>封号</td>

@@ -5,6 +5,7 @@
 							 static void put(String key, BasicDBObject o, GmLogDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
 							 static void put(String key, BasicDBObject o, RoleDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
 							 static void put(String key, BasicDBObject o, SystemKeyValueDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
+							 static void put(String key, BasicDBObject o, XYRechargeLogDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
 							 static void put(String key, BasicDBObject o, YiJieRechargeLogDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
 							 static void put(String key, BasicDBObject o, ZfbOrderDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
 							 static void put(String key, BasicDBObject o, ZfbOrderFinishDto value) {		o.put(key, MongoGen.toObject(value));	 }	 
@@ -16,6 +17,7 @@
 							 static GmLogDto copy(GmLogDto value) {		return new GmLogDto(value);	 }
 							 static RoleDto copy(RoleDto value) {		return new RoleDto(value);	 }
 							 static SystemKeyValueDto copy(SystemKeyValueDto value) {		return new SystemKeyValueDto(value);	 }
+							 static XYRechargeLogDto copy(XYRechargeLogDto value) {		return new XYRechargeLogDto(value);	 }
 							 static YiJieRechargeLogDto copy(YiJieRechargeLogDto value) {		return new YiJieRechargeLogDto(value);	 }
 							 static ZfbOrderDto copy(ZfbOrderDto value) {		return new ZfbOrderDto(value);	 }
 							 static ZfbOrderFinishDto copy(ZfbOrderFinishDto value) {		return new ZfbOrderFinishDto(value);	 }
@@ -27,6 +29,7 @@
 							static DBObject toObject(GmLogDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectGmLogDto(GmLogDto value) {		return value.toObject();	}	 	static BasicDBList toObjectGmLogDto(List<GmLogDto> value) {		BasicDBList o = new BasicDBList();		for (GmLogDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(RoleDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectRoleDto(RoleDto value) {		return value.toObject();	}	 	static BasicDBList toObjectRoleDto(List<RoleDto> value) {		BasicDBList o = new BasicDBList();		for (RoleDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(SystemKeyValueDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectSystemKeyValueDto(SystemKeyValueDto value) {		return value.toObject();	}	 	static BasicDBList toObjectSystemKeyValueDto(List<SystemKeyValueDto> value) {		BasicDBList o = new BasicDBList();		for (SystemKeyValueDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
+							static DBObject toObject(XYRechargeLogDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectXYRechargeLogDto(XYRechargeLogDto value) {		return value.toObject();	}	 	static BasicDBList toObjectXYRechargeLogDto(List<XYRechargeLogDto> value) {		BasicDBList o = new BasicDBList();		for (XYRechargeLogDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(YiJieRechargeLogDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectYiJieRechargeLogDto(YiJieRechargeLogDto value) {		return value.toObject();	}	 	static BasicDBList toObjectYiJieRechargeLogDto(List<YiJieRechargeLogDto> value) {		BasicDBList o = new BasicDBList();		for (YiJieRechargeLogDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(ZfbOrderDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectZfbOrderDto(ZfbOrderDto value) {		return value.toObject();	}	 	static BasicDBList toObjectZfbOrderDto(List<ZfbOrderDto> value) {		BasicDBList o = new BasicDBList();		for (ZfbOrderDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(ZfbOrderFinishDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectZfbOrderFinishDto(ZfbOrderFinishDto value) {		return value.toObject();	}	 	static BasicDBList toObjectZfbOrderFinishDto(List<ZfbOrderFinishDto> value) {		BasicDBList o = new BasicDBList();		for (ZfbOrderFinishDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
@@ -38,6 +41,7 @@
 		public static GmLogDao getGmLogDao() {			return new GmLogDao(getCollection("GmLog"));		}
 		public static RoleDao getRoleDao() {			return new RoleDao(getCollection("Role"));		}
 		public static SystemKeyValueDao getSystemKeyValueDao() {			return new SystemKeyValueDao(getCollection("SystemKeyValue"));		}
+		public static XYRechargeLogDao getXYRechargeLogDao() {			return new XYRechargeLogDao(getCollection("XYRechargeLog"));		}
 		public static YiJieRechargeLogDao getYiJieRechargeLogDao() {			return new YiJieRechargeLogDao(getCollection("YiJieRechargeLog"));		}
 		public static ZfbOrderDao getZfbOrderDao() {			return new ZfbOrderDao(getCollection("ZfbOrder"));		}
 		public static ZfbOrderFinishDao getZfbOrderFinishDao() {			return new ZfbOrderFinishDao(getCollection("ZfbOrderFinish"));		}
@@ -131,6 +135,31 @@
 		public SystemKeyValueDtoCursor findByValue(String value) {						BasicDBObject o = new BasicDBObject("value", value);			return new SystemKeyValueDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public SystemKeyValueDtoCursor findByValueFuzzy(String value) {						value = value.replaceAll("\\*", ".*");			value = "^" + value + "$";			BasicDBObject o = new BasicDBObject("value", Pattern.compile(value, Pattern.CASE_INSENSITIVE));			return new SystemKeyValueDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public SystemKeyValueDto createDTO() {			return new SystemKeyValueDto();		}			public static class SystemKeyValueDtoCursor implements Iterator<SystemKeyValueDto>, Iterable<SystemKeyValueDto>{				private DBCursor	cursor;			private int pageAll;				public SystemKeyValueDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public SystemKeyValueDto next() {				DBObject next = cursor.next();				SystemKeyValueDto dto = new SystemKeyValueDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<SystemKeyValueDto> iterator() {				return this;			}		}	}
+		public static class XYRechargeLogDao {			private DBCollection	collection;			public XYRechargeLogDao(DBCollection collection) {			this.collection = collection;		}			public void save(XYRechargeLogDto u) {			collection.save(u.toObject());		}			public void delete(XYRechargeLogDto u) {			delete(u.getOrderid());		}			public void delete(String orderid) {			collection.remove(key(orderid));		}			public XYRechargeLogDto get(String orderid) {			DBObject o = collection.findOne(key(orderid));			if(o == null) {				return null;			}			XYRechargeLogDto x = new XYRechargeLogDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String orderid) {			BasicDBObject o = new BasicDBObject();		o.put("_id", orderid);			return o;		}			public XYRechargeLogDtoCursor find() {			return new XYRechargeLogDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public XYRechargeLogDtoCursor findByOrderid(String orderid) {			collection.ensureIndex("orderid");			BasicDBObject o = new BasicDBObject("orderid", orderid);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByOrderidFuzzy(String orderid) {			collection.ensureIndex("orderid");			orderid = orderid.replaceAll("\\*", ".*");			orderid = "^" + orderid + "$";			BasicDBObject o = new BasicDBObject("orderid", Pattern.compile(orderid, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByUid(String uid) {						BasicDBObject o = new BasicDBObject("uid", uid);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByUidFuzzy(String uid) {						uid = uid.replaceAll("\\*", ".*");			uid = "^" + uid + "$";			BasicDBObject o = new BasicDBObject("uid", Pattern.compile(uid, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByAmount(String amount) {						BasicDBObject o = new BasicDBObject("amount", amount);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByAmountFuzzy(String amount) {						amount = amount.replaceAll("\\*", ".*");			amount = "^" + amount + "$";			BasicDBObject o = new BasicDBObject("amount", Pattern.compile(amount, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByServerid(String serverid) {						BasicDBObject o = new BasicDBObject("serverid", serverid);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByServeridFuzzy(String serverid) {						serverid = serverid.replaceAll("\\*", ".*");			serverid = "^" + serverid + "$";			BasicDBObject o = new BasicDBObject("serverid", Pattern.compile(serverid, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByExtra(String extra) {						BasicDBObject o = new BasicDBObject("extra", extra);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByExtraFuzzy(String extra) {						extra = extra.replaceAll("\\*", ".*");			extra = "^" + extra + "$";			BasicDBObject o = new BasicDBObject("extra", Pattern.compile(extra, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByTs(String ts) {						BasicDBObject o = new BasicDBObject("ts", ts);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByTsFuzzy(String ts) {						ts = ts.replaceAll("\\*", ".*");			ts = "^" + ts + "$";			BasicDBObject o = new BasicDBObject("ts", Pattern.compile(ts, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findBySign(String sign) {						BasicDBObject o = new BasicDBObject("sign", sign);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findBySignFuzzy(String sign) {						sign = sign.replaceAll("\\*", ".*");			sign = "^" + sign + "$";			BasicDBObject o = new BasicDBObject("sign", Pattern.compile(sign, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findBySig(String sig) {						BasicDBObject o = new BasicDBObject("sig", sig);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findBySigFuzzy(String sig) {						sig = sig.replaceAll("\\*", ".*");			sig = "^" + sig + "$";			BasicDBObject o = new BasicDBObject("sig", Pattern.compile(sig, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByRoleId(String roleId) {						BasicDBObject o = new BasicDBObject("roleId", roleId);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByRoleIdFuzzy(String roleId) {						roleId = roleId.replaceAll("\\*", ".*");			roleId = "^" + roleId + "$";			BasicDBObject o = new BasicDBObject("roleId", Pattern.compile(roleId, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByNick(String nick) {						BasicDBObject o = new BasicDBObject("nick", nick);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public XYRechargeLogDtoCursor findByNickFuzzy(String nick) {						nick = nick.replaceAll("\\*", ".*");			nick = "^" + nick + "$";			BasicDBObject o = new BasicDBObject("nick", Pattern.compile(nick, Pattern.CASE_INSENSITIVE));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByCoin(long coin) {						BasicDBObject o = new BasicDBObject("coin", coin);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public XYRechargeLogDtoCursor findCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("coin", new BasicDBObject("$gte", min).append("$lte", max));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		public XYRechargeLogDtoCursor findByJiangQuan(long jiangQuan) {						BasicDBObject o = new BasicDBObject("jiangQuan", jiangQuan);			return new XYRechargeLogDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public XYRechargeLogDtoCursor findJiangQuanBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("jiangQuan", new BasicDBObject("$gte", min).append("$lte", max));			return new XYRechargeLogDtoCursor(collection.find(o));		}
+			public void clear () {			collection.drop();		}			public XYRechargeLogDto createDTO() {			return new XYRechargeLogDto();		}			public static class XYRechargeLogDtoCursor implements Iterator<XYRechargeLogDto>, Iterable<XYRechargeLogDto>{				private DBCursor	cursor;			private int pageAll;				public XYRechargeLogDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public XYRechargeLogDto next() {				DBObject next = cursor.next();				XYRechargeLogDto dto = new XYRechargeLogDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<XYRechargeLogDto> iterator() {				return this;			}		}	}
 		public static class YiJieRechargeLogDao {			private DBCollection	collection;			public YiJieRechargeLogDao(DBCollection collection) {			this.collection = collection;		}			public void save(YiJieRechargeLogDto u) {			collection.save(u.toObject());		}			public void delete(YiJieRechargeLogDto u) {			delete(u.getSsid());		}			public void delete(String ssid) {			collection.remove(key(ssid));		}			public YiJieRechargeLogDto get(String ssid) {			DBObject o = collection.findOne(key(ssid));			if(o == null) {				return null;			}			YiJieRechargeLogDto x = new YiJieRechargeLogDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String ssid) {			BasicDBObject o = new BasicDBObject();		o.put("_id", ssid);			return o;		}			public YiJieRechargeLogDtoCursor find() {			return new YiJieRechargeLogDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public YiJieRechargeLogDtoCursor findBySsid(String ssid) {			collection.ensureIndex("ssid");			BasicDBObject o = new BasicDBObject("ssid", ssid);			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public YiJieRechargeLogDtoCursor findBySsidFuzzy(String ssid) {			collection.ensureIndex("ssid");			ssid = ssid.replaceAll("\\*", ".*");			ssid = "^" + ssid + "$";			BasicDBObject o = new BasicDBObject("ssid", Pattern.compile(ssid, Pattern.CASE_INSENSITIVE));			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
 		public YiJieRechargeLogDtoCursor findByApp(String app) {						BasicDBObject o = new BasicDBObject("app", app);			return new YiJieRechargeLogDtoCursor(collection.find(o));		}
@@ -578,6 +607,104 @@
 
 
 	static MongoMap<SystemKeyValueDto> copy(MongoMap<SystemKeyValueDto> map) {		MongoMapImpl<SystemKeyValueDto> m = new MongoMapImpl<SystemKeyValueDto>();				for (String key : map.keySet()) {			SystemKeyValueDto v = map.get(key);			m.put(key, MongoGen.copy(v));		}		return m;	}			static List<SystemKeyValueDto> copy(List<SystemKeyValueDto> list) {		List<SystemKeyValueDto> ls = Lists.newArrayList();		for (SystemKeyValueDto t : list) {			ls.add(MongoGen.copy(t));		}		return ls;	}		@Override		public String toString() {			return toObject().toString();		}	}
+		public static class XYRechargeLogDto implements MongoDto{		private String orderid = "";
+		private String uid = "";
+		private String amount = "";
+		private String serverid = "";
+		private String extra = "";
+		private String ts = "";
+		private String sign = "";
+		private String sig = "";
+		private String roleId = "";
+		private String nick = "";
+		private long coin = 0;
+		private long jiangQuan = 0;
+		public XYRechargeLogDto() {		}				/**		 * Copy new one		 */		public XYRechargeLogDto(XYRechargeLogDto src) {			orderid = MongoGen.copy(src.orderid);			
+			uid = MongoGen.copy(src.uid);			
+			amount = MongoGen.copy(src.amount);			
+			serverid = MongoGen.copy(src.serverid);			
+			extra = MongoGen.copy(src.extra);			
+			ts = MongoGen.copy(src.ts);			
+			sign = MongoGen.copy(src.sign);			
+			sig = MongoGen.copy(src.sig);			
+			roleId = MongoGen.copy(src.roleId);			
+			nick = MongoGen.copy(src.nick);			
+			coin = MongoGen.copy(src.coin);			
+			jiangQuan = MongoGen.copy(src.jiangQuan);			
+		}		public String getOrderid() {			return this.orderid;		}
+		public String getUid() {			return this.uid;		}
+		public String getAmount() {			return this.amount;		}
+		public String getServerid() {			return this.serverid;		}
+		public String getExtra() {			return this.extra;		}
+		public String getTs() {			return this.ts;		}
+		public String getSign() {			return this.sign;		}
+		public String getSig() {			return this.sig;		}
+		public String getRoleId() {			return this.roleId;		}
+		public String getNick() {			return this.nick;		}
+		public long getCoin() {			return this.coin;		}
+		public long getJiangQuan() {			return this.jiangQuan;		}
+		public void setOrderid(String orderid) {			this.orderid = orderid;		}
+		public void setUid(String uid) {			this.uid = uid;		}
+		public void setAmount(String amount) {			this.amount = amount;		}
+		public void setServerid(String serverid) {			this.serverid = serverid;		}
+		public void setExtra(String extra) {			this.extra = extra;		}
+		public void setTs(String ts) {			this.ts = ts;		}
+		public void setSign(String sign) {			this.sign = sign;		}
+		public void setSig(String sig) {			this.sig = sig;		}
+		public void setRoleId(String roleId) {			this.roleId = roleId;		}
+		public void setNick(String nick) {			this.nick = nick;		}
+		public void setCoin(long coin) {			this.coin = coin;		}
+		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
+		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();		o.put("_id", orderid);
+			o.put("orderid", MongoGen.toObject(orderid));			
+			o.put("uid", MongoGen.toObject(uid));			
+			o.put("amount", MongoGen.toObject(amount));			
+			o.put("serverid", MongoGen.toObject(serverid));			
+			o.put("extra", MongoGen.toObject(extra));			
+			o.put("ts", MongoGen.toObject(ts));			
+			o.put("sign", MongoGen.toObject(sign));			
+			o.put("sig", MongoGen.toObject(sig));			
+			o.put("roleId", MongoGen.toObject(roleId));			
+			o.put("nick", MongoGen.toObject(nick));			
+			o.put("coin", MongoGen.toObject(coin));			
+			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
+			return o;		}		@Override		public void fromDBObject(DBObject o) {			orderid = getString(o, "orderid");
+			uid = getString(o, "uid");
+			amount = getString(o, "amount");
+			serverid = getString(o, "serverid");
+			extra = getString(o, "extra");
+			ts = getString(o, "ts");
+			sign = getString(o, "sign");
+			sig = getString(o, "sig");
+			roleId = getString(o, "roleId");
+			nick = getString(o, "nick");
+			coin = getLong(o, "coin");
+			jiangQuan = getLong(o, "jiangQuan");
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	static MongoMap<XYRechargeLogDto> copy(MongoMap<XYRechargeLogDto> map) {		MongoMapImpl<XYRechargeLogDto> m = new MongoMapImpl<XYRechargeLogDto>();				for (String key : map.keySet()) {			XYRechargeLogDto v = map.get(key);			m.put(key, MongoGen.copy(v));		}		return m;	}			static List<XYRechargeLogDto> copy(List<XYRechargeLogDto> list) {		List<XYRechargeLogDto> ls = Lists.newArrayList();		for (XYRechargeLogDto t : list) {			ls.add(MongoGen.copy(t));		}		return ls;	}		@Override		public String toString() {			return toObject().toString();		}	}
 		public static class YiJieRechargeLogDto implements MongoDto{		private String ssid = "";
 		private String app = "";
 		private String cbi = "";

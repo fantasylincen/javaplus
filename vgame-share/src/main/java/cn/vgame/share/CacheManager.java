@@ -6,8 +6,8 @@ import net.sf.ehcache.Element;
 
 public class CacheManager {
 
-	private static final int SEC2 = 10;
-	private static final int SEC = 15;
+	private static final int SEC2 = 20;
+	private static final int SEC = 35;
 	private static final String KEY = "VGAME";
 	static net.sf.ehcache.CacheManager CACHE;
 
@@ -30,6 +30,7 @@ public class CacheManager {
 		}
 		return CACHE.getCache(KEY);
 	}
+	
 
 	public static void main(String[] args) {
 		long t = System.currentTimeMillis();
@@ -68,7 +69,7 @@ public class CacheManager {
 		System.out.println((System.currentTimeMillis() - t));
 	}
 
-	public static void put(Object key, long time, Object o) {
+	public static void put(Object key, Object o) {
 		Cache cache = getCache();
 		cache.put(new Element(key, o));
 	}

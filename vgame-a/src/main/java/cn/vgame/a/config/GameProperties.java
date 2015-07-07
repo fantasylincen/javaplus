@@ -36,7 +36,7 @@ public class GameProperties {
 			throw Util.Exception.toRuntimeException(e);
 		}
 
-		CacheManager.put(key, 60000, s);
+		CacheManager.put(key,  s);
 
 		return s;
 	}

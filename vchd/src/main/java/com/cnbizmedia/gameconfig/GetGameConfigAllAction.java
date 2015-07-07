@@ -2,6 +2,8 @@ package com.cnbizmedia.gameconfig;
 
 import java.util.List;
 
+import cn.javaplus.util.Util;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cnbizmedia.JsonAction;
@@ -31,7 +33,7 @@ public class GetGameConfigAllAction extends JsonAction {
 	private Object buildResult(ProjectDto p) {
 		JSONObject obj = new JSONObject();
 		obj.put("projectId", p.getId());
-		obj.put("name", p.getName());
+		obj.put("name", Util.Chinese.getPinYinHump(p.getName()));
 		List<ZoneDto> zones = p.getZones();
 		if (zones != null) {
 			JSONArray jr = new JSONArray();

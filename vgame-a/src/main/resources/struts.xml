@@ -10,14 +10,18 @@
 		<action name="selectRole" class="cn.vgame.a.account.SelectRoleAction" />
 	</package>
 	
-	<package name="recharge4YiJie" extends="struts-default" namespace="/recharge">
+	<package name="recharge" extends="struts-default" namespace="/recharge">
 		<action name="recharge4YiJie" class="cn.vgame.a.recharge.Recharge4YiJieAction" />
+		
+		<action name="recharge4XY" class="cn.vgame.a.recharge.Recharge4XYAction" />
+		
+		<action name="recharge4XYTest" class="cn.vgame.a.recharge.Recharge4XYAction" />
+		
+		<!-- 这个链接是客户端调用的, 客户端调用后, 服务器向AppStore验证订单号是否正确 -->
+		<action name="recharge4AppStoreBuyClient" class="cn.vgame.a.recharge.Recharge4AppStoreBuyClientAction" />
+		
 	</package>
 	
-	<!-- 这个链接是客户端调用的, 客户端调用后, 服务器向AppStore验证订单号是否正确 -->
-	<package name="recharge4AppStoreBuyClient" extends="struts-default" namespace="/recharge4AppStore">
-		<action name="recharge4AppStoreBuyClient" class="cn.vgame.a.recharge.Recharge4AppStoreBuyClientAction" />
-	</package>
 
 	<package name="turntable" extends="struts-default" namespace="/turntable">
 		<action name="commitMySwitchs" class="cn.vgame.a.turntable.CommitMySwitchsAction" />
@@ -223,9 +227,6 @@
 			<result type="redirect">/gm/systemInfo.jsp</result>
 		</action>
 		
-		<action name="setGanSheTime" class="cn.vgame.a.gm.SetGanSheTimeAction">
-			<result type="redirect">/gm/systemInfo.jsp</result>
-		</action>
 		<action name="setKuCun" class="cn.vgame.a.gm.SetKuCunAction">
 			<result type="redirect">/gm/systemInfo.jsp</result>
 		</action>

@@ -35,6 +35,18 @@
 
 		Turntable t = Turntable.getInstance();
 		Controller tc = t.getController();
+		
+	
+		RoleDtoCursor c = dao.find();
+		long all = 0;
+		long allBank = 0;
+		long allJiangQuan = 0;
+		for(RoleDto d : c) {
+			if(!d.getId().startsWith("r")) // 非机器人
+			all += d.getCoin() ;
+			allBank += d.getBankCoin();
+			allJiangQuan += d.getJiangQuan();
+		}
 	%>
 	<form id="setSystemInfo" action="setSystemInfo" method="post">
 		<h2>系统信息</h2>
@@ -46,31 +58,6 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>在线人数(近10分钟登陆的用户)</td>
-					<td><%=OnlineCounter.getOnlineSize()%></td>
-				</tr>
-
-				<tr>
-					<td>总注册人数</td>
-					<td><%=playerCount%></td>
-				</tr>
-
-				<tr>
-					<td>金币输出(今日/历史)</td>
-					<td><%=t.getCoinOutToday() + "/" + t.getCoinOutHistory()%></td>
-				</tr>
-
-				<tr>
-					<td>金币输入(今日/历史)</td>
-					<td><%=t.getCoinInToday() + "/" + t.getCoinInHistory()%></td>
-				</tr>
-
-				<tr>
-					<td>开奖次数(今日/历史)</td>
-					<td><%=t.getGenerateTimesToday() + "/"
-					+ t.getGenerateTimesHistory()%></td>
-				</tr>
 				<%
 					SimpleDateFormat FORMAT = new SimpleDateFormat(
 							"yyyy-MM-dd HH:mm:ss");
@@ -80,17 +67,44 @@
 					<td><%=FORMAT.format(new Date(System.currentTimeMillis()))%></td>
 				</tr>
 				<tr>
+					<td>在线人数/注册人数</td>
+					<td><%=OnlineCounter.getOnlineSize()%>/<%=playerCount%></td>
+				</tr>
+
+				<%-- <tr>
+					<td>金币输出(今日/历史)</td>
+					<td><%=t.getCoinOutToday() + "/" + t.getCoinOutHistory()%></td>
+				</tr>
+
+				<tr>
+					<td>金币输入(今日/历史)</td>
+					<td><%=t.getCoinInToday() + "/" + t.getCoinInHistory()%></td>
+				</tr> --%>
+			
+		 
+				<tr>
+					<td>场外存量</td>
+					<td>携带金币:<%=all%>&nbsp;&nbsp;&nbsp;银行金币:<%=allBank%>&nbsp;&nbsp;&nbsp;奖券:<%=allJiangQuan%></td>
+				</tr>
+
+				<tr>
+					<td>开奖次数(今日/历史)</td>
+					<td><%=t.getGenerateTimesToday() + "/"
+					+ t.getGenerateTimesHistory()%></td>
+				</tr>
+				<tr>
 					<td>彩金</td>
 					<td><%=Turntable.getInstance().getCaiJin()%></td>
 				</tr>
 
 
 				<tr>
-					<td>系统库存</td>
+					<td>库存</td>
 					<td><%=tc.getKuCun()%> &nbsp;&nbsp;&nbsp;&nbsp;<a href="setKuCun.jsp">修改</a>
 					</td>
 				</tr>
-
+				
+				<%-- 
 				<tr>
 					<td>当系统库存小于该值时, 触发强制收分程序<%=tc.getNormalShouFenSec() / 60%>分钟</td>
 					<td><input name="maxKuCun" value="<%=tc.getMaxKuCun()%>">
@@ -98,7 +112,7 @@
 				</tr>
 
 				<tr>
-					<td>触发收分程序时, 强制干涉(强制收分)概率</td>
+					<td>触发收分程序时, 强制干涉强度</td>
 					<td><input name="chuFaTunFenGaiLv" value="<%=tc.getChuFaTunFenGaiLv()%>">
 					</td>
 				</tr>
@@ -108,9 +122,9 @@
 					<td>触发收分程序时, 强制干涉(强制收分)时长(分钟)</td>
 					<td><input name="chuFaTunFenShiChang" value="<%=tc.getChuFaTunFenShiChang()%>">
 					</td>
-				</tr>
+				</tr> --%>
 				
-				<tr>
+				<%-- <tr>
 					<td>回报率档位(吐分速率)</td>
 					<td><input name="dangWei" type="range"
 						min="<%=tc.getDangWeiMin()%>" max="<%=tc.getDangWeiMax()%>"
@@ -133,28 +147,33 @@
 				<tr>
 					<td>当前配置表回报率(大于1:吐分, 小于1:吞分)</td>
 					<td><%=tc.getHuiBaoLv()%>&nbsp;&nbsp;&nbsp;&nbsp;<%=tc.getHuiBaoLvDsc()%></td>
-				</tr>
+				</tr> --%>
 
 				<tr>
-					<td>系统强制干涉类型</td>
+					<td>吞吐类型</td>
 					<td>
 						<%
 							if (tc.isQiangZhiTunFen()) {
 						%> <input type="radio" value="1" name="qiangZhiType"
-						checked="checked">强制吞分 <input type="radio" value="0"
-						name="qiangZhiType">强制吐分 <%
+						checked="checked">吞分 <input type="radio" value="0"
+						name="qiangZhiType">吐分 <%
  	} else {
- %> <input type="radio" value="1" name="qiangZhiType">强制吞分 <input
-						type="radio" value="0" name="qiangZhiType" checked="checked">强制吐分
+ %> <input type="radio" value="1" name="qiangZhiType">吞分 <input
+						type="radio" value="0" name="qiangZhiType" checked="checked">吐分
 						<%
  	}
- %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 剩余干涉时间: <%=tc.getRemainGanSheHour()%>
-						小时 <%=tc.getRemainGanSheMin()%> 分 <a href="setGanSheTime.jsp">修改</a>
+ %> 
+					</td>
+				</tr>
+				
+				<tr>
+					<td>吞吐量</td>
+					<td><input name="tunTuLiang" value="<%=tc.getTunTuLiang()%>">
 					</td>
 				</tr>
 
 				<tr>
-					<td>系统强制干涉概率</td>
+					<td>吞吐强度 (范围:0.0-0.8,值越大,越强)</td>
 					<td><input name="tunTuGaiLv"
 						value="<%=tc.getQiangZhiTunTuGaiLv()%>">
 					</td>
@@ -164,7 +183,7 @@
 					<td>系统干涉状态</td>
 					<td>
 						<%
-							if(tc.getQiangZhiTunTuGaiLv() <0.0001 || tc.getGetGanSheRemainSec() <= 0) {
+							if(!tc.isZhengZaiGanShe()) {
 							 
 						 %>
 						 	<font color="#FF2200">停止运行</font>

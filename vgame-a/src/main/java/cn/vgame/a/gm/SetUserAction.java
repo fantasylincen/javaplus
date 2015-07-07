@@ -31,6 +31,15 @@ public class SetUserAction extends ActionSupport {
 	private String roleId;
 	private int addLaBa;
 	private int reduceLaBa;
+	
+	
+
+	private int addJiangQuan;
+	private int reduceJiangQuan;
+	
+	
+	
+	
 	private long reduceCoin;
 
 	public String getNewNick() {
@@ -92,6 +101,14 @@ public class SetUserAction extends ActionSupport {
 
 		Bag bag = role.getBag();
 
+		if (addJiangQuan > 0) {
+			role.addJiangQuan(addJiangQuan);
+		}
+
+		if (reduceJiangQuan > 0) {
+			role.reduceJiangQuan(reduceJiangQuan);
+		}
+		
 		if (addLaBa > 0) {
 			bag.add(10001, addLaBa);
 		}
@@ -172,6 +189,22 @@ public class SetUserAction extends ActionSupport {
 		if (reduceCoin < 0)
 			reduceCoin = 0;
 		this.reduceCoin = reduceCoin;
+	}
+
+	public int getAddJiangQuan() {
+		return addJiangQuan;
+	}
+
+	public void setAddJiangQuan(int addJiangQuan) {
+		this.addJiangQuan = addJiangQuan;
+	}
+
+	public int getReduceJiangQuan() {
+		return reduceJiangQuan;
+	}
+
+	public void setReduceJiangQuan(int reduceJiangQuan) {
+		this.reduceJiangQuan = reduceJiangQuan;
 	}
 
 }

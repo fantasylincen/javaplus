@@ -77,7 +77,7 @@ public class Server {
 
 	public static void put(Role role) {
 		String id = role.getId();
-		CacheManager.put(key(id), 10 * Util.Time.MILES_ONE_MIN, role);
+		CacheManager.put(key(id),  role);
 	}
 
 	private static String key(String id) {

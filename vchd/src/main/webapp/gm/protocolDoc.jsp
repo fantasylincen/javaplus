@@ -1,25 +1,14 @@
 <%@page import="com.alibaba.fastjson.JSONObject"%><%@page import="com.cnbizmedia.gm.Zone"%><%@page import="com.cnbizmedia.Server"%><%@page import="cn.javaplus.collections.list.Lists"%><%@ page language="java" import="java.util.*" pageEncoding="utf-8"%><%@page import="java.util.List"%><%@page import="com.cnbizmedia.gen.dto.MongoGen"%><%@page import="java.util.List"%><%@page import="cn.javaplus.util.Util"%><%@page import="com.cnbizmedia.gen.dto.MongoGen.Daos"%><%@page import="com.cnbizmedia.gen.dto.MongoGen.ProjectDao"%><%@page import="com.cnbizmedia.gen.dto.MongoGen.ProjectDto"%><%@page import="com.cnbizmedia.gen.dto.MongoGen.ZoneDto"%><%@page import="com.cnbizmedia.gen.dto.MongoGen.KeyValueDto"%><%@page import="java.util.Map.Entry"%><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content=""><meta name="author" content=""><link rel="icon" href="../images/favicon.ico"><title>Theme Template for Bootstrap</title><!-- Bootstrap core CSS --><link href="../css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap theme --><link href="../css/bootstrap-theme.min.css" rel="stylesheet"><link href="../css/simpletable.css" rel="stylesheet"><!-- Custom styles for this template --><link href="../css/theme.css" rel="stylesheet"><!-- Just for debugging purposes. Don't actually copy these 2 lines! --><!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]--><script src="../js/ie-emulation-modes-warning.js"></script><!-- IE10 viewport hack for Surface/desktop Windows 8 bug --><script src="../js/ie10-viewport-bug-workaround.js"></script><!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --><!--[if lt IE 9]>      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>    <![endif]--><meta name="description"	content="The power of GitHub's social coding for your own workgroup. Pricing, tour and more."><meta http-equiv="Content-type:text/html;charset=utf-8"><link href="/assets/application-55f07ba38e3d64171dacc542c1927633.css"	media="all" rel="stylesheet" /><link href="/assets/print-0a04386179bac34932c1e3701a290e49.css"	media="print" rel="stylesheet" /><script src="/assets/application-39c65e5269029f77399e35204fc1b25b.js"></script><meta content="authenticity_token" name="csrf-param" /><meta	content="wVyoRJESvkdzyLgzg7qWCJQWj4R8+LqBqqzfJfAH9MwohwZpl4Rko+EreFXQpEXEXQpRwGIM3s1qUmoxoXu7xA=="	name="csrf-token" /><script src="/assets/event_tracking-de44750e00c71a7199b1447084374783.js"></script></head><body>	<div class="container theme-showcase" role="main"><h2><br>/account
 </h2><table class="bordered">	<thead>		<tr>			<th>说明</th>			<th>名字</th>			<th>参数列表</th>		</tr>	</thead><tr>
-<td><a  title=" A.正常情况:
-  	{
-  		String id :  客户端传过来的userId,
-  		String sessionId,
-  	}
+<td><a  title=" A.正常情况: { String id : 客户端传过来的userId, String sessionId, }
   
-  B.错误:
-   标准错误: 10003 token error
+  B.错误: 标准错误: 10003 token error
   
   
-  说明: 标准错误, 客户端需要对所有包  统一处理
-     {
-     	String error 错误文字,
-     	int code 这个错误对应到配置表 messages 里面的错误号,
-       String args [    比如 消息: 10008    message too long len must < %s0     那么 args =[ 10] 时 , 该消息表示  message too long len must < 10
-       	String arg1...
-       	String arg2...
-       	String arg3...
-       ],
-     }" href=" http://19vc.com/vgame-a/account/enterServer?token=XXXXXX&userId=XXXXXX">
+  说明: 标准错误, 客户端需要对所有包 统一处理 { String error 错误文字, int code 这个错误对应到配置表 messages
+  里面的错误号, String args [ 比如 消息: 10008 message too long len must < %s0 那么 args =[
+  10] 时 , 该消息表示 message too long len must < 10 String arg1... String arg2...
+  String arg3... ], }" href=" http://19vc.com/vgame-a/account/enterServer?token=XXXXXX&userId=XXXXXX&plantform=XXXXXX&appId=XXXXXX">
 玩家进入游戏服务器
 </a></td>
 <td>
@@ -28,6 +17,8 @@ enterServer
 <td>
 token:验证串<br>
 userId:玩家ID<br>
+plantform:未知<br>
+appId:未知<br>
 </td>
 </tr>
 <tr>
@@ -141,12 +132,58 @@ uid:未知<br>
 ver:未知<br>
 </td>
 </tr>
-</table>
-<h2><br>/recharge4AppStore
-</h2><table class="bordered">	<thead>		<tr>			<th>说明</th>			<th>名字</th>			<th>参数列表</th>		</tr>	</thead><tr>
+<tr>
 <td><a  title=" A.正常情况: { }
   
-  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge4AppStore/recharge4AppStoreBuyClient?receipt=XXXXXX">
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4XY?orderId=XXXXXX&uid=XXXXXX&amount=XXXXXX&serverid=XXXXXX&extra=XXXXXX&ts=XXXXXX&sign=XXXXXX&sig=XXXXXX&roleId=XXXXXX&nick=XXXXXX&coin=XXXXXX&jiangQuan=XXXXXX">
+充值
+</a></td>
+<td>
+recharge4XY
+</td>
+<td>
+orderId:未知<br>
+uid:未知<br>
+amount:未知<br>
+serverid:未知<br>
+extra:未知<br>
+ts:未知<br>
+sign:未知<br>
+sig:未知<br>
+roleId:未知<br>
+nick:未知<br>
+coin:未知<br>
+jiangQuan:未知<br>
+</td>
+</tr>
+<tr>
+<td><a  title=" A.正常情况: { }
+  
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4XYTest?orderId=XXXXXX&uid=XXXXXX&amount=XXXXXX&serverid=XXXXXX&extra=XXXXXX&ts=XXXXXX&sign=XXXXXX&sig=XXXXXX&roleId=XXXXXX&nick=XXXXXX&coin=XXXXXX&jiangQuan=XXXXXX">
+充值
+</a></td>
+<td>
+recharge4XYTest
+</td>
+<td>
+orderId:未知<br>
+uid:未知<br>
+amount:未知<br>
+serverid:未知<br>
+extra:未知<br>
+ts:未知<br>
+sign:未知<br>
+sig:未知<br>
+roleId:未知<br>
+nick:未知<br>
+coin:未知<br>
+jiangQuan:未知<br>
+</td>
+</tr>
+<tr>
+<td><a  title=" A.正常情况: { }
+  
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4AppStoreBuyClient?receipt=XXXXXX">
 充值
 </a></td>
 <td>

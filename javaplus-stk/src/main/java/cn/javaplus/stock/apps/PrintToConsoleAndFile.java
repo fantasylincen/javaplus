@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import cn.javaplus.log.IPrintStream;
 import cn.javaplus.log.Log;
 import cn.javaplus.log.Out;
-import cn.javaplus.log.SystemOutPutStream;
+import cn.javaplus.log.SystemOutputStream;
 
 public class PrintToConsoleAndFile implements Out {
 
@@ -30,7 +30,7 @@ public class PrintToConsoleAndFile implements Out {
 	}
 
 	IPrintStream fileout = new FileOut();
-	IPrintStream sysout = new SystemOutPutStream();
+	IPrintStream sysout = new SystemOutputStream();
 
 	@Override
 	public void println(String head, Object... message) {

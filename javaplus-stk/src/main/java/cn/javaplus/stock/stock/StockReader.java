@@ -15,7 +15,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import cn.javaplus.collections.set.Sets;
-import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 
 import com.google.common.collect.Lists;
@@ -42,8 +41,6 @@ public class StockReader {
 		excluds = Sets.newHashSet(excluds);
 		return excluds;
 	}
-
-	// private StockCache stocks = new StockCache();
 
 	private boolean allIsZero(byte[] day) {
 		for (byte b : day) {
@@ -90,7 +87,6 @@ public class StockReader {
 
 		for (String id : ids) {
 
-			// Log.d("loading... " + id);
 			Stock1 read = read(id);
 
 			if (read != null)
@@ -179,7 +175,6 @@ public class StockReader {
 
 	public Stock1 read(String id) {
 
-		Log.d(id);
 
 		if (excluds.contains(id))
 			return null;

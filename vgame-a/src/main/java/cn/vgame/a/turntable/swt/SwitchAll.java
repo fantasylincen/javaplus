@@ -19,6 +19,10 @@ public class SwitchAll implements ISwitchs {
 	public void clear() {
 		ss.clear();
 	}
+	
+	public int getRoleCount(){
+		return ss.size();
+	}
 
 	public void save(String id, ISwitchs s) {
 

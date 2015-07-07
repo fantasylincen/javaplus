@@ -38,6 +38,7 @@ import cn.vgame.a.turntable.swt.ISwitchs;
 import cn.vgame.a.turntable.swt.SwitchAll;
 import cn.vgame.a.zhuang.Zhuang;
 import cn.vgame.a.zhuang.ZhuangManager;
+import cn.vgame.share.CacheManager;
 import cn.vgame.share.KeyValue;
 import cn.vgame.share.KeyValueSaveOnly;
 import cn.vgame.share.Xml;
@@ -180,43 +181,32 @@ public class Turntable {
 		}
 
 		private boolean isQiangZhiTunFen;
-		private long maxKuCun;
-		private boolean isToNormal;
-		private int dangWei;
 		private double tunTuGaiLv;
-		private double chuFaTunFenGaiLv;
-		private int chuFaTunFenShiChang;
 		private long kuCun;
-		private String ganSheSec;
+		private long tunTuLiang;
+
+		// private String ganSheSec;
 
 		public Controller() {
 
 			KeyValue kv = Server.getKeyValueForever();
-			maxKuCun = kv.getLong("MAX_KU_CUN");
-			isToNormal = kv.getBoolean("IS_TO_NORMAL");
-			dangWei = kv.getInt("DANG_WEI");
 			isQiangZhiTunFen = kv.getBoolean("IS_QIANG_ZHI_TUN_FEN");
 			tunTuGaiLv = kv.getDouble("TUN_TU_GAI_LV");
-			chuFaTunFenGaiLv = kv.getDouble("CHU_FA_TUN_FEN_GAI_LV");
-			chuFaTunFenShiChang = kv.getInt("CHU_FA_TUN_FEN_SHI_CHANG");
 			kuCun = kv.getLong("KU_CUN");
-			ganSheSec = kv.getString("GAN_SHE_SEC");
-			if (ganSheSec == null || ganSheSec.equals("0")) {
-				ganSheSec = "0:" + System.currentTimeMillis();
-			}
+			tunTuLiang = kv.getLong("TUN_TU_LIANG");
+			// ganSheSec = kv.getString("GAN_SHE_SEC");
+			// if (ganSheSec == null || ganSheSec.equals("0")) {
+			// ganSheSec = "0:" + System.currentTimeMillis();
+			// }
 		}
 
 		private void saveToDb() {
 			KeyValue kv = Server.getKeyValueForever();
-			kv.set("MAX_KU_CUN", maxKuCun);
-			kv.set("IS_TO_NORMAL", isToNormal);
-			kv.set("DANG_WEI", dangWei);
 			kv.set("IS_QIANG_ZHI_TUN_FEN", isQiangZhiTunFen);
 			kv.set("TUN_TU_GAI_LV", tunTuGaiLv);
-			kv.set("CHU_FA_TUN_FEN_GAI_LV", chuFaTunFenGaiLv);
-			kv.set("CHU_FA_TUN_FEN_SHI_CHANG", chuFaTunFenShiChang);
 			kv.set("KU_CUN", kuCun);
-			kv.set("GAN_SHE_SEC", ganSheSec);
+			kv.set("TUN_TU_LIANG", tunTuLiang);
+			// kv.set("GAN_SHE_SEC", ganSheSec);
 		}
 
 		public long getKuCun() {
@@ -232,84 +222,65 @@ public class Turntable {
 			return tunTuGaiLv;
 		}
 
-		/**
-		 * 强制干涉剩余时间 返回格式: HH:mm
-		 */
-		public String getGanSheShengYuShiJian() {
-			long min = getRemainGanSheMin();
-			long hour = getRemainGanSheHour();
-			return hour + ":" + min;
-		}
+		// /**
+		// * 强制干涉剩余时间 返回格式: HH:mm
+		// */
+		// public String getGanSheShengYuShiJian() {
+		// long min = getRemainGanSheMin();
+		// long hour = getRemainGanSheHour();
+		// return hour + ":" + min;
+		// }
 
-		/**
-		 * 剩余干涉分钟
-		 */
-		public long getRemainGanSheMin() {
-			long remainMillis = getGetGanSheRemainSec() * 1000L;
-			long m = remainMillis % Time.MILES_ONE_HOUR;
-			long min = m / Time.MILES_ONE_MIN;
-			return min;
-		}
+		// /**
+		// * 剩余干涉分钟
+		// */
+		// public long getRemainGanSheMin() {
+		// long remainMillis = getGetGanSheRemainSec() * 1000L;
+		// long m = remainMillis % Time.MILES_ONE_HOUR;
+		// long min = m / Time.MILES_ONE_MIN;
+		// return min;
+		// }
+		//
+		// /**
+		// * 剩余干涉小时
+		// */
+		// public long getRemainGanSheHour() {
+		// long remainMillis = getGetGanSheRemainSec() * 1000L;
+		// return remainMillis / Time.MILES_ONE_HOUR;
+		// }
 
-		/**
-		 * 剩余干涉小时
-		 */
-		public long getRemainGanSheHour() {
-			long remainMillis = getGetGanSheRemainSec() * 1000L;
-			return remainMillis / Time.MILES_ONE_HOUR;
-		}
-
-		/**
-		 * 系统强制干涉剩余秒
-		 * 
-		 * @return
-		 */
-		public int getGetGanSheRemainSec() {
-			if (ganSheSec == null || ganSheSec.isEmpty()
-					|| ganSheSec.equals("0")) {
-				return 0;
-			}
-
-			String[] sp = ganSheSec.split(":");
-			int secAll = new Integer(sp[0]);
-			long updateTime = new Long(sp[1]);
-
-			long now = System.currentTimeMillis();
-			int timeSpendSec = (int) ((now - updateTime) / 1000);
-
-			return Math.max(0, secAll - timeSpendSec);
-		}
-
-		public void setGanSheTime(int hour, int min) {
-			int sec = 0;
-			sec += hour * 3600;
-			sec += min * 60;
-
-			ganSheSec = sec + ":" + System.currentTimeMillis();
-			saveToDb();
-		}
-
-		/**
-		 * 当系统库存正负性发生变化时, 是否将档位跳到正常状态
-		 */
-		public boolean isToNormal() {
-			return isToNormal;
-		}
-
-		/**
-		 * 系统库存大于了预设警戒值的时候, 强制触发收分程序 N秒 默认1800秒
-		 */
-		public int getNormalShouFenSec() {
-			int shichang = getChuFaTunFenShiChang();
-			return shichang * 60;
-		}
+		// /**
+		// * 系统强制干涉剩余秒
+		// *
+		// * @return
+		// */
+		// public int getGetGanSheRemainSec() {
+		// if (ganSheSec == null || ganSheSec.isEmpty()
+		// || ganSheSec.equals("0")) {
+		// return 0;
+		// }
+		//
+		// String[] sp = ganSheSec.split(":");
+		// int secAll = new Integer(sp[0]);
+		// long updateTime = new Long(sp[1]);
+		//
+		// long now = System.currentTimeMillis();
+		// int timeSpendSec = (int) ((now - updateTime) / 1000);
+		//
+		// return Math.max(0, secAll - timeSpendSec);
+		// }
+		//
+		// public void setGanSheTime(int hour, int min) {
+		// int sec = 0;
+		// sec += hour * 3600;
+		// sec += min * 60;
+		//
+		// ganSheSec = sec + ":" + System.currentTimeMillis();
+		// saveToDb();
+		// }
 
 		public int getDangWei() {
-			if (dangWei == 0) {
-				dangWei = getNormalDangWei();
-				saveToDb();
-			}
-			return dangWei;
+			return 1;
 		}
 
 		/**
@@ -317,17 +288,6 @@ public class Turntable {
 		 */
 		public int getNormalDangWei() {
 			return (getDangWeiMin() + getDangWeiMin()) / 2;
-		}
-
-		/**
-		 * 当库存小于这个值的时候, 强制触发收分程序
-		 */
-		public long getMaxKuCun() {
-			if (maxKuCun == 0) {
-				maxKuCun = -10000000;
-				saveToDb();
-			}
-			return maxKuCun;
 		}
 
 		public double getHuiBaoLv() {
@@ -371,43 +331,20 @@ public class Turntable {
 		}
 
 		/**
-		 * @param maxKuCun
-		 *            当系统库存大于某值时, 触发强制收分程序
-		 * @param isToNormal
-		 *            当库存变为0时, 是否把回报率调节到正常值
-		 * @param dangWei
-		 *            回报率档位(吐分速率)
 		 * @param qiangZhiType
 		 *            系统强制干涉类型
 		 * @param tunTuGaiLv
 		 *            系统强制干涉概率
-		 * @param chuFaTunFenShiChang
-		 *            触发收分程序时, 强制干涉概率
-		 * @param chuFaTunFenGaiLv
-		 *            触发收分程序时, 强制干涉时长(分钟)
+		 * @param tunTuLiang
+		 *            吞吐量
 		 */
-		public void update(long maxKuCun, boolean isToNormal, int dangWei,
-				boolean isQiangZhiTunFen, double tunTuGaiLv,
-				double chuFaTunFenGaiLv, int chuFaTunFenShiChang) {
+		public void update(boolean isQiangZhiTunFen, double tunTuGaiLv,
+				long tunTuLiang) {
 
-			this.maxKuCun = maxKuCun;
-			this.isToNormal = isToNormal;
-			this.dangWei = dangWei;
 			this.isQiangZhiTunFen = isQiangZhiTunFen;
 			this.tunTuGaiLv = tunTuGaiLv;
-			this.chuFaTunFenGaiLv = chuFaTunFenGaiLv;
-			this.chuFaTunFenShiChang = chuFaTunFenShiChang;
+			this.setTunTuLiang(tunTuLiang);
 			saveToDb();
-		}
-
-		/**
-		 * 充值档位到正常值
-		 */
-		public void setDangWeiToNormal() {
-			if (isToNormal()) {
-				dangWei = getNormalDangWei();
-				saveToDb();
-			}
 		}
 
 		/**
@@ -418,46 +355,10 @@ public class Turntable {
 		}
 
 		/**
-		 * 开始吞分
-		 */
-		public void startTunFen() {
-
-			isQiangZhiTunFen = true;
-			tunTuGaiLv = getChuFaTunFenGaiLv();
-
-			saveToDb();
-
-			int chuFaTunFenShiChang = getChuFaTunFenShiChang();
-
-			int min = chuFaTunFenShiChang % 60;
-			int hour = chuFaTunFenShiChang / 60;
-			setGanSheTime(hour, min);
-		}
-
-		/**
-		 * 触发收分程序时, 强制干涉概率
-		 */
-		public double getChuFaTunFenGaiLv() {
-			return chuFaTunFenGaiLv;
-		}
-
-		/**
-		 * 触发收分程序时, 强制干涉时长(分钟)
-		 */
-		public int getChuFaTunFenShiChang() {
-			if (chuFaTunFenShiChang == 0) {
-				chuFaTunFenShiChang = 30;
-				saveToDb();
-			}
-			return chuFaTunFenShiChang;
-		}
-
-		/**
 		 * 干涉程序是否正在干涉
 		 */
 		public boolean isZhengZaiGanShe() {
-			int sec = getGetGanSheRemainSec();
-			return sec > 0 && tunTuGaiLv > 0.0001;
+			return tunTuLiang > 0 && tunTuGaiLv > 0.0001;
 		}
 
 		/**
@@ -487,11 +388,6 @@ public class Turntable {
 		 */
 		private Row createTuFenRow(List<Row> all) {
 			TuFenComparator c = new TuFenComparator();
-			return getTunTuFenRow(c, all);
-		}
-
-		private Row getTunTuFenRow(Comparator<String> c, List<Row> all) {
-
 			List<String> types = TurntableUtil.getAllTypesWithOutAAndD();
 			types = Lists.newArrayList(types);
 			Util.Collection.upset(types);
@@ -528,7 +424,19 @@ public class Turntable {
 		 */
 		private Row createTunFenRow(List<Row> all) {
 			TunFenComparator c = new TunFenComparator();
-			return getTunTuFenRow(c, all);
+			List<String> types = TurntableUtil.getAllTypesWithOutAAndD();
+			types = Lists.newArrayList(types);
+
+			types.remove("B");
+			types.remove("C");
+
+			Util.Collection.upset(types);
+			Collections.sort(types, c);
+
+			List<String> sub = Util.Collection.sub(types, 3);
+			Util.Collection.upset(sub);
+			String randomOne = sub.get(0);
+			return findRandomOneByType(randomOne, all);
 		}
 
 		/**
@@ -539,6 +447,14 @@ public class Turntable {
 		public void setKuCun(long kuCun) {
 			this.kuCun = kuCun;
 			saveToDb();
+		}
+
+		public long getTunTuLiang() {
+			return tunTuLiang;
+		}
+
+		public void setTunTuLiang(long tunTuLiang) {
+			this.tunTuLiang = tunTuLiang;
 		}
 
 	}
@@ -609,6 +525,22 @@ public class Turntable {
 		updateKuCun();
 	}
 
+	public int getRoleCount() {
+		int roleCount = switchs.getRoleCount();
+
+		if (roleCount != 0) {
+			CacheManager.put("ROLE_COUNT", roleCount);
+		} else {
+			Object object = CacheManager.get("ROLE_COUNT");
+			if (object == null)
+				return roleCount;
+			int count = (int) object;
+			return count;
+		}
+
+		return roleCount;
+	}
+
 	private void initFields() {
 
 		rankingList = new RankingList();
@@ -649,11 +581,21 @@ public class Turntable {
 		ZhuangManager z = Server.getZhuangManager();
 		Zhuang zh = z.getZhuang();
 		if (zh == null) {
-			long profit = inOut.getIn() - inOut.getOut();
+			long systemIn = inOut.getIn() - inOut.getOut();
+			long systemOut = -systemIn;
 			Controller c = getController();
 			long now = c.getKuCun();
 			long old = now;
-			now += profit;
+			now += systemIn;
+
+			if (c.isZhengZaiGanShe()) {
+				if (c.isTunFening()) {
+					c.setTunTuLiang(c.getTunTuLiang() - systemIn);
+				} else {
+					c.setTunTuLiang(c.getTunTuLiang() - systemOut);
+				}
+			}
+
 			c.setKuCun(now);
 
 			if (isChanged(now, old)) {
@@ -680,6 +622,10 @@ public class Turntable {
 
 	private void addCaiJinToCaiJinChi() {
 
+		if (getController().getKuCun() < 0) { // 如果库存小于0, 就不出彩金
+			return;
+		}
+
 		if (result == null)
 			return;
 
@@ -703,7 +649,7 @@ public class Turntable {
 	 */
 	private void randomX() {
 
-		randomXNumber = Util.Random.get(1, 5);
+		randomXNumber = Util.Random.get(1, 6);
 	}
 
 	private static final class IProfitImplementation implements IProfit {
@@ -892,7 +838,7 @@ public class Turntable {
 				if (!isTestRole) {
 					Log.d("bet", roleId, isRobot ? "robot" : "player",
 							role.getNick(), sw, buildResult(), "-" + rdc, "+"
-									+ add, cj, xcjadd);
+									+ add, cj, xcjadd, role.getCoin());
 				}
 
 				if (!isTestRole && !isRobot) {
@@ -1128,14 +1074,6 @@ public class Turntable {
 
 		timer.start();
 
-		// new Thread() {
-		// public void run() {
-		// while (true) {
-		// new TestTask().run();
-		// Util.Thread.sleep(1000);
-		// }
-		// };
-		// }.start();
 	}
 
 	public int getWeight(Row row) {
@@ -1386,10 +1324,15 @@ public class Turntable {
 	private void addJiangQuan(long caiJin, IRole role) {
 		Const cc = Server.getConst();
 		int min = cc.getInt("JIANG_QUAN_CAI_JIN_MIN");
-		if(caiJin < min)
+		if (caiJin < min)
 			return;
 		double scale = cc.getDouble("JIANG_QUAN_SCALE");
-		role.addJiangQuan((long) (scale * caiJin));
+		long add = (long) (scale * caiJin);
+
+		role.addJiangQuan(add);
+		if (add != 0)
+			Log.d("add jiang quan settlement", role.getId(), role.getNick(),
+					add);
 	}
 
 	private long settlementXiaoCaiJin(IRole role, Row first) {

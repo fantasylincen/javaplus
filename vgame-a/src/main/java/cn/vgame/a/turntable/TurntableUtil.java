@@ -242,7 +242,7 @@ public class TurntableUtil {
 			String type = r.get("type");
 			ls.add(type);
 		}
-		CacheManager.put(key, 30000, ls);
+		CacheManager.put(key, ls);
 		return ls;
 	}
 

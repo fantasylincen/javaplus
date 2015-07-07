@@ -1,6 +1,15 @@
 package cn.vgame.a.account;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.javaplus.collections.list.Lists;
+import cn.javaplus.excel.Row;
+import cn.javaplus.excel.Sheet;
+import cn.vgame.a.Server;
 import cn.vgame.a.receivecoin.CoinStatus;
+import cn.vgame.share.KeyValue;
+import cn.vgame.share.Xml;
 
 public class RoleResult {
 
@@ -12,8 +21,12 @@ public class RoleResult {
 	/**
 	 * @param createRoleResult
 	 */
-	RoleResult(Role r) {
+	public RoleResult(Role r) {
 		role = r;
+	}
+
+	public long getRechargeHistory() {
+		return role.getRechargeHistory();
 	}
 
 	public long getCreateTime() {
@@ -76,12 +89,44 @@ public class RoleResult {
 		return role.hasFengHao();
 	}
 
+	public long getJiangQuan() {
+		return role.getJiangQuan();
+	}
+
 	public boolean isRobot() {
 		return role.isRobot();
 	}
 
 	public long getCoinAll() {
 		return role.getCoinAll();
+	}
+	
+	/**
+	 * 还可以首冲的ID列表
+	 * @return
+	 */
+	public List<Integer> getFirstRechargeIds() {
+		Xml xml = Server.getXml();
+		Sheet xy = xml.get("recharge-xy");
+		List<Row> all = xy.getAll();
+		ArrayList<Integer> ls = Lists.newArrayList();
+		for (Row row : all) {
+			if(canFirstRecharge(row)) {
+				ls.add(row.getInt("id"));
+			}
+		}
+		return ls;
+	}
+
+	private boolean canFirstRecharge(Row row) {
+		int a = row.getInt("jinDou");
+		int b = row.getInt("jinDouFirst");
+		if(a == b)
+			return false;
+		String rmb = row.get("rmb");
+		KeyValue kv = role.getKeyValueForever();
+		boolean hasRecharge = kv.getBoolean("FIRST_RECHARGE_MARK:" + rmb);
+		return !hasRecharge;
 	}
 
 }
