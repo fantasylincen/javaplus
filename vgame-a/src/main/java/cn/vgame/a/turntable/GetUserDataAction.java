@@ -1,6 +1,7 @@
 package cn.vgame.a.turntable;
 
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
+import cn.vgame.a.account.RoleResult;
 
 /**
  * 获取玩家数据
@@ -30,7 +31,7 @@ public class GetUserDataAction extends JsonActionAfterRoleEnterGame {
 
 	@Override
 	public Object run() {
-		return role;
+		return new RoleResult(role);
 	}
 
 }

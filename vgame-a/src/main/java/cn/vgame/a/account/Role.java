@@ -41,6 +41,10 @@ public class Role implements IRole {
 		}
 	}
 
+	public long getRechargeHistory() {
+		return dto.getRechargeHistory();
+	}
+
 	@Override
 	public long getJiangQuan() {
 		return dto.getJiangQuan();

@@ -649,7 +649,7 @@ public class Turntable {
 	 */
 	private void randomX() {
 
-		randomXNumber = Util.Random.get(1, 5);
+		randomXNumber = Util.Random.get(1, 6);
 	}
 
 	private static final class IProfitImplementation implements IProfit {

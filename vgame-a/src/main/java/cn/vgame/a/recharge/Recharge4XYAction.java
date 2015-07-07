@@ -23,6 +23,7 @@ import cn.vgame.a.Server;
 import cn.vgame.a.account.Role;
 import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.XYRechargeLogDto;
+import cn.vgame.share.KeyValue;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.xyzs.server.PayCallBack;
@@ -46,9 +47,11 @@ public class Recharge4XYAction extends ActionSupport {
 	public class Add {
 		long coin;
 		long jiangQuan;
+		private final Row row;
 
 		public Add(Row row) {
 
+			this.row = row;
 			if (isFirstRecharge()) {
 				coin = row.getInt("jinDouFirst");
 			} else {
@@ -61,7 +64,12 @@ public class Recharge4XYAction extends ActionSupport {
 		 * 是否第一次充值
 		 */
 		private boolean isFirstRecharge() {
-			return role.getDto().getRechargeHistory() <= 0;
+			KeyValue v = role.getKeyValueForever();
+			return v.getBoolean("FIRST_RECHARGE_MARK:" + getRmb());
+		}
+
+		public String getRmb() {
+			return row.get("rmb");
 		}
 
 		public long getCoin() {
@@ -175,6 +183,9 @@ public class Recharge4XYAction extends ActionSupport {
 			Log.d("recharge xy success", role.getId(), role.getNick(),
 					a.getCoin(), role.getCoin());
 			Daos.getXYRechargeLogDao().save(this.dto);
+
+			role.getKeyValueForever().set("FIRST_RECHARGE_MARK:" + a.getRmb(),
+					true);// 标记已经首冲了
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.e(e);
