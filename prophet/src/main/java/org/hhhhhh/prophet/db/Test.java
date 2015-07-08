@@ -1,4 +1,4 @@
-package org.hhhhhh.prophet.test;
+package org.hhhhhh.prophet.db;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,9 +16,9 @@ public class Test {
             Transaction tx = session.beginTransaction();
 
             for (int i = 0; i < 200; i++) {
-                Customer customer = new Customer();
-                customer.setUsername("customer" + i);
-                customer.setPassword("customer");
+            	UserDto customer = new UserDto();
+                customer.setId("customer" + i);
+                customer.setPwd("customer");
                 session.save(customer);
             }
 

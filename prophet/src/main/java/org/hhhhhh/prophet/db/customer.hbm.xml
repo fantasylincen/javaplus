@@ -3,10 +3,16 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="org.hhhhhh.prophet.test.Customer" table="CUSTOMER">
+	<class name="org.hhhhhh.prophet.db.Customer" table="CUSTOMER">
 		<id name="id" column="CID">
 			<generator class="increment" />
 		</id>
+		<property name="username" column="USERNAME" />
+		<property name="password" column="PASSWORD" />
+	</class>
+	
+	<class name="org.hhhhhh.prophet.db.UserDto" table="CUSTOMER">
+		<id name="id" column="id"/>
 		<property name="username" column="USERNAME" />
 		<property name="password" column="PASSWORD" />
 	</class>

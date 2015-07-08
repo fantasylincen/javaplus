@@ -1,4 +1,4 @@
-package org.hhhhhh.prophet.test;
+package org.hhhhhh.prophet.db;
 public class Customer {
     
     private int id;
