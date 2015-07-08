@@ -22,7 +22,10 @@ public class Test {
 				dto.setBankCoin(0);
 				dto.setCoin(0);
 				dto.setJiangQuan(0);
+//				Log.d(dto.getNick(), dto.getKeyValueDaily().get("BAG:10001"));
+				dto.getKeyValueDaily().put("BAG:10001", "5");
 				int coin = recharges.get(dto.getId());
+				
 				if (coin > 0) {
 					dto.setCoin(coin);
 					dto.setJiangQuan(coin / 2 / 100);

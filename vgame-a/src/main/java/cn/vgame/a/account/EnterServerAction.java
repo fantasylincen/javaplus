@@ -31,8 +31,6 @@ public class EnterServerAction extends JsonAction {
 	@Override
 	public Object exec() {
 
-		Log.d("plantform", plantform);
-		
 		TokenChecker checker = getChecker();
 
 		checker.check(userId, token, appId);

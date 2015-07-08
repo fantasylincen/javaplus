@@ -16,10 +16,13 @@ public class Test {
             Transaction tx = session.beginTransaction();
 
             for (int i = 0; i < 200; i++) {
-            	UserDto customer = new UserDto();
-                customer.setId("customer" + i);
-                customer.setPwd("customer");
-                session.save(customer);
+            	UserDto d = new UserDto();
+                d.setId("customer" + i);
+                d.setPwd("customer");
+                d.setJiFen(1);
+                d.setNick("");
+                d.setEmail("111@111.com");
+                session.save(d);
             }
 
             tx.commit();

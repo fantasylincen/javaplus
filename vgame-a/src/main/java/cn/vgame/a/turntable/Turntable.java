@@ -472,7 +472,8 @@ public class Turntable {
 		public void runSafty() {
 			RobotManager manager = Server.getRobotManager();
 			manager.randomCommit();
-			Log.d("robot commit");
+			long memory = Runtime.getRuntime().freeMemory();
+			Log.d("robot commit", memory / (1024 * 1024) + "M");
 		}
 
 		@Override
