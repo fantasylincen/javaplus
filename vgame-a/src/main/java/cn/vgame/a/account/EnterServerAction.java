@@ -45,6 +45,9 @@ public class EnterServerAction extends JsonAction {
 		if ("xy".equals(plantform)) {
 			return new XyTokenChecker();
 		}
+		if ("domain".equals(plantform)) {
+			return new DomainTokenChecker();
+		}
 		return new VcTokenChecker();
 	}
 

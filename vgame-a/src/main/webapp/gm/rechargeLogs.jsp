@@ -81,19 +81,6 @@
 			
 			
 			<tr>
-			<!-- 
-			CoinLogDto dto = dao.createDTO();
-		Date dt = new Date(System.currentTimeMillis());
-
-		dto.setCoin(coin);
-		dto.setId(Util.ID.createId());
-		dto.setDsc(dsc);
-		dto.setFrom(from + "");
-		dto.setTime(SF.format(dt));
-		dto.setTo(getId());
-		dto.setFromTo(from + "|" + getId());
-		dao.save(dto);
-		 -->
 				<td><%=dto.getTime()%></td>
 				<td><%=dto.getTo()%></td>
 				<td><%=Server.getRole(dto.getTo()).getNick()%></td>

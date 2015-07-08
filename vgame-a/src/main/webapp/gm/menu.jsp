@@ -49,5 +49,8 @@
 	<a href="consoleLogList.jsp">控制台日志</a>
 	<br>
 	<br>
+	<a href="../notice/notice.jsp">公告页面</a>
+	<br>
+	<br>
 </body>
 </html>

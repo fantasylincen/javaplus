@@ -1,25 +1,11 @@
 package org.hhhhhh.prophet;
 
-import org.hhhhhh.prophet.config.ServerConfig;
-import org.hhhhhh.prophet.gen.dto.MongoGen.Daos;
-import org.hhhhhh.prophet.gen.dto.MongoGen.UserDao;
-import org.hhhhhh.prophet.gen.dto.MongoGen.UserDao.UserDtoCursor;
-import org.hhhhhh.prophet.gen.dto.MongoGen.UserDto;
-import org.hhhhhh.prophet.gm.ProjectManager;
 import org.hhhhhh.prophet.user.User;
 
 import cn.javaplus.util.Util;
 
 public class Server {
 
-	private static ProjectManager projectManager;
-
-	public static ProjectManager getProjectManager() {
-		if (projectManager == null) {
-			projectManager = new ProjectManager();
-		}
-		return projectManager;
-	}
 
 	//
 	// private static ResourceDir resources;
