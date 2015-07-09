@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.hhhhhh.prophet.JsonAction;
+import org.hhhhhh.prophet.Server;
 import org.hhhhhh.prophet.account4web.UserCreator;
 import org.hhhhhh.prophet.error.ErrorResult;
 import org.hhhhhh.prophet.exception.RegistException;
@@ -52,8 +53,9 @@ public class RegistAction extends JsonAction {
 
 	String username;
 	String password;
+	private String flag;
+	private long time;
 	
-	private String userId;
 
 	public String getUsername() {
 		return username;
@@ -72,6 +74,9 @@ public class RegistAction extends JsonAction {
 	}
 
 	public Object exec() {
+		
+		checkFlag();
+		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		session = request.getSession();
 
@@ -91,27 +96,41 @@ public class RegistAction extends JsonAction {
 		}
 		
 		try {
-			UserDto dto = new UserCreator().createNewUser(session, getUsername(), getPassword(), getUserId());
+			UserDto dto = new UserCreator().createNewUser(session, getUsername(), getPassword());
 			return new RegistSuccess(dto.getId(), getPassword());
 		} catch (RegistException e) {
 			return new ErrorResult(e.getMessage());
 		}
 	}
 
+	private void checkFlag() {
+		String md5 = Util.Secure.md5(username + password + getTime() + Server.KEY);
+		if(!md5.equals(flag))
+			throw new RuntimeException("sign error");
+	}
+
 	private boolean isAreadyRegist() {
 		UserDao dao = Daos.getUserDao();
 		UserDtoCursor c = dao.find("email", getUsername());
 		return c.hasNext();
-
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getFlag() {
+		return flag;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
+	}
+
 
 
 }

@@ -40,7 +40,7 @@ public class LoginAction extends ActionSupport {
 		session = request.getSession();
 		int errorCode = 0;
 
-		User user = Server.loadUserByEmail(getUsername());
+		User user = Server.loadUserByUsername(getUsername());
 		
 		if (user == null) {
 			errorCode = 1;

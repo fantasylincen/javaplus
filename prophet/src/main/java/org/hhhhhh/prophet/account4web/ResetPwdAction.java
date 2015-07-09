@@ -78,7 +78,7 @@ public class ResetPwdAction extends ActionSupport {
 				return "timeUp";
 			}
 			
-			User user = Server.loadUserByEmail(email);
+			User user = Server.loadUserByUsername(email);
 			UserDto dd = user.getDto();
 			dd.setPwd(p1);
 			
