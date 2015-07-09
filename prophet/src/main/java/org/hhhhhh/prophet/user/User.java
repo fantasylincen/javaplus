@@ -14,7 +14,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return dto.getEmail();
+		return dto.getUsername();
 	}
 
 	public String getNick() {
@@ -22,8 +22,8 @@ public class User {
 		if (!isNullOrEmpty(dto.getNick())) {
 			return dto.getNick();
 		}
-		if (!isNullOrEmpty(dto.getEmail())) {
-			return dto.getEmail();
+		if (!isNullOrEmpty(dto.getUsername())) {
+			return dto.getUsername();
 		}
 		return dto.getId();
 	}

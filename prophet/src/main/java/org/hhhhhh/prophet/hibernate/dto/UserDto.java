@@ -2,7 +2,7 @@ package org.hhhhhh.prophet.hibernate.dto;
 
 public class UserDto {
 	String id;
-	String email;
+	String username;
 	String pwd;
 	String nick;
 	int jiFen;
@@ -12,11 +12,11 @@ public class UserDto {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPwd() {
 		return pwd;

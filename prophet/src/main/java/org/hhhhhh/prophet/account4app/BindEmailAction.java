@@ -63,7 +63,7 @@ public class BindEmailAction extends JsonAction {
 
 	private void bindEmailAndPassword(User user) {
 		UserDto dto = user.getDto();
-		dto.setEmail(getEmail());
+		dto.setUsername(getEmail());
 		dto.setPwd(Util.Secure.md5(getPassword()));
 		Daos.getUserDao().save(dto);
 	}
