@@ -14,8 +14,6 @@ import cn.javaplus.collections.map.Maps;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
 import cn.javaplus.log.Log;
-import cn.javaplus.random.WeightFetcher;
-import cn.javaplus.time.Time;
 import cn.javaplus.time.taskutil.TaskSafety;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
@@ -34,6 +32,7 @@ import cn.vgame.a.robot.Robot;
 import cn.vgame.a.robot.RobotManager;
 import cn.vgame.a.system.Const;
 import cn.vgame.a.turntable.GetAllSwitchsAction.Xs;
+import cn.vgame.a.turntable.generator.ExcelGenerator;
 import cn.vgame.a.turntable.swt.ISwitchs;
 import cn.vgame.a.turntable.swt.SwitchAll;
 import cn.vgame.a.zhuang.Zhuang;
@@ -47,116 +46,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 public class Turntable {
-
-	private final class TestTask {
-
-		public void run() {
-			try {
-				Log.d("test task", getCd());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public class CoinInOut {
-
-		private long caiJinOut;
-		private long out;
-		private long in;
-
-		public void addCaiJinOut(long add) {
-			this.caiJinOut = add;
-		}
-
-		public long getOut() {
-			return out;
-		}
-
-		public long getIn() {
-			return in;
-		}
-
-		public long getCaiJinOut() {
-			return caiJinOut;
-		}
-
-		public void addIn(long add) {
-			in += add;
-		}
-
-		public void addOut(long add) {
-			out += add;
-		}
-
-	}
-
-	/**
-	 * 小彩金奖励
-	 * 
-	 * @author Administrator
-	 * 
-	 */
-	public class XiaoCaiJinReward {
-		private String roleId;
-		private long countThisTime;
-		private double percent;
-		private long receive;
-
-		/**
-		 * 这次压了多少注
-		 * 
-		 * @return
-		 */
-		public long getCountThisTime() {
-			return countThisTime;
-		}
-
-		public void setCountThisTime(long countThisTime) {
-			this.countThisTime = countThisTime;
-		}
-
-		/**
-		 * 角色ID
-		 * 
-		 * @return
-		 */
-		public String getRoleId() {
-			return roleId;
-		}
-
-		public void setRoleId(String roleId) {
-			this.roleId = roleId;
-		}
-
-		public void setPercent(double percent) {
-			this.percent = percent;
-		}
-
-		/**
-		 * 获得彩金比例
-		 * 
-		 * @return
-		 */
-		public double getPercent() {
-			return percent;
-		}
-
-		public void setReceive(long receive) {
-			this.receive = receive;
-
-		}
-
-		/**
-		 * 最终获得了好多彩金
-		 * 
-		 * @return
-		 */
-		public long getReceive() {
-			return receive;
-		}
-
-	}
 
 	public class Controller {
 
@@ -185,7 +74,6 @@ public class Turntable {
 		private long kuCun;
 		private long tunTuLiang;
 
-		// private String ganSheSec;
 
 		public Controller() {
 
@@ -194,10 +82,6 @@ public class Turntable {
 			tunTuGaiLv = kv.getDouble("TUN_TU_GAI_LV");
 			kuCun = kv.getLong("KU_CUN");
 			tunTuLiang = kv.getLong("TUN_TU_LIANG");
-			// ganSheSec = kv.getString("GAN_SHE_SEC");
-			// if (ganSheSec == null || ganSheSec.equals("0")) {
-			// ganSheSec = "0:" + System.currentTimeMillis();
-			// }
 		}
 
 		private void saveToDb() {
@@ -206,7 +90,6 @@ public class Turntable {
 			kv.set("TUN_TU_GAI_LV", tunTuGaiLv);
 			kv.set("KU_CUN", kuCun);
 			kv.set("TUN_TU_LIANG", tunTuLiang);
-			// kv.set("GAN_SHE_SEC", ganSheSec);
 		}
 
 		public long getKuCun() {
@@ -222,63 +105,6 @@ public class Turntable {
 			return tunTuGaiLv;
 		}
 
-		// /**
-		// * 强制干涉剩余时间 返回格式: HH:mm
-		// */
-		// public String getGanSheShengYuShiJian() {
-		// long min = getRemainGanSheMin();
-		// long hour = getRemainGanSheHour();
-		// return hour + ":" + min;
-		// }
-
-		// /**
-		// * 剩余干涉分钟
-		// */
-		// public long getRemainGanSheMin() {
-		// long remainMillis = getGetGanSheRemainSec() * 1000L;
-		// long m = remainMillis % Time.MILES_ONE_HOUR;
-		// long min = m / Time.MILES_ONE_MIN;
-		// return min;
-		// }
-		//
-		// /**
-		// * 剩余干涉小时
-		// */
-		// public long getRemainGanSheHour() {
-		// long remainMillis = getGetGanSheRemainSec() * 1000L;
-		// return remainMillis / Time.MILES_ONE_HOUR;
-		// }
-
-		// /**
-		// * 系统强制干涉剩余秒
-		// *
-		// * @return
-		// */
-		// public int getGetGanSheRemainSec() {
-		// if (ganSheSec == null || ganSheSec.isEmpty()
-		// || ganSheSec.equals("0")) {
-		// return 0;
-		// }
-		//
-		// String[] sp = ganSheSec.split(":");
-		// int secAll = new Integer(sp[0]);
-		// long updateTime = new Long(sp[1]);
-		//
-		// long now = System.currentTimeMillis();
-		// int timeSpendSec = (int) ((now - updateTime) / 1000);
-		//
-		// return Math.max(0, secAll - timeSpendSec);
-		// }
-		//
-		// public void setGanSheTime(int hour, int min) {
-		// int sec = 0;
-		// sec += hour * 3600;
-		// sec += min * 60;
-		//
-		// ganSheSec = sec + ":" + System.currentTimeMillis();
-		// saveToDb();
-		// }
-
 		public int getDangWei() {
 			return 1;
 		}
@@ -293,7 +119,8 @@ public class Turntable {
 		public double getHuiBaoLv() {
 			Xml xml = Server.getXml();
 			Sheet sheet = xml.get("huiBaoLv");
-			Row row = sheet.get(getDangWei() + "-" + randomXNumber);
+			Row row = sheet.get(getDangWei() + "-"
+					+ resultGenerator.getRandomXNumber());
 			return row.getDouble("huiBaoLv");
 		}
 
@@ -301,7 +128,8 @@ public class Turntable {
 			try {
 				Xml xml = Server.getXml();
 				Sheet sheet = xml.get("huiBaoLv");
-				Row row = sheet.get(getDangWei() + "-" + randomXNumber);
+				Row row = sheet.get(getDangWei() + "-"
+						+ resultGenerator.getRandomXNumber());
 				return row.get("dsc");
 			} catch (Exception e) {
 				return "";
@@ -464,10 +292,6 @@ public class Turntable {
 	 */
 	public class RobotTask extends TaskSafety {
 
-		// public RobotTask(long delay, long period) {
-		// super(delay, period);
-		// }
-
 		@Override
 		public void runSafty() {
 			RobotManager manager = Server.getRobotManager();
@@ -481,11 +305,6 @@ public class Turntable {
 			Log.e(e);
 			e.printStackTrace();
 		}
-		//
-		// @Override
-		// public TurntableTask copy() {
-		// return new RobotTask(getDelay(), getPeriod());
-		// }
 
 	}
 
@@ -497,7 +316,6 @@ public class Turntable {
 	 */
 	private long getLose(String type) {
 		long countAll = switchs.getByTypeWithOutRobot(type);
-		// Log.d(countAll, type);
 		countAll *= getX(type);
 		return countAll;
 	}
@@ -548,7 +366,7 @@ public class Turntable {
 		result = null;
 		id = Util.ID.createId();
 		switchs = new SwitchAll();
-		timeStart = System.currentTimeMillis();
+		// timeStart = System.currentTimeMillis();
 		isLock = false;
 		inOut = new CoinInOut();
 		settlements = Maps.newHashMap();
@@ -557,22 +375,7 @@ public class Turntable {
 
 		isSomeOneGetCaiJin = false;
 
-		randomX();
-
 		Server.getRobotManager().clearAllSwitchs();
-	}
-
-	private final class WeightFetcherImplementation implements
-			WeightFetcher<Row> {
-		@Override
-		public Integer get(Row t) {
-			int id = t.getInt("id");
-
-			int weightAdd = getWeightAdd(id); // 管理员配置的权重
-			return t.getInt("weight-" + getController().getDangWei() + "-"
-					+ randomXNumber)
-					+ weightAdd;
-		}
 	}
 
 	/**
@@ -645,14 +448,6 @@ public class Turntable {
 		saveCaiJinToDb();
 	}
 
-	/**
-	 * 随机倍率, 在x表中随机
-	 */
-	private void randomX() {
-
-		randomXNumber = Util.Random.get(1, 6);
-	}
-
 	private static final class IProfitImplementation implements IProfit {
 
 		private final Zhuang zh;
@@ -670,7 +465,7 @@ public class Turntable {
 
 		private int getCompare(IProfit o) {
 			long add = o.getAdd();
-			long reduce = o.getReduce();
+			/* long reduce = */o.getReduce();
 			long caiJin = o.getCaiJin();
 
 			long l = add + caiJin/* - reduce */;
@@ -759,15 +554,6 @@ public class Turntable {
 
 	public class GenerateResultTask extends TaskSafety {
 
-		// @Override
-		// public TurntableTask copy() {
-		// return new GenerateResultTask(getDelay(), getPeriod());
-		// }
-		//
-		// public GenerateResultTask(long delay, long period) {
-		// super(delay, period);
-		// }
-
 		@Override
 		protected void process(Exception e) {
 			Log.e(e);
@@ -776,7 +562,7 @@ public class Turntable {
 
 		@Override
 		public void runSafty() {
-			result = generateReward();
+			result = resultGenerator.generateReward(switchs);
 
 			settlementForAllRoles();
 			settlementForZhuang();
@@ -986,16 +772,13 @@ public class Turntable {
 
 	public static Turntable instance;
 
-	private long timeStart;
+	// private long timeStart;
 	private int mustGenerateId = -1; // 本轮必出的东西
 
 	private SwitchAll switchs;
 	private String id;
 	private Result result;
 	private MyTimer timer;
-
-	/** 随机倍率序号 */
-	private int randomXNumber = 1;
 
 	private boolean isLock;
 
@@ -1023,6 +806,8 @@ public class Turntable {
 	private String caiJinNotice;
 
 	private Map<String, XiaoCaiJinReward> xiaoCaiJins;
+
+	ResultGenerator resultGenerator = new ExcelGenerator();
 
 	public static Turntable getInstance() {
 		if (instance == null) {
@@ -1079,32 +864,11 @@ public class Turntable {
 
 	public int getWeight(Row row) {
 		String c = "weight-" + getController().getDangWei() + "-"
-				+ randomXNumber;
+				+ resultGenerator.getRandomXNumber();
 		return row.getInt(c);
 	}
 
 	public long getCd() {
-		// if(result != null) {
-		// return 0;
-		// }
-		// long cd = Server.getConst().getLong("CD");
-		// long jcd = Server.getConst().getLong("JIE_SUAN_CD");
-		//
-		// long m = System.currentTimeMillis();
-		// long t = m - timeStart;
-		//
-		// boolean jinShaYuThisTime = isJinShaYuThisTime();
-		//
-		// long rt = cd - t;
-		// if (jinShaYuThisTime) {
-		// int pauseSec = Server.getConst().getInt("JIN_SHA_YU_PAUSE_SEC");
-		// rt += pauseSec * 1000L;
-		// }
-		//
-		// if (rt < 0)
-		// return cd + jcd + rt;
-		//
-		// return rt;
 		return timer.getBaseTaskCd() + 1900;
 	}
 
@@ -1148,11 +912,8 @@ public class Turntable {
 					s);// 结算给当前用户
 			settlements.put(role.getId(), result);
 
-			// if (!Server.getRobotManager().isRobot(role.getId())) {
-
 			inOut.addIn(result.getReduce());
 			inOut.addOut(result.getAdd());
-			// }
 
 			return new PlayResult(this.result.getResult(), role.getCoin(),
 					null, 0);
@@ -1166,96 +927,11 @@ public class Turntable {
 	 */
 	public PlayResult playOnceWithOutTime(IRole role, ISwitchs s) {
 		checkZhuang(role.getId(), s);
-		Result result = generateReward();
+		Result result = resultGenerator.generateReward(s);
 
 		List<Row> rs = result.getResult();
 		settlement(rs, role, s);// 结算给当前用户
 		return new PlayResult(rs, role.getCoin(), null, 0);
-	}
-
-	/**
-	 * 开奖
-	 */
-	private Result generateReward() {
-		Xml xml = Server.getXml();
-		Sheet sheet = xml.get("weights");
-		List<Row> all = sheet.getAll();
-		List<Row> randoms = random(all);
-		Result r = new Result();
-		r.setResult(randoms);
-		return r;
-	}
-
-	private List<Row> random(List<Row> all) {
-		ArrayList<Row> ls = Lists.newArrayList();
-		Row row = randomFirst(all); // 随机出第一个结果
-		ls.add(row);
-		randomSongDeng(all, ls, row); // 如果出鲨鱼, 送灯
-		return ls;
-	}
-
-	private void randomSongDeng(List<Row> all, ArrayList<Row> ls, Row row) {
-		int count = getSongDengCount(row);
-		List<Row> tmp = filter(all, row);
-		for (int i = 0; i < count; i++) {
-			Row random = randomOne(tmp);
-			ls.add(random);
-			tmp = filter(tmp, random); // 不能出相同的东西
-		}
-	}
-
-	private Row randomFirst(List<Row> all) {
-		Row row;
-		Controller c = getController();
-		if (this.mustGenerateId > 0) { // 本轮第一个必出
-			row = getMust(all);
-		} else if (c.isZhengZaiGanShe() && c.isHappen()) { // 如果干涉程序正在运行,
-			row = c.randomOne(all); // 则由干涉程序生成结果
-		} else {
-			row = randomOne(all);
-		}
-		return row;
-	}
-
-	private List<Row> filter(List<Row> all, Row row) {
-		ArrayList<Row> ls = Lists.newArrayList();
-		for (Row r : all) {
-
-			String t1 = r.get("type");
-			String t2 = row.get("type");
-
-			if (!t1.equals(t2)) {
-				ls.add(r);
-			}
-		}
-		return ls;
-	}
-
-	private int getSongDengCount(Row row) {
-		String type = row.get("type");
-		Xml xml = Server.getXml();
-		Sheet sheet = xml.get("x");
-		Row r = sheet.get(type);
-		String cs = r.get("songDengCount");
-		List<Integer> cc = Util.Collection.getIntegers(cs);
-		return Util.Random.get(cc.get(0), cc.get(1));
-	}
-
-	private Row randomOne(List<Row> all) {
-
-		WeightFetcher<Row> fet = new WeightFetcherImplementation();
-
-		Row row = Util.Random.getRandomOneByWeight(all, fet);
-		return row;
-	}
-
-	private Row getMust(List<Row> all) {
-		for (Row row : all) {
-			if (row.getInt("id") == this.mustGenerateId)
-				return row;
-		}
-		throw new NullPointerException("row " + this.mustGenerateId
-				+ "not found");
 	}
 
 	/**
@@ -1387,14 +1063,7 @@ public class Turntable {
 			return 0;
 		}
 
-		// if (manager.hasMustTo()) {
-		// if (manager.isCaiJinMustTo(role.getId())) {
-		// return settlementCj(role, s, row);
-		// }
-		// return 0;
-		// } else {
 		return settlementCj(role, s, row);
-		// }
 
 	}
 
@@ -1504,7 +1173,8 @@ public class Turntable {
 			throw new NullPointerException(type);
 		}
 		Controller c = getController();
-		return row.getInt("x-" + c.getDangWei() + "-" + randomXNumber);
+		return row.getInt("x-" + c.getDangWei() + "-"
+				+ resultGenerator.getRandomXNumber());
 	}
 
 	/**
@@ -1585,26 +1255,12 @@ public class Turntable {
 	}
 
 	/**
-	 * 管理员设置的权重
-	 * 
-	 * @param idInWeights
-	 *            对应到game.xml weights表中的id
-	 * @return
-	 */
-	public int getWeightAdd(int idInWeights) {
-		Integer weight = weightByGm.get(idInWeights);
-		if (weight == null)
-			weight = 0;
-		return weight;
-	}
-
-	/**
 	 * 更新管理员自定义权重
 	 * 
 	 * @param weightsAdd
 	 */
 	public void updateWeightsAdd(Map<Integer, Integer> weightsAdd) {
-		this.weightByGm = weightsAdd;
+		this.setWeightByGm(weightsAdd);
 		saveWeightsToDb();
 	}
 
@@ -1615,8 +1271,8 @@ public class Turntable {
 
 	private String weightsToJsonString() {
 		JSONObject o = new JSONObject();
-		for (Integer k : weightByGm.keySet()) {
-			Integer v = weightByGm.get(k);
+		for (Integer k : getWeightByGm().keySet()) {
+			Integer v = getWeightByGm().get(k);
 			o.put(k.toString(), v);
 		}
 		return o.toJSONString();
@@ -1653,27 +1309,6 @@ public class Turntable {
 
 		SettlementResult result = getResult(role);
 		List<Row> rst = this.result.getResult();
-		// if (result == null) {
-		// commitUserSwitchs(role.getId(), sw);
-		// result = settlement(rst, role, sw);// 结算给当前用户
-		//
-		// if (!Server.getZhuangManager().isZhuang(role.getId())) {
-		// rankingList.add(result);// 不是庄家的时候, 才加入排行榜, 不然结算界面会显示庄家排名
-		// }
-		//
-		// boolean isRobot = Server.getRobotManager().isRobot(role.getId());
-		// boolean isTestRole = role instanceof TestRole;
-		//
-		// if (!isTestRole && !isRobot) {
-		//
-		// inOut.addIn(result.getReduce());
-		// inOut.addOut(result.getAdd());
-		// inOut.addCaiJinOut(result.getCaiJin()
-		// + result.getXiaoCaiJinAdd());
-		// }
-		//
-		// settlements.put(role.getId(), result);
-		// }
 
 		long coin = role.getCoin();
 
@@ -1761,6 +1396,14 @@ public class Turntable {
 
 	public RankingList getRankingList() {
 		return rankingList;
+	}
+
+	public Map<Integer, Integer> getWeightByGm() {
+		return weightByGm;
+	}
+
+	public void setWeightByGm(Map<Integer, Integer> weightByGm) {
+		this.weightByGm = weightByGm;
 	}
 
 }
