@@ -42,10 +42,11 @@
 		long allBank = 0;
 		long allJiangQuan = 0;
 		for(RoleDto d : c) {
-			if(!d.getId().startsWith("r")) // 非机器人
-			all += d.getCoin() ;
-			allBank += d.getBankCoin();
-			allJiangQuan += d.getJiangQuan();
+			if(!d.getId().startsWith("r")) { // 非机器人
+				all += d.getCoin() ;
+				allBank += d.getBankCoin();
+				allJiangQuan += d.getJiangQuan();
+			}
 		}
 	%>
 	<form id="setSystemInfo" action="setSystemInfo" method="post">

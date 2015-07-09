@@ -1,23 +1,14 @@
 package org.hhhhhh.prophet;
 
+import org.hhhhhh.prophet.hibernate.dao.Daos;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDao;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDtoCursor;
+import org.hhhhhh.prophet.hibernate.dto.UserDto;
 import org.hhhhhh.prophet.user.User;
 
 import cn.javaplus.util.Util;
 
 public class Server {
-
-
-	//
-	// private static ResourceDir resources;
-	//
-	// public static ResourceDir getResources() {
-	// if (resources == null) {
-	// resources = new ResourceDir();
-	// }
-	// return resources;
-	// }
-
-	private static ServerConfig config;
 
 	/**
 	 * 每次获得到的对象都不一样
@@ -34,7 +25,7 @@ public class Server {
 		if (email == null)
 			throw new NullPointerException();
 		UserDao dao = Daos.getUserDao();
-		UserDtoCursor c = dao.findByEmail(email);
+		UserDtoCursor c = dao.find("email", email);
 		if (c.hasNext())
 			return c.next();
 		return null;
@@ -51,12 +42,6 @@ public class Server {
 		if (c == null)
 			return null;
 		return new User(c);
-	}
-
-	public static ServerConfig getConfig() {
-		if (config == null)
-			config = new ServerConfig();
-		return config;
 	}
 
 	public static User load(String input) {

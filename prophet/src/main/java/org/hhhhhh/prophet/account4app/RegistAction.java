@@ -1,20 +1,20 @@
-package com.cnbizmedia.account4games;
+package org.hhhhhh.prophet.account4app;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.hhhhhh.prophet.JsonAction;
+import org.hhhhhh.prophet.account4web.UserCreator;
+import org.hhhhhh.prophet.error.ErrorResult;
+import org.hhhhhh.prophet.exception.RegistException;
+import org.hhhhhh.prophet.hibernate.dao.Daos;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDao;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDtoCursor;
+import org.hhhhhh.prophet.hibernate.dto.UserDto;
 
 import cn.javaplus.util.Util;
 
-import com.cnbizmedia.JsonAction;
-import com.cnbizmedia.account.UserCreator;
-import com.cnbizmedia.error.ErrorResult;
-import com.cnbizmedia.exception.RegistException;
-import com.cnbizmedia.gen.dto.MongoGen.Daos;
-import com.cnbizmedia.gen.dto.MongoGen.UserDao;
-import com.cnbizmedia.gen.dto.MongoGen.UserDao.UserDtoCursor;
-import com.cnbizmedia.gen.dto.MongoGen.UserDto;
 
 public class RegistAction extends JsonAction {
 
@@ -100,11 +100,10 @@ public class RegistAction extends JsonAction {
 
 	private boolean isAreadyRegist() {
 		UserDao dao = Daos.getUserDao();
-		UserDtoCursor c = dao.findByEmail(getUsername());
+		UserDtoCursor c = dao.find("email", getUsername());
 		return c.hasNext();
 
 	}
-
 
 	public String getUserId() {
 		return userId;

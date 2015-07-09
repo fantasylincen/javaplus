@@ -1,9 +1,9 @@
 package org.hhhhhh.prophet.user;
 
 import org.hhhhhh.prophet.exception.VGameException;
-import org.hhhhhh.prophet.gen.dto.MongoGen.Daos;
-import org.hhhhhh.prophet.gen.dto.MongoGen.UserDao;
-import org.hhhhhh.prophet.gen.dto.MongoGen.UserDto;
+import org.hhhhhh.prophet.hibernate.dao.Daos;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDao;
+import org.hhhhhh.prophet.hibernate.dto.UserDto;
 
 public class User {
 
@@ -17,10 +17,6 @@ public class User {
 		return dto.getEmail();
 	}
 
-	public String getPwdMD5() {
-		return dto.getPwdMD5();
-	}
-
 	public String getNick() {
 
 		if (!isNullOrEmpty(dto.getNick())) {
@@ -29,7 +25,7 @@ public class User {
 		if (!isNullOrEmpty(dto.getEmail())) {
 			return dto.getEmail();
 		}
-		return dto.getQQOpenId();
+		return dto.getId();
 	}
 
 	private boolean isNullOrEmpty(String s) {
@@ -41,8 +37,8 @@ public class User {
 	 * 
 	 * @return
 	 */
-	public int getVb() {
-		return dto.getVb();
+	public int getJiFen() {
+		return dto.getJiFen();
 	}
 
 	public UserDto getDto() {
@@ -53,25 +49,29 @@ public class User {
 		return dto.getId();
 	}
 
-	public void reduceVb(int vbNeed) {
-		if (vbNeed < 0)
-			throw new IllegalArgumentException(vbNeed + "");
-		
-		checkEnouph(vbNeed);
-		dto.setVb(dto.getVb() - vbNeed);
+	public void reduceJiFen(int jiFenNeed) {
+		if (jiFenNeed < 0)
+			throw new IllegalArgumentException(jiFenNeed + "");
+
+		checkEnouph(jiFenNeed);
+		dto.setJiFen(dto.getJiFen() - jiFenNeed);
 		Daos.getUserDao().save(dto);
 	}
 
-	private void checkEnouph(int vbNeed) {
-		if (dto.getVb() < vbNeed)
+	private void checkEnouph(int jiFenNeed) {
+		if (dto.getJiFen() < jiFenNeed)
 			throw new VGameException("V币不够");
 	}
 
-	public void addVb(int vbAdd) {
-		if (vbAdd <= 0)
-			throw new IllegalArgumentException(vbAdd + "");
-		dto.setVb(dto.getVb() + vbAdd);
+	public void addJiFen(int jiFenAdd) {
+		if (jiFenAdd <= 0)
+			throw new IllegalArgumentException(jiFenAdd + "");
+		dto.setJiFen(dto.getJiFen() + jiFenAdd);
 		UserDao dao = Daos.getUserDao();
 		dao.save(dto);
+	}
+
+	public String getPwd() {
+		return dto.getPwd();
 	}
 }

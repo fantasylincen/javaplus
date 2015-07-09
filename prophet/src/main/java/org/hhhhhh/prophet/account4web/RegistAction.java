@@ -1,4 +1,4 @@
-package com.cnbizmedia.account;
+package org.hhhhhh.prophet.account4web;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.hhhhhh.prophet.hibernate.dao.Daos;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDao;
+import org.hhhhhh.prophet.hibernate.dao.Daos.UserDtoCursor;
 
-import com.cnbizmedia.gen.dto.MongoGen.Daos;
-import com.cnbizmedia.gen.dto.MongoGen.UserDao;
-import com.cnbizmedia.gen.dto.MongoGen.UserDao.UserDtoCursor;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegistAction extends ActionSupport {
@@ -81,7 +81,7 @@ public class RegistAction extends ActionSupport {
 
 	private boolean isAreadyRegist() {
 		UserDao dao = Daos.getUserDao();
-		UserDtoCursor c = dao.findByEmail(getUsername());
+		UserDtoCursor c = dao.find("email", getUsername());
 		return c.hasNext();
 
 	}
