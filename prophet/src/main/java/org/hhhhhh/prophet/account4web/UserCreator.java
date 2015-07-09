@@ -39,7 +39,7 @@ public class UserCreator {
 			String password, String userId) {
 		UserDao dao = Daos.getUserDao();
 		UserDto dto = new UserDto();
-		dto.setEmail(username);
+		dto.setUsername(username);
 
 		if (userId != null) {
 			checkUserId(userId);

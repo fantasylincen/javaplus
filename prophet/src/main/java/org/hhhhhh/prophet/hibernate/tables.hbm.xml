@@ -11,14 +11,14 @@
 		<property name="password" column="PASSWORD" />
 	</class> -->
 	
-	<class name="org.hhhhhh.prophet.db.dto.UserDto" table="user">
+	<class name="org.hhhhhh.prophet.hibernate.dto.UserDto" table="user">
 		<id name="id" column="id"/>
-		<property name="email" column="email" />
+		<property name="username" column="username" />
 		<property name="pwd" column="pwd" />
 		<property name="nick" column="nick" />
 		<property name="jiFen" column="jiFen" />
 	</class>
-	<class name="org.hhhhhh.prophet.db.dto.SystemKeyValueDto" table="system_key_value">
+	<class name="org.hhhhhh.prophet.hibernate.dto.SystemKeyValueDto" table="system_key_value">
 		<id name="key" column="key"/>
 		<property name="value" column="value" />
 	</class>

@@ -1,76 +1,67 @@
 package org.hhhhhh.prophet.hibernate.dao;
 
-import org.hhhhhh.prophet.hibernate.dao.Daos.UserDtoCursor;
+import java.util.Iterator;
+
 import org.hhhhhh.prophet.hibernate.dto.SystemKeyValueDto;
 import org.hhhhhh.prophet.hibernate.dto.UserDto;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-
-@SuppressWarnings("deprecation")
+@SuppressWarnings("unchecked")
 public class Daos {
 
 	public static class SystemKeyValueDao {
 
 		public void save(SystemKeyValueDto dto) {
-	.		
+			// TODO LC
 		}
 
-		public SystemKeyValueDto get(String key) {}
+		public SystemKeyValueDto get(String key) {
+			// TODO LC
+			return null;
+		}
 
 	}
-	public static class UserDao {
+
+	public static class UserDao extends HibernateDaoSupport {
 
 		public void save(UserDto dto) {
-	.		
+			getHibernateTemplate().saveOrUpdate(dto);
 		}
 
 		public UserDto get(String id) {
-			try {
-	            SessionFactory sf =
-	                new Configuration().configure().buildSessionFactory();
-	            Session session = sf.openSession();
-	            Transaction tx = session.beginTransaction();
-	            session.
-	            
-	            for (int i = 0; i < 200; i++) {
-	            	UserDto d = new UserDto();
-	                d.setId("customer" + i);
-	                d.setPwd("customer");
-	                d.setJiFen(1);
-	                d.setNick("");
-	                d.setEmail("111@111.com");
-	                session.save(d);
-	            }
-
-	            tx.commit();
-	            session.close();
-
-	        } catch (HibernateException e) {
-	            e.printStackTrace();
-	        }
-		
+			HibernateTemplate t = getHibernateTemplate();
+			UserDto userDto = t.get(UserDto.class, id);
+			UserDto user = (UserDto) userDto;
+			return user;
 		}
 
 		public UserDtoCursor find(String field, String v) {
+			Iterator<UserDto> it = getHibernateTemplate().iterate(
+					"from user where field='" + v + "'");
+			return new UserDtoCursor(it);
 		}
 
 	}
 
 	public static class UserDtoCursor {
 
+		private final Iterator<UserDto> it;
+
+		public UserDtoCursor(Iterator<UserDto> it) {
+			this.it = it;
+		}
+
 		public boolean hasNext() {
-			
+			return it.hasNext();
 		}
 
 		public UserDto next() {
-			
+			return it.next();
 		}
-		
+
 	}
+
 	public static UserDao getUserDao() {
 		return new UserDao();
 	}

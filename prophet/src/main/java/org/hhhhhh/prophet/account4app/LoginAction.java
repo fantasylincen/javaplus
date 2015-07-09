@@ -45,7 +45,7 @@ public class LoginAction extends JsonAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		session = request.getSession();
 
-		User user = Server.loadUserByEmail(getUsername());
+		User user = Server.loadUserByUsername(getUsername());
 
 		if (user == null) {
 			return new ErrorResult("user not exist");
