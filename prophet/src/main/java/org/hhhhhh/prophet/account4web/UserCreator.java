@@ -48,7 +48,7 @@ public class UserCreator {
 			dto.setId(createUserId());
 		}
 
-		dto.setPwd(password);
+		dto.setPassword(password);
 		dto.setNick("");
 		dao.save(dto);
 		session.setAttribute("userId", dto.getId());
