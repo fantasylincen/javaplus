@@ -3,7 +3,7 @@
   type="WEB"
   name="prophet"
   id="myeclipse.1423039259780"
-  context-root="/vchd"
+  context-root="/prophet"
   j2ee-spec="6.0"
   archive="prophet.war">
   <attributes>
