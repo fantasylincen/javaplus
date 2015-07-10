@@ -6,7 +6,7 @@ package cn.vgame.a.turntable;
  * @author Administrator
  * 
  */
-public class XiaoCaiJinReward {
+public class RoleCommitThisTime {
 	private String roleId;
 	private long countThisTime;
 	private double percent;

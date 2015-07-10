@@ -20,13 +20,11 @@ import cn.javaplus.util.Util;
 public class RegistAction extends JsonAction {
 
 	public static class RegistSuccess {
-		private final String pwdMd5;
-		private String pwd;
+		private final String password;
 
-		public RegistSuccess(String userId, String pwd) {
+		public RegistSuccess(String userId, String password) {
 			this.userId = userId;
-			this.pwd = pwd;
-			pwdMd5 = Util.Secure.md5(pwd);
+			this.password = password;
 		}
 
 		public boolean getIsSuccess() {
@@ -37,12 +35,8 @@ public class RegistAction extends JsonAction {
 			return userId;
 		}
 
-		public String getPwdMd5() {
-			return pwdMd5;
-		}
-		
-		public String getPwd() {
-			return pwd;
+		public String getPassword() {
+			return password;
 		}
 
 		private String userId;
@@ -96,7 +90,13 @@ public class RegistAction extends JsonAction {
 		}
 		
 		try {
-			UserDto dto = new UserCreator().createNewUser(session, getUsername(), getPassword());
+//			UserDto dto = new UserCreator().createNewUser(session, getUsername(), getPassword());
+			UserDto dto = new UserDto();
+			dto.setId("xxxxxxxxx");
+			dto.setUsername(username);
+			dto.setPassword(password);
+			dto.setNick("ww");
+			dto.setJiFen(20);
 			return new RegistSuccess(dto.getId(), getPassword());
 		} catch (RegistException e) {
 			return new ErrorResult(e.getMessage());

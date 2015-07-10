@@ -80,7 +80,7 @@ public class ResetPwdAction extends ActionSupport {
 			
 			User user = Server.loadUserByUsername(email);
 			UserDto dd = user.getDto();
-			dd.setPwd(p1);
+			dd.setPassword(p1);
 			
 			Daos.getUserDao().save(dd);
 			

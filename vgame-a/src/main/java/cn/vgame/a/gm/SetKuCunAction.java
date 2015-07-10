@@ -1,5 +1,6 @@
 package cn.vgame.a.gm;
 
+import cn.vgame.a.Server;
 import cn.vgame.a.turntable.Turntable;
 import cn.vgame.a.turntable.Turntable.Controller;
 
@@ -21,7 +22,14 @@ public class SetKuCunAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		Controller c = Turntable.getInstance().getController();
+		
+		long old = c.getKuCun();
+		
 		c.setKuCun(kuCun);
+		
+		long kuCunAdd = kuCun - old;
+		
+		Server.getKeyValueSaveOnly().add("KU_CUN_TOU_FANG_LIANG", kuCunAdd);
 		
 		return SUCCESS;
 	}

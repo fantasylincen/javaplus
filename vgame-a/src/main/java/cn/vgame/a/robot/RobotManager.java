@@ -53,6 +53,10 @@ public class RobotManager {
 	public Collection<Robot> getRobots() {
 		return robots.values();
 	}
+	
+	public int getRobotCount() {
+		return robots.size();
+	}
 
 //	/**
 //	 * 彩金是否一定给这个机器人 id: 机器人的id

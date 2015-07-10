@@ -14,7 +14,7 @@
 	<class name="org.hhhhhh.prophet.hibernate.dto.UserDto" table="user">
 		<id name="id" column="id"/>
 		<property name="username" column="username" />
-		<property name="pwd" column="pwd" />
+		<property name="password" column="password" />
 		<property name="nick" column="nick" />
 		<property name="jiFen" column="jiFen" />
 	</class>

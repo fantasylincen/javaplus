@@ -72,6 +72,6 @@ public class User {
 	}
 
 	public String getPwd() {
-		return dto.getPwd();
+		return dto.getPassword();
 	}
 }
