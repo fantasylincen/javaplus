@@ -37,6 +37,7 @@
 		<action name="oneKeyRegist" class="org.hhhhhh.prophet.account4app.OneKeyRegistAction"/>
 		<action name="loginById" class="org.hhhhhh.prophet.account4app.LoginByIdAction"/>
 		<action name="bindEmail" class="org.hhhhhh.prophet.account4app.BindEmailAction"/>
+		<action name="test" class="org.hhhhhh.prophet.account4app.TestAction"/>
 	</package>
 	
 
