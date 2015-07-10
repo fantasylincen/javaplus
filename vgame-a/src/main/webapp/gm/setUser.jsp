@@ -179,11 +179,12 @@ function juge(form){
 				</tr>
 				<tr>
 					<td><a href="coinLog.jsp?roleId=<%=role.getId()%>&page=1&countEvery=14">查看金豆记录</a></td>
-
 					<td></td>
 				</tr>
 			</tbody>
 		</table>
+		<br>
+		<br>
 		<br>
 		<br>
 		<input type="submit" value="保存" /> &nbsp;&nbsp;&nbsp;&nbsp; <a

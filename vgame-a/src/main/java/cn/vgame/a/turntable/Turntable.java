@@ -33,6 +33,7 @@ import cn.vgame.a.robot.RobotManager;
 import cn.vgame.a.system.Const;
 import cn.vgame.a.turntable.GetAllSwitchsAction.Xs;
 import cn.vgame.a.turntable.generator.ExcelGenerator;
+import cn.vgame.a.turntable.generator.PZResultGenerator;
 import cn.vgame.a.turntable.swt.ISwitchs;
 import cn.vgame.a.turntable.swt.SwitchAll;
 import cn.vgame.a.zhuang.Zhuang;
@@ -73,7 +74,18 @@ public class Turntable {
 		private double tunTuGaiLv;
 		private long kuCun;
 		private long tunTuLiang;
+		private double kuCunShuaiJian;
 
+		// getShuaiJianHistory
+		// getShuaiJianToday
+		/*
+		 * <tr> <td>库存每轮衰减比例</td> <td><input name="kuCunShuaiJian"
+		 * value="<%=tc.getKuCunShuaiJian()%>%>"> </td> </tr>
+		 * 
+		 * <tr> <td>今日衰减量/历史衰减量</td> <td><input name="kuCunShuaiJian"
+		 * value="<%=tc.getShuaiJianToday()/tc.getShuaiJianHistory()%>%>"> </td>
+		 * </tr>
+		 */
 
 		public Controller() {
 
@@ -82,6 +94,8 @@ public class Turntable {
 			tunTuGaiLv = kv.getDouble("TUN_TU_GAI_LV");
 			kuCun = kv.getLong("KU_CUN");
 			tunTuLiang = kv.getLong("TUN_TU_LIANG");
+
+			kuCunShuaiJian = kv.getDouble("KU_CUN_SHUAI_JIAN");
 		}
 
 		private void saveToDb() {
@@ -90,6 +104,7 @@ public class Turntable {
 			kv.set("TUN_TU_GAI_LV", tunTuGaiLv);
 			kv.set("KU_CUN", kuCun);
 			kv.set("TUN_TU_LIANG", tunTuLiang);
+			kv.set("KU_CUN_SHUAI_JIAN", kuCunShuaiJian);
 		}
 
 		public long getKuCun() {
@@ -165,12 +180,15 @@ public class Turntable {
 		 *            系统强制干涉概率
 		 * @param tunTuLiang
 		 *            吞吐量
+		 * @param kuCunShuaiJian
+		 *            库存衰减量
 		 */
 		public void update(boolean isQiangZhiTunFen, double tunTuGaiLv,
-				long tunTuLiang) {
+				long tunTuLiang, double kuCunShuaiJian) {
 
 			this.isQiangZhiTunFen = isQiangZhiTunFen;
 			this.tunTuGaiLv = tunTuGaiLv;
+			this.kuCunShuaiJian = kuCunShuaiJian;
 			this.setTunTuLiang(tunTuLiang);
 			saveToDb();
 		}
@@ -186,6 +204,9 @@ public class Turntable {
 		 * 干涉程序是否正在干涉
 		 */
 		public boolean isZhengZaiGanShe() {
+			if (!(resultGenerator instanceof ExcelGenerator)) {
+				return false;
+			}
 			return tunTuLiang > 0 && tunTuGaiLv > 0.0001;
 		}
 
@@ -285,6 +306,14 @@ public class Turntable {
 			this.tunTuLiang = tunTuLiang;
 		}
 
+		public double getKuCunShuaiJian() {
+			return kuCunShuaiJian;
+		}
+
+		public void setKuCunShuaiJian(double kuCunShuaiJian) {
+			this.kuCunShuaiJian = kuCunShuaiJian;
+		}
+
 	}
 
 	/**
@@ -342,10 +371,30 @@ public class Turntable {
 			addCaiJinToCaiJinChi();
 
 		updateKuCun();
+		shaiJianKuCun();
+	}
+
+	private void shaiJianKuCun() {
+		Controller c = getController();
+		long kuCun = c.getKuCun();
+		if (kuCun < 0)
+			return;
+
+		long reduce = (long) (kuCun * c.getKuCunShuaiJian());
+		c.setKuCun(kuCun - reduce);
+
+		KeyValueSaveOnly o = Server.getKeyValueSaveOnly();
+
+		o.add("KU_CUN_SHUAI_JIAN_LIANG", reduce);// 记录库存衰减量
 	}
 
 	public int getRoleCount() {
-		int roleCount = switchs.getRoleCount();
+		if (switchs == null)
+			return 0;
+		int roleCount = switchs.getRoleCount()
+				- Server.getRobotManager().getRobotCount();
+
+		roleCount = Math.max(0, roleCount);
 
 		if (roleCount != 0) {
 			CacheManager.put("ROLE_COUNT", roleCount);
@@ -371,11 +420,21 @@ public class Turntable {
 		inOut = new CoinInOut();
 		settlements = Maps.newHashMap();
 		xiaoCaiJins = Maps.newHashMap();
+		xiaoCaiJinThisRound = getXiaoCaiJinThisRound();
 		caiJinNotice = null;
 
 		isSomeOneGetCaiJin = false;
 
 		Server.getRobotManager().clearAllSwitchs();
+	}
+
+	/**
+	 * 此轮小彩金总量
+	 */
+	private long getXiaoCaiJinThisRound() {
+		long xiaoCaiJinThisRound = getCaiJin();
+		xiaoCaiJinThisRound = (long) (xiaoCaiJinThisRound * getXiaoCaiJinPercent());
+		return xiaoCaiJinThisRound;
 	}
 
 	/**
@@ -385,7 +444,7 @@ public class Turntable {
 		ZhuangManager z = Server.getZhuangManager();
 		Zhuang zh = z.getZhuang();
 		if (zh == null) {
-			long systemIn = inOut.getIn() - inOut.getOut();
+			long systemIn = inOut.getIn() - inOut.getOut()- inOut.getCaiJinOut();
 			long systemOut = -systemIn;
 			Controller c = getController();
 			long now = c.getKuCun();
@@ -426,7 +485,8 @@ public class Turntable {
 
 	private void addCaiJinToCaiJinChi() {
 
-		if (getController().getKuCun() < 0) { // 如果库存小于0, 就不出彩金
+		long kuCun = getController().getKuCun();
+		if (kuCun < 0) { // 如果库存小于0, 就不出彩金
 			return;
 		}
 
@@ -504,15 +564,6 @@ public class Turntable {
 	}
 
 	public class RoundEndTask extends TaskSafety {
-
-		// @Override
-		// public TurntableTask copy() {
-		// return new RoundEndTask(getDelay(), getPeriod());
-		// }
-		//
-		// public RoundEndTask(long delay, long period) {
-		// super(delay, period);
-		// }
 
 		@Override
 		protected void process(Exception e) {
@@ -637,7 +688,7 @@ public class Turntable {
 				settlements.put(roleId, result);
 			}
 
-			removeXiaoCaiJin();
+			initCaiJin();
 		}
 
 		private String buildResult() {
@@ -649,7 +700,7 @@ public class Turntable {
 			return sb.toString();
 		}
 
-		private void removeXiaoCaiJin() {
+		private void initCaiJin() {
 			caiJin = getMinCaiJin();
 			saveCaiJinToDb();
 		}
@@ -672,44 +723,46 @@ public class Turntable {
 				ISwitchs sw = switchs.get(roleId);
 				int count = TurntableUtil.getByType(sw, type);
 				if (count >= condition) {
-					xiaoCaiJins.put(roleId,
-							buildXiaoCaiJinReward(roleId, count));
+					xiaoCaiJins.put(roleId, buildCommitThisTime(roleId, count));
 				}
 			}
 
-			long countAll = getXiaoCaiJinCountAll();
+			long countAll = getCommitAll();
 
-			String base = Server.getConst().getString("CAI_JIN_SCALE_SMALL");
-
-			String[] ss = base.split("\\-");
-			double min = new Double(ss[0]);
-			double max = new Double(ss[1]);
-
-			double caiJinPercentAll = Util.Random.get(min, max);
-
-			for (XiaoCaiJinReward r : xiaoCaiJins.values()) {
+			for (RoleCommitThisTime r : xiaoCaiJins.values()) {
 				double c = r.getCountThisTime();
-				double percent = c / countAll * caiJinPercentAll;
-				r.setPercent(percent);
+				double percent = c / countAll;
+				r.setPercent(percent); // 它可以获得的比例
 			}
 		}
 
-		private long getXiaoCaiJinCountAll() {
+		private long getCommitAll() {
 			long sum = 0;
-			for (XiaoCaiJinReward r : xiaoCaiJins.values()) {
+			for (RoleCommitThisTime r : xiaoCaiJins.values()) {
 				sum += r.getCountThisTime();
 			}
 			return sum;
 		}
 
-		private XiaoCaiJinReward buildXiaoCaiJinReward(String roleId, int count) {
-			XiaoCaiJinReward r = new XiaoCaiJinReward();
+		private RoleCommitThisTime buildCommitThisTime(String roleId, int count) {
+			RoleCommitThisTime r = new RoleCommitThisTime();
 			r.setRoleId(roleId);
 			r.setCountThisTime(count);
 			return r;
 		}
 
 		private double isXiaoCaiJinHappen() {
+
+			long kuCun = getController().getKuCun();
+
+			if (kuCun < 0) // 库存为负数, 不发生小彩金彩金
+				return 0;
+
+			double p = Server.getConst().getDouble("CAI_JIN_PROBABILITY_SMALL");
+
+			if (!Util.Random.isHappen(p)) {
+				return 0;
+			}
 
 			List<Row> rr = Turntable.this.result.getResult();
 			Row first = rr.get(0);
@@ -805,9 +858,11 @@ public class Turntable {
 
 	private String caiJinNotice;
 
-	private Map<String, XiaoCaiJinReward> xiaoCaiJins;
+	private Map<String, RoleCommitThisTime> xiaoCaiJins;
 
-	ResultGenerator resultGenerator = new ExcelGenerator();
+	long xiaoCaiJinThisRound;
+
+	ResultGenerator resultGenerator = new PZResultGenerator();
 
 	public static Turntable getInstance() {
 		if (instance == null) {
@@ -922,17 +977,17 @@ public class Turntable {
 		}
 	}
 
-	/**
-	 * 不计时投注
-	 */
-	public PlayResult playOnceWithOutTime(IRole role, ISwitchs s) {
-		checkZhuang(role.getId(), s);
-		Result result = resultGenerator.generateReward(s);
-
-		List<Row> rs = result.getResult();
-		settlement(rs, role, s);// 结算给当前用户
-		return new PlayResult(rs, role.getCoin(), null, 0);
-	}
+	// /**
+	// * 不计时投注
+	// */
+	// public PlayResult playOnceWithOutTime(IRole role, ISwitchs s) {
+	// checkZhuang(role.getId(), s);
+	// Result result = resultGenerator.generateReward(s);
+	//
+	// List<Row> rs = result.getResult();
+	// settlement(rs, role, s);// 结算给当前用户
+	// return new PlayResult(rs, role.getCoin(), null, 0);
+	// }
 
 	/**
 	 * 结算金币
@@ -1013,13 +1068,11 @@ public class Turntable {
 	}
 
 	private long settlementXiaoCaiJin(IRole role, Row first) {
-		XiaoCaiJinReward rwd = xiaoCaiJins.get(role.getId());
+		RoleCommitThisTime rwd = xiaoCaiJins.get(role.getId());
 		if (rwd == null)
 			return 0;
 
-		long cj = getCaiJin();
-
-		long receive = (long) (rwd.getPercent() * cj);
+		long receive = (long) (rwd.getPercent() * xiaoCaiJinThisRound);
 
 		rwd.setReceive(receive);
 
@@ -1027,7 +1080,28 @@ public class Turntable {
 
 		saveCaiJinLog(role, receive, true);
 
+		reduceCaiJin(receive);
+
 		return receive;
+	}
+
+	/**
+	 * 从彩金池扣彩金
+	 */
+	private void reduceCaiJin(long r) {
+		caiJin -= r;
+		saveCaiJinToDb();
+	}
+
+	private double getXiaoCaiJinPercent() {
+		String base = Server.getConst().getString("CAI_JIN_SCALE_SMALL");
+
+		String[] ss = base.split("\\-");
+		double min = new Double(ss[0]);
+		double max = new Double(ss[1]);
+
+		double caiJinPercentAll = Util.Random.get(min, max);
+		return caiJinPercentAll;
 	}
 
 	private void saveCaiJinLog(IRole role, long settlementCaiJin,

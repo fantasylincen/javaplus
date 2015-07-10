@@ -1,3 +1,4 @@
+<%@page import="cn.vgame.a.Server"%>
 <%@page import="cn.vgame.a.turntable.Turntable.Controller"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.hp.hpl.sparta.Document"%>
@@ -84,24 +85,58 @@
 			
 		 
 				<tr>
-					<td>场外存量</td>
-					<td>携带金币:<%=all%>&nbsp;&nbsp;&nbsp;银行金币:<%=allBank%>&nbsp;&nbsp;&nbsp;奖券:<%=allJiangQuan%></td>
-				</tr>
-
-				<tr>
 					<td>开奖次数(今日/历史)</td>
 					<td><%=t.getGenerateTimesToday() + "/"
 					+ t.getGenerateTimesHistory()%></td>
 				</tr>
+				
+				<tr>
+					<td>场外携带金币</td>
+					<td><%=all%></td>
+				</tr>
+				
+				<tr>
+					<td>银行存量</td>
+					<td><%=allBank%></td>
+				</tr>
+				<tr>
+					<td>奖券</td>
+					<td><%=allJiangQuan%></td>
+				</tr>
+
 				<tr>
 					<td>彩金</td>
 					<td><%=Turntable.getInstance().getCaiJin()%></td>
 				</tr>
 
-
 				<tr>
 					<td>库存</td>
 					<td><%=tc.getKuCun()%> &nbsp;&nbsp;&nbsp;&nbsp;<a href="setKuCun.jsp">修改</a>
+					</td>
+				</tr>
+				<tr>
+					<td>库存每轮衰减比例</td>
+					<td><input name="kuCunShuaiJian" value="<%=tc.getKuCunShuaiJian()%>">
+					</td>
+				</tr>
+				<tr>
+					<td>今日库存投放量/历史库存投放量</td>
+					<%
+						long ssHistory = Server.getKeyValueForever().getLong("KU_CUN_TOU_FANG_LIANG");
+						long ssToday = Server.getKeyValueDaily().getLong("KU_CUN_TOU_FANG_LIANG");
+					 %>
+					<td><%=ssToday %>/<%=ssHistory %>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td>今日衰减量/历史衰减量</td>
+					<%
+						long sHistory = Server.getKeyValueForever().getLong("KU_CUN_SHUAI_JIAN_LIANG");
+						long sToday = Server.getKeyValueDaily().getLong("KU_CUN_SHUAI_JIAN_LIANG");
+					 %>
+					<td><%=sToday %>/<%=sHistory %>
 					</td>
 				</tr>
 				
@@ -149,7 +184,7 @@
 					<td>当前配置表回报率(大于1:吐分, 小于1:吞分)</td>
 					<td><%=tc.getHuiBaoLv()%>&nbsp;&nbsp;&nbsp;&nbsp;<%=tc.getHuiBaoLvDsc()%></td>
 				</tr> --%>
-
+<%-- 
 				<tr>
 					<td>吞吐类型</td>
 					<td>
@@ -198,7 +233,7 @@
 							 
 						 %>
 					</td>
-				</tr>
+				</tr> --%>
 
 			</tbody>
 		</table>

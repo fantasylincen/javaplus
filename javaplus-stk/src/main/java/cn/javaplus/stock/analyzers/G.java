@@ -19,6 +19,8 @@ public class G implements AnalyzeStrategy {
 	public G() {
 		String d = new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis() - Time.MILES_ONE_DAY));
 		dateNow = new Integer(d);
+		
+//		dateNow = 20150705;
 	}
 
 	public boolean conform(Stock1 stock) {
@@ -27,7 +29,7 @@ public class G implements AnalyzeStrategy {
 		if (last == null)
 			return false;
 
-		if (!startsWith(stock.getId(), "60", "00")) {
+		if (!startsWith(stock.getId(), "60", "00", "30")) {
 			return false;
 		}
 

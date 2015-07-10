@@ -18,7 +18,8 @@ public class SystemKeyValueForever implements KeyValue {
 
 	@Override
 	public long getLong(Object key) {
-		return new Long(getString(key, "0"));
+		String string = getString(key, "0");
+		return new Long(string);
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ public class CoinInOut {
 	private long in;
 
 	public void addCaiJinOut(long add) {
-		this.caiJinOut = add;
+		this.caiJinOut += add;
 	}
 
 	public long getOut() {
