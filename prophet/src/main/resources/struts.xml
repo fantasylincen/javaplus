@@ -3,7 +3,6 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 
-
 	<package name="account4web" extends="struts-default" namespace="/account4web">
 		<action name="regist" class="org.hhhhhh.prophet.account4web.RegistAction">
 			<result type="redirect">/regist_success.jsp</result>

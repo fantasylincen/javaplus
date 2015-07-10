@@ -5,6 +5,12 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name></display-name>
 
+	<listener>
+		<listener-class>cn.vgame.a.init.InitListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>cn.vgame.a.system.OnlineCounter</listener-class>
+	</listener>
 
 	<session-config>
 		<session-timeout>120</session-timeout><!-- 默认时间为分钟 -->
