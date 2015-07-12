@@ -4,8 +4,6 @@ import java.util.Iterator;
 
 import org.hhhhhh.prophet.hibernate.dto.SystemKeyValueDto;
 import org.hhhhhh.prophet.hibernate.dto.UserDto;
-import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 @SuppressWarnings("unchecked")
 public class Daos {

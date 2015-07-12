@@ -13,7 +13,7 @@
 		<property name="connection.password">vcvc2013</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		
-		<mapping resource="org/hhhhhh/prophet/hibernate/tables.hbm.xml" /> 
+		<mapping resource="tables.hbm.xml" /> 
 	</session-factory>
 
 </hibernate-configuration>
