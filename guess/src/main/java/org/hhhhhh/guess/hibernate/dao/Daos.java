@@ -8,6 +8,7 @@ import org.hhhhhh.guess.hibernate.dto.UserDto;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 @SuppressWarnings("unchecked")
 public class Daos {
@@ -41,13 +42,15 @@ public class Daos {
 		public UserDtoCursor find(String field, String v) {
 			SessionFactory sf = HibernateSessionFactory.getSessionFactory();
 			Session session = sf.openSession();
-			String hql = "from user where " + field + " = " + v;
+			
+			String hql = "from UserDto where " + field + "=?";
 			Query query = session.createQuery(hql);
+			query.setParameter(0, v);
 			query.setCacheable(true);
 			Iterator<UserDto> it = query.iterate();
+			
 			return new UserDtoCursor(it);
 		}
-
 	}
 
 	public static class UserDtoCursor {

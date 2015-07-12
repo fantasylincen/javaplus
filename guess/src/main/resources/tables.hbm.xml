@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 	
-<hibernate-mapping>
+<hibernate-mapping >
 
 	<class name="org.hhhhhh.guess.hibernate.dto.UserDto" table="user">
 		<id name="id" column="id"/>
@@ -11,5 +11,10 @@
 		<property name="password" column="password" />
 		<property name="nick" column="nick" />
 		<property name="jiFen" column="jiFen" />
+	</class>
+	
+	<class name="org.hhhhhh.guess.hibernate.dto.SystemKeyValueDto" table="system_key_value">
+		<id name="key" column="key"/>
+		<property name="value" column="value" />
 	</class>
 </hibernate-mapping>
