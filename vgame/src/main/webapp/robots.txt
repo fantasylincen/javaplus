@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /recharge.jsp
-Allow: /contacts.jsp
-Allow: /index.jsp
-Allow: /about.jsp

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project default="plugin_export" name="导出插件到F盘">
-	<target name="plugin_export">
-		<pde.exportPlugins destination="F:\" exportSource="false" exportType="directory" plugins="______" useJARFormat="true"/>
-	</target>
-</project>

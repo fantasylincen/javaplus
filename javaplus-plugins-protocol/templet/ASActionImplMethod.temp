@@ -1,8 +1,0 @@
-
-		public function NAME(FILEDS):void
-		{
-		
-			var p:Packet = new PacketImpl(_socket);
-WRITE_FS
-			p.send();
-		}
