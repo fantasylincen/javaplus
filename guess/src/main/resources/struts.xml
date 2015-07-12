@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="account4app" extends="struts-default" namespace="/account4app">
+		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction"/>
+		<action name="login" class="org.hhhhhh.guess.account4app.LoginAction"/>
+		<action name="resetPwd" class="org.hhhhhh.guess.account4app.ResetPwdAction"/>
+		
+		<action name="oneKeyRegist" class="org.hhhhhh.guess.account4app.OneKeyRegistAction"/>
+		<action name="loginById" class="org.hhhhhh.guess.account4app.LoginByIdAction"/>
+		<action name="bindEmail" class="org.hhhhhh.guess.account4app.BindEmailAction"/>
+		<action name="test" class="org.hhhhhh.guess.account4app.TestAction"/>
+	</package>
+
+</struts>    
