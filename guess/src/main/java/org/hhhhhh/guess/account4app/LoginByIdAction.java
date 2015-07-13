@@ -36,7 +36,7 @@ public class LoginByIdAction extends JsonAction {
 		if (user == null) {
 			return new ErrorResult("user not exist");
 		} else {
-			String md5a = user.getPwd();
+			String md5a = user.getPassword();
 			if (!md5a.equals(getPwd())) {
 				return new ErrorResult("password error");
 			}

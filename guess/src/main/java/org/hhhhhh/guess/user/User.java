@@ -13,7 +13,7 @@ public class User {
 		this.dto = dto;
 	}
 
-	public String getEmail() {
+	public String getUsername() {
 		return dto.getUsername();
 	}
 
@@ -71,7 +71,7 @@ public class User {
 		dao.save(dto);
 	}
 
-	public String getPwd() {
+	public String getPassword() {
 		return dto.getPassword();
 	}
 }

@@ -9,18 +9,12 @@ import org.hhhhhh.guess.Server;
 import org.hhhhhh.guess.error.ErrorResult;
 import org.hhhhhh.guess.user.User;
 
-import cn.javaplus.util.Util;
-
-import com.alibaba.fastjson.JSON;
-import com.opensymphony.xwork2.ActionSupport;
-
 public class LoginAction extends JsonAction {
 
 	private static final long serialVersionUID = -7216556879198306440L;
 
 	String username;
 	String password;
-	private String tokenKey;
 
 	private HttpSession session;
 
@@ -50,41 +44,45 @@ public class LoginAction extends JsonAction {
 		if (user == null) {
 			return new ErrorResult("user not exist");
 		} else {
-			String md5a = user.getPwd();
-			if (!md5a.equals(getPassword())) {
+			String pwd = user.getPassword();
+			if (!pwd.equals(getPassword())) {
 				return new ErrorResult("password error");
 			}
 		}
 
 		session.setAttribute("userId", user.getId());
 		
-		return new LoginSuccessResult(user.getId());
-	}
-
-	public String getTokenKey() {
-		return tokenKey;
-	}
-
-	public void setTokenKey(String tokenKey) {
-		this.tokenKey = tokenKey;
+		return new LoginSuccessResult(user);
 	}
 
 	class LoginSuccessResult {
 
-		private final String id;
 
-		public LoginSuccessResult(String id) {
-			this.id = id;
+		private final User user;
+
+		public LoginSuccessResult(User user) {
+			this.user = user;
+		}
+
+		public String getUsername() {
+			return user.getUsername();
+		}
+
+		public String getNick() {
+			return user.getNick();
+		}
+
+		public int getJiFen() {
+			return user.getJiFen();
 		}
 
 		public String getId() {
-			return id;
+			return user.getId();
 		}
+		
+		
 
-		public String getToken() {
-			String tokenKey = getTokenKey();
-			return Util.Token.generate(tokenKey, getId());
-		}
+
 	}
 
 }

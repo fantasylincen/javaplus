@@ -24,7 +24,7 @@ public class Server {
 		if (username == null)
 			throw new NullPointerException();
 		UserDao dao = Daos.getUserDao();
-		UserDtoCursor c = dao.find("email", username);
+		UserDtoCursor c = dao.find("username", username);
 		if (c.hasNext())
 			return c.next();
 		return null;

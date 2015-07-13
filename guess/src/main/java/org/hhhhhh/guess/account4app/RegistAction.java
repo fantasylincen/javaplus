@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.hhhhhh.guess.JsonAction;
 import org.hhhhhh.guess.Server;
-import org.hhhhhh.guess.account4web.UserCreator;
 import org.hhhhhh.guess.error.ErrorResult;
 import org.hhhhhh.guess.exception.RegistException;
 import org.hhhhhh.guess.hibernate.dao.Daos;
@@ -19,26 +18,31 @@ import cn.javaplus.util.Util;
 public class RegistAction extends JsonAction {
 
 	public static class RegistSuccess {
-		private final String password;
 
-		public RegistSuccess(String userId, String password) {
-			this.userId = userId;
-			this.password = password;
+
+		private final UserDto dto;
+
+		public RegistSuccess(UserDto dto) {
+			this.dto = dto;
 		}
 
-		public boolean getIsSuccess() {
-			return true;
+		public String getId() {
+			return dto.getId();
 		}
 
-		public String getUserId() {
-			return userId;
+		public String getUsername() {
+			return dto.getUsername();
 		}
 
-		public String getPassword() {
-			return password;
+		public String getNick() {
+			return dto.getNick();
 		}
 
-		private String userId;
+		public int getJiFen() {
+			return dto.getJiFen();
+		}
+
+
 	}
 
 	private static final long serialVersionUID = -8965549726279594696L;
@@ -93,7 +97,7 @@ public class RegistAction extends JsonAction {
 		try {
 			UserCreator c = new UserCreator();
 			UserDto dto = c.createNewUser(session, un, pwd);
-			return new RegistSuccess(dto.getId(), pwd);
+			return new RegistSuccess(dto);
 		} catch (RegistException e) {
 			return new ErrorResult(e.getMessage());
 		}

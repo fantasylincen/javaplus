@@ -1,7 +1,5 @@
 package org.hhhhhh.guess.hibernate.dto;
 
-import org.hhhhhh.guess.hibernate.dao.Daos;
-import org.hhhhhh.guess.hibernate.dao.Daos.UserDao;
 import org.junit.Test;
 
 import cn.javaplus.log.Log;
@@ -10,8 +8,8 @@ import cn.javaplus.web.WebContentFethcer;
 
 public class ActionTests {
 
-	static String httpHead = "http://localhost:8090/guess/";
-	
+	static String httpHead = "http://localhost/guess/";
+
 	@Test
 	public void testRegist() {
 		String KEY = "JJYSB";
@@ -30,8 +28,17 @@ public class ActionTests {
 		Log.d(content);
 	}
 	
-	public static void main(String[] args) {
-		UserDao dao = Daos.getUserDao();
-		dao.get("1");
+
+	@Test
+	public void testLogin() {
+		String username = "574907580@qq.com";
+		String password = "123456";
+		
+		String url = httpHead + "account4app/login?username=USERNAME&password=PASSWORD";
+		url = url.replace("USERNAME", username);
+		url = url.replace("PASSWORD", password);
+		
+		String content = WebContentFethcer.get("utf8", url);
+		Log.d(content);
 	}
 }

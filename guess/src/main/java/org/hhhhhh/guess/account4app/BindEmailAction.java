@@ -23,7 +23,7 @@ public class BindEmailAction extends JsonAction {
 		}
 
 		public String getEmail() {
-			return user.getEmail();
+			return user.getUsername();
 		}
 		
 		public String getPassword() {
@@ -76,7 +76,7 @@ public class BindEmailAction extends JsonAction {
 
 	private boolean isAreadyBindEmail(User user) {
 
-		String email = user.getEmail();
+		String email = user.getUsername();
 		return email != null && !email.isEmpty();
 	}
 
