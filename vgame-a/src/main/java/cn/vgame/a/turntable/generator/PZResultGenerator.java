@@ -127,7 +127,9 @@ public class PZResultGenerator implements ResultGenerator {
 		Controller c = Turntable.getInstance().getController();
 		long kuCun = c.getKuCun();
 
-		if (kuCun < 0) {
+		double pro = Server.getConst().getDouble("TUN_FEN_GAI_LV");
+		
+		if (Util.Random.isHappen(pro) || kuCun < 0) {
 			return generateTunFen(xss, all);
 		} else {
 			return generateTuFen(xss, all);

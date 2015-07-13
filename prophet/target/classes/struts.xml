@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+
+	<package name="account4web" extends="struts-default" namespace="/account4web">
+		<action name="regist" class="org.hhhhhh.prophet.account4web.RegistAction">
+			<result type="redirect">/regist_success.jsp</result>
+			<result type="redirect" name="error">/regist.jsp</result>
+		</action>
+		<action name="login" class="org.hhhhhh.prophet.account4web.LoginAction">
+			<result type="redirect">/index.jsp</result>
+			<result type="redirect" name="error">/login.jsp</result>
+		</action>
+		<action name="logout" class="org.hhhhhh.prophet.account4web.LogoutAction">
+			<result type="redirect">/index.jsp</result>
+		</action>
+		<action name="resetPassword" class="org.hhhhhh.prophet.account4web.ResetPasswordAction">
+			<result type="redirect">/resetSuccess.jsp</result>
+			<result type="redirect" name="error">/resetPassword.jsp</result>
+		</action>
+		<action name="resetPwd" class="org.hhhhhh.prophet.account4web.ResetPwdAction">
+			<result type="redirect">/login.jsp</result>
+			<result type="redirect" name="error">/resetPwd.jsp</result>
+		</action>
+		<action name="getUser" class="org.hhhhhh.prophet.account4web.GetUserAction">
+			<result type="redirect">/user.jsp</result>
+		</action>
+	</package>
+	
+	<package name="account4app" extends="struts-default" namespace="/account4app">
+		<action name="regist" class="org.hhhhhh.prophet.account4app.RegistAction"/>
+		<action name="login" class="org.hhhhhh.prophet.account4app.LoginAction"/>
+		<action name="resetPwd" class="org.hhhhhh.prophet.account4app.ResetPwdAction"/>
+		
+		<action name="oneKeyRegist" class="org.hhhhhh.prophet.account4app.OneKeyRegistAction"/>
+		<action name="loginById" class="org.hhhhhh.prophet.account4app.LoginByIdAction"/>
+		<action name="bindEmail" class="org.hhhhhh.prophet.account4app.BindEmailAction"/>
+	</package>
+	
+
+
+
+</struts>    

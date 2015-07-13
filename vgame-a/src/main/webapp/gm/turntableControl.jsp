@@ -261,9 +261,7 @@
 				<tr>
 					<th>ID</th>
 					<th>类型名</th>
-					<th>预设权重</th>
-					<th>权重增量</th>
-					<th>实际权重</th>
+					<th>权重</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -283,8 +281,6 @@
 		
 		int weight = Turntable.getInstance().getWeight(row);
 
-		Turntable t = Turntable.getInstance();
-		int weightAdd = t.getWeightAdd(id);
 
 		sb.append("<tr>");
 		sb.append("<td>");
@@ -299,15 +295,6 @@
 		sb.append(weight);
 		sb.append("</td>");
 
-		sb.append("<td>");
-		sb.append("<input name=\"weightAdd:" + id + "\" value=\"" + weightAdd
-		//		+ "\" style=\"border-left:0px;border-top:0px;border-right:0px;border-bottom:0px\">");
-				+ "\"\">");
-		sb.append("</td>");
-
-		sb.append("<td>");
-		sb.append(weightAdd + weight);
-		sb.append("</td>");
 
 		sb.append("</tr>");
 	}%>

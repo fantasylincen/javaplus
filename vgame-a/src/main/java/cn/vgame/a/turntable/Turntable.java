@@ -75,17 +75,7 @@ public class Turntable {
 		private long kuCun;
 		private long tunTuLiang;
 		private double kuCunShuaiJian;
-
-		// getShuaiJianHistory
-		// getShuaiJianToday
-		/*
-		 * <tr> <td>库存每轮衰减比例</td> <td><input name="kuCunShuaiJian"
-		 * value="<%=tc.getKuCunShuaiJian()%>%>"> </td> </tr>
-		 * 
-		 * <tr> <td>今日衰减量/历史衰减量</td> <td><input name="kuCunShuaiJian"
-		 * value="<%=tc.getShuaiJianToday()/tc.getShuaiJianHistory()%>%>"> </td>
-		 * </tr>
-		 */
+		private long kuCunShuaiJianZhi;
 
 		public Controller() {
 
@@ -96,6 +86,7 @@ public class Turntable {
 			tunTuLiang = kv.getLong("TUN_TU_LIANG");
 
 			kuCunShuaiJian = kv.getDouble("KU_CUN_SHUAI_JIAN");
+			setKuCunShuaiJianZhi(kv.getLong("KU_CUN_SHUAI_JIAN_ZHI"));
 		}
 
 		private void saveToDb() {
@@ -105,6 +96,7 @@ public class Turntable {
 			kv.set("KU_CUN", kuCun);
 			kv.set("TUN_TU_LIANG", tunTuLiang);
 			kv.set("KU_CUN_SHUAI_JIAN", kuCunShuaiJian);
+			kv.set("KU_CUN_SHUAI_JIAN_ZHI", getKuCunShuaiJianZhi());
 		}
 
 		public long getKuCun() {
@@ -181,14 +173,17 @@ public class Turntable {
 		 * @param tunTuLiang
 		 *            吞吐量
 		 * @param kuCunShuaiJian
-		 *            库存衰减量
+		 *            库存衰比例
+		 * @param kuCunShuaiJianZhi
+		 *            库存衰减值
 		 */
 		public void update(boolean isQiangZhiTunFen, double tunTuGaiLv,
-				long tunTuLiang, double kuCunShuaiJian) {
+				long tunTuLiang, double kuCunShuaiJian, long kuCunShuaiJianZhi) {
 
 			this.isQiangZhiTunFen = isQiangZhiTunFen;
 			this.tunTuGaiLv = tunTuGaiLv;
 			this.kuCunShuaiJian = kuCunShuaiJian;
+			this.setKuCunShuaiJianZhi(kuCunShuaiJianZhi);
 			this.setTunTuLiang(tunTuLiang);
 			saveToDb();
 		}
@@ -314,6 +309,14 @@ public class Turntable {
 			this.kuCunShuaiJian = kuCunShuaiJian;
 		}
 
+		public long getKuCunShuaiJianZhi() {
+			return kuCunShuaiJianZhi;
+		}
+
+		public void setKuCunShuaiJianZhi(long kuCunShuaiJianZhi) {
+			this.kuCunShuaiJianZhi = kuCunShuaiJianZhi;
+		}
+
 	}
 
 	/**
@@ -381,6 +384,7 @@ public class Turntable {
 			return;
 
 		long reduce = (long) (kuCun * c.getKuCunShuaiJian());
+		reduce += c.getKuCunShuaiJianZhi();
 		c.setKuCun(kuCun - reduce);
 
 		KeyValueSaveOnly o = Server.getKeyValueSaveOnly();
@@ -444,7 +448,8 @@ public class Turntable {
 		ZhuangManager z = Server.getZhuangManager();
 		Zhuang zh = z.getZhuang();
 		if (zh == null) {
-			long systemIn = inOut.getIn() - inOut.getOut()- inOut.getCaiJinOut();
+			long systemIn = inOut.getIn() - inOut.getOut()
+					- inOut.getCaiJinOut();
 			long systemOut = -systemIn;
 			Controller c = getController();
 			long now = c.getKuCun();

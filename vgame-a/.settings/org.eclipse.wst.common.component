@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="share-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vgame-share/vgame-share">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="javaplus-util-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javaplus-util/javaplus-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
