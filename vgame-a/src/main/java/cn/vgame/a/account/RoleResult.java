@@ -3,10 +3,13 @@ package cn.vgame.a.account;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import cn.javaplus.collections.list.Lists;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
 import cn.vgame.a.Server;
+import cn.vgame.a.plantform.Plantform;
 import cn.vgame.a.receivecoin.CoinStatus;
 import cn.vgame.share.KeyValue;
 import cn.vgame.share.Xml;
@@ -17,12 +20,15 @@ public class RoleResult {
 	 * 
 	 */
 	private final Role role;
+	private final HttpSession session;
 
 	/**
+	 * @param session 
 	 * @param createRoleResult
 	 */
-	public RoleResult(Role r) {
+	public RoleResult(Role r, HttpSession session) {
 		role = r;
+		this.session = session;
 	}
 
 	public long getRechargeHistory() {
@@ -106,8 +112,14 @@ public class RoleResult {
 	 * @return
 	 */
 	public List<Integer> getFirstRechargeIds() {
+		
+		Plantform plantform = (Plantform) session.getAttribute("plantform");
+		if(plantform == null)
+			return Lists.newArrayList();
+		
 		Xml xml = Server.getXml();
-		Sheet xy = xml.get("recharge-xy");
+		
+		Sheet xy = xml.get(plantform.getRechargeSheetName());
 		List<Row> all = xy.getAll();
 		ArrayList<Integer> ls = Lists.newArrayList();
 		for (Row row : all) {

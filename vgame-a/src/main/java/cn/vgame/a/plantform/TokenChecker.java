@@ -1,4 +1,4 @@
-package cn.vgame.a.account;
+package cn.vgame.a.plantform;
 
 public interface TokenChecker {
 

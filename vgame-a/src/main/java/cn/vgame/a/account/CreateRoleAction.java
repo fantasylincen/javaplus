@@ -63,7 +63,7 @@ public class CreateRoleAction extends JsonAction {
 
 		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
 		Events.dispatch(new CreateRoleEvent(role, session));
-		return new CreateRoleResult(role);
+		return new CreateRoleResult(role, session);
 	}
 
 	private boolean isAreadyUse() {

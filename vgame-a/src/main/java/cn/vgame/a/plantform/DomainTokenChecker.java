@@ -1,4 +1,4 @@
-package cn.vgame.a.account;
+package cn.vgame.a.plantform;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -12,8 +12,8 @@ public class DomainTokenChecker implements TokenChecker {
 
 	@Override
 	public void check(String userId, String token, String appId) {
-//		http://sy.test.cw678.com/Services/GetAccountInfo?AccName=1111&Time=1432121212&Flag=834598349543895
-		
+		// http://sy.test.cw678.com/Services/GetAccountInfo?AccName=1111&Time=1432121212&Flag=834598349543895
+
 		int time = getTime();
 
 		String url = "http://sy.test.cw678.com/Services/GetAccountInfo?AccName=USER_ID&Time=TIME&Flag=FLAG";
@@ -21,16 +21,16 @@ public class DomainTokenChecker implements TokenChecker {
 		url = url.replaceAll("TIME", time + "");
 		url = url.replaceAll("FLAG", getFlag(userId, time));
 		String content = WebContentFethcer.get("utf8", url);
-		
+
 		JSONObject obj = JSON.parseObject(content);
 		int ret = obj.getInteger("Ret");
-		if(ret == 2) {
+		if (ret == 2) {
 			throw new ErrorResult(0, "Sign Error").toException();
 		}
-		if(ret == 3) {
+		if (ret == 3) {
 			throw new ErrorResult(0, "AccName not exist").toException();
 		}
-		if(ret != 1) {
+		if (ret != 1) {
 			throw new ErrorResult(0, "Unknown Error").toException();
 		}
 	}

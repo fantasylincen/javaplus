@@ -1,4 +1,4 @@
-package cn.vgame.a.account;
+package cn.vgame.a.plantform;
 
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
