@@ -178,7 +178,7 @@ function juge(form){
 					<td><br></td>
 				</tr>
 				<tr>
-					<td><a href="coinLog.jsp?roleId=<%=role.getId()%>&page=1&countEvery=14">查看金豆记录</a></td>
+					<td><a href="coinLog.jsp?roleId=<%=role.getId()%>&page=200000000&countEvery=14">查看金豆记录</a></td>
 					<td></td>
 				</tr>
 			</tbody>

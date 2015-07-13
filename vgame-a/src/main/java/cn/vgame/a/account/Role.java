@@ -359,6 +359,8 @@ public class Role implements IRole {
 				otherRole.getNick(), otherRole.getCoin());
 
 		otherRole.addCoinLog(coin, getId(), "send coin");
+		
+		Server.getKeyValueSaveOnly().add("TRADE_VOL", coin);
 	}
 
 	/**
@@ -451,6 +453,8 @@ public class Role implements IRole {
 		Daos.getRoleDao().save(dto);
 
 		addCoinLog(add, from, "recharge");
+		
+		Server.getKeyValueForever().add("SYSTEM_RECHARGE", add);
 	}
 	
 

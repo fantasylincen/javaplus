@@ -40,13 +40,16 @@
 	<a href="randomTest.jsp">随机测试</a>
 	<br>
 	<br>
-	<a href="logs.jsp">操作日志</a>
+	<a href="logs.jsp?page=100000000">操作日志</a>
 	<br>
 	<br>
-	<a href="rechargeLogs.jsp">充值记录</a>
+	<a href="rechargeLogs.jsp?page=100000000">充值记录</a>
 	<br>
 	<br>
-	<a href="consoleLogList.jsp">控制台日志</a>
+	<a href="coinLogs.jsp?page=100000000">转账记录</a>
+	<br>
+	<br>
+	<a href="consoleLogList.jsp">系统日志</a>
 	<br>
 	<br>
 	<a href="../notice/notice.jsp">公告页面</a>

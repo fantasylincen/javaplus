@@ -706,7 +706,7 @@ public class Turntable {
 		}
 
 		private void initCaiJin() {
-			caiJin = getMinCaiJin();
+			caiJin = Math.max(getMinCaiJin(), caiJin);
 			saveCaiJinToDb();
 		}
 

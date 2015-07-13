@@ -95,7 +95,7 @@ public class PZResultGenerator implements ResultGenerator {
 
 	}
 
-	private int randomXNumber;
+	private int randomXNumber = Util.Random.get(1, 6);
 
 	@Override
 	public Result generateReward(SwitchAll switchs) {

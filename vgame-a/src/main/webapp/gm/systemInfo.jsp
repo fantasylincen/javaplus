@@ -1,3 +1,6 @@
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao.CoinLogDtoCursor"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao"%>
 <%@page import="cn.vgame.a.Server"%>
 <%@page import="cn.vgame.a.turntable.Turntable.Controller"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -42,13 +45,12 @@
 		long all = 0;
 		long allBank = 0;
 		long allJiangQuan = 0;
-		long allRecharge = 0;
+		long allTrade = 0;
 		for(RoleDto d : c) {
 			if(!d.getId().startsWith("r")) { // 非机器人
 				all += d.getCoin() ;
 				allBank += d.getBankCoin();
 				allJiangQuan += d.getJiangQuan();
-				allRecharge += d.getRechargeHistory();
 			}
 		}
 	%>
@@ -61,7 +63,7 @@
 					<th>值</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody>`
 				<%
 					SimpleDateFormat FORMAT = new SimpleDateFormat(
 							"yyyy-MM-dd HH:mm:ss");
@@ -71,7 +73,7 @@
 					<td><%=FORMAT.format(new Date(System.currentTimeMillis()))%></td>
 				</tr>
 				<tr>
-					<td>在线人数/注册人数</td>
+					<td>下注人数/注册人数</td>
 					<td><%=OnlineCounter.getOnlineSize()%>/<%=playerCount%></td>
 				</tr>
 
@@ -87,12 +89,17 @@
 				</tr>
 				
 				<tr>
+					<td>今日交易量/历史交易量</td>
+					<td><%=Server.getKeyValueDaily().getLong("TRADE_VOL")%>/<%=Server.getKeyValueForever().getLong("TRADE_VOL")%></td>
+				</tr>
+				
+				<tr>
 					<td>银行存量</td>
 					<td><%=allBank%></td>
 				</tr>
 				<tr>
-					<td>累计充值</td>
-					<td><%=allRecharge%>&nbsp;金豆</td>
+					<td>今日充值/历史充值</td>
+					<td><%=Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE")%>/<%=Server.getKeyValueForever().getLong("SYSTEM_RECHARGE")%></td>
 				</tr>
 				<tr>
 					<td>奖券</td>

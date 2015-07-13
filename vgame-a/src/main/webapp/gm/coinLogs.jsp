@@ -1,4 +1,3 @@
-<%@page import="cn.javaplus.collections.map.Maps"%>
 <%@page import="cn.vgame.a.account.Role"%>
 <%@page import="cn.vgame.a.Server"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
@@ -23,21 +22,16 @@
 </head>
 <body>
 	<div>
-		<%
-			String roleId = request.getParameter("roleId");
-			String nick = Server.getRole(roleId).getNick();
-		 %>
-		<h2>[<%=nick %>] 的金豆记录</h2>
+		<h2>转账记录</h2>
 		<table class="bordered">
 			<thead>
 				<tr>
 					<th>时间</th>
 					<th>FROM&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;TO</th>
-					<th>金币增量</th>
+					<th>金币</th>
 					<th>说明</th>
 				</tr>
 			</thead>
-
 			<%!void print(StringBuffer sb, CoinLogDto dto) {
 
 		sb.append("<tr>");
@@ -48,21 +42,14 @@
 		
 		sb.append("<td>");
 		
-		String from = dto.getFrom();
-		if("send coin".equals(dto.getDsc())) {
-			from = Server.getRole(from).getNick();
-		}
+		String fromNick = Server.getRole(dto.getFrom()).getNick();
+		String toNick = Server.getRole(dto.getTo()).getNick();
 		
-		Map<String, String> map = Maps.newHashMap();
-		map.put("bank", "<font color=\"#1A6BE6\">银行</font>");
-		map.put("system", "<font color=\"#D52B4D\">系统</font>");
-		map.put("market", "<font color=\"#3CC43C\">商店</font>");
+		fromNick = "<a href=\"coinLog.jsp?page=200000000&countEvery=14&roleId=" + dto.getFrom() + "\">" + fromNick + "</a>";
+		toNick = "<a href=\"coinLog.jsp?page=200000000&countEvery=14&roleId=" + dto.getTo() + "\">" + toNick + "</a>";
 		
-		if(map.get(from) != null)
-		 	from = map.get(from);
+		sb.append(fromNick + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + toNick);
 		
-		sb.append(from + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + Server.getRole(dto.getTo()).getNick());
-
 		sb.append("</td>");
 
 		sb.append("<td>");
@@ -98,8 +85,7 @@
 		return dsc;
 	}
  %>
-			<%
-				int cev = 14;
+			<%int cev = 14;
 				StringBuffer ssb = new StringBuffer();
 
 				CoinLogDao dao = Daos.getCoinLogDao();
@@ -108,10 +94,9 @@
 				
 				String cv = request.getParameter("countEvery");
 
-				CoinLogDtoCursor find = dao.findByFromToFuzzy("*" + roleId + "*");
-				Log.d("roleId", "[" + roleId + "]");
+				CoinLogDtoCursor find = dao.findByDsc("send coin");
 				
-				int p = pg == null ? 0 : new Integer(pg);
+				int p = pg == null ? Integer.MAX_VALUE : new Integer(pg);
 				int countEvery = cv == null ? cev : new Integer(cv);
 
 				if (p < 1)
@@ -146,36 +131,32 @@
 		</table>
 
 
-
-
-
 			 		总记录:<%=count %>&nbsp;&nbsp;&nbsp;&nbsp;以上是所有结果
 		<br>
 <br><br>
 
-		<form id="nextPage" action="coinLog.jsp" method="post">
-			<input type="hidden" name="countEvery" value="<%=cev%>&roleId=<%=roleId%>"> <input
+		<form id="nextPage" action="coinLogs.jsp" method="post">
+			<input type="hidden" name="countEvery" value="<%=cev%>"> <input
 				type="hidden" name="page" value="<%=p + 1%>">
 		</form>
 
-		<form id="prePage" action="coinLog.jsp" method="post">
-			<input type="hidden" name="countEvery" value="<%=cev%>&roleId=<%=roleId%>"> <input
+		<form id="prePage" action="coinLogs.jsp" method="post">
+			<input type="hidden" name="countEvery" value="<%=cev%>"> <input
 				type="hidden" name="page" value="<%=p - 1%>">
 		</form>
-		<form name="jump" action="coinLog.jsp" method="post">
-			<a href="coinLog.jsp?page=<%=1%>&countEvery=<%=cev%>&roleId=<%=roleId%>">首页</a>&nbsp;
-			<a href="coinLog.jsp?page=<%=p - 1%>&countEvery=<%=cev%>&roleId=<%=roleId%>">上一页</a>
+		<form name="jump" action="coinLogs.jsp" method="post">
+			<a href="coinLogs.jsp?page=<%=1%>&countEvery=<%=cev%>">首页</a>&nbsp;
+			<a href="coinLogs.jsp?page=<%=p - 1%>&countEvery=<%=cev%>">上一页</a>
 			<%=p + "/" + pageAll%>
-			<a href="coinLog.jsp?page=<%=p + 1%>&countEvery=<%=cev%>&roleId=<%=roleId%>">下一页</a>&nbsp;
+			<a href="coinLogs.jsp?page=<%=p + 1%>&countEvery=<%=cev%>">下一页</a>&nbsp;
 
-			<a href="coinLog.jsp?page=<%=pageAll%>&countEvery=<%=cev%>&roleId=<%=roleId%>">末页</a>
-			&nbsp;&nbsp;<input type="hidden" name="countEvery" value="<%=cev%>&roleId=<%=roleId%>">
+			<a href="coinLogs.jsp?page=<%=pageAll%>&countEvery=<%=cev%>">末页</a>
+			&nbsp;&nbsp;<input type="hidden" name="countEvery" value="<%=cev%>">
 			<input type="text" name="page" value="<%=p%>"> <a
 				href="javascript:jump.submit();">go</a>
 		</form>
 		
-		 <a
-			href="setUser.jsp?roleId=<%=roleId%>"> 返回</a> <br>
+		 <a href="menu.jsp"> 返回</a> <br>
 		
 	</div>
 </body>

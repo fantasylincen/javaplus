@@ -43,14 +43,24 @@
 
 		int cev = new Integer(countEve);
 		int pageInt = new Integer(pg);
-		c.page(pageInt, cev);
-
-		int pageAll = c.getPageAll();
 		
-		if(pageInt > pageAll) 
+
+		int pageAll;
+		int count = c.getCount();
+		if (count % cev == 0) {
+			pageAll = count / cev;
+		} else {
+			pageAll = count / cev + 1;
+		}
+
+		if (pageInt > pageAll)
 			pageInt = pageAll;
-		if(pageInt < 1)
-			pageInt = 1;
+
+		int skip = (pageInt - 1) * cev;
+		if(skip > 0) {
+			c.skip(skip);
+		}
+		c.limit(cev);
 	%>
 
 
