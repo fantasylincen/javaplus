@@ -33,12 +33,6 @@
 	<br>
 	<a href="systemInfo.jsp">系统信息</a>
 	<br>
-	<!-- <br>
-	<a href="turntableControl.jsp">轮盘控制</a>
-	<br> -->
-	<br>
-	<a href="randomTest.jsp">随机测试</a>
-	<br>
 	<br>
 	<a href="logs.jsp?page=100000000">操作日志</a>
 	<br>
