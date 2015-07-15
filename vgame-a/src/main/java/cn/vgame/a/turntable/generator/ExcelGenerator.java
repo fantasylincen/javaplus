@@ -19,9 +19,7 @@ public class ExcelGenerator implements ResultGenerator {
 
 	@Override
 	public Result generateReward(SwitchAll switchs) {
-		
-		randomXNumber = Util.Random.get(1, 6);
-		
+
 		Xml xml = Server.getXml();
 		Sheet sheet = xml.get("weights");
 		List<Row> all = sheet.getAll();
@@ -30,20 +28,19 @@ public class ExcelGenerator implements ResultGenerator {
 		r.setResult(randoms);
 		return r;
 	}
-	
+
 	public int getRandomXNumber() {
 		return randomXNumber;
 	}
-	
+
 	private List<Row> random(List<Row> all) {
 		ArrayList<Row> ls = Lists.newArrayList();
 		Row row = randomFirst(all); // 随机出第一个结果
 		ls.add(row);
-		new RandomByExcel().randomSongDeng(all, ls, row, randomXNumber); // 如果出鲨鱼, 送灯
+		new RandomByExcel().randomSongDeng(all, ls, row, randomXNumber); // 如果出鲨鱼,
+																			// 送灯
 		return ls;
 	}
-
-	
 
 	private Row randomFirst(List<Row> all) {
 		Row row;
@@ -57,19 +54,21 @@ public class ExcelGenerator implements ResultGenerator {
 		}
 		return row;
 	}
-	
 
-	
 	/** 随机倍率序号 */
-	private int randomXNumber = 1;
-	
+	private int randomXNumber = Util.Random.get(1, 6);;
 
 	private Row getMust(List<Row> all) {
 		for (Row row : all) {
 			if (row.getInt("id") == Turntable.getInstance().getMustGenerateId())
 				return row;
 		}
-		throw new NullPointerException("row " + Turntable.getInstance().getMustGenerateId()
-				+ "not found");
+		throw new NullPointerException("row "
+				+ Turntable.getInstance().getMustGenerateId() + "not found");
+	}
+
+	@Override
+	public void updateRandomXNumber() {
+		randomXNumber = Util.Random.get(1, 6);
 	}
 }

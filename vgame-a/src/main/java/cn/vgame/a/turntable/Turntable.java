@@ -430,6 +430,7 @@ public class Turntable {
 		isSomeOneGetCaiJin = false;
 
 		Server.getRobotManager().clearAllSwitchs();
+		resultGenerator.updateRandomXNumber();
 	}
 
 	/**

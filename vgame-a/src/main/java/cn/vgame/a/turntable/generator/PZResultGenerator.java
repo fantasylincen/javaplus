@@ -99,7 +99,6 @@ public class PZResultGenerator implements ResultGenerator {
 
 	@Override
 	public Result generateReward(SwitchAll switchs) {
-		randomXNumber = Util.Random.get(1, 6);
 		List<Xs> xss = getXss(switchs);
 
 		List<Row> all = getAllRows();
@@ -108,6 +107,11 @@ public class PZResultGenerator implements ResultGenerator {
 		Result r = new Result();
 		r.setResult(randoms);
 		return r;
+	}
+
+	@Override
+	public void updateRandomXNumber() {
+		randomXNumber = Util.Random.get(1, 6);
 	}
 
 	private List<Row> getAllRows() {
@@ -128,7 +132,7 @@ public class PZResultGenerator implements ResultGenerator {
 		long kuCun = c.getKuCun();
 
 		double pro = Server.getConst().getDouble("TUN_FEN_GAI_LV");
-		
+
 		if (Util.Random.isHappen(pro) || kuCun < 0) {
 			return generateTunFen(xss, all);
 		} else {
@@ -141,7 +145,9 @@ public class PZResultGenerator implements ResultGenerator {
 		ArrayList<Row> ls = Lists.newArrayList();
 		List<Xs> fu = getFu(xss);
 		Row first;
-		if (fu.isEmpty()) {
+		if (Turntable.getInstance().getMustGenerateId() > 0) { // 本轮第一个必出
+			first = getMust(all);
+		} else if (fu.isEmpty()) {
 			Collections.sort(xss, new TuFenC());
 			Xs xs = xss.get(0);
 			first = get(all, xs.getType());
@@ -153,7 +159,14 @@ public class PZResultGenerator implements ResultGenerator {
 		new RandomByExcel().randomSongDeng(all, ls, first, randomXNumber);
 		return ls;
 	}
-
+	private Row getMust(List<Row> all) {
+		for (Row row : all) {
+			if (row.getInt("id") == Turntable.getInstance().getMustGenerateId())
+				return row;
+		}
+		throw new NullPointerException("row " + Turntable.getInstance().getMustGenerateId()
+				+ "not found");
+	}
 	private List<Xs> getFu(List<Xs> xss) {
 
 		ArrayList<Xs> ls = Lists.newArrayList();
@@ -188,7 +201,10 @@ public class PZResultGenerator implements ResultGenerator {
 		removeShaYu(fu);
 
 		Row first;
-		if (fu.isEmpty()) {
+
+		if (Turntable.getInstance().getMustGenerateId() > 0) { // 本轮第一个必出
+			first = getMust(all);
+		} else if (fu.isEmpty()) {
 			Collections.sort(xss, new TunFenC());
 			Xs xs = xss.get(0);
 			first = get(all, xs.getType());

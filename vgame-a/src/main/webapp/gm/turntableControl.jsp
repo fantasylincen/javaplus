@@ -159,13 +159,12 @@
 				<th>ID</th>
 				<th>昵称</th>
 				<th>金币</th>
-				<th>今日金币输入</th>
-				<th>今日金币输出</th>
-				<th>历史金币输入</th>
-				<th>历史金币输出</th>
+				<th>今日盈利</th>
+				<th>今日下注</th>
+				<th>历史盈利</th>
+				<th>历史下注</th>
 				<th>本轮下注量</th>
 				<th>是否下注金鲨</th>
-				<th>高级功能</th>
 			</tr>
 		</thead>
 
@@ -239,11 +238,11 @@
 		} else {
 			sb.append("-");
 		} */
-		sb.append("-");
+		/* sb.append("-");
 		
 		sb.append("</td>");
 
-		sb.append("</tr>");
+		sb.append("</tr>"); */
 	}%>
 
 		</tbody>
@@ -251,7 +250,7 @@
 
 	<br>
 	<br>
-
+<%-- 
 	<form id="updateWeightAdd" action="turntableControl.jsp" method="post">
 
 		<h2>轮盘信息</h2>
@@ -305,7 +304,7 @@
 		<a href="menu.jsp"> 返回</a> <br>
 		
 	</form>
-
+ --%>
 
 </body>
 </html>

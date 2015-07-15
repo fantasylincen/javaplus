@@ -8,4 +8,6 @@ public interface ResultGenerator {
 
 	int getRandomXNumber();
 
+	void updateRandomXNumber();
+
 }

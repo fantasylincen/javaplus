@@ -1,6 +1,6 @@
 package org.hhhhhh.guess.user;
 
-import org.hhhhhh.guess.exception.VGameException;
+import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.Daos;
 import org.hhhhhh.guess.hibernate.dao.Daos.UserDao;
 import org.hhhhhh.guess.hibernate.dto.UserDto;
@@ -32,11 +32,6 @@ public class User {
 		return s == null || s.isEmpty();
 	}
 
-	/**
-	 * V币
-	 * 
-	 * @return
-	 */
 	public int getJiFen() {
 		return dto.getJiFen();
 	}
@@ -60,7 +55,7 @@ public class User {
 
 	private void checkEnouph(int jiFenNeed) {
 		if (dto.getJiFen() < jiFenNeed)
-			throw new VGameException("V币不够");
+			throw new GuessException("积分不够");
 	}
 
 	public void addJiFen(int jiFenAdd) {

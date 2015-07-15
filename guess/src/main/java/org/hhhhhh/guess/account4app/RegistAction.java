@@ -1,57 +1,30 @@
 package org.hhhhhh.guess.account4app;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.hhhhhh.guess.JsonAction;
-import org.hhhhhh.guess.Server;
-import org.hhhhhh.guess.error.ErrorResult;
-import org.hhhhhh.guess.exception.RegistException;
+import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.Daos;
 import org.hhhhhh.guess.hibernate.dao.Daos.UserDao;
 import org.hhhhhh.guess.hibernate.dao.Daos.UserDtoCursor;
-import org.hhhhhh.guess.hibernate.dto.UserDto;
 
-import cn.javaplus.util.Util;
+import cn.javaplus.log.Log;
 
-public class RegistAction extends JsonAction {
+import com.opensymphony.xwork2.ActionSupport;
 
-	public static class RegistSuccess {
+public class RegistAction extends ActionSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3922340422655972833L;
 
-		private final UserDto dto;
-
-		public RegistSuccess(UserDto dto) {
-			this.dto = dto;
-		}
-
-		public String getId() {
-			return dto.getId();
-		}
-
-		public String getUsername() {
-			return dto.getUsername();
-		}
-
-		public String getNick() {
-			return dto.getNick();
-		}
-
-		public int getJiFen() {
-			return dto.getJiFen();
-		}
-
-
-	}
-
-	private static final long serialVersionUID = -8965549726279594696L;
-	private HttpSession session;
-
-	String username;
-	String password;
-	private String flag;
-	private long time;
+	private String username;
+	private String password;
+	private String nick;
 
 	public String getUsername() {
 		return username;
@@ -69,45 +42,27 @@ public class RegistAction extends JsonAction {
 		this.password = password;
 	}
 
-	public Object exec() {
+	@Override
+	public String execute() {
 
-		checkFlag();
-
+		Log.d("regist action");
+		
 		HttpServletRequest request = ServletActionContext.getRequest();
-		session = request.getSession();
+		HttpSession session = request.getSession();
 
 		String pwd = getPassword();
-		String p = pwd;
 		String un = getUsername();
-		if (p == null) {
-			return new ErrorResult("please type password");
-		} else if (p.length() < 6) {
-			return new ErrorResult("password lenth < 6");
-		} else if (un == null || un.isEmpty()) {
-			return new ErrorResult("please type username");
-		} else {
-			String regex = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
-			if (!un.matches(regex)) {
-				return new ErrorResult("please type email address");
-			} else if (isAreadyRegist()) {
-				return new ErrorResult("user aready exist");
-			}
+		String regex = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
+		if (un == null || !un.matches(regex)) {
+			throw new GuessException("please type email address");
+		} else if (isAreadyRegist()) {
+			throw new GuessException("user aready exist");
 		}
 
-		try {
-			UserCreator c = new UserCreator();
-			UserDto dto = c.createNewUser(session, un, pwd);
-			return new RegistSuccess(dto);
-		} catch (RegistException e) {
-			return new ErrorResult(e.getMessage());
-		}
-	}
-
-	private void checkFlag() {
-		String md5 = Util.Secure.md5(username + password + getTime()
-				+ Server.KEY);
-		if (!md5.equals(flag))
-			throw new RuntimeException("sign error");
+		UserCreator c = new UserCreator();
+		c.createNewUser(session, un, pwd);
+		Log.d("regist successful");
+		return SUCCESS;
 	}
 
 	private boolean isAreadyRegist() {
@@ -116,20 +71,12 @@ public class RegistAction extends JsonAction {
 		return c.hasNext();
 	}
 
-	public String getFlag() {
-		return flag;
+	public String getNick() {
+		return nick;
 	}
 
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
-
-	public long getTime() {
-		return time;
-	}
-
-	public void setTime(long time) {
-		this.time = time;
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 
 }

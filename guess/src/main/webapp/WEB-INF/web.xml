@@ -6,6 +6,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
   <display-name></display-name>	
   <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <filter>
@@ -14,6 +15,16 @@
   		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
   	</filter-class>
   </filter>
+  
+    <error-page>
+         <error-code>404</error-code>
+        <location>/app/404.jsp</location>
+     </error-page>
+     
+     <error-page>
+         <error-code>500</error-code>
+        <location>/app/500.jsp</location>
+     </error-page>
   <filter-mapping>
   	<filter-name>struts2</filter-name>
   	<url-pattern>/*</url-pattern>
