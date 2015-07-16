@@ -41,7 +41,8 @@ public class SendMessageAction extends ActionSupport {
 		response.setCharacterEncoding("utf8");
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
-		
+		if(message == null || message.isEmpty())
+			return SUCCESS;
 		message = EncodingUtil.iso2Utf8(message);
 		message = Util.Sencitive.sencitive(message);
 		checkLen();
