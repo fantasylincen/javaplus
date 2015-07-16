@@ -1,7 +1,0 @@
-
-		/**
-		 * METHOD_DOC
-		 *
-ARGS_DOC
-		 */
-		function NAME(FILEDS):void;

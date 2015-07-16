@@ -1,7 +1,0 @@
-package PACKAGE_NAME;
-public class CLASS_NAME {
-
-PROPERTIES
-SETS_AND_GETS
-
-}

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project default="plugin_export" name="build">
-	<target name="plugin_export">
-		<pde.exportPlugins destination="C:\Users\Administrator\Desktop\plugin" exportSource="false" exportType="directory" plugins="cn.javaplus.plugins.generator.protocol" useJARFormat="true"/>
-	</target>
-</project>

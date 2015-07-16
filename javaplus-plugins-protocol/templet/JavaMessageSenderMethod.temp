@@ -1,4 +1,0 @@
-		/**
-		 *
-		 */
-		RETURN_TYPE METHOD_NAME(ISocket socketARGS);

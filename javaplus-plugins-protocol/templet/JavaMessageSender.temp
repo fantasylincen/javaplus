@@ -1,9 +1,0 @@
-package PACKAGE_NAME;
-
-import com.lemon.commons.socket.ISocket;
-
-public interface CLASS_NAMEMessageSender {
-
-METHODS
-
-}
