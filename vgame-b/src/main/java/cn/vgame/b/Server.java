@@ -16,7 +16,6 @@ import cn.vgame.b.config.ServerConfig;
 import cn.vgame.b.gen.dto.MongoGen.Daos;
 import cn.vgame.b.gen.dto.MongoGen.RoleDao;
 import cn.vgame.b.gen.dto.MongoGen.RoleDto;
-import cn.vgame.b.message.MessageManager;
 import cn.vgame.b.system.Const;
 import cn.vgame.b.util.SystemKeyValueDaoForeverAdaptor;
 import cn.vgame.share.CacheManager;
@@ -31,7 +30,7 @@ public class Server {
 
 	private static ServerConfig config;
 	private static Const cst;
-	private static MessageManager msgm;
+//	private static MessageManager msgm;
 
 	private static final String KEY = "ROLES";
 
@@ -62,7 +61,7 @@ public class Server {
 
 	public static void put(Role role) {
 		String id = role.getId();
-		CacheManager.put(key(id), 10 * Util.Time.MILES_ONE_MIN, role);
+		CacheManager.put(key(id), role);
 	}
 
 	private static String key(String id) {
@@ -81,11 +80,11 @@ public class Server {
 		return cst;
 	}
 
-	public static MessageManager getMessageManager() {
-		if (msgm == null)
-			msgm = new MessageManager();
-		return msgm;
-	}
+//	public static MessageManager getMessageManager() {
+//		if (msgm == null)
+//			msgm = new MessageManager();
+//		return msgm;
+//	}
 
 	public static KeyValueSaveOnly getKeyValueSaveOnly() {
 		return new KeyValueSaveOnlyImplementation();

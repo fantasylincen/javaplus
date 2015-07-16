@@ -1,3 +1,4 @@
+<%@page import="cn.javaplus.collections.list.Lists"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao.CoinLogDtoCursor"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.Daos"%>
@@ -18,7 +19,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>主页</title>
+<title>飞禽走兽</title>
 <link rel="shortcut icon" href="../favicon.ico">
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -84,13 +85,6 @@
 				<button class="ui-btn" type="submit">发送</button>
 
 
-
-
-
-
-
-
-
 			</form>
 			</p>
 
@@ -124,23 +118,45 @@
 
 		<div class="jqm-block-content">
 			<h3>历史记录</h3>
+			<font size="1">
+				<%
+					String roleId = (String) session.getAttribute("roleId");
+					StringBuffer ssb = new StringBuffer();
+	
+					List<CoinLogDto> last = getLast(roleId, 50);
+					
+					for (CoinLogDto dto : last) {
+						print(ssb, dto);
+					}
+	
+					out.println(ssb.toString());
+				%>
+			</font>
+			<%!
+				public List<CoinLogDto> getLast(String roleId, int count) {
+				
+					CoinLogDao dao = Daos.getCoinLogDao();
+				
+					CoinLogDtoCursor find = dao.findByFrom(roleId);
 
-			<%
-				String roleId = (String) session.getAttribute("roleId");
-				StringBuffer ssb = new StringBuffer();
-
-				CoinLogDao dao = Daos.getCoinLogDao();
-
-				CoinLogDtoCursor find = dao.findByFrom(roleId);
-
-				find.limit(50);
-
-				for (CoinLogDto dto : find) {
-					print(ssb, dto);
+					int skip = find.getCount() - count;
+					
+					if(skip <0) {
+						skip = 0;
+					}
+					find.skip(skip);
+					find.limit(count);
+					List<CoinLogDto> ls = Lists.newArrayList();
+					for (CoinLogDto dto : find) {
+						ls.add(dto);
+					}
+					
+					Collections.reverse(ls);
+					return ls;
+					
+					
 				}
-
-				out.println(ssb.toString());
-			%>
+			 %>
 
 			<%!void print(StringBuffer sb, CoinLogDto dto) {
 

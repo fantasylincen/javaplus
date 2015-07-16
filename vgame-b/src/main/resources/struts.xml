@@ -17,7 +17,7 @@
 	<package name="game" extends="struts-default" namespace="/turntable">
 
 		<action name="getRole" class="cn.vgame.b.turntable.GetRoleAction" />
-
+		<action name="getUserData" class="cn.vgame.b.turntable.GetUserDataAction" />
 		<!-- 
 		
 		买东西 

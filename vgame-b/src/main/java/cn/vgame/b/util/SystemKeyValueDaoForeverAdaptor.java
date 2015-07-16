@@ -32,7 +32,6 @@ public class SystemKeyValueDaoForeverAdaptor implements ISystemKeyValueDao {
 			dto.setValue(value);
 		}
 
-
 	}
 
 	private SystemKeyValueDao dao;
@@ -40,11 +39,11 @@ public class SystemKeyValueDaoForeverAdaptor implements ISystemKeyValueDao {
 	public SystemKeyValueDaoForeverAdaptor() {
 		dao = Daos.getSystemKeyValueDao();
 	}
-	
+
 	@Override
 	public ISystemKeyValueDto createDTO() {
-		 SystemKeyValueDto dto = dao.createDTO();
-		 return new SystemKeyValueDtoAdaptor(dto);
+		SystemKeyValueDto dto = dao.createDTO();
+		return new SystemKeyValueDtoAdaptor(dto);
 	}
 
 	@Override
@@ -57,7 +56,10 @@ public class SystemKeyValueDaoForeverAdaptor implements ISystemKeyValueDao {
 
 	@Override
 	public ISystemKeyValueDto get(String key) {
-		return new SystemKeyValueDtoAdaptor(dao.get(key));
+		SystemKeyValueDto dto = dao.get(key);
+		if (dto == null)
+			return null;
+		return new SystemKeyValueDtoAdaptor(dto);
 	}
 
 }
