@@ -1,0 +1,13 @@
+package cn.javaplus.crazy;
+
+import cn.javaplus.crazy.assets.Assets;
+
+public class AssetsLoader {
+
+	public static void loadAll() {
+REPEATED LOADS
+	}
+	
+REPEATED OTHER_LOAD_METHOD
+
+}

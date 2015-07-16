@@ -180,7 +180,9 @@ public class CommitMySwitchsAction extends JsonActionAfterRoleEnterGame {
 	@Override
 	public Object run() {
 		ISwitchs s = new SwitchsImpl(this);
-		Turntable.getInstance().commitUserSwitchs(role.getId(), s);
+		if (!role.getDto().getIsCantPlay()) {
+			Turntable.getInstance().commitUserSwitchs(role.getId(), s);
+		}
 		return Turntable.getInstance().getSwitchs();
 	}
 }

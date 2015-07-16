@@ -67,6 +67,12 @@ interface Role {
 	 */
 	boolean getHasFengHao();
 	
+	/**
+	 * 是否禁止游戏
+	 * @return
+	 */
+	boolean getIsCantPlay();
+	
 	MongoMap<String> getKeyValueDaily();
 
 	MongoMap<String> getKeyValueForever();

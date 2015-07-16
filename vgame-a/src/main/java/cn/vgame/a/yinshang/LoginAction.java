@@ -33,6 +33,11 @@ public class LoginAction extends ActionSupport {
 	public String execute() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		session = request.getSession();
+		
+		String uid = (String) session.getAttribute("id");
+		if(uid != null) {
+			return "toindex";
+		}
 
 		YinShangDao dao = Daos.getYinShangDao();
 		YinShangDto dto = dao.get(id);

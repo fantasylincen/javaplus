@@ -4,35 +4,6 @@
 
 	<constant name="struts.devMode" value="true" />
 
-	<package name="web" namespace="/web" extends="struts-default">
-
-
-     	<global-results>
-     	  	<result name="guessexception">/app/error.jsp
-     	  	<param name="actionName"></param>
-     	  	</result>  
-        </global-results>
-        <global-exception-mappings>
-            <exception-mapping result="guessexception" exception="org.hhhhhh.guess.exception.GuessException">
-            </exception-mapping>
-        </global-exception-mappings>
-        
-
-
-		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction">
-			<result type="redirect" name="success">/app/registSuccessful.jsp</result>
-			<result type="redirect" name="error">/app/regist.jsp</result>
-		</action>
-		<action name="login" class="org.hhhhhh.guess.account4app.LoginAction" >
-			<result type="redirect" name="success">/app/index.jsp</result>
-		</action>
-		<action name="resetPwd" class="org.hhhhhh.guess.account4app.ResetPwdAction" />
-        <action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction">
-           	<result name="error">/app/error.jsp</result>
-        </action>
-
-	</package>
-	
 	<package name="app" namespace="/app" extends="struts-default">
 
 
@@ -44,7 +15,6 @@
             </exception-mapping>
         </global-exception-mappings>
         
-
 
 		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction">
 			<result type="redirect" name="success">/app/registSuccessful.jsp</result>
@@ -58,4 +28,34 @@
 
 	</package>
 
+
+	<package name="web" namespace="/web" extends="struts-default">
+
+
+     	<global-results>
+     	  	<result name="guessexception">/web/error.jsp
+     	  	<param name="actionName"></param>
+     	  	</result>  
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping result="guessexception" exception="org.hhhhhh.guess.exception.GuessException">
+            </exception-mapping>
+        </global-exception-mappings>
+        
+
+
+		<action name="regist" class="org.hhhhhh.guess.account4web.RegistAction">
+			<result type="redirect" name="success">/web/registSuccessful.jsp</result>
+			<result type="redirect" name="error">/web/regist.jsp</result>
+		</action>
+		<action name="login" class="org.hhhhhh.guess.account4web.LoginAction" >
+			<result type="redirect" name="success">/web/index.jsp</result>
+		</action>
+		<action name="resetPwd" class="org.hhhhhh.guess.account4web.ResetPwdAction" />
+        <action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction">
+           	<result name="error">/web/error.jsp</result>
+        </action>
+
+	</package>
+	
 </struts>    

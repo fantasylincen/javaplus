@@ -123,10 +123,10 @@
 					String roleId = (String) session.getAttribute("roleId");
 					StringBuffer ssb = new StringBuffer();
 	
-					List<CoinLogDto> last = getLast(roleId, 50);
+					List<CoinLogDto> last = getLast(roleId, 100);
 					
 					for (CoinLogDto dto : last) {
-						print(ssb, dto);
+						print(ssb, dto, roleId);
 					}
 	
 					out.println(ssb.toString());
@@ -137,7 +137,7 @@
 				
 					CoinLogDao dao = Daos.getCoinLogDao();
 				
-					CoinLogDtoCursor find = dao.findByFrom(roleId);
+					CoinLogDtoCursor find = dao.findByFromToFuzzy("*" + roleId + "*");
 
 					int skip = find.getCount() - count;
 					
@@ -158,7 +158,7 @@
 				}
 			 %>
 
-			<%!void print(StringBuffer sb, CoinLogDto dto) {
+			<%!void print(StringBuffer sb, CoinLogDto dto, String meId) {
 
 		String from = dto.getFrom();
 		if (!"send coin".equals(dto.getDsc())) {
@@ -166,11 +166,16 @@
 		}
 		
 		
+		String color = "#884452";
 		
-		sb.append("<p><font color=\"#884452\">" );
+		if(!meId.equals(dto.getFrom())) {
+			color = "#4D61B3";
+		}
+		
+		sb.append("<p><font color=\"" + color + "\">" );
 		sb.append(dto.getTime().replaceAll("201[0-9]\\-", ""));
 		sb.append("&nbsp;");
-		sb.append(Server.getRole(dto.getTo()).getNick());
+		sb.append(Server.getRole(dto.getFrom()).getNick() + "&nbsp;&gt;&gt;&nbsp;" + Server.getRole(dto.getTo()).getNick());
 		sb.append("</font>&nbsp;&nbsp;");
 		sb.append(dto.getCoin());
 		sb.append("金豆");

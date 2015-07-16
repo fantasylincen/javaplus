@@ -28,7 +28,7 @@ public class Build {
 
 	public static void main(String[] args) {
 		generateMongoDB();
-		generateProtocols();
+//		generateProtocols();
 		generateEvents();
 	}
 
@@ -36,84 +36,84 @@ public class Build {
 		new EventsGenerator().generate("src/main/java/cn/vgame/a/events/Events.java", "src/main/java/cn/vgame/", "cn.vgame.a.events");
 	}
 
-	@SuppressWarnings("unchecked")
-	private static void generateProtocols() {
-		String temp = Util.File.getContent(Resources.getResource("protocolDoc.temp"));
-		try {
-			SAXReader saxReader = new SAXReader();
-			Document document = saxReader.read(Resources.getResource("struts.xml"));
-			Element employees = document.getRootElement();
-			StringPrinter tables = new StringPrinter();
-			for (Iterator<Element> i = employees.elementIterator(); i.hasNext();) {
-				Element e = i.next();
-				String name = e.getName();
-				if (name.equals("package")) {
-
-					String tempTable = Util.File.getContent(Resources.getResource("table.temp"));
-					
-					StringPrinter r = new StringPrinter();
-					String nameSpace = e.attributeValue("namespace");
-					r.println("<br>" + nameSpace);
-					tempTable = tempTable.replaceAll("HEAD", r.toString());
-					List<Element> actions = e.elements("action");
-
-					StringPrinter tableContent = new StringPrinter();
-					for (Element action : actions) {
-						tableContent.println("<tr>");
-						String aName = action.attributeValue("name");
-						String className = action.attributeValue("class");
-
-						try {
-							JavaFileImpl file = new JavaFileImpl(
-									JavaParser.parse(new File("src/main/java/"
-											+ toPath(className))));
-							List<MethodDeclaration> methods = file.getMethods();
-							TypeDeclaration type = file.getType();
-
-							List<MethodDeclaration> getMethods = getGetters(methods);
-
-							String comment = getCommet(type.getComment());
-
-							tableContent.println("<td><a " +
-									" title=\" " + getTitle(type.getComment())+ "\"" +
-									" href=\" " + buildLink(getMethods, nameSpace, aName)
-									+ "\">");
-							tableContent.println(comment);
-							tableContent.println("</a></td>");
-
-							tableContent.println("<td>");
-							tableContent.println(aName);
-							tableContent.println("</td>");
-
-							tableContent.println("<td>");
-							for (MethodDeclaration m : getMethods) {
-								String argName = Util.Str.firstToLowerCase(m
-										.getName().replaceFirst("get", ""));
-								Comment mc = m.getComment();
-								tableContent.println(argName + ":"
-										+ getCommet(mc) + "<br>");
-							}
-							tableContent.println("</td>");
-						} catch (Exception ee) {
-							throw Util.Exception.toRuntimeException(ee);
-						}
-
-						tableContent.println("</tr>");
-					}
-					tempTable = tempTable.replaceAll("TABLE_CONTENT",
-							tableContent.toString());
-					tables.println(tempTable);
-				}
-			}
-
-			temp = temp.replaceAll("PROTOCOLS", tables.toString());
-			String dstPath = "../vchd/src/main/webapp/gm/protocolDoc.jsp";
-			Util.File.write(dstPath, temp);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+//	@SuppressWarnings("unchecked")
+//	private static void generateProtocols() {
+//		String temp = Util.File.getContent(Resources.getResource("protocolDoc.temp"));
+//		try {
+//			SAXReader saxReader = new SAXReader();
+//			Document document = saxReader.read(Resources.getResource("struts.xml"));
+//			Element employees = document.getRootElement();
+//			StringPrinter tables = new StringPrinter();
+//			for (Iterator<Element> i = employees.elementIterator(); i.hasNext();) {
+//				Element e = i.next();
+//				String name = e.getName();
+//				if (name.equals("package")) {
+//
+//					String tempTable = Util.File.getContent(Resources.getResource("table.temp"));
+//					
+//					StringPrinter r = new StringPrinter();
+//					String nameSpace = e.attributeValue("namespace");
+//					r.println("<br>" + nameSpace);
+//					tempTable = tempTable.replaceAll("HEAD", r.toString());
+//					List<Element> actions = e.elements("action");
+//
+//					StringPrinter tableContent = new StringPrinter();
+//					for (Element action : actions) {
+//						tableContent.println("<tr>");
+//						String aName = action.attributeValue("name");
+//						String className = action.attributeValue("class");
+//
+//						try {
+//							JavaFileImpl file = new JavaFileImpl(
+//									JavaParser.parse(new File("src/main/java/"
+//											+ toPath(className))));
+//							List<MethodDeclaration> methods = file.getMethods();
+//							TypeDeclaration type = file.getType();
+//
+//							List<MethodDeclaration> getMethods = getGetters(methods);
+//
+//							String comment = getCommet(type.getComment());
+//
+//							tableContent.println("<td><a " +
+//									" title=\" " + getTitle(type.getComment())+ "\"" +
+//									" href=\" " + buildLink(getMethods, nameSpace, aName)
+//									+ "\">");
+//							tableContent.println(comment);
+//							tableContent.println("</a></td>");
+//
+//							tableContent.println("<td>");
+//							tableContent.println(aName);
+//							tableContent.println("</td>");
+//
+//							tableContent.println("<td>");
+//							for (MethodDeclaration m : getMethods) {
+//								String argName = Util.Str.firstToLowerCase(m
+//										.getName().replaceFirst("get", ""));
+//								Comment mc = m.getComment();
+//								tableContent.println(argName + ":"
+//										+ getCommet(mc) + "<br>");
+//							}
+//							tableContent.println("</td>");
+//						} catch (Exception ee) {
+//							throw Util.Exception.toRuntimeException(ee);
+//						}
+//
+//						tableContent.println("</tr>");
+//					}
+//					tempTable = tempTable.replaceAll("TABLE_CONTENT",
+//							tableContent.toString());
+//					tables.println(tempTable);
+//				}
+//			}
+//
+//			temp = temp.replaceAll("PROTOCOLS", tables.toString());
+//			String dstPath = "../vchd/src/main/webapp/gm/protocolDoc.jsp";
+//			Util.File.write(dstPath, temp);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 
 	private static String buildLink(List<MethodDeclaration> getMethods,
 			String nameSpace, String aName) {

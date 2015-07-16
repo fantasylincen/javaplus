@@ -28,6 +28,7 @@
 		</action>
 		<action name="login" class="cn.vgame.a.yinshang.LoginAction" >
 			<result type="redirect" name="success">index.jsp</result>
+			<result type="redirect" name="toindex">index.jsp</result>
 		</action>
         <action name="errorProcessor" class="cn.vgame.a.yinshang.YinShangErrorAction">
            	<result name="error">error.jsp</result>

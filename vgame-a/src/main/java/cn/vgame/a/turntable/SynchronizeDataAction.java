@@ -241,7 +241,11 @@ public class SynchronizeDataAction extends JsonActionAfterRoleEnterGame {
 	@Override
 	public Object run() {
 		ISwitchs s = new SwitchsImpl2(this);
-		Turntable.getInstance().commitUserSwitchs(role.getId(), s);
+		
+		if(!role.getDto().getIsCantPlay()) {
+			Turntable.getInstance().commitUserSwitchs(role.getId(), s);
+		}
+		
 //		Log.d(s);
 		return new GetTableDataResult(role);
 	}
