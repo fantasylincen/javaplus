@@ -53,15 +53,15 @@
 		
 		
 		<action name="getBag" class="cn.vgame.b.turntable.GetBagAction" />
-		
+	    <action name="getMissionStar" class="cn.vgame.b.turntable.GetMissionStarAction" />
 		
 	</package>
 
 	<!-- 喊话 -->
-	<package name="message" extends="struts-default" namespace="/message">
+	<!-- <package name="message" extends="struts-default" namespace="/message">
 		<action name="sendMessage" class="cn.vgame.b.message.SendMessageAction" />
 		<action name="getMessages" class="cn.vgame.b.message.GetMessagesAction" />
-	</package>
+	</package> -->
 
 
 

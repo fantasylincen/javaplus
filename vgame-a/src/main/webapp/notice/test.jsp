@@ -1,14 +1,9 @@
-<%@page import="cn.vgame.a.account.Role"%>
-<%@page import="cn.vgame.a.Server"%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
-	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 </head>
 <body>
 
@@ -30,7 +25,7 @@
 <div data-role="page" id="pagetwo">
   <div data-role="header">
     <h1>欢迎访问我的主页</h1>
-  </div>
+  </div>	
 
   <div data-role="content">
     <p>点击链接返回页面一。<b>注释：</b>：fade 是默认效果。</p>

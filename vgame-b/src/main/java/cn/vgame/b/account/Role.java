@@ -6,6 +6,7 @@ import cn.vgame.b.gen.dto.MongoGen.Daos;
 import cn.vgame.b.gen.dto.MongoGen.MongoMap;
 import cn.vgame.b.gen.dto.MongoGen.RoleDao;
 import cn.vgame.b.gen.dto.MongoGen.RoleDto;
+import cn.vgame.b.mission.Mission;
 import cn.vgame.b.result.ErrorResult;
 import cn.vgame.share.KeyValue;
 import cn.vgame.share.KeyValueSaveOnly;
@@ -139,7 +140,7 @@ public class Role implements IRole {
 
 	private final RoleDto dto;
 	private Bag bag;
-
+    private Mission mission;
 	public long getCreateTime() {
 		return dto.getCreateTime();
 	}
@@ -222,7 +223,8 @@ public class Role implements IRole {
 	 * 值存储器,永久有效
 	 */
 	public KeyValue getKeyValueForever() {
-		return new KeyValueForever();
+		KeyValueForever kv = new KeyValueForever();
+		return kv;
 	}
 
 	/**
@@ -270,6 +272,13 @@ public class Role implements IRole {
 			bag = new Bag(this);
 		return bag;
 	}
+	
+	public Mission getMission() {
+		if (mission == null)
+			mission = new Mission(this);
+		return mission;
+	}
+
 
 	public void logout() {
 		dto.setIsOnline(false);
