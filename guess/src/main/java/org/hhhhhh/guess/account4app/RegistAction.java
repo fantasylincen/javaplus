@@ -1,21 +1,19 @@
 package org.hhhhhh.guess.account4app;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.hhhhhh.guess.exception.GuessException;
+import org.hhhhhh.guess.JsonAction;
+import org.hhhhhh.guess.error.ErrorResult;
 import org.hhhhhh.guess.hibernate.dao.Daos;
 import org.hhhhhh.guess.hibernate.dao.Daos.UserDao;
 import org.hhhhhh.guess.hibernate.dao.Daos.UserDtoCursor;
+import org.hhhhhh.guess.hibernate.dto.UserDto;
 
 import cn.javaplus.log.Log;
 
-import com.opensymphony.xwork2.ActionSupport;
-
-public class RegistAction extends ActionSupport {
+public class RegistAction extends JsonAction {
 
 	/**
 	 * 
@@ -41,8 +39,15 @@ public class RegistAction extends ActionSupport {
 		this.password = password;
 	}
 
+
+	private boolean isAreadyRegist() {
+		UserDao dao = Daos.getUserDao();
+		UserDtoCursor c = dao.find("username", getUsername());
+		return c.hasNext();
+	}
+
 	@Override
-	public String execute() {
+	protected Object exec() {
 
 		Log.d("regist action");
 		
@@ -53,20 +58,14 @@ public class RegistAction extends ActionSupport {
 		String un = getUsername();
 		String regex = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
 		if (un == null || !un.matches(regex)) {
-			throw new GuessException("please type email address");
+			return new ErrorResult("please type email address");
 		} else if (isAreadyRegist()) {
-			throw new GuessException("user aready exist");
+			return new ErrorResult("user aready exist");
 		}
 
 		UserCreator c = new UserCreator();
-		c.createNewUser(session, un, pwd);
+		UserDto dto = c.createNewUser(session, un, pwd);
 		Log.d("regist successful");
-		return SUCCESS;
-	}
-
-	private boolean isAreadyRegist() {
-		UserDao dao = Daos.getUserDao();
-		UserDtoCursor c = dao.find("username", getUsername());
-		return c.hasNext();
+		return new RegistSuccessfulResult(dto);
 	}
 }
