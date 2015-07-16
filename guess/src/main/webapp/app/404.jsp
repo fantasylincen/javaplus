@@ -48,7 +48,7 @@ header div {
 
 		<div data-role="header" class="jqm-header">
 			<h2>
-				<a title="Guess Home"><img src="../_assets/img/jquery-logo.png"
+				<a title="Guess Home"><img src="img/logo.png"
 					alt="jQuery Mobile"> </a>
 			</h2>
 		</div>

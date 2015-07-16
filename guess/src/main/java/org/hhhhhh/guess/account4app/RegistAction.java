@@ -24,7 +24,6 @@ public class RegistAction extends ActionSupport {
 
 	private String username;
 	private String password;
-	private String nick;
 
 	public String getUsername() {
 		return username;
@@ -70,13 +69,4 @@ public class RegistAction extends ActionSupport {
 		UserDtoCursor c = dao.find("username", getUsername());
 		return c.hasNext();
 	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
 }

@@ -38,9 +38,8 @@ public class Server {
 	private static RobotManager robotManager;
 	private static ZhuangManager zhuangManager;
 
-
 	private static ZfbRechargeManager zfbRechargeManager;
-	
+
 	public static ZfbRechargeManager getZfbRechargeManager() {
 		if (zfbRechargeManager == null) {
 			zfbRechargeManager = new ZfbRechargeManager();
@@ -54,7 +53,7 @@ public class Server {
 		String id = (String) session.getAttribute("roleId");
 		return getRole(id);
 	}
-	
+
 	public static Role getRole(String id) {
 
 		if (id == null)
@@ -64,7 +63,8 @@ public class Server {
 
 		if (role == null) {
 			role = load(id);
-			put(role);
+			if (role != null)
+				put(role);
 		}
 		return role;
 	}
@@ -72,20 +72,20 @@ public class Server {
 	private static Role load(String id) {
 		RoleDao dao = Daos.getRoleDao();
 		RoleDto dto = dao.get(id);
+		if(dto == null)
+			return null;
 		return new Role(dto);
 	}
 
 	public static void put(Role role) {
 		String id = role.getId();
-		CacheManager.put(key(id),  role);
+		CacheManager.put(key(id), role);
 	}
 
 	private static String key(String id) {
 		return KEY + ":" + id;
 	}
 
-
-	
 	public static ServerConfig getConfig() {
 		if (config == null)
 			config = new ServerConfig();
@@ -135,6 +135,7 @@ public class Server {
 
 	/**
 	 * 服务器分区标识符
+	 * 
 	 * @return
 	 */
 	public static String getIdentity() {
@@ -145,13 +146,13 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
-//		Log.d(isLinux());
+		// Log.d(isLinux());
 		System.out.println(getIdentity());
 	}
-	
+
 	private static String getMAC() {
 		String p = "[0-9a-zA-Z]{2}[:\\-][0-9a-zA-Z]{2}[:\\-][0-9a-zA-Z]{2}[:\\-][0-9a-zA-Z]{2}[:\\-][0-9a-zA-Z]{2}[:\\-][0-9a-zA-Z]{2}";
-		if(isLinux()) {
+		if (isLinux()) {
 			return cmd("cat /sys/class/net/eth0/address", p);
 		} else {
 			return cmd("cmd /c ipconfig /all", p);
@@ -169,7 +170,7 @@ public class Server {
 			Pattern p = Pattern.compile(patten);
 			Matcher m = p.matcher(ss);
 			boolean find = m.find();
-			if(find) {
+			if (find) {
 				String group = m.group();
 				return group;
 			}
@@ -186,7 +187,6 @@ public class Server {
 		}
 	}
 
-
 	public static RobotManager getRobotManager() {
 		if (robotManager == null)
 			robotManager = new RobotManager();
@@ -194,7 +194,7 @@ public class Server {
 	}
 
 	public static ZhuangManager getZhuangManager() {
-		if(zhuangManager == null)
+		if (zhuangManager == null)
 			zhuangManager = new ZhuangManager();
 		return zhuangManager;
 	}

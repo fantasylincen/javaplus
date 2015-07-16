@@ -52,5 +52,8 @@
 	<a href="../notice/notice.jsp">公告页面</a>
 	<br>
 	<br>
+	<a href="../yinshang/yinshang.jsp">银商管理</a>
+	<br>
+	<br>
 </body>
 </html>

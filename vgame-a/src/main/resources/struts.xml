@@ -3,6 +3,30 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 
+	<package name="yinshang" namespace="/yinshang" extends="struts-default">
+
+     	<global-results>
+     	  	<result name="yinshangexception">error.jsp</result>  
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping result="yinshangexception" exception="cn.vgame.a.yinshang.YinShangException">
+            </exception-mapping>
+        </global-exception-mappings>
+        
+
+		<action name="addYinShang" class="cn.vgame.a.yinshang.AddYinShangAction" >
+			<result type="redirect" name="success">yinshang.jsp</result>
+		</action>
+		<action name="login" class="cn.vgame.a.yinshang.LoginAction" >
+			<result type="redirect" name="success">index.jsp</result>
+		</action>
+        <action name="errorProcessor" class="cn.vgame.a.yinshang.YinShangErrorAction">
+           	<result name="error">error.jsp</result>
+        </action>
+
+	</package>
+	
+	
 	<package name="account" extends="struts-default" namespace="/account">
 		<action name="enterServer" class="cn.vgame.a.account.EnterServerAction" />
 		<action name="createRole" class="cn.vgame.a.account.CreateRoleAction" />

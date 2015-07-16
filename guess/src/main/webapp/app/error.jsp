@@ -1,4 +1,6 @@
+<%@page import="cn.javaplus.log.Log"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s"  uri="/struts-tags"%>    
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -10,7 +12,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>猜猜猜</title>
+<title>出错了</title>
 <link rel="shortcut icon" href="../favicon.ico">
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -48,14 +50,11 @@ header div {
 
 		<div data-role="header" class="jqm-header">
 			<h2>
-				<a title="Guess Home"><img src="/_assets/img/jquery-logo.png"
+				<a title="Guess Home"><img src="img/logo.png"
 					alt="jQuery Mobile"> </a>
 			</h2>
 		</div>
-		<h1>ERROR</h1>
-
-		<p><s:property value="exception.message"/>  </p>
-
+		<h1><s:property value="exception.message"/></h1> 
 	</div>
 
 

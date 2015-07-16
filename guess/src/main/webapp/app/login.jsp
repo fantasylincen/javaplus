@@ -10,7 +10,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>猜猜猜</title>
+<title>登录</title>
 <link rel="shortcut icon" href="../favicon.ico">
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -117,14 +117,12 @@
 
 
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
-
 		<div data-role="header" class="jqm-header">
 			<h2>
-				<a title="Guess Home"><img src="../_assets/img/jquery-logo.png"
+				<a title="Guess Home"><img height="800" src="img/logo.png"
 					alt="jQuery Mobile"> </a>
 			</h2>
 		</div>
-
 		<div data-role="content" class="content">
 
 
@@ -138,13 +136,27 @@
 					type="password" class="txt2"
 					onclick="if(this.value=='input password'){this.value='';this.type='password';}"
 					onfocus="if(this.value=='input password'){this.value='';this.type='password';}" />
+					<br>
 				<button class="ui-btn" type="submit">登录</button>
 			</form>
 
 		</div>
-
+		<div data-role="footer" data-position="fixed" data-id="footernav">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="regist.jsp">注册</a>
+					</li>
+					<li><a href="login.jsp" class="ui-btn-active ui-state-persist">登录</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
-	<!-- /page -->
+
+
+
+
+
 
 </body>
 </html>

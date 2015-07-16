@@ -23,22 +23,20 @@
 
 </head>
 <script type="text/javascript">
-
 	function check() {
-	    var p1 = document.getElementById("password").value;
-	    var p2 = document.getElementById("password2").value;
+		var p1 = document.getElementById("password").value;
+		var p2 = document.getElementById("password2").value;
 		var eq = p1 == p2;
-	 	if (!eq) {
+		if (!eq) {
 			alert("两次输入的密码不一样,请重新输入");
 			return false;
 		}
-		if(p1.length < 6) {
+		if (p1.length < 6) {
 			alert("密码太短");
 			return false;
 		}
-		return true; 
+		return true;
 	}
-	
 </script>
 
 <style type="text/css">
@@ -60,34 +58,36 @@ header div {
 
 <body>
 
-
-
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
-
 		<div data-role="header" class="jqm-header">
 			<h2>
-				<a title="Guess Home"><img src="../_assets/img/jquery-logo.png"
+				<a title="Guess Home"><img height="800" src="img/logo.png"
 					alt="jQuery Mobile"> </a>
 			</h2>
 		</div>
+		<div data-role="content" class="content">
+			<form method="post" action="regist" onsubmit="return check()">
+				<label for="username">请输入用户名</label> <input type="text"
+					name="username" id="username" /> <label for="password">请输入密码</label>
+				<input type="password" name="password" id="password" /> <label
+					for="password">再次输入密码</label> <input id="password2"
+					name="password2" type="password" class="txt2" />
+				<!-- <label
+						for="nick">昵 称</label> <input type="text" name="nick" id="nick" /> -->
 
-		<form method="post" action="regist" onsubmit="return check()">
-			<label for="username">请输入用户名</label> 
-			<input type="text" name="username" id="username" /> 
-			<label for="password">请输入密码</label>
-			<input type="password" name="password" id="password" /> 
-			<label for="password">再次输入密码</label> 
-			<input id="password2" name="password2" type="password" class="txt2" /> 
-			<label for="nick">昵 称</label>
-			<input type="text" name="nick" id="nick" />
-			
-			<button class="ui-btn" type="submit">立即注册</button>
-		</form>
-
+				<button class="ui-btn" type="submit">立即注册</button>
+			</form>
+		</div>
+		<div data-role="footer" data-position="fixed" data-id="footernav">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="regist.jsp"
+						class="ui-btn-active ui-state-persist">注册</a></li>
+					<li><a href="login.jsp">登录</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
-
-
-
 
 </body>
 </html>

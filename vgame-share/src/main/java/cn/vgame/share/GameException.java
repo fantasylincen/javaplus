@@ -16,5 +16,10 @@ public class GameException extends RuntimeException {
 	public IErrorResult getErrorResult() {
 		return errorResult;
 	}
+	
+	@Override
+	public String getMessage() {
+		return errorResult.getError() + "";
+	}
 
 }

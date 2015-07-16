@@ -5,6 +5,10 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name></display-name>
 
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 	<listener>
 		<listener-class>cn.vgame.a.init.InitListener</listener-class>
 	</listener>
@@ -26,7 +30,8 @@
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>
-			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>

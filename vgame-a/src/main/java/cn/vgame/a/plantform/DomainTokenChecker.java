@@ -16,7 +16,7 @@ public class DomainTokenChecker implements TokenChecker {
 
 		int time = getTime();
 
-		String url = "http://sy.test.cw678.com/Services/GetAccountInfo?AccName=USER_ID&Time=TIME&Flag=FLAG";
+		String url = "http://fqzs.cw678.com/Services/GetAccountInfo?AccName=USER_ID&Time=TIME&Flag=FLAG";
 		url = url.replaceAll("USER_ID", userId);
 		url = url.replaceAll("TIME", time + "");
 		url = url.replaceAll("FLAG", getFlag(userId, time));

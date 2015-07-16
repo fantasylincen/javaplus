@@ -48,15 +48,13 @@ header div {
 
 		<div data-role="header" class="jqm-header">
 			<h2>
-				<a title="Guess Home"><img src="../_assets/img/jquery-logo.png"
+				<a title="Guess Home"><img src="img/logo.png"
 					alt="jQuery Mobile"> </a>
 			</h2>
 		</div>
 		<h1>恭喜您!注册成功</h1>
 
-		<p>jQuery Mobile is a touch-friendly UI framework built on jQuery Core that works across all popular mobile, tablet and desktop platforms.</p>
-
-
+		<p><a href="login.jsp">前往登陆</a></p>
 
 	</div>
 
