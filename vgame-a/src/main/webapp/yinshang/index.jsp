@@ -93,10 +93,13 @@
 			<h3>我的信息</h3>
 
 			<p>
-				ID:<%=(String) session.getAttribute("id")%>
+				帐号:<%=(String) session.getAttribute("id")%>
 			</p>
 			<p>
-				我的金豆:<%=Server.getRole((String) session.getAttribute("roleId"))
+				昵称:<%=Server.getRole((String) session.getAttribute("roleId")).getNick()%>
+			</p>
+			<p>
+				金豆:<%=Server.getRole((String) session.getAttribute("roleId"))
 					.getCoin()%>
 			</p>
 

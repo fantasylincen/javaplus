@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import cn.vgame.a.Server;
+import cn.vgame.a.account.Role;
 import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.YinShangDao;
 import cn.vgame.a.gen.dto.MongoGen.YinShangDto;
@@ -50,6 +52,11 @@ public class AddYinShangAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		session = request.getSession();
 
+		Role role = Server.getRole(roleId);
+
+		if(role == null)
+			throw new RuntimeException("role not found:" + roleId);
+		
 		YinShangDao dao = Daos.getYinShangDao();
 
 		YinShangDto dto = dao.get(id);
@@ -59,8 +66,14 @@ public class AddYinShangAction extends ActionSupport {
 		dto.setId(id);
 		dto.setPassword(password);
 		dto.setRoleId(roleId);
+		
 
 		dao.save(dto);
+		
+		//禁止其游戏
+		role.getDto().setIsCantPlay(true);//禁止游戏
+		Daos.getRoleDao().save(role.getDto());
+		
 		return SUCCESS;
 	}
 

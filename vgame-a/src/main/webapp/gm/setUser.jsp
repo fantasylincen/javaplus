@@ -166,6 +166,23 @@ function juge(form){
 
 
 				</tr>
+				
+				<tr>
+					<td>禁止游戏</td>
+
+					<td>
+						<%
+							if (role.getDto().getIsCantPlay()) {
+						%> <input name="isCantPlay" type="checkbox" checked="checked" /> <%
+ 	} else {
+ %> <input name="isCantPlay" type="checkbox" /> <%
+ 	}
+ %>
+					</td>
+
+
+
+				</tr>
 
 				<tr>
 

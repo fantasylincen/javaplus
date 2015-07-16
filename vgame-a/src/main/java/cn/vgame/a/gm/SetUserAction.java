@@ -27,6 +27,7 @@ public class SetUserAction extends ActionSupport {
 	String newNick;
 	String isJinYan;
 	String isFengHao;
+	private String isCantPlay;
 	private String reason;
 	private String roleId;
 	private int addLaBa;
@@ -86,6 +87,7 @@ public class SetUserAction extends ActionSupport {
 
 		boolean isJinYan = "on".equals(getIsJinYan());
 		boolean isFengHao = "on".equals(getIsFengHao());
+		boolean isCantPlay = "on".equals(getIsCantPlay());
 
 		RoleDto dto = role.getDto();
 
@@ -94,6 +96,7 @@ public class SetUserAction extends ActionSupport {
 		dto.setNick(newNick);
 		dto.setHasJinYan(isJinYan);
 		dto.setHasFengHao(isFengHao);
+		dto.setIsCantPlay(isCantPlay);
 		RoleDao dao = Daos.getRoleDao();
 		dao.save(dto);
 
@@ -205,6 +208,14 @@ public class SetUserAction extends ActionSupport {
 
 	public void setReduceJiangQuan(int reduceJiangQuan) {
 		this.reduceJiangQuan = reduceJiangQuan;
+	}
+
+	public String getIsCantPlay() {
+		return isCantPlay;
+	}
+
+	public void setIsCantPlay(String isCantPlay) {
+		this.isCantPlay = isCantPlay;
 	}
 
 }
