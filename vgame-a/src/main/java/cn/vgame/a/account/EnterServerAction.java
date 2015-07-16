@@ -1,6 +1,9 @@
 package cn.vgame.a.account;
 
 import cn.javaplus.log.Log;
+import cn.vgame.a.plantform.Plantform;
+import cn.vgame.a.plantform.PlantformFactory;
+import cn.vgame.a.plantform.TokenChecker;
 
 /**
  * 玩家进入游戏服务器
@@ -31,21 +34,18 @@ public class EnterServerAction extends JsonAction {
 	@Override
 	public Object exec() {
 
-		TokenChecker checker = getChecker();
+		Plantform p = PlantformFactory.createPlantform(plantform);
+		
+		TokenChecker checker = p.getChecker();
 
 		checker.check(userId, token, appId);
 
 		session.setAttribute("userId", getUserId());
+		session.setAttribute("plantform", p);
+		
 		Log.d("enter game " + getUserId());
 		return new EnterServerResult(getUserId(), session.getId());
 
-	}
-
-	private TokenChecker getChecker() {
-		if ("xy".equals(plantform)) {
-			return new XyTokenChecker();
-		}
-		return new VcTokenChecker();
 	}
 
 	/**

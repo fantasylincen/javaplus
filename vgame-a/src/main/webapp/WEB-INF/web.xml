@@ -14,7 +14,7 @@
 	</listener>
 
 	<session-config>
-		<session-timeout>240</session-timeout><!-- 默认时间为分钟 -->
+		<session-timeout>120</session-timeout><!-- 默认时间为分钟 -->
 
 	</session-config>
 	<!-- <filter> <filter-name>encodingFilter</filter-name> <filter-class>cn.vgame.a.SetCharacterEncodingFilter</filter-class> 

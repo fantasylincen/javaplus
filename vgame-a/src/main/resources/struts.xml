@@ -178,6 +178,7 @@
 		 -->
 		 
 		 <action name="getRankingList" class="cn.vgame.a.turntable.GetRankingListAction" />
+		 <action name="getTradeLog" class="cn.vgame.a.turntable.GetTradeLogAction" />
 		
 	</package>
 

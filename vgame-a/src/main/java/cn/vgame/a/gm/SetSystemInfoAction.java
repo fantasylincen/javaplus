@@ -16,7 +16,9 @@ public class SetSystemInfoAction extends ActionSupport {
 	private int qiangZhiType;
 	private double tunTuGaiLv;
 	private long tunTuLiang;
-
+	private double kuCunShuaiJian;
+	private long kuCunShuaiJianZhi;
+	
 	public void setTunTuGaiLv(double tunTuGaiLv) {
 		if(tunTuGaiLv < 0)
 			tunTuGaiLv = 0;
@@ -30,7 +32,7 @@ public class SetSystemInfoAction extends ActionSupport {
 	public String execute() throws Exception {
 		Controller c = Turntable.getInstance().getController();
 		boolean isTun = qiangZhiType == 1;
-		c.update( isTun, tunTuGaiLv, tunTuLiang);
+		c.update( isTun, tunTuGaiLv, tunTuLiang, kuCunShuaiJian, kuCunShuaiJianZhi);
 		return SUCCESS;
 	}
 
@@ -54,6 +56,31 @@ public class SetSystemInfoAction extends ActionSupport {
 
 	public void setTunTuLiang(long tunTuLiang) {
 		this.tunTuLiang = tunTuLiang;
+	}
+
+
+	public double getKuCunShuaiJian() {
+		return kuCunShuaiJian;
+	}
+
+
+	public void setKuCunShuaiJian(double kuCunShuaiJian) {
+		if(kuCunShuaiJian < 0)
+			kuCunShuaiJian = 0;
+		if(kuCunShuaiJian > 0.5)
+			kuCunShuaiJian = 0.5;
+		
+		this.kuCunShuaiJian = kuCunShuaiJian;
+	}
+
+
+	public long getKuCunShuaiJianZhi() {
+		return kuCunShuaiJianZhi;
+	}
+
+
+	public void setKuCunShuaiJianZhi(long kuCunShuaiJianZhi) {
+		this.kuCunShuaiJianZhi = kuCunShuaiJianZhi;
 	}
 
 }

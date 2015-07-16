@@ -1,3 +1,4 @@
+<%@page import="cn.javaplus.collections.map.Maps"%>
 <%@page import="cn.vgame.a.account.Role"%>
 <%@page import="cn.vgame.a.Server"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
@@ -47,13 +48,21 @@
 		
 		sb.append("<td>");
 		
-	/* 	Role f = Server.getRole(dto.getFrom());
+		String from = dto.getFrom();
+		if("send coin".equals(dto.getDsc())) {
+			from = Server.getRole(from).getNick();
+		}
 		
-		if(f != null) {
-			sb.append(f.getNick() + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + Server.getRole(dto.getTo()).getNick());
-		} else { */
-			sb.append(dto.getFrom() + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + Server.getRole(dto.getTo()).getNick());
-	/* 	} */
+		Map<String, String> map = Maps.newHashMap();
+		map.put("bank", "<font color=\"#1A6BE6\">银行</font>");
+		map.put("system", "<font color=\"#D52B4D\">系统</font>");
+		map.put("market", "<font color=\"#3CC43C\">商店</font>");
+		
+		if(map.get(from) != null)
+		 	from = map.get(from);
+		
+		sb.append(from + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + Server.getRole(dto.getTo()).getNick());
+
 		sb.append("</td>");
 
 		sb.append("<td>");

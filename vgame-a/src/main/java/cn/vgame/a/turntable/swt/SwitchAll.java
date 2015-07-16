@@ -39,7 +39,7 @@ public class SwitchAll implements ISwitchs {
 		return sum;
 	}
 
-	public long getByTypeWithOutRobot(String type) {
+	public int getByTypeWithOutRobot(String type) {
 		int sum = 0;
 		RobotManager rm = Server.getRobotManager();
 

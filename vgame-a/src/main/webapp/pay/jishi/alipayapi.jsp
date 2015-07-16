@@ -96,7 +96,7 @@
 		sParaTemp.put("show_url", show_url);
 		sParaTemp.put("body", body);
 		
-		Server.getZfbRechargeManager().createZfbOrder(sParaTemp, id, roleId);
+		Server.getZfbRechargeManager().createZfbOrder(sParaTemp,  id,  roleId);
 		
 		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
 		out.println(sHtmlText);

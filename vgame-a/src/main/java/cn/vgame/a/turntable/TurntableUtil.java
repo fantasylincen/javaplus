@@ -1,10 +1,13 @@
 package cn.vgame.a.turntable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.javaplus.collections.counter.Counter;
 import cn.javaplus.collections.list.Lists;
+import cn.javaplus.collections.map.Maps;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
 import cn.vgame.a.turntable.swt.ISwitchs;
@@ -12,6 +15,32 @@ import cn.vgame.share.CacheManager;
 import cn.vgame.share.Xml;
 
 public class TurntableUtil {
+
+	static Map<String, String> translate = createTranslate();
+
+	/**
+	 * 翻译成中文
+	 */
+	public static final String toChinese(String type) {
+		return translate.get(type);
+	}
+
+	private static Map<String, String> createTranslate() {
+		HashMap<String, String> m = Maps.newHashMap();
+		m.put("A", "禽");
+		m.put("B", "银");
+		m.put("C", "金");
+		m.put("D", "兽");
+		m.put("E", "燕");
+		m.put("F", "鸽");
+		m.put("G", "孔");
+		m.put("H", "鹰");
+		m.put("I", "狮");
+		m.put("J", "熊");
+		m.put("K", "猴");
+		m.put("L", "兔");
+		return m;
+	}
 
 	public static class SwitchsTemp implements ISwitchs {
 

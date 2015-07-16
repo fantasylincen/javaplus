@@ -31,7 +31,7 @@ public class GetUserDataAction extends JsonActionAfterRoleEnterGame {
 
 	@Override
 	public Object run() {
-		return new RoleResult(role);
+		return new RoleResult(role, session);
 	}
 
 }

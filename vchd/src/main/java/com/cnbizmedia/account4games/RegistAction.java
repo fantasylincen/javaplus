@@ -86,8 +86,6 @@ public class RegistAction extends JsonAction {
 				.matches(
 						"^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$")) {
 			return new ErrorResult("please type email address");
-		} else if (passwordError()) {
-			return new ErrorResult("password error");
 		} else if (isAreadyRegist()) {
 			return new ErrorResult("user aready exist");
 		}
@@ -107,14 +105,6 @@ public class RegistAction extends JsonAction {
 
 	}
 
-	private boolean passwordError() {
-		UserDao dao = Daos.getUserDao();
-		UserDto dto = dao.get(getPassword());
-		if (dto == null)
-			return false;
-		String md5 = Util.Secure.md5(getPassword());
-		return md5.equals(dto.getPwdMD5());
-	}
 
 	public String getUserId() {
 		return userId;

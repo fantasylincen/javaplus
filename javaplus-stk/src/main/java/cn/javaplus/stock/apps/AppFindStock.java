@@ -15,7 +15,7 @@ public class AppFindStock {
 			AnalyzeStrategy s = new G();
 
 			if (s.conform(stock)) {
-				System.out.println(stock.getId() + "  -- 收盘日 -- " + stock.getLast().getDate());
+//				System.out.println(stock.getId() + "  -- 收盘日 -- " + stock.getLast().getDate());
 			}
 
 		}

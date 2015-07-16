@@ -135,14 +135,14 @@ ver:未知<br>
 <tr>
 <td><a  title=" A.正常情况: { }
   
-  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4XY?orderId=XXXXXX&uid=XXXXXX&amount=XXXXXX&serverid=XXXXXX&extra=XXXXXX&ts=XXXXXX&sign=XXXXXX&sig=XXXXXX&roleId=XXXXXX&nick=XXXXXX&coin=XXXXXX&jiangQuan=XXXXXX">
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4XY?orderid=XXXXXX&uid=XXXXXX&amount=XXXXXX&serverid=XXXXXX&extra=XXXXXX&ts=XXXXXX&sign=XXXXXX&sig=XXXXXX&roleId=XXXXXX&nick=XXXXXX&coin=XXXXXX&jiangQuan=XXXXXX">
 充值
 </a></td>
 <td>
 recharge4XY
 </td>
 <td>
-orderId:未知<br>
+orderid:未知<br>
 uid:未知<br>
 amount:未知<br>
 serverid:未知<br>
@@ -159,14 +159,14 @@ jiangQuan:未知<br>
 <tr>
 <td><a  title=" A.正常情况: { }
   
-  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4XYTest?orderId=XXXXXX&uid=XXXXXX&amount=XXXXXX&serverid=XXXXXX&extra=XXXXXX&ts=XXXXXX&sign=XXXXXX&sig=XXXXXX&roleId=XXXXXX&nick=XXXXXX&coin=XXXXXX&jiangQuan=XXXXXX">
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/recharge/recharge4XYTest?orderid=XXXXXX&uid=XXXXXX&amount=XXXXXX&serverid=XXXXXX&extra=XXXXXX&ts=XXXXXX&sign=XXXXXX&sig=XXXXXX&roleId=XXXXXX&nick=XXXXXX&coin=XXXXXX&jiangQuan=XXXXXX">
 充值
 </a></td>
 <td>
 recharge4XYTest
 </td>
 <td>
-orderId:未知<br>
+orderid:未知<br>
 uid:未知<br>
 amount:未知<br>
 serverid:未知<br>
@@ -695,6 +695,24 @@ getRankingList
 <td>
 </td>
 </tr>
+<tr>
+<td><a  title=" A.正常情况: { zhuang:{//庄家 nick:昵称 roleId:角色id coin: 获得金豆 }
+  
+  me: { //本家 nick:昵称 roleId:角色id coin: 获得金豆 }
+  
+  rankingList: [ { nick:昵称, roleId:角色id, coin: 获得金豆}, { nick:昵称, roleId:角色id,
+  coin: 获得金豆}, { nick:昵称, roleId:角色id, coin: 获得金豆}, { nick:昵称, roleId:角色id,
+  coin: 获得金豆}, { nick:昵称, roleId:角色id, coin: 获得金豆}, ... ] }
+  
+  B.错误: 标准错误" href=" http://19vc.com/vgame-a/turntable/getTradeLog">
+获取本轮排行榜列表
+</a></td>
+<td>
+getTradeLog
+</td>
+<td>
+</td>
+</tr>
 </table>
 <h2><br>/message
 </h2><table class="bordered">	<thead>		<tr>			<th>说明</th>			<th>名字</th>			<th>参数列表</th>		</tr>	</thead><tr>
@@ -792,7 +810,7 @@ id:未知<br>
 </td>
 </tr>
 <tr>
-<td><a  title=" 无" href=" http://19vc.com/vgame-a/gm/setUser?newNick=XXXXXX&isJinYan=XXXXXX&isFengHao=XXXXXX&roleId=XXXXXX&reason=XXXXXX&addLaBa=XXXXXX&addCoin=XXXXXX&reduceLaBa=XXXXXX&reduceCoin=XXXXXX">
+<td><a  title=" 无" href=" http://19vc.com/vgame-a/gm/setUser?newNick=XXXXXX&isJinYan=XXXXXX&isFengHao=XXXXXX&roleId=XXXXXX&reason=XXXXXX&addLaBa=XXXXXX&addCoin=XXXXXX&reduceLaBa=XXXXXX&reduceCoin=XXXXXX&addJiangQuan=XXXXXX&reduceJiangQuan=XXXXXX">
 重新加载系统配置(刘雨诚请无视)
 </a></td>
 <td>
@@ -808,35 +826,23 @@ addLaBa:未知<br>
 addCoin:未知<br>
 reduceLaBa:未知<br>
 reduceCoin:未知<br>
+addJiangQuan:未知<br>
+reduceJiangQuan:未知<br>
 </td>
 </tr>
 <tr>
-<td><a  title=" 无" href=" http://19vc.com/vgame-a/gm/setSystemInfo?maxKuCun=XXXXXX&dangWei=XXXXXX&tunTuGaiLv=XXXXXX&toNormal=XXXXXX&qiangZhiType=XXXXXX&chuFaTunFenShiChang=XXXXXX&chuFaTunFenGaiLv=XXXXXX">
+<td><a  title=" 无" href=" http://19vc.com/vgame-a/gm/setSystemInfo?tunTuGaiLv=XXXXXX&qiangZhiType=XXXXXX&tunTuLiang=XXXXXX&kuCunShuaiJian=XXXXXX&kuCunShuaiJianZhi=XXXXXX">
 修改系统配置(刘雨诚请无视)
 </a></td>
 <td>
 setSystemInfo
 </td>
 <td>
-maxKuCun:未知<br>
-dangWei:未知<br>
 tunTuGaiLv:未知<br>
-toNormal:未知<br>
 qiangZhiType:未知<br>
-chuFaTunFenShiChang:未知<br>
-chuFaTunFenGaiLv:未知<br>
-</td>
-</tr>
-<tr>
-<td><a  title=" 无" href=" http://19vc.com/vgame-a/gm/setGanSheTime?hour=XXXXXX&min=XXXXXX">
-修改系统干涉时长(刘雨诚请无视)
-</a></td>
-<td>
-setGanSheTime
-</td>
-<td>
-hour:未知<br>
-min:未知<br>
+tunTuLiang:未知<br>
+kuCunShuaiJian:未知<br>
+kuCunShuaiJianZhi:未知<br>
 </td>
 </tr>
 <tr>

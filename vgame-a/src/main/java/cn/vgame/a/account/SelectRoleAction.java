@@ -48,7 +48,7 @@ public class SelectRoleAction extends JsonAction {
 		}
 
 		public RoleResult getRole() {
-			return new RoleResult(role);
+			return new RoleResult(role, session);
 		}
 	}
 

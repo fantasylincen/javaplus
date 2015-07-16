@@ -7,12 +7,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import cn.javaplus.util.Util;
-
 import com.cnbizmedia.gen.dto.MongoGen.Daos;
 import com.cnbizmedia.gen.dto.MongoGen.UserDao;
 import com.cnbizmedia.gen.dto.MongoGen.UserDao.UserDtoCursor;
-import com.cnbizmedia.gen.dto.MongoGen.UserDto;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegistAction extends ActionSupport {
@@ -68,8 +65,6 @@ public class RegistAction extends ActionSupport {
 				.matches(
 						"^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$")) {
 			errorCode = 2;
-		} else if (passwordError()) {
-			errorCode = 5;
 		} else if (isAreadyRegist()) {
 			errorCode = 6;
 		}
@@ -91,14 +86,6 @@ public class RegistAction extends ActionSupport {
 
 	}
 
-	private boolean passwordError() {
-		UserDao dao = Daos.getUserDao();
-		UserDto dto = dao.get(getPassword1());
-		if (dto == null)
-			return false;
-		String md5 = Util.Secure.md5(getPassword1());
-		return md5.equals(dto.getPwdMD5());
-	}
 
 	private static final int INIT_VALUE = 100000000;
 	private static AtomicInteger userId = new AtomicInteger(INIT_VALUE);

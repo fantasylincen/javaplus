@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.ehcache.config.Configuration.RuntimeCfg;
+
 import org.apache.struts2.ServletActionContext;
 
 import cn.javaplus.collections.set.Sets;
@@ -47,7 +49,8 @@ public abstract class AbstractJsonAction extends ActionSupport {
 		// Log.d("vgame SessionID:" + session.getId());
 
 		StringBuffer url = request.getRequestURL();
-		Log.d(url);
+		long memory = Runtime.getRuntime().freeMemory();
+		Log.d(url, memory / (1024 * 1024) + "M");
 
 		PrintWriter out = response.getWriter();
 		Object r;
