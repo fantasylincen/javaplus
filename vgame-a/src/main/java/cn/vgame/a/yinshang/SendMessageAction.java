@@ -43,7 +43,6 @@ public class SendMessageAction extends ActionSupport {
 		session = request.getSession();
 		if(message == null || message.isEmpty())
 			return SUCCESS;
-		message = EncodingUtil.iso2Utf8(message);
 		message = Util.Sencitive.sencitive(message);
 		checkLen();
 		sendMessage();

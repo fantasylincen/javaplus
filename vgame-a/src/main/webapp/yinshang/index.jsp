@@ -9,6 +9,12 @@
 <%@page import="cn.vgame.a.message.MessageManager"%>
 <%@page import="cn.vgame.a.Server"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=utf-8"%> 
+<% 
+request.setCharacterEncoding("UTF-8"); 
+response.setCharacterEncoding("UTF-8"); 
+response.setContentType("text/html; charset=utf-8"); 
+%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -80,12 +86,10 @@
  	}
  %> </font>
 			<p>
-			<form id="sendMessage" name="sendMessage" action="sendMessage">
+			<form  method ="post" id="sendMessage" name="sendMessage" action="sendMessage">
 				<input id="message" name="message" type="text" maxlength="50"
 					class="txt1"></input>
 				<button class="ui-btn" type="submit">发送</button>
-
-
 			</form>
 			</p>
 
@@ -104,11 +108,11 @@
 					.getCoin()%>
 			</p>
 			<p>
-				在线人数:<%=Turntable.getInstance().getRoleCount()%>
+				当前下注人数:<%=Turntable.getInstance().getRoleCount()%>
 			</p>
 
 			<p>
-			<form id="sendCoin" name="sendCoin" action="sendCoin">
+			<form method ="post" id="sendCoin" name="sendCoin" action="sendCoin">
 				<input id="nick" name="nick" class="txt1" type="text"
 					value="请输入用户昵称"
 					onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
