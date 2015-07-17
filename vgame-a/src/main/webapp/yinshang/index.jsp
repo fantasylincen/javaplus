@@ -1,3 +1,4 @@
+<%@page import="cn.vgame.a.turntable.Turntable"%>
 <%@page import="cn.javaplus.collections.list.Lists"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao.CoinLogDtoCursor"%>
@@ -90,17 +91,20 @@
 
 		</div>
 		<div class="jqm-block-content">
-			<h3>我的信息</h3>
+			<h3>信息</h3>
 
 			<p>
-				帐号:<%=(String) session.getAttribute("id")%>
+				我的帐号:<%=(String) session.getAttribute("id")%>
 			</p>
 			<p>
-				昵称:<%=Server.getRole((String) session.getAttribute("roleId")).getNick()%>
+				我的昵称:<%=Server.getRole((String) session.getAttribute("roleId")).getNick()%>
 			</p>
 			<p>
-				金豆:<%=Server.getRole((String) session.getAttribute("roleId"))
+				我的金豆:<%=Server.getRole((String) session.getAttribute("roleId"))
 					.getCoin()%>
+			</p>
+			<p>
+				在线人数:<%=Turntable.getInstance().getRoleCount()%>
 			</p>
 
 			<p>

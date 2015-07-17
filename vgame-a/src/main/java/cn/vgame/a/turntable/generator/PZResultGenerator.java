@@ -144,6 +144,9 @@ public class PZResultGenerator implements ResultGenerator {
 
 		ArrayList<Row> ls = Lists.newArrayList();
 		List<Xs> fu = getFu(xss);
+		
+		removeShaYuTu(fu);
+		
 		Row first;
 		if (Turntable.getInstance().getMustGenerateId() > 0) { // 本轮第一个必出
 			first = getMust(all);
@@ -159,6 +162,24 @@ public class PZResultGenerator implements ResultGenerator {
 		new RandomByExcel().randomSongDeng(all, ls, first, randomXNumber);
 		return ls;
 	}
+	private void removeShaYuTu(List<Xs> fu) {
+		Iterator<Xs> it = fu.iterator();
+		while (it.hasNext()) {
+			PZResultGenerator.Xs xs = (PZResultGenerator.Xs) it.next();
+			
+			if("B".equals(xs.getType())) {
+				if (Util.Random.isHappen(0.8)) {
+					it.remove();
+				}
+			} else if("C".equals(xs.getType())) {
+				if (Util.Random.isHappen(0.9)) {
+					it.remove();
+				}
+			} 
+			
+		}
+	}
+
 	private Row getMust(List<Row> all) {
 		for (Row row : all) {
 			if (row.getInt("id") == Turntable.getInstance().getMustGenerateId())
