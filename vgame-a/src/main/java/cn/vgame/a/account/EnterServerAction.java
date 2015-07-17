@@ -1,6 +1,7 @@
 package cn.vgame.a.account;
 
 import cn.javaplus.log.Log;
+import cn.vgame.a.Server;
 import cn.vgame.a.plantform.Plantform;
 import cn.vgame.a.plantform.PlantformFactory;
 import cn.vgame.a.plantform.TokenChecker;
@@ -44,6 +45,7 @@ public class EnterServerAction extends JsonAction {
 		session.setAttribute("plantform", p);
 		
 		Log.d("enter game " + getUserId());
+		Server.getKeyValueSaveOnly().add("ENTER_GAME_TIMES", 1);
 		return new EnterServerResult(getUserId(), session.getId());
 
 	}

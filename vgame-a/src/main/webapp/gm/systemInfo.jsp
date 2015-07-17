@@ -30,8 +30,6 @@
 </head>
 <body>
 
-	<a href="systemInfo.jsp">刷新</a> &nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="menu.jsp"> 返回</a>
 	<%
 		RoleDao dao = Daos.getRoleDao();
 		int playerCount = dao.find().getCount();
@@ -83,13 +81,25 @@
 				</tr>
 				
 				<tr>
-					<td>场外携带金币</td>
-					<td><%=all%></td>
+					<td>今日新增用户/历史创建用户</td>
+					<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%></td>
 				</tr>
-				
+				<tr>
+					<td>今日登陆/历史登陆</td>
+					<td><%=Server.getKeyValueDaily().getLong("ENTER_GAME_TIMES")%>/<%=Server.getKeyValueForever().getLong("ENTER_GAME_TIMES")%></td>
+				</tr>
+				<tr>
+					<td>今日充值/历史充值</td>
+					<td><%=Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE")%>/<%=Server.getKeyValueForever().getLong("SYSTEM_RECHARGE")%></td>
+				</tr>
 				<tr>
 					<td>今日交易量/历史交易量</td>
 					<td><%=Server.getKeyValueDaily().getLong("TRADE_VOL")%>/<%=Server.getKeyValueForever().getLong("TRADE_VOL")%></td>
+				</tr>
+
+				<tr>
+					<td>场外携带金币</td>
+					<td><%=all%></td>
 				</tr>
 				
 				<tr>
@@ -97,14 +107,10 @@
 					<td><%=allBank%></td>
 				</tr>
 				<tr>
-					<td>今日充值/历史充值</td>
-					<td><%=Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE")%>/<%=Server.getKeyValueForever().getLong("SYSTEM_RECHARGE")%></td>
-				</tr>
-				<tr>
 					<td>奖券</td>
 					<td><%=allJiangQuan%></td>
 				</tr>
-
+				
 				<tr>
 					<td>彩金</td>
 					<td><%=Turntable.getInstance().getCaiJin()%></td>
@@ -152,7 +158,7 @@
 		</table>
 
 		<br> <input type="submit" value="保存" /> &nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="menu.jsp"> 返回</a> <br>
+		<a href="menu.jsp"> 返回</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="systemInfo.jsp">刷新</a> <br>
 	</form>
 </body>
 </html>

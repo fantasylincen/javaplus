@@ -1,6 +1,7 @@
 package cn.vgame.a.account;
 
 import cn.javaplus.util.Util;
+import cn.vgame.a.Server;
 import cn.vgame.a.events.Events;
 import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao;
@@ -63,6 +64,9 @@ public class CreateRoleAction extends JsonAction {
 
 		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
 		Events.dispatch(new CreateRoleEvent(role, session));
+		
+		Server.getKeyValueSaveOnly().add("CREATE_ROLE_COUNT", 1);
+		
 		return new CreateRoleResult(role, session);
 	}
 
