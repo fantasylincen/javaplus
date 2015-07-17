@@ -1,5 +1,6 @@
 package cn.vgame.a.bank;
 
+import cn.javaplus.log.Log;
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
 
 /**
@@ -26,6 +27,7 @@ public class ToBankAction extends JsonActionAfterRoleEnterGame {
 	@Override
 	public Object run() {
 		role.toBank(coin);
+		Log.d("to bank", role.getId(), role.getNick(), coin, "余额:" + role.getCoin(), "银行:" + role.getBankCoin());
 		return new BankResult(role);
 	}
 

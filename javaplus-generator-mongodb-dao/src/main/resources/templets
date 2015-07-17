@@ -701,7 +701,7 @@ TempletName:DAOS
 
 		}
 
-		private static DBCollection getCollection(String collectionName) {
+		public static DBCollection getCollection(String collectionName) {
 			DBCollection c;
 			try {
 				c = cache.get(collectionName);

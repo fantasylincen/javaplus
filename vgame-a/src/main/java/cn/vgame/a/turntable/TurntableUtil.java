@@ -2,6 +2,7 @@ package cn.vgame.a.turntable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import cn.javaplus.collections.list.Lists;
 import cn.javaplus.collections.map.Maps;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
+import cn.javaplus.random.Fetcher;
 import cn.vgame.a.turntable.swt.ISwitchs;
 import cn.vgame.share.CacheManager;
 import cn.vgame.share.Xml;
@@ -276,10 +278,47 @@ public class TurntableUtil {
 	}
 
 	public static String toString(ISwitchs s) {
-		return "A:" + s.getA() + "#B:" + s.getB() + "#C:" + s.getC() + "#D:"
-				+ s.getD() + "#E:" + s.getE() + "#F:" + s.getF() + "#G:"
-				+ s.getG() + "#H:" + s.getH() + "#I:" + s.getI() + "#J:"
-				+ s.getJ() + "#K:" + s.getK() + "#L:" + s.getL();
+		List<String> types = getAllTypes();
+		TypeF fetcher = new TypeF(s);
+		return "[" + linkWith(" ", types, fetcher) + "]";
+	}
+
+	private static String linkWith(String sp, List<String> types,
+			TypeF fetcher) {
+
+		StringBuilder sb = new StringBuilder();
+		Iterator<String> it = types.iterator();
+		while (it.hasNext()) {
+			String s = it.next();
+			String str = fetcher.get(s);
+			if(str == null)
+				continue;
+			sb.append(str);
+			if (it.hasNext()) {
+				sb.append(sp);
+			}
+		}
+		return sb + "";
+	}
+
+	public static class TypeF implements Fetcher<String, String> {
+	
+		private final ISwitchs s;
+	
+		public TypeF(ISwitchs s) {
+			this.s = s;
+		}
+	
+		@Override
+		public String get(String t) {
+	
+			int count = TurntableUtil.getByType(s, t);
+			if(count == 0) {
+				return null;
+			}
+			return toChinese(t) + ":" + count;
+		}
+	
 	}
 
 	public static int getByType(ISwitchs s, String type) {

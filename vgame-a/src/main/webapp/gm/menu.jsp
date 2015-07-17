@@ -30,6 +30,7 @@
 
 	<a href="queryUsers.jsp">用户管理</a>
 	<br>
+
 	<br>
 	<a href="systemInfo.jsp">系统信息</a>
 	<br>
@@ -48,9 +49,9 @@
 	<br>
 	<a href="consoleLogList.jsp">系统日志</a>
 	<br>
-	<br>
+	<!-- <br>
 	<a href="../notice/notice.jsp">公告页面</a>
-	<br>
+	<br> -->
 	<br>
 	<a href="../yinshang/yinshang.jsp">银商管理</a>
 	<br>

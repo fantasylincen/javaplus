@@ -1,3 +1,7 @@
+<%@page import="com.mongodb.DBCursor"%>
+<%@page import="com.mongodb.DBCollection"%>
+<%@page import="com.mongodb.BasicDBObject"%>
+<%@page import="cn.vgame.a.gen.dto.MongoGen.CollectionFetcher"%>
 <%@page import="cn.vgame.a.result.ErrorResult"%>
 <%@page import="cn.javaplus.log.Log"%>
 <%@page import="com.hp.hpl.sparta.Document"%>
@@ -24,11 +28,10 @@
 					<th>角色ID</th>
 					<th>所属帐号</th>
 					<th>昵称</th>
-					<th>金币</th>
-					<th>仓库</th>
-					<th>奖券</th>
-					
-					<th>创建时间</th>
+					<th><a href="queryUsers.jsp?query_users_sort=coin">金币</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=bankCoin">仓库</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=jiangQuan">奖券</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=createTime">创建时间</a></th>
 					<th>机器人</th>
 				</tr>
 			</thead>
@@ -85,19 +88,27 @@
 				int cev = 14;
 				StringBuffer ssb = new StringBuffer();
 
+				
+
 				RoleDao dao = Daos.getRoleDao();
 
 				String pg = request.getParameter("page");
 				String cv = request.getParameter("countEvery");
 				String guanJianZi = request.getParameter("guanJianZi");
-
+				String query_users_sort = request.getParameter("query_users_sort");
+				
 				RoleDtoCursor find;
 				
 				if(guanJianZi != null ) {
 					session.setAttribute("guanJianZi", guanJianZi);
 				}
 				
+				if(query_users_sort != null ) {
+					session.setAttribute("query_users_sort", query_users_sort);
+				}
+				
 				guanJianZi= (String)session.getAttribute("guanJianZi");
+				query_users_sort= (String)session.getAttribute("query_users_sort");
 				
 				
 				if(pg != null) {
@@ -111,7 +122,19 @@
 				}
 				
 				if(guanJianZi.trim().isEmpty()) {
-					find = dao.find();
+					
+					
+					DBCollection c = Daos.getCollection("Role");
+					DBCursor sort;
+					
+					if(query_users_sort != null) {
+						sort = c.find().sort(new BasicDBObject(query_users_sort, -1));
+					} else {
+						sort = c.find();
+					}
+					
+					find = new RoleDtoCursor(sort);
+					
 				} else {
 					guanJianZi = "*" + guanJianZi + "*";
 					guanJianZi = guanJianZi.replaceAll("\\*+", "*");

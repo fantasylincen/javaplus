@@ -380,7 +380,8 @@ public class Turntable {
 	private void shaiJianKuCun() {
 		Controller c = getController();
 		long kuCun = c.getKuCun();
-		if (kuCun < 0)
+		long min = Server.getConst().getLong("KU_CUN_SHUAI_JIAN_MIN");
+		if (kuCun < min) // -200W之后, 就不进行衰减了
 			return;
 
 		long reduce = (long) (kuCun * c.getKuCunShuaiJian());
@@ -663,6 +664,9 @@ public class Turntable {
 
 			Set<String> keySet = switchs.keySet();
 			List<Row> r = Turntable.this.result.getResult();
+			
+			long kuCun = getController().getKuCun();
+
 			for (String roleId : keySet) {
 				IRole role = Server.getRole(roleId);
 				ISwitchs sw = switchs.get(roleId);
@@ -680,9 +684,12 @@ public class Turntable {
 				long add = result.getAdd();
 
 				if (!isTestRole) {
-					Log.d("bet", roleId, isRobot ? "robot" : "player",
-							role.getNick(), sw, buildResult(), "-" + rdc, "+"
-									+ add, cj, xcjadd, role.getCoin());
+					Log.d("开奖", roleId, isRobot ? "robot" : "player", "库:"
+							+ kuCun,
+							role.getNick(), sw, buildResult(), "注:" + rdc, "赢:"
+									+ add, "大彩:" + cj, "小彩:" + xcjadd, "余额:"
+									+ role.getCoin(),
+							"银行:" + role.getBankCoin());
 				}
 
 				if (!isTestRole && !isRobot) {
@@ -700,8 +707,12 @@ public class Turntable {
 		private String buildResult() {
 			List<Row> r = Turntable.this.result.getResult();
 			StringBuilder sb = new StringBuilder();
-			for (Row row : r) {
-				sb.append(row.get("type"));
+
+			for (int i = 0; i < r.size(); i++) {
+				Row row = r.get(i);
+				String str = row.get("type");
+				str = "[" + TurntableUtil.toChinese(str) + "]";
+				sb.append(str);
 			}
 			return sb.toString();
 		}
