@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="app" namespace="/app" extends="struts-default">
+
+
+	</package>
+
+
+	<package name="web" namespace="/web" extends="struts-default">
+
+
+     	<global-results>
+     	  	<result name="guessexception">/web/error.jsp
+     	  	<param name="actionName"></param>
+     	  	</result>  
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping result="guessexception" exception="org.hhhhhh.house.exception.GuessException">
+            </exception-mapping>
+        </global-exception-mappings>
+        
+
+
+        <action name="errorProcessor" class="org.hhhhhh.house.exception.ErrorAction">
+           	<result name="error">/web/error.jsp</result>
+        </action>
+
+	</package>
+	
+</struts>    

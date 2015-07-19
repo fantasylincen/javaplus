@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servers>
+
+	<game>
+		<name>召唤师</name>
+		<server>
+			<id>zhs-001</id>
+			<name>测试服</name>
+			<rechargeUrl>http://121.40.60.134:10001/recharge</rechargeUrl>
+			<rechargeParameterSetter>com.cnbizmedia.recharge.ZhsParamSetter</rechargeParameterSetter>
+
+			<goldName>钻石</goldName>
+			<scale>1</scale><!-- 钻石 : V币 -->
+			<dsc>1钻石=1V币</dsc>
+			
+			<rechargePar-did>1</rechargePar-did>
+
+		</server>
+	</game>
+
+	<game>
+		<name>全名97</name>
+		<server>
+			<id>qm97-001</id>
+			<name>测试服</name>
+			<rechargeUrl>http://120.24.61.79:10001/recharge</rechargeUrl>
+			<rechargeParameterSetter>com.cnbizmedia.recharge.ZhsParamSetter</rechargeParameterSetter>
+			<goldName>元宝</goldName>
+			<scale>1</scale><!-- 元宝 : V币 -->
+			<dsc>1元宝=1V币</dsc>
+		</server>
+	</game>
+</servers>

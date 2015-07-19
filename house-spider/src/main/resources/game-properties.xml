@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<serverConfigKey>llyydzcdpbhsgb8837aadf</serverConfigKey>
+	
+	<emailTitle>Please reset your password</emailTitle>
+	<emailContent>
+		We heard that you lost your 19vc password. Sorry about that!
+	
+		But don't worry! You can use the following link within the next day to reset your password:
+		
+		www.19vc.com/resetPwd.jsp?code=EMAIL_CODE
+		
+		Thanks,
+		Your friends at 19vc.com
+	</emailContent>
+	
+	<email>vcresetpassword@sina.com</email>
+	<emailPassword>vc2013</emailPassword>
+	
+	<emailServerHost>smtp.sina.com</emailServerHost>
+	<emailServerPort>25</emailServerPort>
+	
+	<users>
+		[
+		 { "username": "admin", "password":"javaadmin"},
+		 { "username": "wyh", "password":"ww"},
+		 { "username": "lyc", "password":"liuyc"},
+		 { "username": "pz", "password":"peizhi123"},
+		 { "username": "ys", "password":"yangsongabc"},
+		 { "username": "sm", "password":"sumingabcde"},
+		 { "username": "ck", "password":"chenk"},
+		 { "username": "lc", "password":"yjjyjj"}
+		]
+	</users>
+</properties>

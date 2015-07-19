@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping >
+
+	<class name="org.hhhhhh.house.hibernate.dto.HouseDto" table="house">
+		<id name="id" column="id"/>
+		<property name="name" column="name" />
+		<property name="href" column="href" />
+		<property name="plate" column="plate" />
+		<property name="price" column="price" />
+		<property name="tel" column="tel" />
+		<property name="date" column="date" />
+	</class>
+	
+</hibernate-mapping>
