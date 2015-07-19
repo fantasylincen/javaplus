@@ -97,7 +97,7 @@ public class SendCoinAction extends ActionSupport {
 	}
 
 	public void setNick(String nick) {
-		nick = EncodingUtil.iso2Utf8(nick);
+//		nick = EncodingUtil.iso2Utf8(nick);
 		nick = nick.trim();
 		this.nick = nick;
 	}
