@@ -29,11 +29,8 @@ public class GameProperties {
 	
 	public static String getStringNoTrim(String k) {
 
-		String s = (String) CacheManager.get(key(k));
-		if (s != null)
-			return s;
-
 		SAXReader reader = new SAXReader();
+		String s;
 		try {
 			
 			Document d = reader.read(Resources
@@ -44,14 +41,7 @@ public class GameProperties {
 			throw Util.Exception.toRuntimeException(e);
 		}
 
-		CacheManager.put(key(k), 60000, s);
-
 		return s;
 	}
 
-	private static String key(String k) {
-
-		String key = GameProperties.class.getName();
-		return key + ":" + k;
-	}
 }

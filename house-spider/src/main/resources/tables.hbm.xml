@@ -6,13 +6,18 @@
 <hibernate-mapping >
 
 	<class name="org.hhhhhh.house.hibernate.dto.HouseDto" table="house">
-		<id name="id" column="id"/>
+		<id name="href" column="href" />
 		<property name="name" column="name" />
-		<property name="href" column="href" />
+		<property name="floor" column="floor" />
 		<property name="plate" column="plate" />
 		<property name="price" column="price" />
+		<property name="huxing" column="huxing" />
 		<property name="tel" column="tel" />
-		<property name="date" column="date" />
+		<property name="owner" column="owner" />
+		<property name="commit_date" column="commit_date" />
+		<property name="update_date" column="update_date" />
+		<property name="zoneName" column="zoneName" />
+		<property name="dsc" column="dsc" />
 	</class>
 	
 </hibernate-mapping>

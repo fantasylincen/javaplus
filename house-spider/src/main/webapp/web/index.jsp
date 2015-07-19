@@ -40,9 +40,8 @@
 			<font size="1"> <%
  	StringBuffer ssb = new StringBuffer();
 
- 	HouseDao dao = Daos.getHouseDao();
-
- 	HouseDtoCursor find = dao.find("id", "1");
+ 	HouseDtoCursor find = Daos.getHouseDao().findSortByLimit(
+ 			"commit_date", 500);
 
  	List<HouseDto> ls = Lists.newArrayList();
  	for (HouseDto dto : find) {
@@ -56,12 +55,45 @@
 
 		String name = dto.getName();
 
-		String color = "#884452";
-
+		String color;
+		
+		color = "#29CBFC";
 		sb.append("<p><font color=\"" + color + "\">");
+		sb.append(dto.getCommit_date().substring(5, 16));
+		sb.append("</font>&nbsp;&nbsp;");
+
+		color = "#DD74EC";
+		sb.append("<font color=\"" + color + "\">");
+		sb.append("<a href=\"" + dto.getHref() + "\">");
 		sb.append(name);
+		sb.append("</a></font>&nbsp;&nbsp;");
+
+		color = "#29CBFC";
+		sb.append("<font color=\"" + color + "\">");
+		sb.append("&nbsp;&nbsp;" + dto.getOwner());
+		sb.append("</font>&nbsp;&nbsp;");
+
+		color = "#AB3B48";
+		sb.append("<font color=\"" + color + "\">");
+		String tel = dto.getTel();
+		if (tel.startsWith("http://")) {
+			sb.append("<img width=\"70\" src=\"" + tel + "\">");
+		} else {
+			sb.append(tel);
+		}
+		sb.append("</font>&nbsp;&nbsp;");
+
+		color = "#59CA1C";
+		sb.append("<font color=\"" + color + "\">");
+		sb.append("￥" + dto.getPrice());
+		sb.append("</font>&nbsp;&nbsp;");
+
+		color = "#29CBFC";
+		sb.append("<font color=\"" + color + "\">");
+		sb.append("&nbsp;&nbsp;" + dto.getHuxing());
 		sb.append("</font>&nbsp;&nbsp;");
 		sb.append("</p>");
+		sb.append("<br>");
 	}%>
 
 		</div>

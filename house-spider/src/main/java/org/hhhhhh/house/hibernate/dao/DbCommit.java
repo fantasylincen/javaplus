@@ -15,7 +15,7 @@ public class DbCommit {
 		try {
 			s = sf.openSession();
 			t = s.beginTransaction();
-			s.save(dto);
+			s.saveOrUpdate(dto);
 			t.commit();
 		} catch (Exception err) {
 			t.rollback();

@@ -11,6 +11,9 @@
   		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
   	</filter-class>
   </filter>
+	<listener>
+		<listener-class>org.hhhhhh.house.InitListener</listener-class>
+	</listener>
   <error-page>
     <error-code>404</error-code>
     <location>/app/404.jsp</location>

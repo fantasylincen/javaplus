@@ -34,7 +34,7 @@ public class HouseDao {
 		
 		return new HouseDtoCursor(it);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public HouseDtoCursor find() {
 		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
@@ -46,5 +46,38 @@ public class HouseDao {
 		Iterator<HouseDto> it = query.iterate();
 		
 		return new HouseDtoCursor(it);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public HouseDtoCursor findSortBy(String sort) {
+		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
+		Session session = sf.openSession();
+		
+		String hql = "from HouseDto order by " + sort + " desc";
+		Query query = session.createQuery(hql);
+		query.setCacheable(true);
+		Iterator<HouseDto> it = query.iterate();
+		
+		return new HouseDtoCursor(it);
+	}
+
+	public HouseDtoCursor findSortByLimit(String sort, int limit) {
+		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
+		Session session = sf.openSession();
+		
+		String hql = "from HouseDto order by " + sort + " desc limit = " + limit;
+		Query query = session.createQuery(hql);
+		query.setCacheable(true);
+		@SuppressWarnings("unchecked")
+		Iterator<HouseDto> it = query.iterate();
+		
+		return new HouseDtoCursor(it);
+	}
+	
+	public static void main(String[] args) {
+		HouseDtoCursor all = Daos.getHouseDao().findSortBy("commit_date");
+		for (HouseDto dto : all) {
+			System.out.println(dto.getUpdate_date());
+		}
 	}
 }
