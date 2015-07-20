@@ -45,13 +45,20 @@ public class Spider {
 					if (isNew(dto)) {
 						willNotify.add(dto);
 					}
-					Daos.getHouseDao().save(dto);
+					try {
+						Daos.getHouseDao().save(dto);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 
 				}
 				Log.d("更新成功");
 			}
 
+			Log.d("正在发送邮件...");
 			sendEmail(willNotify);
+			
+			Log.d("邮件发送成功", willNotify.size() + "条");
 		}
 
 

@@ -51,7 +51,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 
 	private HouseDto getHouseData(String url) {
 
-		Log.d("获取房源信息:" + url);
+		Log.d("获取房源信息" , url);
 		String houseInfo = WebContentFethcer.get("utf-8", url);
 		HouseDto dto = new HouseDto();
 		Document doc = Jsoup.parse(houseInfo);
@@ -65,6 +65,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		dto.setHref(url);
 		Elements dls = e.getElementsByTag("dl");
 		setAttributes(dto, dls);
+		Log.d("获取成功" , url);
 		return dto;
 	}
 
