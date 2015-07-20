@@ -2,7 +2,7 @@ package org.hhhhhh.guess.user;
 
 import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.Daos;
-import org.hhhhhh.guess.hibernate.dao.Daos.UserDao;
+import org.hhhhhh.guess.hibernate.dao.UserDao;
 import org.hhhhhh.guess.hibernate.dto.UserDto;
 
 public class User {
@@ -22,10 +22,7 @@ public class User {
 		if (!isNullOrEmpty(dto.getNick())) {
 			return dto.getNick();
 		}
-		if (!isNullOrEmpty(dto.getUsername())) {
-			return dto.getUsername();
-		}
-		return dto.getId();
+		return dto.getUsername();
 	}
 
 	private boolean isNullOrEmpty(String s) {
@@ -40,9 +37,6 @@ public class User {
 		return dto;
 	}
 
-	public String getId() {
-		return dto.getId();
-	}
 
 	public void reduceJiFen(int jiFenNeed) {
 		if (jiFenNeed < 0)

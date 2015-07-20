@@ -6,11 +6,17 @@
 <hibernate-mapping >
 
 	<class name="org.hhhhhh.guess.hibernate.dto.UserDto" table="user">
-		<id name="id" column="id"/>
-		<property name="username" column="username" />
+		<id name="username" column="username"/>
 		<property name="password" column="password" />
 		<property name="nick" column="nick" />
 		<property name="jiFen" column="jiFen" />
+	</class>
+	
+	<class name="org.hhhhhh.guess.hibernate.dto.AnswersDto" table="user">
+		<id name="username_question_id" column="username_question_id"/>
+		<property name="option_id" column="option_id" />
+		<property name="round" column="round" />
+		<property name="date" column="date" />
 	</class>
 	
 	<class name="org.hhhhhh.guess.hibernate.dto.SystemKeyValueDto" table="system_key_value">

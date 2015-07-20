@@ -4,11 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.hhhhhh.guess.JsonAction;
 import org.hhhhhh.guess.Server;
+import org.hhhhhh.guess.action.JsonAction;
 import org.hhhhhh.guess.config.GameProperties;
 import org.hhhhhh.guess.hibernate.dao.Daos;
-import org.hhhhhh.guess.hibernate.dao.Daos.SystemKeyValueDao;
+import org.hhhhhh.guess.hibernate.dao.SystemKeyValueDao;
 import org.hhhhhh.guess.hibernate.dto.SystemKeyValueDto;
 import org.hhhhhh.guess.user.User;
 

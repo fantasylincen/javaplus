@@ -15,6 +15,7 @@ import com.google.common.io.Resources;
 
 public class GameServersXml {
 
+	@SuppressWarnings("unchecked")
 	public static List<ServerNode> getServers() {
 
 		String key = GameServersXml.class.getName();
@@ -42,7 +43,7 @@ public class GameServersXml {
 			throw Util.Exception.toRuntimeException(e);
 		}
 
-		CacheManager.put(key, 15000, ls);
+		CacheManager.put(key, ls);
 
 		return ls;
 	}

@@ -1,15 +1,16 @@
 package org.hhhhhh.guess.account4app;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.hhhhhh.guess.EncodingUtil;
-import org.hhhhhh.guess.JsonAction;
+import org.hhhhhh.guess.action.JsonAction;
 import org.hhhhhh.guess.error.ErrorResult;
 import org.hhhhhh.guess.hibernate.dao.Daos;
-import org.hhhhhh.guess.hibernate.dao.Daos.UserDao;
-import org.hhhhhh.guess.hibernate.dao.Daos.UserDtoCursor;
+import org.hhhhhh.guess.hibernate.dao.UserDao;
 import org.hhhhhh.guess.hibernate.dto.UserDto;
 
 import cn.javaplus.log.Log;
@@ -44,8 +45,8 @@ public class RegistAction extends JsonAction {
 
 	private boolean isAreadyRegist() {
 		UserDao dao = Daos.getUserDao();
-		UserDtoCursor c = dao.find("username", getUsername());
-		return c.hasNext();
+		List<UserDto> c = dao.find("username", getUsername());
+		return !c.isEmpty();
 	}
 
 	@Override

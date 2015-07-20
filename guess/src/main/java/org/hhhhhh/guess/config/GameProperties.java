@@ -22,11 +22,11 @@ public class GameProperties {
 	public static String getString(String k) {
 
 		String ss = getStringNoTrim(k);
-		if(ss == null)
+		if (ss == null)
 			return null;
 		return ss.trim();
 	}
-	
+
 	public static String getStringNoTrim(String k) {
 
 		String s = (String) CacheManager.get(key(k));
@@ -35,7 +35,7 @@ public class GameProperties {
 
 		SAXReader reader = new SAXReader();
 		try {
-			
+
 			Document d = reader.read(Resources
 					.getResource("game-properties.xml"));
 			Element root = d.getRootElement();
@@ -44,7 +44,7 @@ public class GameProperties {
 			throw Util.Exception.toRuntimeException(e);
 		}
 
-		CacheManager.put(key(k), 60000, s);
+		CacheManager.put(key(k), s);
 
 		return s;
 	}

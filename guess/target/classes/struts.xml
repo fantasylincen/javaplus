@@ -16,13 +16,12 @@
         </global-exception-mappings>
         
 
-		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction">
-			<result type="redirect" name="success">/app/registSuccessful.jsp</result>
-			<result type="redirect" name="error">/app/regist.jsp</result>
-		</action>
-		<action name="login" class="org.hhhhhh.guess.account4app.LoginAction" >
-			<result type="redirect" name="success">/app/index.jsp</result>
-		</action>
+		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction"/>
+		<action name="login" class="org.hhhhhh.guess.account4app.LoginAction" />
+		<action name="getDatas" class="org.hhhhhh.guess.account4app.GetDatasAction" />
+		<action name="select" class="org.hhhhhh.guess.account4app.SelectAction" />
+		
+		
 		<action name="resetPwd" class="org.hhhhhh.guess.account4app.ResetPwdAction" />
         <action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction"/>
 
@@ -51,6 +50,8 @@
 		<action name="login" class="org.hhhhhh.guess.account4web.LoginAction" >
 			<result type="redirect" name="success">/web/index.jsp</result>
 		</action>
+		
+		
 		<action name="resetPwd" class="org.hhhhhh.guess.account4web.ResetPwdAction" />
         <action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction">
            	<result name="error">/web/error.jsp</result>

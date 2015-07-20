@@ -7,17 +7,10 @@ public class UserDto  implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7650716400879559994L;
-	String id;
 	String username;
 	String password;
 	String nick;
 	int jiFen;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getUsername() {
 		return username;
 	}

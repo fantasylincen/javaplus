@@ -1,4 +1,4 @@
-package org.hhhhhh.guess;
+package org.hhhhhh.guess.action;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.hhhhhh.guess.ProphetException;
+import org.hhhhhh.guess.ProphetExceptionAdaptor;
 
 import cn.javaplus.collections.set.Sets;
 import cn.javaplus.log.Log;

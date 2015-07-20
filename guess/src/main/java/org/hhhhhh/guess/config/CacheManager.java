@@ -31,7 +31,7 @@ public class CacheManager {
 		return CACHE.getCache(KEY);
 	}
 
-	public static void put(Object key, long time, Object o) {
+	public static void put(Object key, Object o) {
 		Cache cache = getCache();
 		cache.put(new Element(key, o));
 	}

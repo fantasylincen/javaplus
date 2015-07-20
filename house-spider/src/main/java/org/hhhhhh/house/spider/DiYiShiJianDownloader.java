@@ -42,7 +42,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		ArrayList<HouseDto> ls = Lists.newArrayList();
 		for (String url : urls) {
 			if (isAreadyHave(url)) {
-				Log.d("aready have now:" + url);
+//				Log.d("aready have now:" + url);
 				continue;
 			}
 			HouseDto dto;
@@ -62,7 +62,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 
 	private HouseDto getHouseData(String url) {
 
-		Log.d("get house data", url);
+//		Log.d("fetch house data", url);
 		String houseInfo = WebContentFethcer.get("utf-8", url);
 		HouseDto dto = new HouseDto();
 		Document doc = Jsoup.parse(houseInfo);
@@ -76,7 +76,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		dto.setHref(url);
 		Elements dls = e.getElementsByTag("dl");
 		setAttributes(dto, dls);
-		Log.d("get house data successful", url);
+		Log.d("fetch house data successful", url);
 		return dto;
 	}
 

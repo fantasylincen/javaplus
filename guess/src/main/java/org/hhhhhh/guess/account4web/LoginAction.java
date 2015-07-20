@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.hhhhhh.guess.JsonAction;
 import org.hhhhhh.guess.Server;
+import org.hhhhhh.guess.action.JsonAction;
 import org.hhhhhh.guess.error.ErrorResult;
 import org.hhhhhh.guess.user.User;
 
@@ -50,7 +50,7 @@ public class LoginAction extends JsonAction {
 			}
 		}
 
-		session.setAttribute("userId", user.getId());
+		session.setAttribute("username", user.getUsername());
 		
 		return new LoginSuccessResult(user);
 	}
@@ -77,7 +77,7 @@ public class LoginAction extends JsonAction {
 		}
 
 		public String getId() {
-			return user.getId();
+			return user.getUsername();
 		}
 		
 		

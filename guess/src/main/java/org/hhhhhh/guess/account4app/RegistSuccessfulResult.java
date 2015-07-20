@@ -11,7 +11,7 @@ public class RegistSuccessfulResult {
 	}
 
 	public String getId() {
-		return dto.getId();
+		return dto.getUsername();
 	}
 
 	public String getUsername() {

@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import cn.javaplus.collections.counter.Counter;
 import cn.javaplus.collections.list.Lists;
 import cn.javaplus.collections.set.Sets;
 import cn.javaplus.excel.Row;
@@ -17,6 +19,7 @@ import cn.vgame.a.turntable.ResultGenerator;
 import cn.vgame.a.turntable.Turntable;
 import cn.vgame.a.turntable.Turntable.Controller;
 import cn.vgame.a.turntable.TurntableUtil;
+import cn.vgame.a.turntable.swt.ISwitchs;
 import cn.vgame.a.turntable.swt.SwitchAll;
 import cn.vgame.share.Xml;
 
@@ -144,12 +147,18 @@ public class PZResultGenerator implements ResultGenerator {
 
 		ArrayList<Row> ls = Lists.newArrayList();
 		List<Xs> fu = getFu(xss);
-		
+
 		removeShaYuTu(fu);
-		
+		double p = Server.getConst()
+				.getDouble("IS_TU_FEN_BY_PERSON_COUNT_PROB");
 		Row first;
 		if (Turntable.getInstance().getMustGenerateId() > 0) { // 本轮第一个必出
 			first = getMust(all);
+
+		} else if (Util.Random.isHappen(p) && havePlayerXiaZhu()) { // 吐到下注玩家数量最多的灯上玩家最多的
+
+			first = getPlayerCountMax(all);
+
 		} else if (fu.isEmpty()) {
 			Collections.sort(xss, new TuFenC());
 			Xs xs = xss.get(0);
@@ -162,21 +171,71 @@ public class PZResultGenerator implements ResultGenerator {
 		new RandomByExcel().randomSongDeng(all, ls, first, randomXNumber);
 		return ls;
 	}
+
+	private boolean havePlayerXiaZhu() {
+		Turntable ins = Turntable.getInstance();
+		SwitchAll switchs = ins.getSwitchs();
+		long count = TurntableUtil.getCountAllWithOutAAndD(switchs);
+		return count >= 0;
+	}
+
+	private Row getPlayerCountMax(List<Row> all) {
+		String type = getMaxType();
+		return get(all, type);
+	}
+
+	private String getMaxType() {
+		Counter<String> counts = getXiaZhuPlayerCount();
+		String maxType = null;
+		int maxCount = -1;
+		for (String type : counts.keySet()) {
+			int count = counts.get(type);
+			if (count > maxCount) {
+				maxCount = count;
+				maxType = type;
+			}
+		}
+
+		return maxType;
+	}
+
+	private Counter<String> getXiaZhuPlayerCount() {
+
+		SwitchAll switchs = Turntable.getInstance().getSwitchs();
+
+		Counter<String> c = new Counter<String>();
+		Set<String> all = switchs.getAll();
+
+		List<String> types = TurntableUtil.getAllTypesWithOutAAndD();
+
+		for (String roleId : all) {
+			ISwitchs s = switchs.get(roleId);
+			for (String type : types) {
+				int count = TurntableUtil.getByType(s, type);
+				if (count > 0) {
+					c.add(type, 1); // 该灯人数加1
+				}
+			}
+		}
+
+		return c;
+	}
+
 	private void removeShaYuTu(List<Xs> fu) {
 		Iterator<Xs> it = fu.iterator();
 		while (it.hasNext()) {
 			PZResultGenerator.Xs xs = (PZResultGenerator.Xs) it.next();
-			
-			if("B".equals(xs.getType())) {
+
+			if ("B".equals(xs.getType())) {
 				if (Util.Random.isHappen(0.8)) {
 					it.remove();
 				}
-			} else if("C".equals(xs.getType())) {
+			} else if ("C".equals(xs.getType())) {
 				if (Util.Random.isHappen(0.9)) {
 					it.remove();
 				}
-			} 
-			
+			}
+
 		}
 	}
 
@@ -185,9 +244,10 @@ public class PZResultGenerator implements ResultGenerator {
 			if (row.getInt("id") == Turntable.getInstance().getMustGenerateId())
 				return row;
 		}
-		throw new NullPointerException("row " + Turntable.getInstance().getMustGenerateId()
-				+ "not found");
+		throw new NullPointerException("row "
+				+ Turntable.getInstance().getMustGenerateId() + "not found");
 	}
+
 	private List<Xs> getFu(List<Xs> xss) {
 
 		ArrayList<Xs> ls = Lists.newArrayList();

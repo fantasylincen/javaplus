@@ -36,10 +36,9 @@ public class Spider {
 			List<HouseDto> willNotify = getWillNotify();
 
 			try {
-				Log.d("send email...");
+//				Log.d("send email...");
 				if (willNotify.isEmpty()) {
-
-					Log.d("update list is empty!");
+//					Log.d("update list is empty!");
 					return;
 				}
 
@@ -47,6 +46,7 @@ public class Spider {
 				String content = cc.replace("CONTENT", buildConent(willNotify));
 
 				String title = GameProperties.getString("emailTitle").trim();
+				title += willNotify.size() + "条";
 				String from = GameProperties.getString("email").trim();
 				String host = GameProperties.getString("emailServerHost")
 						.trim();
