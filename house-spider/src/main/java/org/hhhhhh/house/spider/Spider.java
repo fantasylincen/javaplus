@@ -18,6 +18,84 @@ import com.google.common.collect.Lists;
 
 public class Spider {
 
+	public class SendEmailThread extends Thread {
+
+		@Override
+		public void run() {
+			while (true) {
+				try {
+					sendEmail();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				cn.javaplus.util.Util.Thread.sleep(10000);
+			}
+		}
+
+		private void sendEmail() {
+
+			List<HouseDto> willNotify = getWillNotify();
+
+			try {
+				Log.d("send email...");
+				if (willNotify.isEmpty()) {
+
+					Log.d("update list is empty!");
+					return;
+				}
+
+				String cc = GameProperties.getStringNoTrim("emailContent");
+				String content = cc.replace("CONTENT", buildConent(willNotify));
+
+				String title = GameProperties.getString("emailTitle").trim();
+				String from = GameProperties.getString("email").trim();
+				String host = GameProperties.getString("emailServerHost")
+						.trim();
+				String port = GameProperties.getString("emailServerPort")
+						.trim();
+				String pwd = GameProperties.getString("emailPassword").trim();
+				String emailTo = GameProperties.getString("emailTo").trim();
+
+				SimpleMailSender s = new SimpleMailSender();
+				MailSenderInfo m = new MailSenderInfo();
+				m.setValidate(true);
+				m.setMailServerHost(host);
+				m.setMailServerPort(port);
+				m.setUserName(from);
+				m.setPassword(pwd);
+				m.setFromAddress(from);
+				m.setToAddress(emailTo);
+				m.setSubject(title);
+				m.setContent(content);
+				s.sendTextMailInThread(m);
+
+				Log.d("send successful count:" + willNotify.size());
+
+				marksend(willNotify);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		private List<HouseDto> getWillNotify() {
+			HouseDao dao = Daos.getHouseDao();
+			HouseDtoCursor dto = dao.find("is_send_email", false);
+			ArrayList<HouseDto> ls = Lists.newArrayList();
+			for (HouseDto d : dto) {
+				ls.add(d);
+			}
+			return ls;
+		}
+
+		private void marksend(List<HouseDto> willNotify) {
+			for (HouseDto dto : willNotify) {
+				dto.setIs_send_email(true);
+				Daos.getHouseDao().save(dto);
+			}
+		}
+
+	}
+
 	public class SpiderThread extends Thread {
 
 		List<FangYuanWangDownloader> downloaders = Lists.newArrayList();
@@ -36,15 +114,11 @@ public class Spider {
 
 		private void downloadInfos() {
 
-			List<HouseDto> willNotify = Lists.newArrayList();
 			for (FangYuanWangDownloader d : downloaders) {
 
 				List<HouseDto> ls = d.download();
 				for (HouseDto dto : ls) {
 
-					if (isNew(dto)) {
-						willNotify.add(dto);
-					}
 					try {
 						Daos.getHouseDao().save(dto);
 					} catch (Exception e) {
@@ -52,22 +126,9 @@ public class Spider {
 					}
 
 				}
-				Log.d("更新成功");
+				Log.d("update ok");
 			}
 
-			Log.d("正在发送邮件...");
-			sendEmail(willNotify);
-			
-			Log.d("邮件发送成功", willNotify.size() + "条");
-		}
-
-
-		
-
-		private boolean isNew(HouseDto dto) {
-			String id = dto.getHref();
-			HouseDao dao = Daos.getHouseDao();
-			return dao.get(id) == null;
 		}
 
 		public void addDownloader(FangYuanWangDownloader d) {
@@ -77,42 +138,13 @@ public class Spider {
 
 	private static Spider ins;
 
-	private SpiderThread thread;
+	private SpiderThread downloadThread;
+
+	private SendEmailThread sendEmailThread;
 
 	private Spider() {
 	}
 
-	private void sendEmail(List<HouseDto> willNotify) {
-		try {
-			if(willNotify.isEmpty())
-				return;
-			
-			String cc = GameProperties.getStringNoTrim("emailContent");
-			String content = cc.replace("CONTENT", buildConent(willNotify));
-			
-			String title = GameProperties.getString("emailTitle").trim();
-			String from = GameProperties.getString("email").trim();
-			String host = GameProperties.getString("emailServerHost").trim();
-			String port = GameProperties.getString("emailServerPort").trim();
-			String pwd = GameProperties.getString("emailPassword").trim();
-			String emailTo = GameProperties.getString("emailTo").trim();
-
-			SimpleMailSender s = new SimpleMailSender();
-			MailSenderInfo m = new MailSenderInfo();
-			m.setValidate(true);
-			m.setMailServerHost(host);
-			m.setMailServerPort(port);
-			m.setUserName(from);
-			m.setPassword(pwd);
-			m.setFromAddress(from);
-			m.setToAddress(emailTo);
-			m.setSubject(title);
-			m.setContent(content);
-			s.sendTextMailInThread(m);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	private String buildConent(List<HouseDto> willNotify) {
 		StringBuilder sb = new StringBuilder();
 		for (HouseDto dto : willNotify) {
@@ -127,12 +159,12 @@ public class Spider {
 			if (!tel.startsWith("http://")) {
 				sb.append(dto.getOwner() + ":" + tel + "   ");
 			}
-			
+
 			sb.append("\r\n");
 		}
 		return sb.toString();
 	}
-	
+
 	public static Spider getInstance() {
 		if (ins == null)
 			ins = new Spider();
@@ -140,24 +172,28 @@ public class Spider {
 	}
 
 	public void ensureStart() {
-		if (thread == null) {
-			thread = new SpiderThread();
-			thread.setPriority(Thread.MAX_PRIORITY);
-			thread.addDownloader(new DiYiShiJianDownloader());
-			thread.start();
+		if (downloadThread == null) {
+			downloadThread = new SpiderThread();
+			downloadThread.setPriority(Thread.MAX_PRIORITY);
+			downloadThread.addDownloader(new DiYiShiJianDownloader());
+			downloadThread.start();
+		}
+		if (sendEmailThread == null) {
+			sendEmailThread = new SendEmailThread();
+			sendEmailThread.start();
 		}
 	}
-	
+
 	public static void main(String[] args) {
-//		HouseDtoCursor all = Daos.getHouseDao().find();
-//		ArrayList<HouseDto> ls = Lists.newArrayList();
-//		for (HouseDto dto : all) {
-//			ls.add(dto);
-//		}
-//		
-//		new Spider().sendEmail(ls);
-		
-		HouseDtoCursor dto = Daos.getHouseDao().findSortByLimit("update_date", 10);
+		// HouseDtoCursor all = Daos.getHouseDao().find();
+		// ArrayList<HouseDto> ls = Lists.newArrayList();
+		// for (HouseDto dto : all) {
+		// ls.add(dto);
+		// }
+		//
+		// new Spider().sendEmail(ls);
+
+		HouseDtoCursor dto = Daos.getHouseDao().find("is_send_email", false);
 		for (HouseDto d : dto) {
 			System.out.println(d.getName());
 		}

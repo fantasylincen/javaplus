@@ -77,7 +77,7 @@
 		sb.append("<font color=\"" + color + "\">");
 		String tel = dto.getTel();
 		if (tel.startsWith("http://")) {
-			sb.append("<img width=\"70\" src=\"" + tel + "\">");
+			//sb.append("<img width=\"70\" src=\"" + tel + "\">");
 		} else {
 			sb.append(tel);
 		}

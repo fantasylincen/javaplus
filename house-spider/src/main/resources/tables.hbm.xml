@@ -12,6 +12,7 @@
 		<property name="plate" column="plate" />
 		<property name="price" column="price" />
 		<property name="huxing" column="huxing" />
+		<property name="is_send_email" column="is_send_email" />
 		<property name="tel" column="tel" />
 		<property name="owner" column="owner" />
 		<property name="commit_date" column="commit_date" />

@@ -12,6 +12,10 @@ public class SwitchAll implements ISwitchs {
 
 	Map<String, ISwitchs> ss = Maps.newConcurrentMap();
 
+	public Set<String> getAll() {
+		return ss.keySet();
+	}
+	
 	public ISwitchs get(String id) {
 		return ss.get(id);
 	}

@@ -18,8 +18,11 @@
 			<result type="redirect" name="success">yinshang.jsp</result>
 		</action>
 		<action name="addYinShangCoin" class="cn.vgame.a.yinshang.AddYinShangCoinAction" >
-			<result type="redirect" name="success">index.jsp</result>
+			<result type="redirect" name="success">yinshang.jsp</result>
 		</action>
+		
+		
+		
 		<action name="sendMessage" class="cn.vgame.a.yinshang.SendMessageAction" >
 			<result type="redirect" name="success">index.jsp</result>
 		</action>

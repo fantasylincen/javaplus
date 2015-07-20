@@ -1,3 +1,6 @@
+<%@page import="cn.vgame.a.turntable.TurntableUtil"%>
+<%@page import="cn.vgame.a.turntable.swt.ISwitchs"%>
+<%@page import="cn.vgame.a.turntable.swt.SwitchAll"%>
 <%@page import="cn.vgame.a.robot.Robot"%>
 <%@page import="cn.vgame.a.account.Role"%>
 <%@page import="cn.vgame.a.robot.RobotManager"%>
@@ -34,12 +37,12 @@
 <body>
 
 	<a href="turntableControl.jsp">刷新</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="menu.jsp"> 返回</a> 
+	<a href="menu.jsp"> 返回</a>
 	<%
- 		Map<Integer, Integer> weightsAdd = getWeightsAdd(request);
- 			if (weightsAdd != null)
- 		Turntable.getInstance().updateWeightsAdd(weightsAdd);
- 	%>
+		Map<Integer, Integer> weightsAdd = getWeightsAdd(request);
+		if (weightsAdd != null)
+			Turntable.getInstance().updateWeightsAdd(weightsAdd);
+	%>
 
 	<%!private static Map<Integer, Integer> getWeightsAdd(
 			HttpServletRequest request) {
@@ -79,10 +82,9 @@
 		sb.append("</td>");
 
 		sb.append("<td>");
-		sb.append(t.getCountThisTime(type));
+		sb.append(t.getCountThisTimeWithOutRobot(type));
 		sb.append("</td>");
 
- 
 		sb.append("<td>");
 
 		if ("AD".contains(type)) {
@@ -123,7 +125,7 @@
 				<th>类型ID</th>
 				<th>类型名</th>
 				<th>倍率</th>
-				<th>本轮下注人数</th>
+				<th>本轮下注量</th>
 				<!-- <th>历史下注人数</th> -->
 				<th>高级功能</th>
 			</tr>
@@ -135,19 +137,119 @@
 
 			<%
 				Xml xml = Server.getXml();
-					Sheet sheet = xml.get("x");
-					List<Row> all = sheet.getAll();
-					StringBuilder sb = new StringBuilder();
-					for (Row row : all) {
-						print(row, sb);
-					}
+				Sheet sheet = xml.get("x");
+				List<Row> all = sheet.getAll();
+				StringBuilder sb = new StringBuilder();
+				for (Row row : all) {
+					print(row, sb);
+				}
 
-					out.println(sb);
+				out.println(sb);
 			%>
 
 		</tbody>
 	</table>
 
+	<h2>当前玩家下注</h2>
+	<table border="2">
+		<thead>
+			<tr>
+				<th>玩家昵称</th>
+				<th>金豆</th>
+				<th>银行</th>
+				<th>走兽</th>
+				<th>银鲨</th>
+				<th>金鲨</th>
+				<th>飞禽</th>
+				<th>燕子</th>
+				<th>鸽子</th>
+				<th>孔雀</th>
+				<th>老鹰</th>
+				<th>狮子</th>
+				<th>熊猫</th>
+				<th>猴子</th>
+				<th>兔子</th>
+			</tr>
+		</thead>
+
+
+		<tbody>
+
+			<%
+				StringBuilder sbba = new StringBuilder();
+				SwitchAll ss = Turntable.getInstance().getSwitchs();
+				Set<String> d = ss.getAll();
+				for (String roleId : d) {
+					if (Server.getRobotManager().isRobot(roleId)) {
+						continue;
+					}
+					ISwitchs s = ss.get(roleId);
+					print(roleId, s, sbba);
+				}
+
+				printBiChu(sbba);
+
+				out.println(sbba);
+			%>
+
+			<%!private static void printBiChu(StringBuilder sb) {
+
+		List<String> types = TurntableUtil.getAllTypes();
+		sb.append("<tr>");
+		sb.append("<td>-</td>");
+		sb.append("<td>-</td>");
+		sb.append("<td>-</td>");
+		for (String type : types) {
+
+			sb.append("<td>");
+			if ("AD".contains(type)) {
+				sb.append("-");
+			} else {
+
+				int id = findId(type);
+
+				Turntable t = Turntable.getInstance();
+				if (t.isMustGenerate(id)) {
+					sb.append("<a href=\"mustGenerate?id=" + id + "\">取消</a>");
+				} else {
+					sb.append("<a href=\"mustGenerate?id=" + id + "\">本轮必出</a>");
+				}
+
+			}
+			sb.append("</td>");
+
+		}
+		sb.append("</tr>");
+
+	}%>
+
+			<%!private static void print(String id, ISwitchs s, StringBuilder sb) {
+		Role role = Server.getRole(id);
+
+		sb.append("<tr>");
+
+		sb.append("<td>");
+		sb.append(role.getNick());
+		sb.append("</td>");
+		sb.append("<td>");
+		sb.append(role.getCoin());
+		sb.append("</td>");
+		sb.append("<td>");
+		sb.append(role.getBankCoin());
+		sb.append("</td>");
+
+		List<String> types = TurntableUtil.getAllTypes();
+		for (String type : types) {
+			sb.append("<td>");
+			sb.append(TurntableUtil.getByType(s, type));
+			sb.append("</td>");
+		}
+
+		sb.append("</tr>");
+	}%>
+
+		</tbody>
+	</table>
 
 	<br>
 	<br>
@@ -191,7 +293,7 @@
 
 		sb.append("<td>");
 		sb.append("<a href=\"setUser.jsp?roleId=" + robot.getId() + "\">"
-				+ robot.getId() + "</a>" );
+				+ robot.getId() + "</a>");
 		sb.append("</td>");
 
 		sb.append("<td>");
@@ -228,16 +330,16 @@
 
 		sb.append("<td>");
 
-	/* 	if (robot.isCommitJinSha()) {
-			if (manager.isCaiJinMustTo(robot.getId())) {
-				sb.append("<a href=\"caiJinMustTo\">取消</a>");
+		/* 	if (robot.isCommitJinSha()) {
+				if (manager.isCaiJinMustTo(robot.getId())) {
+					sb.append("<a href=\"caiJinMustTo\">取消</a>");
+				} else {
+					sb.append("<a href=\"caiJinMustTo?id=" + robot.getId()
+							+ "\">本轮必出金鲨, 并把彩金给他</a>");
+				}
 			} else {
-				sb.append("<a href=\"caiJinMustTo?id=" + robot.getId()
-						+ "\">本轮必出金鲨, 并把彩金给他</a>");
-			}
-		} else {
-			sb.append("-");
-		} */
+				sb.append("-");
+			} */
 		/* sb.append("-");
 		
 		sb.append("</td>");
@@ -250,7 +352,7 @@
 
 	<br>
 	<br>
-<%-- 
+	<%-- 
 	<form id="updateWeightAdd" action="turntableControl.jsp" method="post">
 
 		<h2>轮盘信息</h2>

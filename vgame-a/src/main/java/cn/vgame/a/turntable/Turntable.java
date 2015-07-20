@@ -1328,6 +1328,11 @@ public class Turntable {
 			return 0;
 		return TurntableUtil.getByType(switchs, type);
 	}
+	public long getCountThisTimeWithOutRobot(String type) {
+		if (switchs == null)
+			return 0;
+		return switchs.getByTypeWithOutRobot(type);
+	}
 
 	/**
 	 * 历史下注量

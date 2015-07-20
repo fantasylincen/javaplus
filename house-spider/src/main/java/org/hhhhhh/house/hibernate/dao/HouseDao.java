@@ -22,7 +22,7 @@ public class HouseDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public HouseDtoCursor find(String field, String v) {
+	public HouseDtoCursor find(String field, Object v) {
 		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
 		Session session = sf.openSession();
 		

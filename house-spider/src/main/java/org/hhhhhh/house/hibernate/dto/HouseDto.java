@@ -24,6 +24,7 @@ public class HouseDto implements Serializable {
 	}
 
 	private String href;
+	private boolean is_send_email;
 
 	public String getHref() {
 		return href;
@@ -119,6 +120,14 @@ public class HouseDto implements Serializable {
 
 	public void setZoneName(String zoneName) {
 		this.zoneName = zoneName;
+	}
+
+	public boolean isIs_send_email() {
+		return is_send_email;
+	}
+
+	public void setIs_send_email(boolean is_send_email) {
+		this.is_send_email = is_send_email;
 	}
 
 	private String zoneName;

@@ -21,23 +21,30 @@ import com.google.common.collect.Lists;
 public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 
 	String url = "http://bj.01fy.cn/sale/";
-//	String url1 = "http://bj.01fy.cn/sale/list_2_0_0_0-0_0_0-0_0_2_0_1_.html";
-//	String url2 = "http://bj.01fy.cn/sale/list_2_0_0_0-0_0_0-0_0_2_0_2_.html";
+
+	// String url1 =
+	// "http://bj.01fy.cn/sale/list_2_0_0_0-0_0_0-0_0_2_0_1_.html";
+	// String url2 =
+	// "http://bj.01fy.cn/sale/list_2_0_0_0-0_0_0-0_0_2_0_2_.html";
 
 	@Override
 	public List<HouseDto> download() {
 		String content1 = WebContentFethcer.get("utf-8", url);
-//		String content1 = WebContentFethcer.get("utf-8", url1);
-//		String content2 = WebContentFethcer.get("utf-8", url2);
+		// String content1 = WebContentFethcer.get("utf-8", url1);
+		// String content2 = WebContentFethcer.get("utf-8", url2);
 		List<String> houseUrls1 = getUrls(content1);
-//		List<String> houseUrls2 = getUrls(content2);
-		
+		// List<String> houseUrls2 = getUrls(content2);
+
 		List<String> urls = Lists.newArrayList();
 		urls.addAll(houseUrls1);
-//		urls.addAll(houseUrls2);
-		
+		// urls.addAll(houseUrls2);
+
 		ArrayList<HouseDto> ls = Lists.newArrayList();
 		for (String url : urls) {
+			if (isAreadyHave(url)) {
+				Log.d("aready have now:" + url);
+				continue;
+			}
 			HouseDto dto;
 			try {
 				dto = getHouseData(url);
@@ -49,9 +56,13 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		return ls;
 	}
 
+	private boolean isAreadyHave(String url2) {
+		return Daos.getHouseDao().get(url2) != null;
+	}
+
 	private HouseDto getHouseData(String url) {
 
-		Log.d("获取房源信息" , url);
+		Log.d("get house data", url);
 		String houseInfo = WebContentFethcer.get("utf-8", url);
 		HouseDto dto = new HouseDto();
 		Document doc = Jsoup.parse(houseInfo);
@@ -65,7 +76,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		dto.setHref(url);
 		Elements dls = e.getElementsByTag("dl");
 		setAttributes(dto, dls);
-		Log.d("获取成功" , url);
+		Log.d("get house data successful", url);
 		return dto;
 	}
 
@@ -105,7 +116,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 			} else if (key.contains("联系电话")) {
 				Element ee = getElementsByTag(dd, "div");
 				Element img = getElementsByTag(ee, "img");
-				if(img != null) {
+				if (img != null) {
 					dto.setTel(img.attr("src"));
 				} else {
 					String trim = ee.text().trim();

@@ -95,13 +95,13 @@
 
 		</table>
 		<br> <br> <br> 
-		<form id="form2" name="form2" action="addYinShang">
+		<form method ="post" id="form2" name="form2" action="addYinShang">
 			<label>银商ID</label> <input type="text" name="id"> <label>银商角色ID</label>
 			<input type="text" name="roleId"> <label>银商密码</label> <input
 				type="text" name="password"> <input type="submit" value="添加银商">
 		</form>
 		<br> <br> <br> 
-		<form id="form3" name="form3" action="addYinShangCoin">
+		<form method ="post" id="form3" name="form3" action="addYinShangCoin">
 			<label>银商ID</label> <input type="text" name="id"> <label>金豆数量</label>
 			<input type="text" name="coin">  <input type="submit" value="增加银商金豆">
 		</form>

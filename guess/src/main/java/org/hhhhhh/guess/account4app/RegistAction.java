@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.hhhhhh.guess.EncodingUtil;
 import org.hhhhhh.guess.JsonAction;
 import org.hhhhhh.guess.error.ErrorResult;
 import org.hhhhhh.guess.hibernate.dao.Daos;
@@ -22,7 +23,8 @@ public class RegistAction extends JsonAction {
 
 	private String username;
 	private String password;
-
+	private String nick;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -65,7 +67,18 @@ public class RegistAction extends JsonAction {
 
 		UserCreator c = new UserCreator();
 		UserDto dto = c.createNewUser(session, un, pwd);
+		dto.setNick(nick);
 		Log.d("regist successful");
 		return new RegistSuccessfulResult(dto);
+	}
+
+	public String getNick() {
+		
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		nick = EncodingUtil.iso2Utf8(nick);
+		this.nick = nick;
 	}
 }
