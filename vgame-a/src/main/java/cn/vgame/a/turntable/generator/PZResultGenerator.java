@@ -12,6 +12,7 @@ import cn.javaplus.collections.list.Lists;
 import cn.javaplus.collections.set.Sets;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
+import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.turntable.Result;
@@ -152,12 +153,15 @@ public class PZResultGenerator implements ResultGenerator {
 		double p = Server.getConst()
 				.getDouble("IS_TU_FEN_BY_PERSON_COUNT_PROB");
 		Row first;
+		
+		String maxType = getMaxType();
+		
 		if (Turntable.getInstance().getMustGenerateId() > 0) { // 本轮第一个必出
 			first = getMust(all);
 
-		} else if (Util.Random.isHappen(p) && havePlayerXiaZhu()) { // 吐到下注玩家数量最多的灯上玩家最多的
+		} else if (maxType != null && Util.Random.isHappen(p) ) { // 吐到下注玩家数量最多的灯上玩家最多的
 
-			first = getPlayerCountMax(all);
+			first = getPlayerCountMax(all, maxType);
 
 		} else if (fu.isEmpty()) {
 			Collections.sort(xss, new TuFenC());
@@ -172,15 +176,8 @@ public class PZResultGenerator implements ResultGenerator {
 		return ls;
 	}
 
-	private boolean havePlayerXiaZhu() {
-		Turntable ins = Turntable.getInstance();
-		SwitchAll switchs = ins.getSwitchs();
-		long count = TurntableUtil.getCountAllWithOutAAndD(switchs);
-		return count >= 0;
-	}
-
-	private Row getPlayerCountMax(List<Row> all) {
-		String type = getMaxType();
+	private Row getPlayerCountMax(List<Row> all, String type) {
+		Log.d("压注玩家最多的灯", TurntableUtil.toChinese(type));
 		return get(all, type);
 	}
 
@@ -188,8 +185,12 @@ public class PZResultGenerator implements ResultGenerator {
 		Counter<String> counts = getXiaZhuPlayerCount();
 		String maxType = null;
 		int maxCount = -1;
-		for (String type : counts.keySet()) {
-			int count = counts.get(type);
+
+		List<TypeCount> cs = parse(counts);
+		for (TypeCount tc : cs) {
+			int count = tc.getCount();
+			String type = tc.getType();
+			Log.d(TurntableUtil.toChinese(type), count);
 			if (count > maxCount) {
 				maxCount = count;
 				maxType = type;
@@ -197,6 +198,20 @@ public class PZResultGenerator implements ResultGenerator {
 		}
 
 		return maxType;
+	}
+
+	private List<TypeCount> parse(Counter<String> counts) {
+		ArrayList<TypeCount> ls = Lists.newArrayList();
+		for (String type : counts.keySet()) {
+			int count = counts.get(type);
+
+			TypeCount tc = new TypeCount();
+			tc.setCount(count);
+			tc.setType(type);
+			ls.add(tc);
+		}
+		Util.Collection.upset(ls);
+		return ls;
 	}
 
 	private Counter<String> getXiaZhuPlayerCount() {
@@ -209,6 +224,8 @@ public class PZResultGenerator implements ResultGenerator {
 		List<String> types = TurntableUtil.getAllTypesWithOutAAndD();
 
 		for (String roleId : all) {
+			if (Server.getRobotManager().isRobot(roleId))
+				continue;
 			ISwitchs s = switchs.get(roleId);
 			for (String type : types) {
 				int count = TurntableUtil.getByType(s, type);
