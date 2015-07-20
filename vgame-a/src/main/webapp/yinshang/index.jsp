@@ -1,3 +1,4 @@
+<%@page import="cn.vgame.share.EncodingUtil"%>
 <%@page import="cn.vgame.a.turntable.Turntable"%>
 <%@page import="cn.javaplus.collections.list.Lists"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
@@ -66,9 +67,28 @@ response.setContentType("text/html; charset=utf-8");
 			</h2>
 		</div>
 		<div class="jqm-block-content">
+		
+		
+		<%!
+			public String getZoneName() {
+				int id = Server.getConfig().getInt("zoneId");
+				if(id == 10002) {
+					return "内网"; 
+				} else if(id == 10003) {
+					return "AppStore"; 
+				} else if(id == 10004) {
+					return "联运1"; 
+				} else if(id == 10005) {
+					return "XY平台"; 
+				} else if(id == 10006) {
+					return "酷狗"; 
+				} else {
+					return id + ""; 
+				}
+			}
+		 %>
 
-
-			<h3>聊天记录</h3>
+			<h3>聊天记录-<%=getZoneName() %></h3>
 			<font size="1"> <%
  	MessageManager m = Server.getMessageManager();
  	Messages ms = m.getMessages();
@@ -97,6 +117,9 @@ response.setContentType("text/html; charset=utf-8");
 		<div class="jqm-block-content">
 			<h3>信息</h3>
 
+			<p>
+				所在平台:<%=getZoneName()%>
+			</p>
 			<p>
 				我的帐号:<%=(String) session.getAttribute("id")%>
 			</p>

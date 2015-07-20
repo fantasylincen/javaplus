@@ -18,8 +18,8 @@ public class CreateRoleSendCoin implements Listener<CreateRoleEvent> {
 			role.addCoin(coin);
 		
 		//减库存
-		Controller ccc = Turntable.getInstance().getController();
-		ccc.setKuCun(ccc.getKuCun() - coin);
+//		Controller ccc = Turntable.getInstance().getController();
+//		ccc.setKuCun(ccc.getKuCun() - coin);
 	}
 
 }

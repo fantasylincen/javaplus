@@ -9,6 +9,7 @@ import org.hhhhhh.guess.hibernate.dao.Daos;
 import org.hhhhhh.guess.hibernate.dao.UserDao;
 import org.hhhhhh.guess.hibernate.dto.AnswersDto;
 import org.hhhhhh.guess.hibernate.dto.UserDto;
+import org.hhhhhh.guess.question.Manager;
 import org.hhhhhh.guess.user.User;
 
 public class Server {
