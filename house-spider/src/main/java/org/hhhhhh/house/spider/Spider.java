@@ -6,7 +6,6 @@ import java.util.List;
 import org.hhhhhh.house.config.GameProperties;
 import org.hhhhhh.house.hibernate.dao.Daos;
 import org.hhhhhh.house.hibernate.dao.HouseDao;
-import org.hhhhhh.house.hibernate.dao.HouseDtoCursor;
 import org.hhhhhh.house.hibernate.dto.HouseDto;
 
 import cn.javaplus.log.Log;
@@ -79,9 +78,9 @@ public class Spider {
 
 		private List<HouseDto> getWillNotify() {
 			HouseDao dao = Daos.getHouseDao();
-			HouseDtoCursor dto = dao.find("is_send_email", false);
+			List<HouseDto> dtos = dao.find("is_send_email", false);
 			ArrayList<HouseDto> ls = Lists.newArrayList();
-			for (HouseDto d : dto) {
+			for (HouseDto d : dtos) {
 				ls.add(d);
 			}
 			return ls;
@@ -90,8 +89,8 @@ public class Spider {
 		private void marksend(List<HouseDto> willNotify) {
 			for (HouseDto dto : willNotify) {
 				dto.setIs_send_email(true);
-				Daos.getHouseDao().save(dto);
 			}
+			Daos.getHouseDao().save(willNotify);
 		}
 
 	}
@@ -108,7 +107,7 @@ public class Spider {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				cn.javaplus.util.Util.Thread.sleep(5 * Time.MILES_ONE_MIN);
+				cn.javaplus.util.Util.Thread.sleep(3 * Time.MILES_ONE_MIN);
 			}
 		}
 
@@ -185,17 +184,5 @@ public class Spider {
 	}
 
 	public static void main(String[] args) {
-		// HouseDtoCursor all = Daos.getHouseDao().find();
-		// ArrayList<HouseDto> ls = Lists.newArrayList();
-		// for (HouseDto dto : all) {
-		// ls.add(dto);
-		// }
-		//
-		// new Spider().sendEmail(ls);
-
-		HouseDtoCursor dto = Daos.getHouseDao().find("is_send_email", false);
-		for (HouseDto d : dto) {
-			System.out.println(d.getName());
-		}
 	}
 }
