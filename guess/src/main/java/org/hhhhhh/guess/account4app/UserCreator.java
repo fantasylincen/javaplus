@@ -22,7 +22,6 @@ public class UserCreator {
 		UserDao dao = Daos.getUserDao();
 		UserDto dto = new UserDto();
 		dto.setUsername(username);
-
 		dto.setPassword(password);
 		dto.setNick("");
 		dao.save(dto);

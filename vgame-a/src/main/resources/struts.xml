@@ -248,7 +248,7 @@
 		<action name="execScript" class="cn.vgame.a.gm.ExecScriptAction" />
 
 		<action name="mustGenerate" class="cn.vgame.a.gm.MustGenerateAction">
-			<result type="redirect">/gm/turntableControl.jsp</result>
+			<result type="redirect">/gm/systemInfo.jsp</result>
 		</action>
 
 

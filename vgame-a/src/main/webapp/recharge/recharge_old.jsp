@@ -92,9 +92,9 @@ a:hover {
 	<img src="recharge/zfb.png">
 	<%
 		String roleId = (String) session.getAttribute("roleId");
-		if(roleId==null && Server.getConfig().getBoolean("isDebug")) {
-			roleId = "VC100031001427";
-		}
+		//if(roleId==null && Server.getConfig().getBoolean("isDebug")) {
+		//	roleId = "VC100031001427";
+		//}
 		Role role = Server.getRole(roleId);
 	%>
 	您正在为

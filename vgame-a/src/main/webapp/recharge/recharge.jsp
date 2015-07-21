@@ -276,11 +276,9 @@ input:-moz-placeholder {
 
 		<%
 			String roleId = request.getParameter("roleId");
-			if(roleId==null && Server.getConfig().getBoolean("isDebug")) {
-				roleId = "VC100031001427";
-			}
+			session.setAttribute("roleId", roleId);
 			Role role = Server.getRole(roleId);
-			Log.d(session.getId(), role.getNick(), Server.getConfig().getBoolean("isDebug"));
+			Log.d("open recharge.jsp", session.getId(), role.getId(), role.getNick(), Server.getConfig().getBoolean("isDebug"));
 		%>
 		<h1 class="head-content" style="font-size:20px; margin:0px">
 			您正在为[<%=role.getNick()%>]充值
