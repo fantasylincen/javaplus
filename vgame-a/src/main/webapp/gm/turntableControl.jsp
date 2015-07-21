@@ -32,7 +32,6 @@
 <html>
 <head>
 <%@include file="head.html"%>
-
 </head>
 <body>
 
@@ -150,7 +149,6 @@
 		</tbody>
 	</table>
 
-	<h2>当前玩家下注</h2>
 	<table border="2">
 		<thead>
 			<tr>

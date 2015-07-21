@@ -36,9 +36,7 @@
 	<%
 		////////////////////////////////////请求参数//////////////////////////////////////
 		String roleId = (String)session.getAttribute("roleId");
-		if(roleId == null && Server.getConfig().getBoolean("isDebug")){
-			roleId = "VC100031001427";
-		}
+		Log.d("open alipayapi.jsp", session.getId(), roleId, "isDebug", Server.getConfig().getBoolean("isDebug"));
 		ServerConfig c = Server.getConfig();
 		
 		String head = "http://" + c.getString("host") + "/" + c.getString("webContextRoot");
@@ -67,6 +65,7 @@
 		//必填
 		//付款金额
 		String total_fee = new String(request.getParameter("WIDtotal_fee").getBytes("ISO-8859-1"),"UTF-8");
+		
 		//必填
 
 		String id = new String(request.getParameter("id").getBytes("ISO-8859-1"),"UTF-8");

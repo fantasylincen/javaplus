@@ -15,6 +15,7 @@ import cn.vgame.a.gen.dto.MongoGen.MongoDbProperties;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao.RoleDtoCursor;
 import cn.vgame.a.gen.dto.MongoGen.RoleDto;
+import cn.vgame.a.robot.RobotManager;
 import cn.vgame.a.turntable.Turntable;
 import cn.vgame.a.util.RoleIdGenerator;
 import cn.vgame.share.FileLogger;
@@ -45,7 +46,7 @@ public final class InitThread extends Thread {
 	private void createRobots() {
 		RoleDao dao = Daos.getRoleDao();
 
-		List<String> nicks = createNicks();
+		List<String> nicks = RobotManager.createNicks();
 		for (String nick : nicks) {
 			RoleDto dto = dao.createDTO();
 			dto.setCoin(100000000);
@@ -57,23 +58,6 @@ public final class InitThread extends Thread {
 			dao.save(dto);
 			Log.d("create new robot", dto.getId(), nick);
 		}
-	}
-
-	private List<String> createNicks() {
-		URL url = Resources.getResource("nicks.txt");
-		List<String> nicks = Util.File.getLines(url);
-		Util.Collection.upset(nicks);
-
-		Iterator<String> it = nicks.iterator();
-
-		while (it.hasNext()) {
-			String n = (String) it.next();
-			if (n.trim().isEmpty()) {
-				it.remove();
-			}
-		}
-
-		return Util.Collection.sub(nicks, 20);
 	}
 
 	private void printSucessfulMessage() {

@@ -2,6 +2,7 @@ package cn.vgame.a.robot;
 
 import java.util.List;
 
+import cn.javaplus.collections.list.Lists;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
 import cn.javaplus.random.WeightFetcher;
@@ -35,8 +36,16 @@ public class Robot {
 		return getRole().getCoin();
 	}
 
+	private static List<String> nicks;
+	
 	public String getNick() {
-		return getRole().getNick();
+		if(nicks == null) {
+			nicks = Lists.newArrayList(RobotManager.getNicks());
+		}
+		
+		return Util.Collection.getRandomOne(nicks);
+		
+//		return getRole().getNick();
 	}
 
 	public long getCommitAll() {

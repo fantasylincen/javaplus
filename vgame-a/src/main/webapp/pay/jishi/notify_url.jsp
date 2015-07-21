@@ -100,13 +100,13 @@
 
 		Role role = Server.getRole(roleId);
 		long add = dto.getCount();
+		Log.d("recharge for" , roleId, "coin add", add , role.getNick());
 		role.addCoin(add);
 		role.addRechargeHistory(add, "zfb");
 		role.addJiangQuan(dto.getJiangQuan());
 		
 		Log.d("recharge success", role.getId(), role.getNick(), add,
 				role.getCoin());
-		
 		
 		dao.delete(dto);
 		
