@@ -36,7 +36,6 @@ public abstract class JsonAction extends ActionSupport {
 	protected HttpSession session;
 	private static Set<String> set;
 
-
 	@Override
 	public final String execute() throws Exception {
 		response = ServletActionContext.getResponse();
@@ -46,7 +45,7 @@ public abstract class JsonAction extends ActionSupport {
 
 		StringBuffer url = request.getRequestURL();
 		long memory = Runtime.getRuntime().freeMemory();
-		Log.d(url, memory / (1024 * 1024) + "M");
+		Log.d(url, session.getId(), memory / (1024 * 1024) + "M");
 
 		PrintWriter out = response.getWriter();
 		Object r;

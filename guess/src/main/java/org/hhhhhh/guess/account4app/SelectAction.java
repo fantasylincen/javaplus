@@ -41,14 +41,14 @@ public class SelectAction extends JsonActionAfterRoleEnterGame {
 		if (dao.get(key()) != null) {
 			throw new GuessException("不可修改答案");
 		}
-		
+
 		AnswersDto dto = new AnswersDto();
 		dto.setDate(Util.Time.getCurrentFormatTime());
 		dto.setOption_id(getOptionId());
 		dto.setRound(Server.getManager().getRound());
 		dto.setUsername_question_id(key());
 		dao.save(dto);
-		
+
 		return new SuccessResult();
 	}
 

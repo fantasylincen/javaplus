@@ -18,11 +18,6 @@ public class GameServersXml {
 	@SuppressWarnings("unchecked")
 	public static List<ServerNode> getServers() {
 
-		String key = GameServersXml.class.getName();
-		Object list = CacheManager.get(key);
-		if (list != null)
-			return (List<ServerNode>) list;
-
 		SAXReader reader = new SAXReader();
 		ArrayList<ServerNode> ls = Lists.newArrayList();
 		try {
@@ -42,8 +37,6 @@ public class GameServersXml {
 		} catch (DocumentException e) {
 			throw Util.Exception.toRuntimeException(e);
 		}
-
-		CacheManager.put(key, ls);
 
 		return ls;
 	}

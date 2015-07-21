@@ -67,8 +67,7 @@ public class RegistAction extends JsonAction {
 		}
 
 		UserCreator c = new UserCreator();
-		UserDto dto = c.createNewUser(session, un, pwd);
-		dto.setNick(nick);
+		UserDto dto = c.createNewUser(session, un, pwd, nick);
 		Log.d("regist successful");
 		return new RegistSuccessfulResult(dto);
 	}

@@ -106,7 +106,7 @@ public class ResetPwdAction extends JsonAction {
 
 		int errorCode;
 
-		User user = Server.loadUserByUsername(getEmail());
+		User user = Server.getUser(getEmail());
 
 		if (user != null) {
 			String code = generateResetEmailCode();

@@ -1,12 +1,7 @@
 package org.hhhhhh.guess.hibernate.dto;
 
-import java.io.Serializable;
 
-public class AnswersDto implements Serializable {
-	private static final long serialVersionUID = 3694747168450837652L;
-	/**
-	 * 
-	 */
+public class AnswersDto  {
 	String username_question_id;
 	String option_id;
 	private int round;

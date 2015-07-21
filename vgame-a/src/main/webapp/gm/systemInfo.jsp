@@ -110,7 +110,7 @@
 				if (t.isMustGenerate(id)) {
 					sb.append("<a href=\"mustGenerate?id=" + id + "\">取消</a>");
 				} else {
-					sb.append("<a href=\"mustGenerate?id=" + id + "\">本轮必出</a>");
+					sb.append("<a href=\"mustGenerate?id=" + id + "\">必出</a>");
 				}
 
 			}

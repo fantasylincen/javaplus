@@ -12,7 +12,7 @@
 		<property name="jiFen" column="jiFen" />
 	</class>
 	
-	<class name="org.hhhhhh.guess.hibernate.dto.AnswersDto" table="user">
+	<class name="org.hhhhhh.guess.hibernate.dto.AnswersDto" table="answers">
 		<id name="username_question_id" column="username_question_id"/>
 		<property name="option_id" column="option_id" />
 		<property name="round" column="round" />

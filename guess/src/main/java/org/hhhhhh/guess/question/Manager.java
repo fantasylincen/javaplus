@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 public class Manager {
 
 	public User getFirstOne() {
-		return Server.getUser("aaa");
+		return Server.getUser("574628@qq.com");
 	}
 
 	public int getRound() {

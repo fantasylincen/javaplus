@@ -29,9 +29,7 @@ public class GameProperties {
 
 	public static String getStringNoTrim(String k) {
 
-		String s = (String) CacheManager.get(key(k));
-		if (s != null)
-			return s;
+		String s;
 
 		SAXReader reader = new SAXReader();
 		try {
@@ -44,14 +42,7 @@ public class GameProperties {
 			throw Util.Exception.toRuntimeException(e);
 		}
 
-		CacheManager.put(key(k), s);
-
 		return s;
 	}
 
-	private static String key(String k) {
-
-		String key = GameProperties.class.getName();
-		return key + ":" + k;
-	}
 }
