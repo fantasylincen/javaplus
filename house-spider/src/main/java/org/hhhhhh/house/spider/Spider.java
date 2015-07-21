@@ -175,6 +175,7 @@ public class Spider {
 			downloadThread = new SpiderThread();
 			downloadThread.setPriority(Thread.MAX_PRIORITY);
 			downloadThread.addDownloader(new DiYiShiJianDownloader());
+			downloadThread.addDownloader(new Com58Downloader());
 			downloadThread.start();
 		}
 		if (sendEmailThread == null) {

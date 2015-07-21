@@ -43,7 +43,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		for (String url : urls) {
 			if (isAreadyHave(url)) {
 //				Log.d("aready have now:" + url);
-				continue;
+				break;
 			}
 			HouseDto dto;
 			try {
@@ -76,7 +76,7 @@ public class DiYiShiJianDownloader implements FangYuanWangDownloader {
 		dto.setHref(url);
 		Elements dls = e.getElementsByTag("dl");
 		setAttributes(dto, dls);
-		Log.d("fetch house data successful", url);
+		Log.d("fetch dysj house data successful", url);
 		return dto;
 	}
 

@@ -40,7 +40,7 @@
 			<font size="1"> <%
  	StringBuffer ssb = new StringBuffer();
 
- 	HouseDtoCursor find = Daos.getHouseDao().findSortByLimit(
+ 	List<HouseDto> find = Daos.getHouseDao().findSortByLimit(
  			"commit_date", 100);
 
  	List<HouseDto> ls = Lists.newArrayList();
