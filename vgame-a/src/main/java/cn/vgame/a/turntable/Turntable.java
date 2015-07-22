@@ -374,23 +374,29 @@ public class Turntable {
 			addCaiJinToCaiJinChi();
 
 		updateKuCun();
-		shaiJianKuCun();
+		shuaiJianKuCun();
 	}
 
-	private void shaiJianKuCun() {
+	/**
+	 * 系统盈利时才进行衰减
+	 */
+	private void shuaiJianKuCun() {
 		Controller c = getController();
 		long kuCun = c.getKuCun();
-		long min = Server.getConst().getLong("KU_CUN_SHUAI_JIAN_MIN");
-		if (kuCun < min) // -200W之后, 就不进行衰减了
+		
+		long profit = inOut.getIn() - inOut.getOut();
+		
+		if (profit < 0) // 系统没有盈利, 就不衰减
 			return;
 
-		long reduce = (long) (kuCun * c.getKuCunShuaiJian());
+		long reduce = (long) (profit * c.getKuCunShuaiJian());
 		reduce += c.getKuCunShuaiJianZhi();
 		c.setKuCun(kuCun - reduce);
 
 		KeyValueSaveOnly o = Server.getKeyValueSaveOnly();
 
-		o.add("KU_CUN_SHUAI_JIAN_LIANG", reduce);// 记录库存衰减量
+		o.add("KU_CUN_SHUAI_JIAN_LIANG", reduce);		// 记录库存衰减量
+		o.set("LAST_KU_CUN_SHUAI_JIAN_LIANG", reduce);	// 记录上轮衰减量
 	}
 
 	public int getRoleCount() {
@@ -450,8 +456,7 @@ public class Turntable {
 		ZhuangManager z = Server.getZhuangManager();
 		Zhuang zh = z.getZhuang();
 		if (zh == null) {
-			long systemIn = inOut.getIn() - inOut.getOut()
-					- inOut.getCaiJinOut();
+			long systemIn = inOut.getIn() - inOut.getOut();
 			long systemOut = -systemIn;
 			Controller c = getController();
 			long now = c.getKuCun();
@@ -500,7 +505,7 @@ public class Turntable {
 		if (result == null)
 			return;
 
-		long in = inOut.getIn() - inOut.getOut() - inOut.getCaiJinOut();
+		long in = inOut.getIn() - inOut.getOut();
 		in = Math.max(in, 0);
 
 		String base = Server.getConst().getString("CAI_JIN_SCALE");
@@ -695,8 +700,7 @@ public class Turntable {
 				if (!isTestRole && !isRobot) {
 
 					inOut.addIn(rdc);
-					inOut.addOut(add);
-					inOut.addCaiJinOut(cj + xcjadd);
+					inOut.addOut(add + cj + xcjadd);
 				}
 				settlements.put(roleId, result);
 			}
