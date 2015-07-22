@@ -355,11 +355,11 @@ public class Role implements IRole {
 		otherRole.addCoin(coin);
 		otherRole.reduceCoin(getPoundage(coin));// 支付手续费
 
-		Log.d("send coin", getId(), getNick(), getCoin(), otherRole.getId(),
-				otherRole.getNick(), otherRole.getCoin());
+		Log.d("send coin", getId(), getNick(), "+" + coin, getCoin(),
+				otherRole.getId(), otherRole.getNick(), otherRole.getCoin());
 
 		otherRole.addCoinLog(coin, getId(), "send coin");
-		
+
 		Server.getKeyValueSaveOnly().add("TRADE_VOL", coin);
 	}
 
@@ -453,10 +453,9 @@ public class Role implements IRole {
 		Daos.getRoleDao().save(dto);
 
 		addCoinLog(add, from, "recharge");
-		
+
 		Server.getKeyValueForever().add("SYSTEM_RECHARGE", add);
 	}
-	
 
 	@Override
 	public void addCoinLog(long coin, Object from, String dsc) {
@@ -476,22 +475,23 @@ public class Role implements IRole {
 
 	/**
 	 * 增加奖券
+	 * 
 	 * @param add
 	 */
 	@Override
 	public void addJiangQuan(long add) {
-		if(add == 0)
+		if (add == 0)
 			return;
-		if(add < 0)
+		if (add < 0)
 			add = 0;
 		dto.setJiangQuan(dto.getJiangQuan() + add);
 		Daos.getRoleDao().save(dto);
 	}
-	
+
 	public void reduceJiangQuan(int reduce) {
-		if(reduce == 0)
+		if (reduce == 0)
 			return;
-		if(reduce < 0)
+		if (reduce < 0)
 			reduce = 0;
 		dto.setJiangQuan(dto.getJiangQuan() - reduce);
 		Daos.getRoleDao().save(dto);

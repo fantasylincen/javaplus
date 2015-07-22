@@ -145,7 +145,7 @@ response.setContentType("text/html; charset=utf-8");
 					onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
 					onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
 					style="color:#999999">
-				<button class="ui-btn" type="submit">转账</button>
+				<button class="ui-btn" type="submit" onclick="return confirm('确定转账吗?')">转账</button>
 			</form>
 			</p>
 		</div>
