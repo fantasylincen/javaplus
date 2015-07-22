@@ -117,6 +117,7 @@ public class Spider {
 				dto.setIs_send_email(true);
 			}
 			Daos.getHouseDao().save(willNotify);
+			Log.d("marksend");
 		}
 
 	}

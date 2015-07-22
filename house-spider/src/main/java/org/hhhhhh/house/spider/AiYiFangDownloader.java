@@ -66,12 +66,12 @@ public class AiYiFangDownloader implements FangYuanWangDownloader {
 //		} catch (UnsupportedEncodingException e2) {
 //			e2.printStackTrace();
 //		}
-		try {
-			System.setOut(new PrintStream("d:/temp.xml"));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		Log.d(houseInfo);
+//		try {
+//			System.setOut(new PrintStream("d:/temp.xml"));
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		}
+//		Log.d(houseInfo);
 		
 		HouseDto dto = new HouseDto();
 		Document doc = Jsoup.parse(houseInfo);
