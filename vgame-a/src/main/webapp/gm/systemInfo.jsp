@@ -332,14 +332,16 @@
 
 
 					<tr>
-						<td>今日衰减量/历史衰减量</td>
+						<td>今日衰减量/历史衰减量/最后一轮衰减量</td>
 						<%
 							long sHistory = Server.getKeyValueForever().getLong(
 									"KU_CUN_SHUAI_JIAN_LIANG");
 							long sToday = Server.getKeyValueDaily().getLong(
 									"KU_CUN_SHUAI_JIAN_LIANG");
+							long sLast= Server.getKeyValueForever().getLong(
+									"LAST_KU_CUN_SHUAI_JIAN_LIANG");
 						%>
-						<td><%=sToday%>/<%=sHistory%></td>
+						<td><%=sToday%>/<%=sHistory%>/<%=sLast%></td>
 					</tr>
 
 
