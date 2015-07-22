@@ -1,8 +1,9 @@
+<%@page import="cn.vgame.a.turntable.generator.ProfitCalc.Xs"%>
+<%@page import="cn.vgame.a.turntable.generator.ProfitCalc"%>
 <%@page import="cn.javaplus.collections.map.Maps"%>
 <%@page import="cn.javaplus.collections.set.Sets"%>
 <%@page import="cn.vgame.a.turntable.generator.SwitchWithOutRobot"%>
 <%@page import="com.google.common.collect.Lists"%>
-<%@page import="cn.vgame.a.turntable.generator.PZResultGenerator.Xs"%>
 <%@page import="cn.javaplus.excel.Row"%>
 <%@page import="cn.javaplus.excel.Sheet"%>
 <%@page import="cn.vgame.share.Xml"%>
@@ -54,10 +55,10 @@
 					<th>玩家昵称</th>
 					<th>金豆</th>
 					<th>银行</th>
-					<th>走兽</th>
+					<th>飞禽</th>
 					<th>银鲨</th>
 					<th>金鲨</th>
-					<th>飞禽</th>
+					<th>走兽</th>
 					<th>燕子</th>
 					<th>鸽子</th>
 					<th>孔雀</th>
@@ -128,11 +129,16 @@
 		sb.append("<td><font color=\"#0066FF\">系统盈利</font></td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
-		Map<String, Long> map = getXss(Turntable.getInstance().getSwitchs());
+		
+		Turntable t = Turntable.getInstance();
+		
+		List<Xs> xs = ProfitCalc.getXss(t.getSwitchs(), t.getResultGenerator().getRandomXNumber());
+
 		for (String type : types) {
 
+
 			sb.append("<td>");
-			Long a = map.get(type);
+			Long a = getProfit(type, xs);
 			if (a != null) {
 				if (a < 0)
 					sb.append("<font color=\"#007700\">" + a + "</font>");
@@ -149,6 +155,18 @@
 		sb.append("</tr>");
 
 	}%>
+	
+	<%!
+		public static long getProfit(String type, List<Xs> xs) {
+			for(Xs x : xs) {
+				String t = x.getType();
+				if(type.equals(t)) {
+					return x.getProfit();
+				}
+			}
+			return 0;
+		}
+	 %>
 
 				<%!public static int findId(String type) {
 		Xml a = Server.getXml();

@@ -127,7 +127,7 @@ public class Turntable {
 			Xml xml = Server.getXml();
 			Sheet sheet = xml.get("huiBaoLv");
 			Row row = sheet.get(getDangWei() + "-"
-					+ resultGenerator.getRandomXNumber());
+					+ getResultGenerator().getRandomXNumber());
 			return row.getDouble("huiBaoLv");
 		}
 
@@ -136,7 +136,7 @@ public class Turntable {
 				Xml xml = Server.getXml();
 				Sheet sheet = xml.get("huiBaoLv");
 				Row row = sheet.get(getDangWei() + "-"
-						+ resultGenerator.getRandomXNumber());
+						+ getResultGenerator().getRandomXNumber());
 				return row.get("dsc");
 			} catch (Exception e) {
 				return "";
@@ -199,7 +199,7 @@ public class Turntable {
 		 * 干涉程序是否正在干涉
 		 */
 		public boolean isZhengZaiGanShe() {
-			if (!(resultGenerator instanceof ExcelGenerator)) {
+			if (!(getResultGenerator() instanceof ExcelGenerator)) {
 				return false;
 			}
 			return tunTuLiang > 0 && tunTuGaiLv > 0.0001;
@@ -437,7 +437,7 @@ public class Turntable {
 		isSomeOneGetCaiJin = false;
 
 		Server.getRobotManager().clearAllSwitchs();
-		resultGenerator.updateRandomXNumber();
+		getResultGenerator().updateRandomXNumber();
 	}
 
 	/**
@@ -625,7 +625,7 @@ public class Turntable {
 
 		@Override
 		public void runSafty() {
-			result = resultGenerator.generateReward(switchs);
+			result = getResultGenerator().generateReward(switchs);
 
 			settlementForAllRoles();
 			settlementForZhuang();
@@ -814,10 +814,17 @@ public class Turntable {
 		}
 
 		private void saveToHistory() {
+//			Row first = result.getResult().get(0);
+			
+			for (Row r : result.getResult()) {
+				save(r);
+			}
+		}
+
+		private void save(Row first) {
 			try {
 				GetHistoryResult history = getHistory();
 				History his = new History();
-				Row first = result.getResult().get(0);
 				int id = first.getInt("id");
 				his.setId(id);
 				List<History> hhh = history.getHistory();
@@ -883,7 +890,7 @@ public class Turntable {
 
 	long xiaoCaiJinThisRound;
 
-	ResultGenerator resultGenerator = new PZResultGenerator();
+	private ResultGenerator resultGenerator = new PZResultGenerator();
 
 	public static Turntable getInstance() {
 		if (instance == null) {
@@ -940,7 +947,7 @@ public class Turntable {
 
 	public int getWeight(Row row) {
 		String c = "weight-" + getController().getDangWei() + "-"
-				+ resultGenerator.getRandomXNumber();
+				+ getResultGenerator().getRandomXNumber();
 		return row.getInt(c);
 	}
 
@@ -1269,7 +1276,7 @@ public class Turntable {
 		}
 		Controller c = getController();
 		return row.getInt("x-" + c.getDangWei() + "-"
-				+ resultGenerator.getRandomXNumber());
+				+ getResultGenerator().getRandomXNumber());
 	}
 
 	/**
@@ -1504,6 +1511,14 @@ public class Turntable {
 
 	public void setWeightByGm(Map<Integer, Integer> weightByGm) {
 		this.weightByGm = weightByGm;
+	}
+
+	public ResultGenerator getResultGenerator() {
+		return resultGenerator;
+	}
+
+	public void setResultGenerator(ResultGenerator resultGenerator) {
+		this.resultGenerator = resultGenerator;
 	}
 
 }
