@@ -6,7 +6,7 @@
 	<emailServerHost>smtp.163.com</emailServerHost>
 	<emailServerPort>25</emailServerPort>
 	
-	<emailTo>317991763@qq.com</emailTo>
+	<emailTo>zuixinfangyuan@163.com</emailTo>
 	<emailTitle>房源更新</emailTitle>
 	<emailContent>
 		房源有更新!
