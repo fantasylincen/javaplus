@@ -21,9 +21,9 @@
 <%@include file="head.html"%>
 </head>
 <body>
-	<div>
-		<h2>转账记录</h2>
-		<table class="bordered">
+
+	<div data-demo-html="true" style="width: 95%; ">
+		<table border="1">
 			<thead>
 				<tr>
 					<th>时间</th>

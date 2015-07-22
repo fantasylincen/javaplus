@@ -18,34 +18,32 @@
 </head>
 <body>
 
-	<div>
+	<div data-demo-html="true" style="width: 95%; ">
 
-		<a href="menu.jsp">返回</a><br>
+		<a href="menu.jsp">返回</a><br> <br>
+
+
+
+		<%
+			List<File> logs = ConsoleLog.getFiles();
+
+			if (logs.isEmpty()) {
+				out.println("没有日志记录");
+			} else {
+
+				for (File log : logs) {
+		%>
+		<a href="consoleLogs.jsp?console-log-file-name=<%=log.getName()%>"><%=log.getName().replaceAll("\\.log", "")%></a>
 		<br>
+		<%
+			}
+			}
+		%>
+
+
+
+
+		<br> <br>
 	</div>
-
-
-
-	<%
-		List<File> logs = ConsoleLog.getFiles();
-
-		if (logs.isEmpty()) {
-			out.println("没有日志记录");
-		} else {
-
-			for (File log : logs) {
-	%>
-	<a href="consoleLogs.jsp?console-log-file-name=<%=log.getName()%>"><%=log.getName()%></a>
-	<br>
-	<%
-		}
-		}
-	%>
-
-
-
-
-	<br>
-	<br>
 </body>
 </html>

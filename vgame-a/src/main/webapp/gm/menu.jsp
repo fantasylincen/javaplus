@@ -35,7 +35,7 @@
 	<a href="systemInfo.jsp">系统信息</a>
 	<br>
 	<br>
-	<a href="turntableControl.jsp">系统控制</a>
+	<a href="robotManage.jsp">机器人管理</a>
 	<br>
 	<br>
 	<a href="logs.jsp?page=100000000">操作日志</a>

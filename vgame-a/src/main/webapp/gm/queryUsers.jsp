@@ -20,9 +20,8 @@
 <%@include file="head.html"%>
 </head>
 <body>
-	<div>
-		<h2>用户管理</h2>
-		<table class="bordered">
+	<div style="width: 95%; ">
+		<table  border="1">
 			<thead>
 				<tr>
 					<th>角色ID</th>

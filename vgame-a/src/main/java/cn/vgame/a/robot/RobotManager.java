@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.io.Resources;
 
 import cn.javaplus.collections.list.Lists;
 import cn.javaplus.collections.map.Maps;
+import cn.javaplus.collections.set.Sets;
 import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
@@ -60,7 +62,8 @@ public class RobotManager {
 	}
 
 	public Collection<Robot> getRobots() {
-		return robots.values();
+		Collection<Robot> values = robots.values();
+		return values;
 	}
 
 	public int getRobotCount() {
@@ -111,16 +114,21 @@ public class RobotManager {
 	}
 	
 	public static List<String> getNicks() {
+		if(nicks == null) {
+			URL url = Resources.getResource("nicks.txt");
+			List<String> lines = Util.File.getLines(url);
+			Set<String> sets = Sets.newHashSet(lines);
+			sets.remove("");
+			sets.remove(" ");
+			nicks = Lists.newArrayList(sets);
+			Util.Collection.upset(nicks);
+		}
 		return nicks;
 	}
 
 	public static List<String> createNicks() {
-		URL url = Resources.getResource("nicks.txt");
-		nicks = Util.File.getLines(url);
-		
-		Util.Collection.upset(nicks);
 
-		List<String> ns = Lists.newArrayList(nicks);
+		List<String> ns = Lists.newArrayList(getNicks());
 		
 		Iterator<String> it = ns.iterator();
 

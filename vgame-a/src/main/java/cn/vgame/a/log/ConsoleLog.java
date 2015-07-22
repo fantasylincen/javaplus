@@ -73,7 +73,10 @@ public class ConsoleLog {
 	public static List<File> getFiles() {
 		String file = Server.getConfig().getString("logFilePath");
 		File file2 = new File(file);
-		return Lists.newArrayList(file2.listFiles());
+		List<File> ss = Lists.newArrayList(file2.listFiles());
+		Collections.sort(ss);
+		Collections.reverse(ss);
+		return ss;
 	}
 
 	private static List<ConsoleLog> getLogs(File file) {

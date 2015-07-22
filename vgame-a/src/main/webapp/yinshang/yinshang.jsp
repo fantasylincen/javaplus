@@ -26,12 +26,12 @@
 <%@include file="head.html"%>
 </head>
 <body>
-	<div>
+
+	<div data-demo-html="true" style="width: 95%; ">
 		<%
 			
 		%>
-		<h2>银商管理</h2>
-		<table class="bordered">
+		<table border="1">
 			<thead>
 				<tr>
 					<th>银商ID</th>
@@ -53,17 +53,18 @@
 		sb.append("<td>");
 
 		Role role = Server.getRole(dto.getRoleId());
-		
-		sb.append("<a href=\"coinLog.jsp?roleId=" + role.getId() + "&page=200000000&countEvery=14\">" + role.getNick() + "</a>");
+
+		sb.append("<a href=\"coinLog.jsp?roleId=" + role.getId()
+				+ "&page=200000000&countEvery=14\">" + role.getNick() + "</a>");
 
 		sb.append("</td>");
-		
+
 		sb.append("<td>");
 
 		sb.append(role.getCoin());
 
 		sb.append("</td>");
-		
+
 		sb.append("<td>");
 
 		sb.append(role.getBankCoin());
@@ -94,16 +95,17 @@
 			%>
 
 		</table>
-		<br> <br> <br> 
-		<form method ="post" id="form2" name="form2" action="addYinShang">
+		<br> <br> <br>
+		<form method="post" id="form2" name="form2" action="addYinShang">
 			<label>银商ID</label> <input type="text" name="id"> <label>银商角色ID</label>
 			<input type="text" name="roleId"> <label>银商密码</label> <input
-				type="text" name="password"> <input type="submit" value="添加银商">
+				type="text" name="password"> <input type="submit"
+				value="添加银商">
 		</form>
-		<br> <br> <br> 
-		<form method ="post" id="form3" name="form3" action="addYinShangCoin">
+		<form method="post" id="form3" name="form3" action="addYinShangCoin">
 			<label>银商ID</label> <input type="text" name="id"> <label>金豆数量</label>
-			<input type="text" name="coin">  <input type="submit" value="增加银商金豆">
+			<input type="text" name="coin"> <input type="submit"
+				value="增加银商金豆">
 		</form>
 
 

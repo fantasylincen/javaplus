@@ -40,21 +40,10 @@
 <head>
 <meta http-equiv="refresh" content="5">
 <%@include file="head.html"%>
-<%-- <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="../favicon.ico">
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-<link rel="stylesheet"
-	href="../css/themes/default/jquery.mobile-1.4.5.min.css">
-<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-<script src="../js/jquery.js"></script>
-<script src="../_assets/js/index.js"></script>
-<script src="../js/jquery.mobile-1.4.5.min.js"></script> --%>
-
 
 </head>
 <body>
-	<div data-demo-html="true">
+	<div data-demo-html="true" style="width: 95%; ">
 
 		<%=Turntable.getInstance().getCd() / 1000%>秒
 
@@ -321,12 +310,12 @@
 						</td>
 					</tr>
 					<tr>
-						<td>库存每轮衰减比例(大于0才衰减)</td>
+						<td>系统盈利衰减率</td>
 						<td><input name="kuCunShuaiJian"
 							value="<%=tc.getKuCunShuaiJian()%>"></td>
 					</tr>
 					<tr>
-						<td>库存每轮衰减值(大于0才衰减)</td>
+						<td>系统盈利衰减值</td>
 						<td><input name="kuCunShuaiJianZhi"
 							value="<%=tc.getKuCunShuaiJianZhi()%>"></td>
 					</tr>

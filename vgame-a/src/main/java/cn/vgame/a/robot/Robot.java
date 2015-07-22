@@ -40,7 +40,9 @@ public class Robot {
 	
 	public String getNick() {
 		if(nicks == null) {
-			nicks = Lists.newArrayList(RobotManager.getNicks());
+			List<String> nicks2 = RobotManager.getNicks();
+			nicks = Lists.newArrayList(nicks2);
+			nicks.remove(null);
 		}
 		
 		return Util.Collection.getRandomOne(nicks);
