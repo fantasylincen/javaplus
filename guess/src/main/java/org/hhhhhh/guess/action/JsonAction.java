@@ -59,7 +59,7 @@ public abstract class JsonAction extends ActionSupport {
 			String s = toJSONString(new ProphetExceptionAdaptor(e));
 			
 			out.println(s);
-			Log.e(s);
+//			Log.e(s);
 			e(e);
 		} catch (Throwable e) {
 
