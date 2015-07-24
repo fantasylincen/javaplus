@@ -44,192 +44,193 @@
 
 </head>
 <body>
-	<%
-		RoleDao dao = Daos.getRoleDao();
-		int playerCount = dao.find().getCount();
+	<center>
+		<%
+			RoleDao dao = Daos.getRoleDao();
+			int playerCount = dao.find().getCount();
 
-		Turntable t = Turntable.getInstance();
-		Controller tc = t.getController();
+			Turntable t = Turntable.getInstance();
+			Controller tc = t.getController();
 
-		RoleDtoCursor c = dao.find();
-		long all = 0;
-		long allBank = 0;
-		long allJiangQuan = 0;
-		long allTrade = 0;
-		for (RoleDto dd : c) {
-			if (!dd.getId().startsWith("r")) { // 非机器人
-				all += dd.getCoin();
-				allBank += dd.getBankCoin();
-				allJiangQuan += dd.getJiangQuan();
+			RoleDtoCursor c = dao.find();
+			long all = 0;
+			long allBank = 0;
+			long allJiangQuan = 0;
+			long allTrade = 0;
+			for (RoleDto dd : c) {
+				if (!dd.getId().startsWith("r")) { // 非机器人
+					all += dd.getCoin();
+					allBank += dd.getBankCoin();
+					allJiangQuan += dd.getJiangQuan();
+				}
 			}
-		}
-	%>
-	<div data-demo-html="true" style="width: 95%; ">
-		<form id="setSystemInfo" action="setSystemInfo" method="post">
+		%>
+		<div data-demo-html="true" style="width: 95%; ">
+			<form id="setSystemInfo" action="setSystemInfo" method="post">
 
-			<table border="1" data-role="table" id="table-custom-2"
-				data-mode="columntoggle"
-				class="ui-body-d ui-shadow table-stripe ui-responsive ui-table ui-table-columntoggle">
-				<!-- <thead>
+				<table border="1" data-role="table" id="table-custom-2"
+					data-mode="columntoggle"
+					class="ui-body-d ui-shadow table-stripe ui-responsive ui-table ui-table-columntoggle">
+					<!-- <thead>
 				<tr>
 					<th>系统属性</th>
 					<th>值</th>
 				</tr>
 			</thead> -->
-				<tbody>
-					<%
-						SimpleDateFormat FORMAT = new SimpleDateFormat(
-								"yyyy-MM-dd HH:mm:ss");
-					%>
-					<tr>
-						<td>服务器时间</td>
-						<td><%=FORMAT.format(new Date(System.currentTimeMillis()))%></td>
-					</tr>
-					<tr>
-						<td>下注人数/注册人数</td>
-						<td><%=OnlineCounter.getOnlineSize()%>/<%=playerCount%></td>
-					</tr>
+					<tbody>
+						<%
+							SimpleDateFormat FORMAT = new SimpleDateFormat(
+									"yyyy-MM-dd HH:mm:ss");
+						%>
+						<tr>
+							<td>服务器时间</td>
+							<td><%=FORMAT.format(new Date(System.currentTimeMillis()))%></td>
+						</tr>
+						<tr>
+							<td>下注人数/注册人数</td>
+							<td><%=OnlineCounter.getOnlineSize()%>/<%=playerCount%></td>
+						</tr>
 
-					<tr>
-						<td>开奖次数(今日/历史)</td>
-						<td><%=t.getGenerateTimesToday() + "/"
+						<tr>
+							<td>开奖次数(今日/历史)</td>
+							<td><%=t.getGenerateTimesToday() + "/"
 					+ t.getGenerateTimesHistory()%></td>
-					</tr>
+						</tr>
 
+						<tr>
+							<td>今日新增用户/历史创建用户</td>
+							<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%></td>
+						</tr>
+						<tr>
+							<td>今日登陆/历史登陆</td>
+							<td><%=Server.getKeyValueDaily().getLong("ENTER_GAME_TIMES")%>/<%=Server.getKeyValueForever().getLong("ENTER_GAME_TIMES")%></td>
+						</tr>
+						<tr>
+							<td>今日充值/历史充值</td>
+							<td><%=Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE")%>/<%=Server.getKeyValueForever().getLong("SYSTEM_RECHARGE")%></td>
+						</tr>
+						<tr>
+							<td>今日交易量/历史交易量</td>
+							<td><%=Server.getKeyValueDaily().getLong("TRADE_VOL")%>/<%=Server.getKeyValueForever().getLong("TRADE_VOL")%></td>
+						</tr>
+
+						<tr>
+							<td>场外金币+银行</td>
+							<td><font color="#FF0000"><%=all%> + <%=allBank%> 
+									= <%=(allBank + all) / 10000%>W &nbsp;:&nbsp;&nbsp; <%=buildRmb(allBank + all) %></font></td>
+						</tr>
+
+						<tr>
+							<td>奖券</td>
+							<td><%=allJiangQuan%></td>
+						</tr>
+
+						<tr>
+							<td>彩金</td>
+							<td><%=Turntable.getInstance().getCaiJin()%></td>
+						</tr>
+
+						<tr>
+							<td>库存</td>
+							<td><%=buildRmb(tc.getKuCun())%>&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="addKuCun?add=-1000000">-100W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="addKuCun?add=-100000">-10W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="addKuCun?add=-10000">-1W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="addKuCun?add=10000">+1W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="addKuCun?add=100000">+10W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="addKuCun?add=1000000">+100W</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						</tr>
+						<tr>
+							<td>系统盈利衰减率</td>
+							<td><input name="kuCunShuaiJian"
+								value="<%=tc.getKuCunShuaiJian()%>">
+							</td>
+						</tr>
+						<tr>
+							<td>系统盈利衰减值</td>
+							<td><input name="kuCunShuaiJianZhi"
+								value="<%=tc.getKuCunShuaiJianZhi()%>">
+							</td>
+						</tr>
+						<tr>
+							<td>今日库存投放量/历史库存投放量</td>
+							<%
+								long ssHistory = Server.getKeyValueForever().getLong(
+										"KU_CUN_TOU_FANG_LIANG");
+								long ssToday = Server.getKeyValueDaily().getLong(
+										"KU_CUN_TOU_FANG_LIANG");
+							%>
+							<td><%=buildRmb(ssToday)%>&nbsp;/&nbsp;<%=buildRmb(ssHistory)%></td>
+						</tr>
+
+
+						<tr>
+							<td>今日衰减量/历史衰减量/最后一轮衰减量</td>
+							<%
+								long sHistory = Server.getKeyValueForever().getLong(
+										"KU_CUN_SHUAI_JIAN_LIANG");
+								long sToday = Server.getKeyValueDaily().getLong(
+										"KU_CUN_SHUAI_JIAN_LIANG");
+								long sLast = Server.getKeyValueForever().getLong(
+										"LAST_KU_CUN_SHUAI_JIAN_LIANG");
+							%>
+							<td><%=buildRmb(sToday)%>&nbsp;/&nbsp;<%=buildRmb(sHistory)%>&nbsp;/&nbsp;<%=buildRmb(sLast)%></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<br> <input style="display: none;" type="submit" value="保存" />
+			</form>
+
+			<%=Turntable.getInstance().getCd() / 1000%>秒
+
+			<table border="1" data-role="table" data-mode="columntoggle"
+				class="ui-body-d ui-shadow table-stripe ">
+				<thead>
 					<tr>
-						<td>今日新增用户/历史创建用户</td>
-						<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%></td>
+						<th>玩家昵称</th>
+						<th>平台</th>
+						<th>金豆</th>
+						<th>银行</th>
+						<th>飞禽</th>
+						<th>银鲨</th>
+						<th>金鲨</th>
+						<th>走兽</th>
+						<th>燕子</th>
+						<th>鸽子</th>
+						<th>孔雀</th>
+						<th>老鹰</th>
+						<th>狮子</th>
+						<th>熊猫</th>
+						<th>猴子</th>
+						<th>兔子</th>
 					</tr>
-					<tr>
-						<td>今日登陆/历史登陆</td>
-						<td><%=Server.getKeyValueDaily().getLong("ENTER_GAME_TIMES")%>/<%=Server.getKeyValueForever().getLong("ENTER_GAME_TIMES")%></td>
-					</tr>
-					<tr>
-						<td>今日充值/历史充值</td>
-						<td><%=Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE")%>/<%=Server.getKeyValueForever().getLong("SYSTEM_RECHARGE")%></td>
-					</tr>
-					<tr>
-						<td>今日交易量/历史交易量</td>
-						<td><%=Server.getKeyValueDaily().getLong("TRADE_VOL")%>/<%=Server.getKeyValueForever().getLong("TRADE_VOL")%></td>
-					</tr>
-
-					<tr>
-						<td>场外金币+银行</td>
-						<td><font color="#FF0000"><%=all%> + <%=allBank%> = <%=allBank + all%>
-								= <%=(allBank + all) / 10000%>W</font></td>
-					</tr>
-
-					<tr>
-						<td>奖券</td>
-						<td><%=allJiangQuan%></td>
-					</tr>
-
-					<tr>
-						<td>彩金</td>
-						<td><%=Turntable.getInstance().getCaiJin()%></td>
-					</tr>
-
-					<tr>
-						<td>库存</td>
-						<td><%=tc.getKuCun()%>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="addKuCun?add=-1000000">-100W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="addKuCun?add=-100000">-10W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="addKuCun?add=-10000">-1W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="addKuCun?add=10000">+1W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="addKuCun?add=100000">+10W</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="addKuCun?add=1000000">+100W</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					</tr>
-					<tr>
-						<td>系统盈利衰减率</td>
-						<td><input name="kuCunShuaiJian"
-							value="<%=tc.getKuCunShuaiJian()%>">
-						</td>
-					</tr>
-					<tr>
-						<td>系统盈利衰减值</td>
-						<td><input name="kuCunShuaiJianZhi"
-							value="<%=tc.getKuCunShuaiJianZhi()%>">
-						</td>
-					</tr>
-					<tr>
-						<td>今日库存投放量/历史库存投放量</td>
-						<%
-							long ssHistory = Server.getKeyValueForever().getLong(
-									"KU_CUN_TOU_FANG_LIANG");
-							long ssToday = Server.getKeyValueDaily().getLong(
-									"KU_CUN_TOU_FANG_LIANG");
-						%>
-						<td><%=ssToday%>/<%=ssHistory%></td>
-					</tr>
+				</thead>
 
 
-					<tr>
-						<td>今日衰减量/历史衰减量/最后一轮衰减量</td>
-						<%
-							long sHistory = Server.getKeyValueForever().getLong(
-									"KU_CUN_SHUAI_JIAN_LIANG");
-							long sToday = Server.getKeyValueDaily().getLong(
-									"KU_CUN_SHUAI_JIAN_LIANG");
-							long sLast = Server.getKeyValueForever().getLong(
-									"LAST_KU_CUN_SHUAI_JIAN_LIANG");
-						%>
-						<td><%=sToday%>/<%=sHistory%>/<%=sLast%></td>
-					</tr>
+				<tbody>
 
-
-				</tbody>
-			</table>
-
-			<br> <input style="display: none;" type="submit" value="保存" />
-		</form>
-
-		<%=Turntable.getInstance().getCd() / 1000%>秒
-
-		<table border="1" data-role="table" data-mode="columntoggle"
-			class="ui-body-d ui-shadow table-stripe ">
-			<thead>
-				<tr>
-					<th>玩家昵称</th>
-					<th>平台</th>
-					<th>金豆</th>
-					<th>银行</th>
-					<th>飞禽</th>
-					<th>银鲨</th>
-					<th>金鲨</th>
-					<th>走兽</th>
-					<th>燕子</th>
-					<th>鸽子</th>
-					<th>孔雀</th>
-					<th>老鹰</th>
-					<th>狮子</th>
-					<th>熊猫</th>
-					<th>猴子</th>
-					<th>兔子</th>
-				</tr>
-			</thead>
-
-
-			<tbody>
-
-				<%
-					StringBuilder sbba = new StringBuilder();
-					SwitchAll ss = Turntable.getInstance().getSwitchs();
-					Set<String> d = ss.getAll();
-					printBeiLv(sbba);
-					printProfit(sbba);
-					printBiChu(sbba);
-					for (String roleId : d) {
-						if (Server.getRobotManager().isRobot(roleId)) {
-							continue;
+					<%
+						StringBuilder sbba = new StringBuilder();
+						SwitchAll ss = Turntable.getInstance().getSwitchs();
+						Set<String> d = ss.getAll();
+						printBeiLv(sbba);
+						printProfit(sbba);
+						printBiChu(sbba);
+						for (String roleId : d) {
+							if (Server.getRobotManager().isRobot(roleId)) {
+								continue;
+							}
+							ISwitchs s = ss.get(roleId);
+							print(roleId, s, sbba);
 						}
-						ISwitchs s = ss.get(roleId);
-						print(roleId, s, sbba);
-					}
 
-					out.println(sbba);
-				%>
+						out.println(sbba);
+					%>
 
-				<%!private static void printBiChu(StringBuilder sb) {
+					<%!private static void printBiChu(StringBuilder sb) {
 
 		List<String> types = TurntableUtil.getAllTypes();
 		sb.append("<tr>");
@@ -262,7 +263,7 @@
 
 	}%>
 
-				<%!private static void printProfit(StringBuilder sb) {
+					<%!private static void printProfit(StringBuilder sb) {
 
 		List<String> types = TurntableUtil.getAllTypes();
 		sb.append("<tr>");
@@ -298,7 +299,7 @@
 	}%>
 
 
-				<%!private static void printBeiLv(StringBuilder sb) {
+					<%!private static void printBeiLv(StringBuilder sb) {
 
 		List<String> types = TurntableUtil.getAllTypes();
 		sb.append("<tr>");
@@ -308,7 +309,6 @@
 		sb.append("<td>-</td>");
 
 		Turntable t = Turntable.getInstance();
-
 
 		for (String type : types) {
 
@@ -323,7 +323,7 @@
 	}%>
 
 
-				<%!public static long getProfit(String type, List<Xs> xs) {
+					<%!public static long getProfit(String type, List<Xs> xs) {
 		for (Xs x : xs) {
 			String t = x.getType();
 			if (type.equals(t)) {
@@ -333,7 +333,7 @@
 		return 0;
 	}%>
 
-				<%!public static int findId(String type) {
+					<%!public static int findId(String type) {
 		Xml a = Server.getXml();
 
 		Sheet sheet = a.get("weights");
@@ -341,7 +341,7 @@
 		return r.getInt("id");
 	}%>
 
-				<%!public static Map<String, Long> getXss(SwitchAll switchs) {
+					<%!public static Map<String, Long> getXss(SwitchAll switchs) {
 		Xml xml = Server.getXml();
 		Sheet sheet = xml.get("x");
 		List<Row> all = sheet.getAll();
@@ -367,48 +367,54 @@
 
 		return map;
 	}%>
-				<%!private static void print(String id, ISwitchs s, StringBuilder sb) {
+					<%!private static void print(String id, ISwitchs s, StringBuilder sb) {
 		Role role = Server.getRole(id);
 
 		sb.append("<tr>");
-		
+
 		sb.append("<td>");
-		
-		sb.append("<a href=\"coinLog.jsp?showBackButton=false&roleId=" + role.getId() + "&page=200000000&countEvery=14\">" + role.getNick() + (role.getRechargeHistory() > 0 ? "<font color='#FF0000'>(充)</font>":"")  + "</a>");
+
+		sb.append("<a href=\"coinLog.jsp?showBackButton=false&roleId="
+				+ role.getId()
+				+ "&page=200000000&countEvery=14\">"
+				+ role.getNick()
+				+ (role.getRechargeHistory() > 0 ? "<font color='#FF0000'>(充"
+						+ role.getRechargeHistory() + ")</font>" : "") + "</a>");
 		sb.append("</td>");
-		
-		
-		
+
 		sb.append("<td>");
-		
+
 		String p = role.getKeyValueForever().getString("PLANTFORM");
-		if(p != null) {
-			sb.append( p);
-		}else {
+		if (p != null) {
+			sb.append(p);
+		} else {
 			sb.append("-");
 		}
-		
+
 		sb.append("</td>");
-		
-		
+
 		sb.append("<td>");
 		long coin = role.getCoin();
 		long bankCoin = role.getBankCoin();
-		if(coin >= 200000) {
-			sb.append("<font color = \"#FF0000\">" + coin + "</font>");
+
+		int rmbC = (int) (coin / 2800);
+		int rmbB = (int) (bankCoin / 2800);
+
+		if (coin >= 200000) {
+			sb.append("<font color = \"#FF0000\">" + buildRmb(bankCoin) + "</font>");
 		} else {
-			sb.append(coin);
+			sb.append(buildRmb(bankCoin));
 		}
-		
+
 		sb.append("</td>");
 		sb.append("<td>");
-		
-		if(bankCoin >= 200000) {
-			sb.append("<font color = \"#FF0000\">" + bankCoin + "</font>");
+
+		if (bankCoin >= 200000) {
+			sb.append("<font color = \"#FF0000\">" + buildRmb(bankCoin) + "</font>");
 		} else {
-			sb.append(bankCoin);
+			sb.append(buildRmb(bankCoin));
 		}
-		
+
 		sb.append("</td>");
 
 		List<String> types = TurntableUtil.getAllTypes();
@@ -421,10 +427,16 @@
 		sb.append("</tr>");
 	}%>
 
-			</tbody>
-		</table>
+					<%!public static String buildRmb(long coin) {
+		int rmb = (int) (coin / 2800);
+		return coin + "&nbsp;&nbsp;(¥" + rmb + ")";
+	}%>
+
+				</tbody>
+			</table>
 
 
-	</div>
+		</div>
+	</center>
 </body>
 </html>
