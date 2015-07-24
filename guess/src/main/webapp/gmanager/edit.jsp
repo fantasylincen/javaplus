@@ -1,9 +1,11 @@
+<%@page import="cn.javaplus.log.Log"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	Log.d("enter edit.jsp");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +20,7 @@
 	href="../css/themes/default/jquery.mobile-1.4.5.min.css">
 <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 <script src="../js/jquery.js"></script>
-<script src="../_assets/js/index.js"></script>
+<!-- <script src="../_assets/js/index.js"></script> -->
 <script src="../js/jquery.mobile-1.4.5.min.js"></script>
 
 

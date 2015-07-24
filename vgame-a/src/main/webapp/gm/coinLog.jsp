@@ -25,7 +25,11 @@
 	<div>
 		<%
 			String roleId = request.getParameter("roleId");
+			String s = request.getParameter("showBackButton");
+			boolean showBackButton = s == null;
+			
 			String nick = Server.getRole(roleId).getNick();
+			
 		 %>
 		<h2>[<%=nick %>] 的金豆记录</h2>
 		<table class="bordered">
@@ -173,9 +177,14 @@
 			<input type="text" name="page" value="<%=p%>"> <a
 				href="javascript:jump.submit();">go</a>
 		</form>
-		
-		 <a
-			href="setUser.jsp?roleId=<%=roleId%>"> 返回</a> <br>
+		<%
+			if(showBackButton) {
+		 %>
+		 		<a href="setUser.jsp?roleId=<%=roleId%>"> 返回</a>
+			<%
+			}
+		 %>
+			 <br>
 		
 	</div>
 </body>

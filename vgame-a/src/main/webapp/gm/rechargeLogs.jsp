@@ -73,6 +73,7 @@
 					<th>角色ID</th>
 					<th>昵称</th>
 					<th>充值金豆</th>
+					<th>平台</th>
 				</tr>
 			</thead>
 
@@ -94,6 +95,7 @@
 					<td><%=dto.getTo()%></td>
 					<td><%=Server.getRole(dto.getTo()).getNick()%></td>
 					<td><%=dto.getCoin()%></td>
+					<td><%=dto.getFrom()%></td>
 				</tr>
 				<%
 					}

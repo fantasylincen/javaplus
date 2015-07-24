@@ -70,6 +70,8 @@ import cn.javaplus.time.UnknownDateException;
 import cn.javaplus.time.UnknownWeek;
 import cn.javaplus.web.WebContentFethcer;
 
+import com.google.common.collect.Maps;
+
 /**
  * 工具类
  * 
@@ -1721,6 +1723,9 @@ public class Util {
 		static SimpleDateFormat timeFormat = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
 
+		private static Map<String, SimpleDateFormat> formats = Maps
+				.newHashMap();
+
 		/**
 		 * 当前当地 日期 (格式化后的) yyyy-MM-dd HH:mm:ss
 		 * 
@@ -1816,8 +1821,35 @@ public class Util {
 		 * @return
 		 */
 		public static String getCurrentTime(String timeFormat) {
-			SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
+			SimpleDateFormat sdf = getFormat(timeFormat);
 			return sdf.format(new Date(System.currentTimeMillis()));
+		}
+
+		public static Date parse(String format, String time) {
+			try {
+				SimpleDateFormat sdf = getFormat(format);
+				return sdf.parse(time);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		public static String format(String format, Date date) {
+			SimpleDateFormat sdf = getFormat(format);
+			return sdf.format(date);
+		}
+
+		public static String format(String format, long time) {
+			return format(format, new Date(time));
+		}
+
+		private static SimpleDateFormat getFormat(String format) {
+			SimpleDateFormat sf = formats.get(format);
+			if (sf == null) {
+				sf = new SimpleDateFormat(format);
+				formats.put(format, sf);
+			}
+			return sf;
 		}
 
 	}
@@ -3489,7 +3521,6 @@ public class Util {
 			}
 			return ts;
 		}
-
 
 	}
 

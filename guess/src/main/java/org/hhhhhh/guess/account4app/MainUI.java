@@ -176,7 +176,8 @@ public class MainUI {
 	
 	public List<QuestionItem> getQuestions() {
 		ArrayList<QuestionItem> ls = Lists.newArrayList();
-		List<Question> questions = Server.getManager().getQuestions();
+		List<Question> questions = user.getQuestions();
+		
 		for (Question question : questions) {
 			ls.add(new QuestionItem(question));
 		}

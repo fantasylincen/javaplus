@@ -7,15 +7,15 @@ public class Option {
 	}
 	
 	public String getTitle() {
-		return "xxxxx";
+		return "是";
 	}
 	
 	public String getDsc() {
-		return "xxxxx";
+		return "是";
 		
 	}
 	public String getScale() {
-		return "29%";
+		return "50%";
 	}
 	public boolean isSelected() {
 		return false;

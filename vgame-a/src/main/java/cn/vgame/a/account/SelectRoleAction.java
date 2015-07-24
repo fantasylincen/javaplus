@@ -5,37 +5,22 @@ import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao;
 import cn.vgame.a.gen.dto.MongoGen.RoleDto;
 import cn.vgame.a.result.ErrorResult;
+import cn.vgame.share.KeyValue;
 
 /**
  * 选定某个角色加入游戏
  * 
  * -----------------
  * 
- * A.正常情况:
- * 	{
- * 		role:{
- * 				id 角色ID,
- * 				ownerId 所属帐号,
- * 				nick 昵称,
- * 				coin 金币数量,
- * 				cd 开奖CD时间(秒)
- * 		}
- * 	}
+ * A.正常情况: { role:{ id 角色ID, ownerId 所属帐号, nick 昵称, coin 金币数量, cd 开奖CD时间(秒) } }
  * 
- * B.错误:
- *  标准错误: 10002 10006
+ * B.错误: 标准错误: 10002 10006
  * 
  * 
- * 说明: 标准错误, 客户端需要对所有包  统一处理
- *    {
- *    	String error 错误文字,
- *    	int code 这个错误对应到配置表 messages 里面的错误号,
- *      String args [    比如 消息: 10008    message too long len must < %s0     那么 args =[ 10] 时 , 该消息表示  message too long len must < 10
- *      	String arg1...
- *      	String arg2...
- *      	String arg3...
- *      ],
- *    }
+ * 说明: 标准错误, 客户端需要对所有包 统一处理 { String error 错误文字, int code 这个错误对应到配置表 messages
+ * 里面的错误号, String args [ 比如 消息: 10008 message too long len must < %s0 那么 args =[
+ * 10] 时 , 该消息表示 message too long len must < 10 String arg1... String arg2...
+ * String arg3... ], }
  */
 public class SelectRoleAction extends JsonAction {
 
@@ -52,7 +37,6 @@ public class SelectRoleAction extends JsonAction {
 		}
 	}
 
-
 	private static final long serialVersionUID = -6099859675509539457L;
 
 	private String roleId;
@@ -67,7 +51,13 @@ public class SelectRoleAction extends JsonAction {
 		if (dto == null)
 			return new ErrorResult(10006);
 		Role role = new Role(dto);
+
+		KeyValue kv = role.getKeyValueForever();
 		
+		String att = (String) session.getAttribute("plantform");
+		if (att != null)
+			kv.set("PLANTFORM", att);
+
 		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
 		return new SelectRoleResult(role);
 	}

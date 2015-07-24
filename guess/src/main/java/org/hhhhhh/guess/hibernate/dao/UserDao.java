@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 public class UserDao {
 
 	public void save(UserDto dto) {
-		new DbCommit().save(dto);
+		new DbUtil().save(dto);
 	}
 
 	public UserDto get(String id) {

@@ -3,37 +3,44 @@ package org.hhhhhh.guess.question;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hhhhhh.guess.account4app.MainUI.OptionItem;
+import org.hhhhhh.guess.hibernate.dto.QuestionDto;
+import org.hhhhhh.guess.user.User;
 
 import com.google.common.collect.Lists;
 
 public class Question {
 
+	private final QuestionDto dto;
+	private final User user;
+
+	public Question(User user, QuestionDto dto) {
+		this.user = user;
+		this.dto = dto;
+	}
+
 	public String getId() {
-		return "111111";
+		return dto.getId();
 	}
 	
 	public String getDsc() {
 
-		return "111111";
+		return dto.getDsc();
 	}
+	
 	public String getImg() {
-
-		return "111111";
+		return "gmanager/getImage?id=" + dto.getId();
 	}
 	
 	public boolean isAnswered() {
-		return false;
-		
+		return user.getKeyValueForever().getBoolean("IS_ANSWERED:" + getId());
 	}
 	
 	public int getCount() {
-	return 1;	
+		return dto.getCount();
 	}
 
 	public List<Option> getOptions() {
 		ArrayList<Option> ls = Lists.newArrayList();
-		ls.add(new Option());
 		ls.add(new Option());
 		ls.add(new Option());
 		return ls;

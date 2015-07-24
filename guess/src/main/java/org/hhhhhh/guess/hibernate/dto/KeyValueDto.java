@@ -1,6 +1,6 @@
 package org.hhhhhh.guess.hibernate.dto;
 
-public class SystemKeyValueDto {
+public class KeyValueDto {
 	String key;
 	String value;
 	public String getKey() {

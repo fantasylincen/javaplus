@@ -5,7 +5,8 @@ import org.hhhhhh.guess.action.JsonActionAfterRoleEnterGame;
 import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.AnswersDao;
 import org.hhhhhh.guess.hibernate.dao.Daos;
-import org.hhhhhh.guess.hibernate.dto.AnswersDto;
+import org.hhhhhh.guess.hibernate.dao.DbUtil;
+import org.hhhhhh.guess.hibernate.dto.AnswerDto;
 
 import cn.javaplus.util.Util;
 
@@ -42,12 +43,12 @@ public class SelectAction extends JsonActionAfterRoleEnterGame {
 			throw new GuessException("不可修改答案");
 		}
 
-		AnswersDto dto = new AnswersDto();
+		AnswerDto dto = new AnswerDto();
 		dto.setDate(Util.Time.getCurrentFormatTime());
 		dto.setOption_id(getOptionId());
 		dto.setRound(Server.getManager().getRound());
 		dto.setUsername_question_id(key());
-		dao.save(dto);
+		DbUtil.save(dto);
 
 		return new SuccessResult();
 	}

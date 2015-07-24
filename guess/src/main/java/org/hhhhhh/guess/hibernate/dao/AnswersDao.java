@@ -1,25 +1,11 @@
 package org.hhhhhh.guess.hibernate.dao;
 
-import org.hhhhhh.guess.hibernate.HibernateSessionFactory;
-import org.hhhhhh.guess.hibernate.dto.AnswersDto;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hhhhhh.guess.hibernate.dto.AnswerDto;
 
 public class AnswersDao {
 
-	public AnswersDto get(String key) {
-		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
-		Session session = sf.openSession();
-		try {
-			AnswersDto s = (AnswersDto) session.get(AnswersDto.class, key);
-			return s;
-		} finally {
-			session.close();
-		}
-	}
-
-	public void save(AnswersDto dto) {
-		new DbCommit().save(dto);
+	public AnswerDto get(String key) {
+		return DbUtil.get(AnswerDto.class, key);
 	}
 
 }

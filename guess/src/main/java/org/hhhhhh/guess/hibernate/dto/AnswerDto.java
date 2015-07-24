@@ -1,7 +1,7 @@
 package org.hhhhhh.guess.hibernate.dto;
 
 
-public class AnswersDto  {
+public class AnswerDto  {
 	String username_question_id;
 	String option_id;
 	private int round;
