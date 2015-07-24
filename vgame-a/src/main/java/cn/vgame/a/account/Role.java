@@ -454,7 +454,7 @@ public class Role implements IRole {
 
 		addCoinLog(add, from, "recharge");
 
-		Server.getKeyValueForever().add("SYSTEM_RECHARGE", add);
+		Server.getKeyValueSaveOnly().add("SYSTEM_RECHARGE", add);
 	}
 
 	@Override
