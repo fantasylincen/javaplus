@@ -117,7 +117,7 @@ public class Spider {
 				dto.setIs_send_email(true);
 			}
 			Daos.getHouseDao().save(willNotify);
-			Log.d("marksend");
+//			Log.d("marksend");
 		}
 
 	}
@@ -202,8 +202,9 @@ public class Spider {
 			downloadThread = new SpiderThread();
 			downloadThread.setPriority(Thread.MAX_PRIORITY);
 			downloadThread.addDownloader(new DiYiShiJianDownloader());
-			downloadThread.addDownloader(new Com58Downloader());
+//			downloadThread.addDownloader(new Com58Downloader());
 			downloadThread.addDownloader(new AiYiFangDownloader());
+//			downloadThread.addDownloader(new SouFangDownloader());
 			downloadThread.start();
 		}
 		if (sendEmailThread == null) {
