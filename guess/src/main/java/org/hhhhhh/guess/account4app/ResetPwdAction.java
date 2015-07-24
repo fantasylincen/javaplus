@@ -49,8 +49,8 @@ public class ResetPwdAction extends JsonAction {
 		String key = "RESET_PASSWORD:" + random;
 		String value = getEmail() + ":" + System.currentTimeMillis();
 
-		dto.setKey(key);
-		dto.setValue(value);
+		dto.setK(key);
+		dto.setV(value);
 
 		DbUtil.save(dto);
 		return random;

@@ -1,18 +1,23 @@
 package org.hhhhhh.guess.hibernate.dto;
 
 public class KeyValueDto {
-	String key;
-	String value;
-	public String getKey() {
-		return key;
+	String k;
+	String v;
+
+	public String getK() {
+		return k;
 	}
-	public void setKey(String key) {
-		this.key = key;
+
+	public void setK(String k) {
+		this.k = k;
 	}
-	public String getValue() {
-		return value;
+
+	public String getV() {
+		return v;
 	}
-	public void setValue(String value) {
-		this.value = value;
+
+	public void setV(String v) {
+		this.v = v;
 	}
+
 }

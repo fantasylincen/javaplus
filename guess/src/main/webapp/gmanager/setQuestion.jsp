@@ -1,3 +1,4 @@
+<%@page import="org.hhhhhh.guess.hibernate.dto.QuestionOptionDto"%>
 <%@page import="org.hhhhhh.guess.hibernate.dto.QuestionDto"%>
 <%@page import="org.hhhhhh.guess.util.ParameterUtil"%>
 <%@page import="cn.javaplus.log.Log"%>
@@ -7,8 +8,8 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 	Log.d("enter setQuestion.jsp");
 %>
 <!DOCTYPE html>
@@ -123,18 +124,37 @@
 		<div data-role="content" class="content">
 			<%
 				String questionId = ParameterUtil.getParameter("questionId");
-				Log.d("questionId", questionId);
+					Log.d("questionId", questionId);
 
-				QuestionDto dto = DbUtil.get(QuestionDto.class, questionId);
+					QuestionDto dto = DbUtil.get(QuestionDto.class, questionId);
+					
+					List<QuestionOptionDto> options = DbUtil.find("QuestionOptionDto", "questionId", dto.getId());
 			%>
+			<%!public String getOptionText (List<QuestionOptionDto> options, String head) {
+					for(QuestionOptionDto dto : options) {
+						if(head.equals(dto.getHead())) {
+							return dto.getDsc();
+						}
+					}
+					return "";
+				}%>
 
 			<form id="upload" name="upload" method="post" action="setQuestion"
 				enctype="multipart/form-data">
-				<label for="content">问题内容</label> <input id="content" name="content"
-					type="text" class="txt1" value="<%=dto.getContent()%>" /> <label
-					for="dsc">说明</label> <input id="dsc" name="dsc" type="text"
-					class="txt1" value="<%=dto.getDsc()%>" />
-
+				<label for="content">问题内容</label> 
+				<input id="content" name="content" type="text" class="txt1" value="<%=dto.getContent()%>" />
+				
+				<label for="dsc">说明</label> 
+				<input id="dsc" name="dsc" type="text" class="txt1" value="<%=dto.getDsc()%>" />
+				
+				<label >选项 A-F</label> 
+				<input id="optionA" name="optionA" type="text" class="txt1" value="<%=getOptionText(options, "A") %>"/> 
+				<input id="optionB" name="optionB" type="text" class="txt1" value="<%=getOptionText(options, "B") %>"/> 
+				<input id="optionC" name="optionC" type="text" class="txt1" value="<%=getOptionText(options, "C") %>"/> 
+				<input id="optionD" name="optionD" type="text" class="txt1" value="<%=getOptionText(options, "D") %>"/> 
+				<input id="optionE" name="optionE" type="text" class="txt1" value="<%=getOptionText(options, "E") %>"/> 
+				<input id="optionF" name="optionF" type="text" class="txt1" value="<%=getOptionText(options, "F") %>"/> 
+				
 
 				<div id="preview" data-role="content" class="content">
 					<img width="100%" id="imghead"

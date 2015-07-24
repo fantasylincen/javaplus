@@ -1,24 +1,53 @@
 package cn.javaplus.mail;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 
-import cn.javaplus.collections.list.Lists;
+import cn.javaplus.util.Util;
 
 public class Test {
-	public static void main(String[] args) {
-//		String cc = sendPost("http://120.24.61.79:10001/getUserData");
-//		System.out.println(cc);
+	public static void main(String[] args) throws AWTException {
+		// String cc = sendPost("http://120.24.61.79:10001/getUserData");
+		// System.out.println(cc);
 
-			List<Integer> ls = Lists.newArrayList(1, 2, 3, 4, 5);
-			System.out.println(ls.subList(1, 5));
-			
-		
+		// List<Integer> ls = Lists.newArrayList(1, 2, 3, 4, 5);
+		// System.out.println(ls.subList(1, 5));
+		//
+		//
+
+		// 240, 346
+
+		for (int i = 0; i < 500; i++) {
+
+			int xStart = 240;
+			int yStart = 346;
+
+			Robot r = new Robot();
+			int w = 496;
+			int grid = w / 9;
+
+			int xx = xStart;
+			int yy = yStart;
+			for (int y = 0; y < 9; y++) {
+				for (int x = 0; x < 9; x++) {
+					xx += grid;
+					r.mouseMove(xx - 10, yy + 10);
+					r.mousePress(InputEvent.BUTTON1_MASK);
+					r.mouseRelease(InputEvent.BUTTON1_MASK);
+					// Util.Thread.sleep(50);
+				}
+				yy += grid;
+				xx = xStart;
+			}
+			System.out.println(i);
+		}
 	}
 
 	/**
@@ -37,13 +66,15 @@ public class Test {
 			URLConnection conn = realUrl.openConnection();
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
-			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			conn.setRequestProperty("user-agent",
+					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
 			out = new PrintWriter(conn.getOutputStream());
 			out.print("did=1&aid=aaaaaa");
 			out.flush();
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			in = new BufferedReader(
+					new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = in.readLine()) != null) {
 				result += line;
@@ -65,36 +96,38 @@ public class Test {
 		}
 		return result;
 	}
-	
-//	
-//	public static void main(String[] args) {
-//		String cc = sendPost("http://120.24.61.79:10001");
-//		System.out.println(cc);
-//	}
-//
-//	// out.print("did=1&uid=152128907&goodsId=com.pocketriver.minilegend.1&money=2&pt=11&tcd=1&st=1LINGCHENGDENGXINFENG");
-//
-//	public static String sendPost(String url) {
-//		String uriAPI = "http://120.24.61.79:10001/getUserData"; // 这是我测试的本地,大家可以随意改
-//		HttpPost httpRequest = new HttpPost(uriAPI);
-//		List<NameValuePair> params = new ArrayList<NameValuePair>();
-//		params.add(new BasicNameValuePair("aid", "aaaaaa"));
-//		params.add(new BasicNameValuePair("did", "1"));
-//		try {
-//			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-//			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
-//			if (httpResponse.getStatusLine().getStatusCode() == 200) {
-//				String strResult = EntityUtils.toString(httpResponse.getEntity());
-//				return strResult;
-//			} else {
-//				return "Error Response: " + httpResponse.getStatusLine().toString();
-//			}
-//		} catch (ClientProtocolException e) {
-//			return e.getMessage().toString();
-//		} catch (IOException e) {
-//			return e.getMessage().toString();
-//		} catch (Exception e) {
-//			return e.getMessage().toString();
-//		}
-//	}
+
+	//
+	// public static void main(String[] args) {
+	// String cc = sendPost("http://120.24.61.79:10001");
+	// System.out.println(cc);
+	// }
+	//
+	// //
+	// out.print("did=1&uid=152128907&goodsId=com.pocketriver.minilegend.1&money=2&pt=11&tcd=1&st=1LINGCHENGDENGXINFENG");
+	//
+	// public static String sendPost(String url) {
+	// String uriAPI = "http://120.24.61.79:10001/getUserData"; //
+	// 这是我测试的本地,大家可以随意改
+	// HttpPost httpRequest = new HttpPost(uriAPI);
+	// List<NameValuePair> params = new ArrayList<NameValuePair>();
+	// params.add(new BasicNameValuePair("aid", "aaaaaa"));
+	// params.add(new BasicNameValuePair("did", "1"));
+	// try {
+	// httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+	// HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+	// if (httpResponse.getStatusLine().getStatusCode() == 200) {
+	// String strResult = EntityUtils.toString(httpResponse.getEntity());
+	// return strResult;
+	// } else {
+	// return "Error Response: " + httpResponse.getStatusLine().toString();
+	// }
+	// } catch (ClientProtocolException e) {
+	// return e.getMessage().toString();
+	// } catch (IOException e) {
+	// return e.getMessage().toString();
+	// } catch (Exception e) {
+	// return e.getMessage().toString();
+	// }
+	// }
 }

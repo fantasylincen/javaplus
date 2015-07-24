@@ -1,3 +1,4 @@
+<%@page import="org.hhhhhh.guess.hibernate.dao.DbUtil"%>
 <%@page import="cn.javaplus.log.Log"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
@@ -127,10 +128,22 @@
 
 			<form id="upload" name="upload" method="post" action="createQuestion"
 				enctype="multipart/form-data">
-				<label for="content">问题内容</label> <input id="content" name="content"
-					type="text" class="txt1" /> <label for="dsc">说明</label> <input
-					id="dsc" name="dsc" type="text" class="txt1" />
-
+				<label for="content">问题内容</label> 
+				<input id="content" name="content" type="text" class="txt1" /> 
+				
+				
+				<label for="dsc">说明</label>
+				<input id="dsc" name="dsc" type="text" class="txt1" />
+				
+				<label >选项 A-F</label> 
+				
+				<input id="optionA" name="optionA" type="text" class="txt1" /> 
+				<input id="optionB" name="optionB" type="text" class="txt1" /> 
+				<input id="optionC" name="optionC" type="text" class="txt1" /> 
+				<input id="optionD" name="optionD" type="text" class="txt1" /> 
+				<input id="optionE" name="optionE" type="text" class="txt1" /> 
+				<input id="optionF" name="optionF" type="text" class="txt1" /> 
+				
 
 				<div id="preview" data-role="content" class="content">
 					<img width="100%" id="imghead" />

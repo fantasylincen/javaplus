@@ -1,18 +1,25 @@
 package org.hhhhhh.guess.util;
 
+import org.hhhhhh.guess.hibernate.dao.Daos;
+import org.hhhhhh.guess.hibernate.dao.KeyValueDao;
+import org.hhhhhh.guess.hibernate.dto.KeyValueDto;
 
 public class SystemKeyValueForever implements KeyValue {
 
-	private final ISystemKeyValueDao dao;
-
-	public SystemKeyValueForever(ISystemKeyValueDao dao) {
-		this.dao = dao;
+	public static void main(String[] args) {
+		KeyValueDao dao = Daos.getKeyValueDao();
+		KeyValueDto dto = dao.createDTO();
+		dto.setK("1");
+		dto.setV("2");
+		dao.save(dto);
 	}
+	
 	@Override
 	public void set(Object key, Object value) {
-		ISystemKeyValueDto dto = dao.createDTO();
-		dto.setKey(key.toString());
-		dto.setValue(value.toString());
+		KeyValueDao dao = Daos.getKeyValueDao();
+		KeyValueDto dto = dao.createDTO();
+		dto.setK(key.toString());
+		dto.setV(value.toString());
 		dao.save(dto);
 	}
 
@@ -21,7 +28,7 @@ public class SystemKeyValueForever implements KeyValue {
 		String string = getString(key, "0");
 		return new Long(string);
 	}
-	
+
 	@Override
 	public int getInt(Object key) {
 		return new Integer(getString(key, "0"));
@@ -39,10 +46,11 @@ public class SystemKeyValueForever implements KeyValue {
 
 	@Override
 	public String getString(Object key) {
-		ISystemKeyValueDto dto = dao.get(key.toString());
+		KeyValueDao dao = Daos.getKeyValueDao();
+		KeyValueDto dto = dao.get(key.toString());
 		if (dto == null)
 			return null;
-		return dto.getValue();
+		return dto.getV();
 	}
 
 	private String getString(Object key, String def) {
@@ -58,6 +66,5 @@ public class SystemKeyValueForever implements KeyValue {
 		value += add;
 		set(key, value);
 	}
-
 
 }

@@ -21,13 +21,6 @@
 		<property name="yiYuCe" column="yiYuCe" />
 	</class>
 	
-	<class name="org.hhhhhh.guess.hibernate.dto.AnswerDto" table="answer">
-		<id name="username_question_id" column="username_question_id" />
-		<property name="option_id" column="option_id" />
-		<property name="round" column="round" />
-		<property name="date" column="date" />
-	</class>
-	
 	<class name="org.hhhhhh.guess.hibernate.dto.QuestionDto" table="question">
 		<id name="id" column="id" />
 		<property name="roundId" column="roundId" />
@@ -35,6 +28,15 @@
 		<property name="dsc" column="dsc" />
 		<property name="createTime" column="createTime" />
 		<property name="imageId" column="imageId"/>
+		<property name="count" column="count"/>
+	</class>
+	
+	<class name="org.hhhhhh.guess.hibernate.dto.QuestionOptionDto" table="question_option">
+		<id name="questionIdAndHead" column="questionIdAndHead" />
+		<property name="questionId" column="questionId"/>
+		<property name="head" column="head" />
+		<property name="dsc" column="dsc" />
+		<property name="createTime" column="createTime" />
 		<property name="count" column="count"/>
 	</class>
 
@@ -46,7 +48,7 @@
 
 	<class name="org.hhhhhh.guess.hibernate.dto.KeyValueDto"
 		table="key_value">
-		<id name="key" column="key" />
-		<property name="value" column="value" />
+		<id name="k" column="k" />
+		<property name="v" column="v" />
 	</class>
 </hibernate-mapping>

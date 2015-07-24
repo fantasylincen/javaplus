@@ -4,6 +4,7 @@ import cn.vgame.a.events.Events;
 import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao;
 import cn.vgame.a.gen.dto.MongoGen.RoleDto;
+import cn.vgame.a.plantform.Plantform;
 import cn.vgame.a.result.ErrorResult;
 import cn.vgame.share.KeyValue;
 
@@ -54,9 +55,10 @@ public class SelectRoleAction extends JsonAction {
 
 		KeyValue kv = role.getKeyValueForever();
 		
-		String att = (String) session.getAttribute("plantform");
-		if (att != null)
-			kv.set("PLANTFORM", att);
+		Plantform att = (Plantform) session.getAttribute("plantform");
+		String name = att.getName();
+		if (name != null)
+			kv.set("PLANTFORM", name);
 
 		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
 		return new SelectRoleResult(role);

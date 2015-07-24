@@ -7,11 +7,9 @@ import org.hhhhhh.guess.hibernate.dao.UserDao;
 import org.hhhhhh.guess.hibernate.dto.UserDto;
 import org.hhhhhh.guess.question.Manager;
 import org.hhhhhh.guess.user.User;
-import org.hhhhhh.guess.util.ISystemKeyValueDao;
 import org.hhhhhh.guess.util.KeyValue;
 import org.hhhhhh.guess.util.KeyValueSaveOnly;
 import org.hhhhhh.guess.util.SystemKeyValueDaily;
-import org.hhhhhh.guess.util.SystemKeyValueDaoForeverAdaptor;
 import org.hhhhhh.guess.util.SystemKeyValueForever;
 
 public class Server {
@@ -61,12 +59,10 @@ public class Server {
 	}
 
 	public static KeyValue getKeyValueForever() {
-		ISystemKeyValueDao dao = new SystemKeyValueDaoForeverAdaptor();
-		return new SystemKeyValueForever(dao);
+		return new SystemKeyValueForever();
 	}
 
 	public static KeyValue getKeyValueDaily() {
-		ISystemKeyValueDao dao = new SystemKeyValueDaoForeverAdaptor();
-		return new SystemKeyValueDaily(dao);
+		return new SystemKeyValueDaily();
 	}
 }

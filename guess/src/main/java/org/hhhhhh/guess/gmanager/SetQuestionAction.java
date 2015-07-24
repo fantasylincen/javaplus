@@ -9,11 +9,9 @@ import org.hhhhhh.guess.hibernate.dto.ImageDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
 import org.hhhhhh.guess.util.ParameterUtil;
 
-import cn.javaplus.log.Log;
-
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SetQuestionAction extends ActionSupport {
+public class SetQuestionAction extends ActionSupport implements QuestionOption {
 	/**
 	 * 
 	 */
@@ -21,19 +19,23 @@ public class SetQuestionAction extends ActionSupport {
 
 	@Override
 	public final String execute() throws Exception {
-		if(image == null) {
-			throw new GuessException("图片不能为空");
-		}
+
 		String questionId = ParameterUtil.getParameter("questionId");
 
 		QuestionDto dto = DbUtil.get(QuestionDto.class, questionId);
 
-		updateImageData(dto);
+		if (image != null)
+			updateImageData(dto);
 
 		dto.setContent(content.trim());
 		dto.setDsc(dsc.trim());
 
 		DbUtil.save(dto);
+		
+		OptionSetter setter = new OptionSetter();
+		setter.setOptions(this, questionId);
+		
+		
 		return SUCCESS;
 	}
 
@@ -42,11 +44,68 @@ public class SetQuestionAction extends ActionSupport {
 		ImageDto idto = DbUtil.get(ImageDto.class, imageId);
 		idto.setImage(new ImageReader().read(image.get(0)));
 		DbUtil.save(idto);
+		
+		
+		
 	}
 
 	private String content;
 	private String dsc;
 	private List<File> image;
+	String optionA;
+	String optionB;
+	String optionC;
+	String optionD;
+	String optionE;
+	String optionF;
+
+	public String getOptionA() {
+		return optionA;
+	}
+
+	public void setOptionA(String optionA) {
+		this.optionA = optionA;
+	}
+
+	public String getOptionB() {
+		return optionB;
+	}
+
+	public void setOptionB(String optionB) {
+		this.optionB = optionB;
+	}
+
+	public String getOptionC() {
+		return optionC;
+	}
+
+	public void setOptionC(String optionC) {
+		this.optionC = optionC;
+	}
+
+	public String getOptionD() {
+		return optionD;
+	}
+
+	public void setOptionD(String optionD) {
+		this.optionD = optionD;
+	}
+
+	public String getOptionE() {
+		return optionE;
+	}
+
+	public void setOptionE(String optionE) {
+		this.optionE = optionE;
+	}
+
+	public String getOptionF() {
+		return optionF;
+	}
+
+	public void setOptionF(String optionF) {
+		this.optionF = optionF;
+	}
 
 	public String getDsc() {
 		return dsc;
@@ -73,7 +132,7 @@ public class SetQuestionAction extends ActionSupport {
 	}
 
 	public void setImage(List<File> image) {
-		if(image == null) {
+		if (image == null) {
 			throw new GuessException("图片不能为空");
 		}
 		this.image = image;

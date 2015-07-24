@@ -11,9 +11,6 @@ public class Daos {
 		return new KeyValueDao();
 	}
 
-	public static AnswersDao getAnswersDao() {
-		return new AnswersDao();
-	}
 
 	public static RoundDao getRoundDao() {
 		return new RoundDao();

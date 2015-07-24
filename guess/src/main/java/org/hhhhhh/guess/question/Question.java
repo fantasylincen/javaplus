@@ -3,7 +3,9 @@ package org.hhhhhh.guess.question;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hhhhhh.guess.hibernate.dao.DbUtil;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
+import org.hhhhhh.guess.hibernate.dto.QuestionOptionDto;
 import org.hhhhhh.guess.user.User;
 
 import com.google.common.collect.Lists;
@@ -39,10 +41,13 @@ public class Question {
 		return dto.getCount();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Option> getOptions() {
 		ArrayList<Option> ls = Lists.newArrayList();
-		ls.add(new Option());
-		ls.add(new Option());
+		List<QuestionOptionDto> find = DbUtil.find("QuestionOptionDto", "questionId", dto.getId());
+		for (QuestionOptionDto dto : find) {
+			ls.add(new Option(this.dto, dto, user));
+		}
 		return ls;
 	}
 	

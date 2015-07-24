@@ -13,5 +13,9 @@ public class KeyValueDao {
 		return DbUtil.get(KeyValueDto.class, key);
 	}
 
+	public void save(KeyValueDto dto) {
+		DbUtil.save(dto);		
+	}
+
 
 }

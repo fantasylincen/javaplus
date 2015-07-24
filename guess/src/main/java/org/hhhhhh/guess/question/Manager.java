@@ -34,7 +34,6 @@ public class Manager {
 		return new User(dto);
 	}
 
-	@SuppressWarnings("unchecked")
 	public int getRound() {
 
 		return getRounds().size();

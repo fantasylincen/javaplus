@@ -19,7 +19,7 @@ public abstract class JsonActionAfterRoleEnterGame extends JsonAction {
 	public final Object exec() {
 		user = Server.getUser(session);
 		if (user == null)
-			throw new GuessException("net error");
+			throw new GuessException("请先登录");
 		return run();
 	}
 

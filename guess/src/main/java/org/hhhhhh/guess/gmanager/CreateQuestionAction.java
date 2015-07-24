@@ -6,6 +6,7 @@ import java.util.List;
 import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.DbUtil;
 import org.hhhhhh.guess.hibernate.dto.ImageDto;
+import org.hhhhhh.guess.hibernate.dto.QuestionOptionDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
 import org.hhhhhh.guess.util.ParameterUtil;
 
@@ -13,12 +14,69 @@ import cn.javaplus.util.Util;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class CreateQuestionAction extends ActionSupport {
+public class CreateQuestionAction extends ActionSupport implements
+		QuestionOption {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	String optionA;
+	String optionB;
+	String optionC;
+	String optionD;
+	String optionE;
+	String optionF;
+
+	public String getOptionA() {
+		return optionA;
+	}
+
+	public String getOptionB() {
+		return optionB;
+	}
+
+	public String getOptionC() {
+		return optionC;
+	}
+
+	public String getOptionD() {
+		return optionD;
+	}
+
+	public String getOptionE() {
+		return optionE;
+	}
+
+	public String getOptionF() {
+		return optionF;
+	}
+
+	public void setOptionA(String optionA) {
+		this.optionA = optionA;
+	}
+
+	public void setOptionB(String optionB) {
+		this.optionB = optionB;
+	}
+
+	public void setOptionC(String optionC) {
+		this.optionC = optionC;
+	}
+
+	public void setOptionD(String optionD) {
+		this.optionD = optionD;
+	}
+
+	public void setOptionE(String optionE) {
+		this.optionE = optionE;
+	}
+
+	public void setOptionF(String optionF) {
+		this.optionF = optionF;
+	}
+
 	@Override
 	public final String execute() throws Exception {
 
@@ -27,13 +85,18 @@ public class CreateQuestionAction extends ActionSupport {
 		String imageId = saveImage();
 
 		QuestionDto dto = new QuestionDto();
-		dto.setId(Util.ID.createId());
+		String questionId = Util.ID.createId();
+
+		dto.setId(questionId);
 		dto.setContent(content.trim());
 		dto.setDsc(dsc.trim());
 		dto.setCreateTime(Util.Time.getCurrentFormatTime());
 		dto.setRoundId(roundId);
 		dto.setImageId(imageId);
 		DbUtil.save(dto);
+
+		OptionSetter setter = new OptionSetter();
+		setter.setOptions(this, questionId);
 
 		return SUCCESS;
 	}
@@ -46,7 +109,7 @@ public class CreateQuestionAction extends ActionSupport {
 		DbUtil.save(dto);
 		return dto.getId();
 	}
-	
+
 	private String content;
 	private String dsc;
 	private List<File> image;

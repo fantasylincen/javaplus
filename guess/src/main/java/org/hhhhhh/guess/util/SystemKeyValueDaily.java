@@ -1,20 +1,20 @@
 package org.hhhhhh.guess.util;
 
+import org.hhhhhh.guess.hibernate.dao.Daos;
+import org.hhhhhh.guess.hibernate.dao.KeyValueDao;
+import org.hhhhhh.guess.hibernate.dto.KeyValueDto;
+
 import cn.javaplus.util.Util;
 
 public class SystemKeyValueDaily implements KeyValue {
 
-	private final ISystemKeyValueDao dao;
-
-	public SystemKeyValueDaily(ISystemKeyValueDao dao) {
-		this.dao = dao;
-	}
 	
 	@Override
 	public void set(Object key, Object value) {
-		ISystemKeyValueDto dto = dao.createDTO();
-		dto.setKey(key.toString() + ":" + Util.Time.getCurrentFormatDay());
-		dto.setValue(value.toString());
+		KeyValueDao dao = Daos.getKeyValueDao();
+		KeyValueDto dto = dao.createDTO();
+		dto.setK(key.toString() + ":" + Util.Time.getCurrentFormatDay());
+		dto.setV(value.toString());
 		dao.save(dto);
 	}
 
@@ -40,11 +40,12 @@ public class SystemKeyValueDaily implements KeyValue {
 
 	@Override
 	public String getString(Object key) {
-		ISystemKeyValueDto dto = dao.get(key.toString() + ":"
+		KeyValueDao dao = Daos.getKeyValueDao();
+		KeyValueDto dto = dao.get(key.toString() + ":"
 				+ Util.Time.getCurrentFormatDay());
 		if (dto == null)
 			return null;
-		return dto.getValue();
+		return dto.getV();
 	}
 
 	private String getString(Object key, String def) {

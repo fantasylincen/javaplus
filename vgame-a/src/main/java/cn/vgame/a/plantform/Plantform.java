@@ -9,5 +9,7 @@ public interface Plantform {
 	 * 充值配置表文件名
 	 */
 	String getRechargeSheetName();
+	
+	String getName();
 
 }
