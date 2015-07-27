@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Activity1" />
+
+        <Button
+            android:id="@+id/layout1_btn1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="返回到上一个Activity" />
+
+        <Button
+            android:id="@+id/layout1_btn2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="切换到下一个Activity" />
+
+        <Button
+            android:id="@+id/layout1_btn_excep"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="除零异常" />
+
+        <Button
+            android:id="@+id/layout1_btn_event"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义事件" />
+
+        <Button
+            android:id="@+id/layout1_btn_event_duration"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义事件时长" />
+
+        <Button
+            android:id="@+id/layout1_btn_event_start"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义事件时长开始" />
+
+        <Button
+            android:id="@+id/layout1_btn_event_end"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义事件时长结束" />
+        
+         <Button
+            android:id="@+id/layout1_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="android_support_v4_app_fragment_page" />
+          <Button
+            android:id="@+id/layout1_app_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="android_app_fragment_page" />
+          
+           <Button
+            android:id="@+id/checkupdate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="CheckUpdate" />
+    </LinearLayout>
+
+</ScrollView>

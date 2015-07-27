@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:gravity="center"
+    android:text="用户反馈"
+    
+    />
+
+<com.baidu.StarRankView 
+	android:id="@+id/star_view"
+	android:layout_width = "fill_parent"
+	android:layout_height = "100px" 
+	android:layout_marginLeft="20px"
+	android:layout_marginRight="20px"
+/>   
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+	<TextView  
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/comment1"
+    	android:text="通关难，伤不起"
+    	android:background="#9F4747"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	<TextView  
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/comment2"
+    	android:text="通关较难"
+    	android:background="#B14A4A"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	<TextView  
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/comment3"
+    	android:text="通关适中"
+    	android:background="#D55151"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	<TextView  
+  	  	android:layout_width="wrap_content" 
+  	  	android:layout_height="wrap_content" 
+  	  	android:id="@+id/comment4"
+    	android:text="通关简单"
+    	android:background="#E75555"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+</LinearLayout>  
+
+
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+	<TextView  
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/comment5"
+    	android:text="坑爹的界面"
+    	android:background="#666666"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	<TextView  
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/comment6"
+    	android:text="界面有待改进"
+    	android:background="#999999"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	<TextView  
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/comment7"
+    	android:text="界面简洁"
+    	android:background="#BBBBBB"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	<TextView  
+  	  	android:layout_width="wrap_content" 
+  	  	android:layout_height="wrap_content"
+  	  	android:id="@+id/comment8" 
+    	android:text="界面很炫"
+    	android:background="#DDDDDD"
+    	android:textColor="#FFFFFF"
+    	android:layout_margin="2px"
+    	android:padding="4px"
+	/>
+	
+</LinearLayout>
+
+
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10px"
+    >
+	<EditText 
+  	  	android:layout_width="wrap_content" 
+  	  	android:layout_height="wrap_content"
+  	  	android:id="@+id/comment_free" 
+  	  	android:maxLength="140"
+    	android:text="(或者)请输入你的观点(140字内)"
+    	android:background="#ffffff"
+    	android:textColor="#999999"
+    	android:layout_margin="2px"
+    	android:padding="2px"
+
+	/>
+
+</LinearLayout>
+
+<LinearLayout android:orientation="horizontal" 
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:layout_marginTop="10dp" >
+		    	
+		    	<Spinner android:id="@+id/feedback_age_spinner"
+			        android:layout_width="wrap_content"
+			        android:layout_height="50dp" 
+			        android:layout_weight="1"/>
+		    	
+		    	<Spinner android:id="@+id/feedback_gender_spinner"
+			        android:layout_width="wrap_content"
+			        android:layout_height="50dp"
+			        android:layout_weight="1"/>
+		    	
+</LinearLayout>
+
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1px"
+    >
+    	<com.baidu.BorderTextView
+		android:id="@+id/btn_commit"
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
+		android:background="#ffffff"
+		android:textColor="#000000"
+		android:text="提交"
+		android:layout_margin="2px"
+    	android:padding="6px"
+	/>
+ </LinearLayout>  
+
+</LinearLayout>

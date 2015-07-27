@@ -1,0 +1,6 @@
+
+	public final static class CLASS_NAME {
+		public static TYPE getTYPE() {
+			return METHOD_NAME("FILE_NAME");
+		}
+	}

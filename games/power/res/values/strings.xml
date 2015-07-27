@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="app_name">tencent_sample</string>
+    <string name="menu_settings">menu_settings</string>
+</resources>

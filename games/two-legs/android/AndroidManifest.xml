@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.javaplus.crazy.android"
+    android:versionCode="3"
+    android:versionName="1.0.3" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/GdxTheme" >
+        <meta-data
+            android:name="baidu-bucket-name"
+            android:value="click-screen" />
+        <meta-data
+            android:name="external-path"
+            android:value="AppData/click-screen/" />
+        <meta-data
+            android:name="GAME_RECORD_NAME"
+            android:value="javaplus-click-screen" />
+
+        <!-- 万普 -->
+        <meta-data
+            android:name="APP_ID"
+            android:value="ddc6293a2c999f28464ce948ffdc6461" />
+        <meta-data
+            android:name="APP_PID"
+            android:value="qq.com" />
+        <!-- 万普 -->
+
+
+        <!-- 友盟 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="54574924fd98c557b4005ff4" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="360.cn" >
+        </meta-data>
+        <!-- 友盟 -->
+
+
+        <!-- 腾讯 -->
+        <meta-data
+            android:name="qqAppId"
+            android:value="1103490798" />
+        <meta-data
+            android:name="qqAppKey"
+            android:value="M0jBr318lVblnvzb" />
+        <!-- 腾讯 -->
+
+
+        <!-- 微信 -->
+        <meta-data
+            android:name="wxAppId"
+            android:value="wx3c88dfbe1497c57c" />
+        <meta-data
+            android:name="wxSecret"
+            android:value="9ecc05357a36ee976eab72d58abd0649" />
+        <!-- 微信 -->
+
+
+        <!-- 广点通 -->
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" />
+
+        <activity
+            android:name="com.qq.e.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 广点通 -->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="cn.javaplus.twolegs.AndroidLauncher"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 友盟分享 -->
+        <!-- 分享内容编辑页 -->
+        <activity
+            android:name="com.umeng.socialize.view.ShareActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+
+        <!-- 腾讯SSO授权的Activity注册 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 微信回调activity -->
+        <activity
+            android:name="cn.javaplus.twolegs.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- *************************    分享相关的注册 END **************************** -->
+
+
+        <!-- 评论相关注册  START -->
+        <activity
+            android:name="com.umeng.socialize.view.CommentActivity"
+            android:configChanges="orientation|keyboard"
+            android:theme="@style/Theme.UMDefault" >
+        </activity>
+        <activity
+            android:name="com.umeng.socialize.view.CommentDetail"
+            android:configChanges="orientation|keyboard"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDefault" >
+        </activity>
+        <activity
+            android:name="com.umeng.socialize.view.CommentDetailNoMap"
+            android:configChanges="orientation|keyboard"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDefault" >
+        </activity>
+
+        <!-- 友盟分享 -->
+
+    </application>
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
+
+    <!-- 友盟分享 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- <uses-permission android:name="android.permission.CALL_PHONE" /> -->
+
+
+    <!-- renren sso Permission for Unit Test -->
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <!-- 友盟分享 -->
+
+</manifest>

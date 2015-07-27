@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 北京兰贝科技有限公司版权所有 -->
+<project>
+	<dependencies>
+		 <!-- <dependency>
+			<groupId>com.marsor.android.common</groupId>
+			<artifactId>MarsorUtils</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency> -->
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>MarsorRepository</id>
+			<name>Marsor Maven Mirror</name>
+			<url>http://maven.marsorstudio.cn:8088/</url>
+		</repository>
+	</repositories>
+	<package>
+		<!-- 不区分大小写，逗号隔开的metaName,代表不同SDK的渠道标识符<channels keyname="UMENG_CHANNEL,gfan_cpid"> -->
+		<channels keyname="UMENG_CHANNEL">
+			<!-- channel的数量代表最终生成的apk文件的数量 -->
+			<channel value="360.cn" />
+ 			<channel value="10086.cn" />
+			<channel value="10086.cn-exp" />
+			<channel value="wandoujia.com" />
+			<channel value="qq.com" />
+			<channel value="sogou.com" />
+			<channel value="yun.baidu.com" />
+		</channels>
+		<keystore path="C:\Users\Administrator\git\games\two-legs\desktop\keystore\common.key" passwd="258819045">
+			<alias name="cn.javaplus.twolegs" passwd="258819045" />
+		</keystore>
+		<outpath value="C:\Users\Administrator\git\games\two-legs\desktop\apks\" />
+	</package>	
+</project>
+

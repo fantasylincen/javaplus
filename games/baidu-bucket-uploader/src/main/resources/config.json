@@ -1,0 +1,14 @@
+{
+	
+	"description":"上传至百度bucket的所有文件, 系统将会把localDir下的所有文件上传至baiduBucketName/bucketDir中",
+	"host":"bcs.duapp.com",
+	"accessKey":"0h3Zk1KPg6TFHor3LWihcksv",
+	"secretKey":"fedEIZkTjTvhfVps7xzbp9MCh5YGnxiE",
+	"uploads":[
+		{
+			"localDir":"C:/Users/Administrator/git/games/click-screen/desktop/game-assets/",
+			"baiduBucketName":"click-screen",
+			"bucketDir":"/"
+		}
+	]
+}
