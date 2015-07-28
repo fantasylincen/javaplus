@@ -51,28 +51,13 @@
 		int a = 0;
 
 		for (RoleDto dd : c) {
-			if (dd.getId().startsWith("VC10006")) {
-				set.add(dd.getNick());
-			}
-		}/*
-		out.println(set.size() + set.toString());
-		out.println("<br>");
-
-		c = dao.find();
-		for (RoleDto dd : c) {
-
-			//out.println(dd.getNick() + "-----------------<br>");
-			if (dd.getId().startsWith("VC10005")
-					&& set.contains(dd.getNick())) {
-				out.println(dd.getNick() + " &nbsp;" + a++ + dd.getId()
-						+ " ; " + (dd.getCoin() + dd.getBankCoin()) + ";" + dd.getRechargeHistory());
-				out.println("<br>");
-
-				if (dd.getCoin() + dd.getBankCoin() == 0) {
-					Daos.getRoleDao().delete(dd);
+				String n = dd.getNick();
+				if(set.contains(n)) {
+					out.println(n + "-" + dd.getCoin() + "-" + dd.getBankCoin());
+					out.println("<br>");
 				}
-			}
-		}*/
+				set.add(n);
+		}
 	%>
 
 </body>

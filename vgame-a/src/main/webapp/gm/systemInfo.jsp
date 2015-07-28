@@ -170,28 +170,31 @@ background-color: #EBEBEB;
 				</tr>
 			</thead> -->
 					<tbody>
-						<%
-							SimpleDateFormat FORMAT = new SimpleDateFormat(
-									"yyyy-MM-dd HH:mm:ss");
-						%>
-				<%-- 		<tr>
-							<td>服务器时间</td>
-							<td><%=FORMAT.format(new Date(System.currentTimeMillis()))%></td>
-						</tr> --%>
-				<%-- 		<tr>
-							<td>下注人数/注册人数</td>
-							<td><%=OnlineCounter.getOnlineSize()%>/<%=playerCount%></td>
-						</tr> --%>
+					<tr>
+							<td>内存</td>
+							<%
+								long free = Runtime.getRuntime().freeMemory();
+								long total = Runtime.getRuntime().totalMemory();
+								long max = Runtime.getRuntime().maxMemory();
+								double p = ((free + 0.0) / total * 100) ;
+								
+							 %>
+							<td><%=free/1024/1024%>M /<%=total/1024/1024%>M  [<%=String.format("%.2f", p)%>%] max:<%=max/1024/1024 %>M</td>
+						</tr>					
 
-						<tr>
+			<%-- 			<tr>
 							<td>开奖次数(今日/历史)</td>
 							<td><%=t.getGenerateTimesToday() + "/"
 					+ t.getGenerateTimesHistory()%></td>
-						</tr>
-
+						</tr> --%>
+						
 						<tr>
 							<td>今日新增/历史创建</td>
-							<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%></td>
+							<%
+								long sendToday = Server.getKeyValueDaily().getLong("CREATE_USER_SEND_COIN");
+								long sendHistory = Server.getKeyValueForever().getLong("CREATE_USER_SEND_COIN");
+							 %>
+							<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%> 送豆[<%=buildRmb(sendToday)%>/<%=buildRmb(sendHistory)%>]</td>
 						</tr>
 						<tr>
 							<td>今日登陆/历史登陆</td>
@@ -199,7 +202,11 @@ background-color: #EBEBEB;
 						</tr>
 						<tr>
 							<td>今日充值/历史充值</td>
-							<td><%=Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE")%>/<%=Server.getKeyValueForever().getLong("SYSTEM_RECHARGE")%></td>
+							<%
+								long td = Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE");
+								long hd = Server.getKeyValueForever().getLong("SYSTEM_RECHARGE");
+							 %>
+							<td><%=td + "(≈¥" + td/ 1200 + ")"%>/<%=hd + "(≈¥" + hd/ 1200 + ")"%></td>
 						</tr>
 						<tr>
 							<td>今日交易量/历史交易量</td>
@@ -282,6 +289,7 @@ background-color: #EBEBEB;
 				class="ui-body-d ui-shadow table-stripe ">
 				<thead>
 					<tr>
+						<th>序号</th>
 						<th>玩家昵称</th>
 						<th>平台</th>
 						<th>金豆</th>
@@ -311,12 +319,13 @@ background-color: #EBEBEB;
 						printBeiLv(sbba);
 						printProfit(sbba);
 						printBiChu(sbba);
+						int i = 1;
 						for (String roleId : d) {
 							if (Server.getRobotManager().isRobot(roleId)) {
 								continue;
 							}
 							ISwitchs s = ss.get(roleId);
-							print(roleId, s, sbba);
+							print(i++, roleId, s, sbba);
 						}
 
 						out.println(sbba);
@@ -329,6 +338,8 @@ background-color: #EBEBEB;
 		sb.append("<td><font color=\"#FF6600\">高级功能</font></td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
+		sb.append("<td>-</td>");
+		
 		sb.append("<td>-</td>");
 
 		for (String type : types) {
@@ -360,6 +371,7 @@ background-color: #EBEBEB;
 		List<String> types = TurntableUtil.getAllTypes();
 		sb.append("<tr>");
 		sb.append("<td><font color=\"#0066FF\">系统盈利</font></td>");
+		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
@@ -396,6 +408,7 @@ background-color: #EBEBEB;
 		List<String> types = TurntableUtil.getAllTypes();
 		sb.append("<tr>");
 		sb.append("<td><font color=\"#0066FF\">当前倍率</font></td>");
+		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
@@ -459,11 +472,14 @@ background-color: #EBEBEB;
 
 		return map;
 	}%>
-					<%!private static void print(String id, ISwitchs s, StringBuilder sb) {
+					<%!private static void print(int i, String id, ISwitchs s, StringBuilder sb) {
 		Role role = Server.getRole(id);
 
 		sb.append("<tr>");
 
+		sb.append("<td>");
+		sb.append(i);
+		sb.append("</td>");
 		sb.append("<td>");
 
 		sb.append("<a href=\"coinLog.jsp?showBackButton=false&roleId="

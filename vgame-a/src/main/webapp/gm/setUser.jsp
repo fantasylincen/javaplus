@@ -28,6 +28,8 @@
 </head>
 <body bgcolor="rgb(110,110,110)">
 
+<div>
+
 	<script>
 function juge(form){
 	if (form.reason.value == null || form.reason.value == ""){ 
@@ -209,7 +211,7 @@ function juge(form){
 
 
 
-	</form>
+	</form></div>
 </body>
 
 </html>

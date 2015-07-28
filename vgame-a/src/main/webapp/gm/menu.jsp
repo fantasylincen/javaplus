@@ -9,7 +9,7 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-
+<div>
 	<%
 		ParameterUtil.getParameter(request, session, "gmUserId");
 	 %>
@@ -49,12 +49,9 @@
 	<br>
 	<a href="consoleLogList.jsp">系统日志</a>
 	<br>
-	<!-- <br>
-	<a href="../notice/notice.jsp">公告页面</a>
-	<br> -->
 	<br>
 	<a href="../yinshang/yinshang.jsp">银商管理</a>
 	<br>
-	<br>
+	<br></div>
 </body>
 </html>

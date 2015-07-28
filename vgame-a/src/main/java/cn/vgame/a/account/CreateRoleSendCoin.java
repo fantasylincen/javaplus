@@ -17,6 +17,8 @@ public class CreateRoleSendCoin implements Listener<CreateRoleEvent> {
 		if (coin > 0)
 			role.addCoin(coin);
 		
+		Server.getKeyValueSaveOnly().add("CREATE_USER_SEND_COIN", coin);
+		
 		//减库存
 //		Controller ccc = Turntable.getInstance().getController();
 //		ccc.setKuCun(ccc.getKuCun() - coin);

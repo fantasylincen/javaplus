@@ -17,7 +17,7 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-
+<center>
 	<div data-demo-html="true" style="width: 95%; ">
 
 		<a href="menu.jsp">返回</a><br> <br>
@@ -45,5 +45,6 @@
 
 		<br> <br>
 	</div>
+	</center>
 </body>
 </html>

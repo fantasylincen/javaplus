@@ -1,3 +1,4 @@
+<%@page import="cn.vgame.a.account.Role"%>
 <%@page import="cn.javaplus.excel.Row"%>
 <%@page import="cn.javaplus.excel.Sheet"%>
 <%@page import="cn.vgame.share.Xml"%>
@@ -27,7 +28,7 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-
+<center>
 	<div data-demo-html="true" style="width: 95%; ">
 		<%
 			String pg = ParameterUtil.getParameter(request, session,
@@ -40,7 +41,7 @@
 			}
 
 			if (countEve == null) {
-				countEve = "22";
+				countEve = "1000";
 			}
 
 			CoinLogDao dao = Daos.getCoinLogDao();
@@ -91,13 +92,14 @@
 	}%>
 				<%
 					for (CoinLogDto dto : c) {
+						Role to = Server.getRole(dto.getTo());
 				%>
 
 
 				<tr>
 					<td><%=dto.getTime()%></td>
 					<td><%=dto.getTo()%></td>
-					<td><%=Server.getRole(dto.getTo()).getNick()%></td>
+					<td><%=to == null ? dto.getTo() : to.getNick()%></td>
 					<td><%=dto.getCoin()%></td>
 					<td><%=dto.getFrom()%></td>
 					<td><%=getRmb(dto.getCoin())%></td>
@@ -161,5 +163,6 @@
 
 		<br> <br> <a href="menu.jsp">返回</a>
 	</div>
+	</center>
 </body>
 </html>

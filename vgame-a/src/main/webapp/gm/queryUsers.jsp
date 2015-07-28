@@ -19,6 +19,7 @@
 <head>
 <%@include file="head.html"%>
 </head>
+<center>
 <body>
 	<div style="width: 95%; ">
 		<table  border="1">
@@ -84,7 +85,7 @@
 	}%>
 
 			<%
-				int cev = 14;
+				int cev = 1000;
 				StringBuffer ssb = new StringBuffer();
 
 				
@@ -216,5 +217,6 @@
 				href="javascript:jump.submit();">查找</a>
 		</form>
 	</div>
+	</center>
 </body>
 </html>

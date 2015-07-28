@@ -1,5 +1,6 @@
 package cn.vgame.a.message;
 
+import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.account.JsonActionAfterRoleEnterGame;
@@ -30,6 +31,7 @@ public class SendMessageAction extends JsonActionAfterRoleEnterGame {
 		checkLen();
 		reduceLaba();
 		sendMessage();
+		Log.d("send message", message);
 		return new SuccessResult();
 	}
 

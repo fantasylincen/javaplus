@@ -16,6 +16,7 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
+<center>
 	<div style="width: 95%; ">
 		<%!public String buildTimeScope(HttpSession session,
 			HttpServletRequest request, int count, String dsc) {
@@ -122,5 +123,6 @@ o.print("<tr>");
 
 		<br> <br>
 	</div>
+	</center>
 </body>
 </html>

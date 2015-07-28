@@ -21,9 +21,9 @@
 <%@include file="head.html"%>
 </head>
 <body>
-
+<center>
 <%
-		int cev = 30;
+		int cev = 1000;
  %>
 
 	<div data-demo-html="true" style="width: 95%; ">
@@ -63,9 +63,9 @@
 			toNick = to.getNick();
 		}
 
-		fromNick = "<a href=\"coinLog.jsp?page=200000000&countEvery=30&roleId="
+		fromNick = "<a href=\"coinLog.jsp?page=200000000&countEvery=1000&roleId="
 				+ dto.getFrom() + "\">" + fromNick + "</a>";
-		toNick = "<a href=\"coinLog.jsp?page=200000000&countEvery=30&roleId="
+		toNick = "<a href=\"coinLog.jsp?page=200000000&countEvery=1000&roleId="
 				+ dto.getTo() + "\">" + toNick + "</a>";
 
 		sb.append(fromNick + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + toNick);
@@ -175,5 +175,6 @@
 		<a href="menu.jsp"> 返回</a> <br>
 
 	</div>
+	</center>
 </body>
 </html>

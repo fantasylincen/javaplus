@@ -22,6 +22,7 @@
 <%@include file="head.html"%>
 </head>
 <body>
+<center>
 	<div>
 		<%
 			String roleId = request.getParameter("roleId");
@@ -32,7 +33,7 @@
 			
 		 %>
 		<h2>[<%=nick %>] 的金豆记录</h2>
-		<table class="bordered">
+		<table border="1">
 			<thead>
 				<tr>
 					<th>时间</th>
@@ -70,7 +71,7 @@
 		sb.append("</td>");
 
 		sb.append("<td>");
-		sb.append(dto.getCoin());
+		sb.append(buildRmb(dto.getCoin()));
 		sb.append("</td>");
 
 		sb.append("<td>");
@@ -81,7 +82,10 @@
 		sb.append("</tr>");
 
 	}%>
-
+<%!public static String buildRmb(long coin) {
+		int rmb = (int) (coin / 2800);
+		return coin + "&nbsp;&nbsp;(¥" + rmb + ")";
+	}%>
 
 <%!
 
@@ -103,7 +107,7 @@
 	}
  %>
 			<%
-				int cev = 14;
+				int cev = 1000;
 				StringBuffer ssb = new StringBuffer();
 
 				CoinLogDao dao = Daos.getCoinLogDao();
@@ -187,5 +191,6 @@
 			 <br>
 		
 	</div>
+	</center>
 </body>
 </html>

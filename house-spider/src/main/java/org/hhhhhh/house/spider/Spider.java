@@ -142,7 +142,13 @@ public class Spider {
 
 			for (FangYuanWangDownloader d : downloaders) {
 
-				List<HouseDto> ls = d.download();
+				List<HouseDto> ls;
+				try {
+					ls = d.download();
+				} catch (Exception e1) {
+					ls = Lists.newArrayList();
+					e1.printStackTrace();
+				}
 				for (HouseDto dto : ls) {
 
 					try {

@@ -15,6 +15,8 @@
 <%@include file="head.html"%>
 </head>
 <body>
+
+<center>
 	<div data-demo-html="true" style="width: 95%; ">
 		<%
 			String pg = ParameterUtil.getParameter(request, session, "page");
@@ -26,7 +28,7 @@
 			}
 
 			if (countEve == null) {
-				countEve = "22";
+				countEve = "1000";
 			}
 
 			GmLogDao dao = Daos.getGmLogDao();
@@ -113,5 +115,6 @@
 
 		<br> <br> <a href="menu.jsp">返回</a>
 	</div>
+	</center>
 </body>
 </html>
