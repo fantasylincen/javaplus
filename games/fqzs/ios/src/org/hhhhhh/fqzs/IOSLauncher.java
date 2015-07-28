@@ -5,13 +5,14 @@ import org.robovm.apple.uikit.UIApplication;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import org.hhhhhh.fqzs.Fqzs;
+
+import org.hhhhhh.fqzs.core.App;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new Fqzs(), config);
+        return new IOSApplication(new App(), config);
     }
 
     public static void main(String[] argv) {
