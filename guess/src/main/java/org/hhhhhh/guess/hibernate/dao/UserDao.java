@@ -25,7 +25,7 @@ public class UserDao {
 	public List<UserDto> find(String field, String v) {
 		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
 		Session session = sf.openSession();
-		
+
 		try {
 			String hql = "from UserDto where " + field + "=?";
 			Query query = session.createQuery(hql);
@@ -35,5 +35,22 @@ public class UserDao {
 		} finally {
 			session.close();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<UserDto> findRankingList() {
+		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
+		Session session = sf.openSession();
+
+		try {
+			String hql = "from UserDto order by jiFen";
+			Query query = session.createQuery(hql);
+			query.setMaxResults(100);
+			query.setCacheable(true);
+			return query.list();
+		} finally {
+			session.close();
+		}
+
 	}
 }

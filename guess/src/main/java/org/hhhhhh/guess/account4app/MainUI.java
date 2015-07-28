@@ -7,73 +7,95 @@ import org.hhhhhh.guess.Server;
 import org.hhhhhh.guess.ad.Ad;
 import org.hhhhhh.guess.question.Option;
 import org.hhhhhh.guess.question.Question;
+import org.hhhhhh.guess.rankinglist.RankingList;
 import org.hhhhhh.guess.user.User;
 
 import com.google.common.collect.Lists;
 
 public class MainUI {
 
+	public List<RankListItem> getRankingList() {
+		ArrayList<RankListItem> ls = Lists.newArrayList();
+		RankingList list = Server.getManager().getRankingList();
+		List<User> users = list.getUsers();
+		for (User user : users) {
+			ls.add(new RankListItem(user));
+		}
+		return ls;
+	}
+
 	public static class OptionItem {
-		
+
 		private final Option option;
+
 		public OptionItem(Option option) {
 			this.option = option;
 		}
+
 		public String getId() {
 			return option.getId();
 		}
+
 		public String getTitle() {
 			return option.getTitle();
 		}
+
 		public String getDsc() {
 			return option.getDsc();
 		}
+
 		public String getScale() {
 			return option.getScale();
 		}
-		public boolean isSelected() {
-			return option.isSelected();
+
+		public boolean isSelected(User user) {
+			return option.isSelected(user);
 		}
 
 	}
 
 	public static class QuestionItem {
-		
+
 		private final Question question;
 
 		public QuestionItem(Question question) {
 			this.question = question;
 		}
 
+		public String getAnswerOptionHead() {
+			String head = question.getAnswerOptionHead();
+			if (head == null || head.isEmpty())
+				return null;
+			return head;
+		}
+
+		public int getJiFen() {
+			return question.getJiFen();
+		}
 
 		public String getId() {
 			return question.getId();
 		}
 
-
 		public String getDsc() {
 			return question.getDsc();
 		}
-
 
 		public String getImg() {
 			return question.getImg();
 		}
 
-
-		public boolean isAnswered() {
-			return question.isAnswered();
+		public boolean isAnswered(User user) {
+			return question.isAnswered(user);
 		}
-
 
 		public int getCount() {
 			return question.getCount();
 		}
 
-
 		public List<OptionItem> getOptions() {
 			ArrayList<OptionItem> ls = Lists.newArrayList();
-			
+
 			List<Option> options = question.getOptions();
 			for (Option option : options) {
 				ls.add(new OptionItem(option));
@@ -83,7 +105,7 @@ public class MainUI {
 	}
 
 	public static class AdItem {
-		
+
 		private final Ad ad;
 
 		public AdItem(Ad ad) {
@@ -145,39 +167,40 @@ public class MainUI {
 	public AdItem getAd() {
 		return new AdItem(Server.getManager().getAd());
 	}
-	
+
 	public int getRank() {
-		return Server.getManager().getRank(user);
+		return Server.getManager().getRankingList().getRank(user);
 	}
-	
+
 	public double getJiangChi() {
 		return Server.getManager().getJiangChi();
 	}
-	
+
 	public int getRound() {
 		return Server.getManager().getRound();
 	}
-	
+
 	public String getDay() {
-		return Server.getManager().getDayA()  + "/" + Server.getManager().getDayB();
+		return Server.getManager().getDayA() + "/"
+				+ Server.getManager().getDayB();
 	}
-	
+
 	public int getRemainSec() {
 		return Server.getManager().getRemainSec();
 	}
-	
+
 	public int getYiYuCe() {
 		return Server.getManager().getYiYuCe();
 	}
-	
+
 	public int getJiFen() {
 		return user.getJiFen();
 	}
-	
+
 	public List<QuestionItem> getQuestions() {
 		ArrayList<QuestionItem> ls = Lists.newArrayList();
-		List<Question> questions = user.getQuestions();
-		
+		List<Question> questions = Server.getManager().getQuestions();
+
 		for (Question question : questions) {
 			ls.add(new QuestionItem(question));
 		}

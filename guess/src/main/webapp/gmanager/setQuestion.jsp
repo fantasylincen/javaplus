@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 <script src="../js/jquery.js"></script>
 <!--  <script src="../_assets/js/index.js"></script> -->
- <script src="../js/jquery.mobile-1.4.5.min.js"></script> 
+<script src="../js/jquery.mobile-1.4.5.min.js"></script>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
@@ -124,37 +124,45 @@
 		<div data-role="content" class="content">
 			<%
 				String questionId = ParameterUtil.getParameter("questionId");
-					Log.d("questionId", questionId);
+				Log.d("questionId", questionId);
 
-					QuestionDto dto = DbUtil.get(QuestionDto.class, questionId);
-					
-					List<QuestionOptionDto> options = DbUtil.find("QuestionOptionDto", "questionId", dto.getId());
+				QuestionDto dto = DbUtil.get(QuestionDto.class, questionId);
+
+				List<QuestionOptionDto> options = DbUtil.find("QuestionOptionDto",
+						"questionId", dto.getId());
 			%>
-			<%!public String getOptionText (List<QuestionOptionDto> options, String head) {
-					for(QuestionOptionDto dto : options) {
-						if(head.equals(dto.getHead())) {
-							return dto.getDsc();
-						}
-					}
-					return "";
-				}%>
+			<%!public String getOptionText(List<QuestionOptionDto> options, String head) {
+		for (QuestionOptionDto dto : options) {
+			if (head.equals(dto.getHead())) {
+				return dto.getDsc();
+			}
+		}
+		return "";
+	}%>
 
 			<form id="upload" name="upload" method="post" action="setQuestion"
 				enctype="multipart/form-data">
-				<label for="content">问题内容</label> 
-				<input id="content" name="content" type="text" class="txt1" value="<%=dto.getContent()%>" />
-				
-				<label for="dsc">说明</label> 
-				<input id="dsc" name="dsc" type="text" class="txt1" value="<%=dto.getDsc()%>" />
-				
-				<label >选项 A-F</label> 
-				<input id="optionA" name="optionA" type="text" class="txt1" value="<%=getOptionText(options, "A") %>"/> 
-				<input id="optionB" name="optionB" type="text" class="txt1" value="<%=getOptionText(options, "B") %>"/> 
-				<input id="optionC" name="optionC" type="text" class="txt1" value="<%=getOptionText(options, "C") %>"/> 
-				<input id="optionD" name="optionD" type="text" class="txt1" value="<%=getOptionText(options, "D") %>"/> 
-				<input id="optionE" name="optionE" type="text" class="txt1" value="<%=getOptionText(options, "E") %>"/> 
-				<input id="optionF" name="optionF" type="text" class="txt1" value="<%=getOptionText(options, "F") %>"/> 
-				
+				<label for="content">问题内容</label> <input id="content" name="content"
+					type="text" class="txt1" value="<%=dto.getContent()%>" /> <label
+					for="dsc">说明</label> <input id="dsc" name="dsc" type="text"
+					class="txt1" value="<%=dto.getDsc()%>" /> <label for="jiFen">积分奖励</label>
+				<input id="jiFen" name="jiFen" type="text" class="txt1"
+					value="<%=dto.getJiFen()%>" /> <label for="answerOptionHead">正确答案(填A/B/C/D/E/F)</label>
+				<input id="answerOptionHead" name="answerOptionHead" type="text"
+					class="txt1" value="<%=dto.getAnswerOptionHead()%>" /> <label>选项
+					A-F</label> <input id="optionA" name="optionA" type="text" class="txt1"
+					value="<%=getOptionText(options, "A")%>" /> <input id="optionB"
+					name="optionB" type="text" class="txt1"
+					value="<%=getOptionText(options, "B")%>" /> <input id="optionC"
+					name="optionC" type="text" class="txt1"
+					value="<%=getOptionText(options, "C")%>" /> <input id="optionD"
+					name="optionD" type="text" class="txt1"
+					value="<%=getOptionText(options, "D")%>" /> <input id="optionE"
+					name="optionE" type="text" class="txt1"
+					value="<%=getOptionText(options, "E")%>" /> <input id="optionF"
+					name="optionF" type="text" class="txt1"
+					value="<%=getOptionText(options, "F")%>" />
+
 
 				<div id="preview" data-role="content" class="content">
 					<img width="100%" id="imghead"
@@ -162,13 +170,17 @@
 				</div>
 
 				<input id="image" name="image" type="file"
-					onchange="previewImage(this)" />
-
-				 <input class="ui-btn"
+					onchange="previewImage(this)" /> <input class="ui-btn"
 					type="button" value="修改"
 					onclick="javascript:document.getElementById('upload').submit()" />
 			</form>
 
+			<form id="deleteQuestion" name="deleteQuestion" method="post"
+				action="deleteQuestion">
+				
+				<input class="ui-btn" type="button" value="删除"
+					onclick="javascript:if(confirm('确定要删除吗?'))document.getElementById('deleteQuestion').submit()" />
+			</form>
 		</div>
 
 	</div>

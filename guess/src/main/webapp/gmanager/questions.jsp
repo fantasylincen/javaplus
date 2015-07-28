@@ -71,6 +71,7 @@
 
 				<li class="ui-li-has-thumb"><a href="setQuestion.jsp?questionId=<%=dto.getId() %>"
 					class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+					<img src="getImage?id=<%=dto.getImageId()%>">
 						<h2><%=dto.getContent()%></h2>
 						<p><%=dto.getDsc()%></p> </a></li>
 

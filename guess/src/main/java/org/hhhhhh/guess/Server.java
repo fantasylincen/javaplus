@@ -65,4 +65,5 @@ public class Server {
 	public static KeyValue getKeyValueDaily() {
 		return new SystemKeyValueDaily();
 	}
+
 }

@@ -135,6 +135,9 @@
 				<label for="dsc">说明</label>
 				<input id="dsc" name="dsc" type="text" class="txt1" />
 				
+				<label for="jiFen">积分奖励</label>
+				<input id="jiFen" name="jiFen" type="text" class="txt1" />
+				
 				<label >选项 A-F</label> 
 				
 				<input id="optionA" name="optionA" type="text" class="txt1" /> 

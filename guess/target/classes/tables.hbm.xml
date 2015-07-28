@@ -5,7 +5,8 @@
 
 <hibernate-mapping>
 
-	<class name="org.hhhhhh.guess.hibernate.dto.UserDto" table="user">
+	<class name="org.hhhhhh.guess.hibernate.dto.UserDto" table="user" >
+		<cache usage="read-write"/>
 		<id name="username" column="username" />
 		<property name="password" column="password" />
 		<property name="nick" column="nick" />
@@ -13,6 +14,7 @@
 	</class>
 
 	<class name="org.hhhhhh.guess.hibernate.dto.RoundDto" table="round">
+		<cache usage="read-write"/>
 		<id name="id" column="id" />
 		<property name="name" column="name" />
 		<property name="startTime" column="startTime" />
@@ -22,6 +24,7 @@
 	</class>
 	
 	<class name="org.hhhhhh.guess.hibernate.dto.QuestionDto" table="question">
+		<cache usage="read-write"/>
 		<id name="id" column="id" />
 		<property name="roundId" column="roundId" />
 		<property name="content" column="content" />
@@ -29,9 +32,12 @@
 		<property name="createTime" column="createTime" />
 		<property name="imageId" column="imageId"/>
 		<property name="count" column="count"/>
+		<property name="jiFen" column="jiFen"/>
+		<property name="answerOptionHead" column="answerOptionHead"/>
 	</class>
 	
 	<class name="org.hhhhhh.guess.hibernate.dto.QuestionOptionDto" table="question_option">
+		<cache usage="read-write"/>
 		<id name="questionIdAndHead" column="questionIdAndHead" />
 		<property name="questionId" column="questionId"/>
 		<property name="head" column="head" />
@@ -40,14 +46,24 @@
 		<property name="count" column="count"/>
 	</class>
 
+	<class name="org.hhhhhh.guess.hibernate.dto.AnswerDto" table="answer">
+		<cache usage="read-write"/>
+		<id name="usernameQuestionId" column="questionIdAndHead" />
+		<property name="username" column="username" />
+		<property name="questionId" column="questionId"/>
+		<property name="optionHead" column="optionHead" />
+	</class>
+
 	
 	<class name="org.hhhhhh.guess.hibernate.dto.ImageDto" table="image">
+		<cache usage="read-write"/>
 		<id name="id" column="id" />
-		<property name="image" column="image" type="binary" length="3096000"/>
+		<property name="image" column="image" type="binary" length="10240000"/>
 	</class>
 
 	<class name="org.hhhhhh.guess.hibernate.dto.KeyValueDto"
 		table="key_value">
+		<cache usage="read-write"/>
 		<id name="k" column="k" />
 		<property name="v" column="v" />
 	</class>
