@@ -1,0 +1,14 @@
+		private static class CLASS_NAME extends ButtonList {
+			public CLASS_NAME () {
+				setX(SET_X);
+				setY(SET_Y);
+REPEATED ADD_BUTTONS
+			}
+			
+			private void addButton(String name, int x, int y, int w, int h, String image) {
+				Button b = new Button(name, image);
+				b.setPosition(x, y);
+				b.setSize(w, h);
+				addActor(b);
+			}
+		}

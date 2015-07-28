@@ -1,0 +1,1054 @@
+GameUI.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+mclubs_up
+  rotate: false
+  xy: 1494, 352
+  size: 22, 22
+  orig: 22, 22
+  offset: 0, 0
+  index: -1
+shearts
+  rotate: false
+  xy: 225, 828
+  size: 29, 34
+  orig: 29, 34
+  offset: 0, 0
+  index: -1
+laizi_small
+  rotate: false
+  xy: 256, 828
+  size: 40, 30
+  orig: 40, 30
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 1446, 789
+  size: 66, 66
+  orig: 66, 66
+  offset: 0, 0
+  index: -1
+hearts_up
+  rotate: false
+  xy: 389, 828
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+joker_small
+  rotate: false
+  xy: 1562, 600
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
+bq_tip
+  rotate: false
+  xy: 1076, 797
+  size: 62, 29
+  orig: 62, 29
+  offset: 0, 0
+  index: -1
+mhearts
+  rotate: false
+  xy: 1828, 744
+  size: 46, 54
+  orig: 46, 54
+  offset: 0, 0
+  index: -1
+bj_tip
+  rotate: false
+  xy: 1658, 339
+  size: 70, 31
+  orig: 70, 31
+  offset: 0, 0
+  index: -1
+dz_not
+  rotate: false
+  xy: 1519, 2
+  size: 195, 185
+  orig: 195, 185
+  offset: 0, 0
+  index: -1
+mpoker_back
+  rotate: false
+  xy: 1882, 176
+  size: 110, 148
+  orig: 110, 148
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 1958, 765
+  size: 29, 46
+  orig: 29, 46
+  offset: 0, 0
+  index: 6
+spoker_bg
+  rotate: false
+  xy: 1813, 593
+  size: 69, 93
+  orig: 69, 93
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 1730, 339
+  size: 37, 46
+  orig: 37, 46
+  offset: 0, 0
+  index: 7
+diamonds
+  rotate: false
+  xy: 1249, 724
+  size: 33, 46
+  orig: 33, 46
+  offset: 0, 0
+  index: 8
+diamonds
+  rotate: false
+  xy: 1740, 545
+  size: 31, 52
+  orig: 31, 52
+  offset: 0, 0
+  index: 9
+bc_button_gray
+  rotate: false
+  xy: 1562, 787
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 1994, 229
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 0
+diamonds
+  rotate: false
+  xy: 1958, 717
+  size: 31, 46
+  orig: 31, 46
+  offset: 0, 0
+  index: 1
+diamonds
+  rotate: false
+  xy: 1931, 742
+  size: 25, 48
+  orig: 25, 48
+  offset: 0, 0
+  index: 2
+diamonds
+  rotate: false
+  xy: 1917, 797
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 3
+exit_button
+  rotate: false
+  xy: 1813, 688
+  size: 53, 54
+  orig: 53, 54
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 1888, 797
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 4
+tips_button
+  rotate: false
+  xy: 1051, 724
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 1859, 800
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 5
+clubs
+  rotate: false
+  xy: 2015, 725
+  size: 25, 46
+  orig: 25, 46
+  offset: 0, 0
+  index: 2
+clubs
+  rotate: false
+  xy: 1376, 789
+  size: 68, 68
+  orig: 68, 68
+  offset: 0, 0
+  index: -1
+clubs
+  rotate: false
+  xy: 1975, 813
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 3
+sdiamonds_up
+  rotate: false
+  xy: 1989, 795
+  size: 13, 14
+  orig: 13, 14
+  offset: 0, 0
+  index: -1
+clubs
+  rotate: false
+  xy: 1998, 135
+  size: 27, 44
+  orig: 27, 44
+  offset: 0, 0
+  index: 4
+shearts_up
+  rotate: false
+  xy: 2029, 525
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+tips_button_gray
+  rotate: false
+  xy: 924, 724
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+clubs
+  rotate: false
+  xy: 1994, 277
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 5
+clubs
+  rotate: false
+  xy: 2004, 795
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 0
+poker_bg
+  rotate: false
+  xy: 1423, 602
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
+mdiamonds
+  rotate: false
+  xy: 1494, 376
+  size: 30, 35
+  orig: 30, 35
+  offset: 0, 0
+  index: 10
+mdiamonds
+  rotate: false
+  xy: 472, 825
+  size: 31, 37
+  orig: 31, 37
+  offset: 0, 0
+  index: 11
+clubs
+  rotate: false
+  xy: 766, 818
+  size: 31, 44
+  orig: 31, 44
+  offset: 0, 0
+  index: 1
+mdiamonds
+  rotate: false
+  xy: 1991, 717
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 12
+clubs
+  rotate: false
+  xy: 1946, 813
+  size: 27, 44
+  orig: 27, 44
+  offset: 0, 0
+  index: 12
+clubs
+  rotate: false
+  xy: 727, 818
+  size: 37, 44
+  orig: 37, 44
+  offset: 0, 0
+  index: 10
+clubs
+  rotate: false
+  xy: 1828, 800
+  size: 29, 46
+  orig: 29, 46
+  offset: 0, 0
+  index: 6
+change_table
+  rotate: false
+  xy: 1716, 115
+  size: 176, 59
+  orig: 176, 59
+  offset: 0, 0
+  index: -1
+clubs
+  rotate: false
+  xy: 1957, 87
+  size: 39, 46
+  orig: 39, 46
+  offset: 0, 0
+  index: 7
+clubs
+  rotate: false
+  xy: 1998, 87
+  size: 39, 46
+  orig: 39, 46
+  offset: 0, 0
+  index: 11
+clubs
+  rotate: false
+  xy: 1140, 797
+  size: 33, 46
+  orig: 33, 46
+  offset: 0, 0
+  index: 8
+clubs
+  rotate: false
+  xy: 1773, 545
+  size: 31, 52
+  orig: 31, 52
+  offset: 0, 0
+  index: 9
+mspades_up
+  rotate: false
+  xy: 966, 828
+  size: 19, 22
+  orig: 19, 22
+  offset: 0, 0
+  index: -1
+bc_tip
+  rotate: false
+  xy: 86, 828
+  size: 70, 31
+  orig: 70, 31
+  offset: 0, 0
+  index: -1
+sjoker_small
+  rotate: false
+  xy: 1955, 552
+  size: 69, 93
+  orig: 69, 93
+  offset: 0, 0
+  index: -1
+poker_mark
+  rotate: false
+  xy: 1284, 602
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
+spades
+  rotate: false
+  xy: 1979, 399
+  size: 58, 68
+  orig: 58, 68
+  offset: 0, 0
+  index: -1
+sclubs
+  rotate: false
+  xy: 1725, 498
+  size: 13, 23
+  orig: 13, 23
+  offset: 0, 0
+  index: 2
+mdiamonds
+  rotate: false
+  xy: 1876, 742
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+sclubs
+  rotate: false
+  xy: 2023, 259
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 3
+sclubs
+  rotate: false
+  xy: 1008, 835
+  size: 14, 22
+  orig: 14, 22
+  offset: 0, 0
+  index: 4
+sclubs
+  rotate: false
+  xy: 2026, 600
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 5
+sclubs
+  rotate: false
+  xy: 158, 828
+  size: 34, 34
+  orig: 34, 34
+  offset: 0, 0
+  index: -1
+mjoker_big
+  rotate: false
+  xy: 1701, 599
+  size: 110, 148
+  orig: 110, 148
+  offset: 0, 0
+  index: -1
+sclubs
+  rotate: false
+  xy: 2023, 284
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 0
+sclubs
+  rotate: false
+  xy: 2023, 235
+  size: 16, 22
+  orig: 16, 22
+  offset: 0, 0
+  index: 1
+sclubs
+  rotate: false
+  xy: 2026, 550
+  size: 15, 23
+  orig: 15, 23
+  offset: 0, 0
+  index: 6
+sclubs
+  rotate: false
+  xy: 415, 828
+  size: 20, 23
+  orig: 20, 23
+  offset: 0, 0
+  index: 7
+sclubs
+  rotate: false
+  xy: 2024, 185
+  size: 17, 23
+  orig: 17, 23
+  offset: 0, 0
+  index: 8
+sclubs
+  rotate: false
+  xy: 1229, 819
+  size: 16, 26
+  orig: 16, 26
+  offset: 0, 0
+  index: 9
+sclubs
+  rotate: false
+  xy: 1024, 835
+  size: 14, 22
+  orig: 14, 22
+  offset: 0, 0
+  index: 12
+diamonds_up
+  rotate: false
+  xy: 1585, 376
+  size: 26, 28
+  orig: 26, 28
+  offset: 0, 0
+  index: -1
+sclubs
+  rotate: false
+  xy: 945, 828
+  size: 19, 22
+  orig: 19, 22
+  offset: 0, 0
+  index: 10
+spoker_mark
+  rotate: false
+  xy: 1178, 724
+  size: 69, 93
+  orig: 69, 93
+  offset: 0, 0
+  index: -1
+sclubs
+  rotate: false
+  xy: 2007, 525
+  size: 20, 23
+  orig: 20, 23
+  offset: 0, 0
+  index: 11
+sdiamonds
+  rotate: false
+  xy: 298, 828
+  size: 33, 33
+  orig: 33, 33
+  offset: 0, 0
+  index: -1
+hearts
+  rotate: false
+  xy: 1955, 647
+  size: 58, 68
+  orig: 58, 68
+  offset: 0, 0
+  index: -1
+bj_button
+  rotate: false
+  xy: 1740, 472
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 1974, 135
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: 12
+mclubs
+  rotate: false
+  xy: 1526, 376
+  size: 30, 35
+  orig: 30, 35
+  offset: 0, 0
+  index: 10
+spades_up
+  rotate: false
+  xy: 363, 828
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 538, 825
+  size: 31, 37
+  orig: 31, 37
+  offset: 0, 0
+  index: 11
+jdz_tip
+  rotate: false
+  xy: 924, 797
+  size: 82, 29
+  orig: 82, 29
+  offset: 0, 0
+  index: -1
+exit_button_gray
+  rotate: false
+  xy: 1985, 469
+  size: 53, 54
+  orig: 53, 54
+  offset: 0, 0
+  index: -1
+mpoker_mark
+  rotate: false
+  xy: 1658, 189
+  size: 110, 148
+  orig: 110, 148
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 1761, 822
+  size: 20, 37
+  orig: 20, 37
+  offset: 0, 0
+  index: 2
+cancel_trust
+  rotate: false
+  xy: 472, 724
+  size: 214, 99
+  orig: 214, 99
+  offset: 0, 0
+  index: -1
+qdz_tip
+  rotate: false
+  xy: 2, 828
+  size: 82, 29
+  orig: 82, 29
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 1713, 822
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 3
+mclubs
+  rotate: false
+  xy: 1950, 135
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: 4
+mclubs
+  rotate: false
+  xy: 1689, 822
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 5
+mclubs
+  rotate: false
+  xy: 1894, 115
+  size: 54, 54
+  orig: 54, 54
+  offset: 0, 0
+  index: -1
+joker_big
+  rotate: false
+  xy: 1519, 189
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 1737, 822
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 0
+cushion
+  rotate: false
+  xy: 1284, 413
+  size: 188, 187
+  orig: 188, 187
+  offset: 0, 0
+  index: -1
+bc_button
+  rotate: false
+  xy: 1249, 789
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 1558, 376
+  size: 25, 35
+  orig: 25, 35
+  offset: 0, 0
+  index: 1
+mclubs
+  rotate: false
+  xy: 1494, 274
+  size: 23, 37
+  orig: 23, 37
+  offset: 0, 0
+  index: 6
+h1
+  rotate: false
+  xy: 816, 724
+  size: 106, 124
+  orig: 106, 124
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 505, 825
+  size: 31, 37
+  orig: 31, 37
+  offset: 0, 0
+  index: 7
+h2
+  rotate: false
+  xy: 1867, 472
+  size: 116, 78
+  orig: 116, 78
+  offset: 0, 0
+  index: -1
+mclubs
+  rotate: false
+  xy: 2015, 686
+  size: 26, 37
+  orig: 26, 37
+  offset: 0, 0
+  index: 8
+mclubs
+  rotate: false
+  xy: 1202, 819
+  size: 25, 42
+  orig: 25, 42
+  offset: 0, 0
+  index: 9
+h3
+  rotate: false
+  xy: 688, 724
+  size: 126, 92
+  orig: 126, 92
+  offset: 0, 0
+  index: -1
+ready_tip
+  rotate: false
+  xy: 1008, 797
+  size: 66, 36
+  orig: 66, 36
+  offset: 0, 0
+  index: -1
+dz
+  rotate: false
+  xy: 1284, 235
+  size: 208, 176
+  orig: 208, 176
+  offset: 0, 0
+  index: -1
+sdiamonds
+  rotate: false
+  xy: 799, 818
+  size: 15, 23
+  orig: 15, 23
+  offset: 0, 0
+  index: 6
+sdiamonds
+  rotate: false
+  xy: 1865, 552
+  size: 17, 23
+  orig: 17, 23
+  offset: 0, 0
+  index: 8
+sdiamonds
+  rotate: false
+  xy: 437, 828
+  size: 19, 23
+  orig: 19, 23
+  offset: 0, 0
+  index: 7
+sdiamonds
+  rotate: false
+  xy: 1847, 545
+  size: 16, 26
+  orig: 16, 26
+  offset: 0, 0
+  index: 9
+mdiamonds_up
+  rotate: false
+  xy: 1805, 822
+  size: 21, 22
+  orig: 21, 22
+  offset: 0, 0
+  index: -1
+mspades
+  rotate: false
+  xy: 1514, 789
+  size: 46, 54
+  orig: 46, 54
+  offset: 0, 0
+  index: -1
+mhearts_up
+  rotate: false
+  xy: 987, 828
+  size: 19, 22
+  orig: 19, 22
+  offset: 0, 0
+  index: -1
+sdiamonds
+  rotate: false
+  xy: 924, 828
+  size: 19, 22
+  orig: 19, 22
+  offset: 0, 0
+  index: 10
+cp_button
+  rotate: false
+  xy: 1897, 326
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+sdiamonds
+  rotate: false
+  xy: 2026, 575
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 0
+sdiamonds
+  rotate: false
+  xy: 1985, 525
+  size: 20, 23
+  orig: 20, 23
+  offset: 0, 0
+  index: 11
+sspades
+  rotate: false
+  xy: 194, 828
+  size: 29, 34
+  orig: 29, 34
+  offset: 0, 0
+  index: -1
+sdiamonds
+  rotate: false
+  xy: 1725, 472
+  size: 13, 24
+  orig: 13, 24
+  offset: 0, 0
+  index: 2
+sdiamonds
+  rotate: false
+  xy: 2023, 210
+  size: 16, 23
+  orig: 16, 23
+  offset: 0, 0
+  index: 1
+menu_bg
+  rotate: false
+  xy: 2, 724
+  size: 468, 102
+  orig: 468, 102
+  offset: 0, 0
+  index: -1
+sdiamonds
+  rotate: false
+  xy: 1868, 713
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 4
+sdiamonds
+  rotate: false
+  xy: 2027, 160
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 12
+sdiamonds
+  rotate: false
+  xy: 2027, 135
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 3
+sdiamonds
+  rotate: false
+  xy: 1868, 688
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: 5
+qdz_button
+  rotate: false
+  xy: 1613, 526
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+clubs_up
+  rotate: false
+  xy: 333, 828
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+sspades_up
+  rotate: false
+  xy: 458, 828
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+cp_button_gray
+  rotate: false
+  xy: 1770, 326
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+mjoker_small
+  rotate: false
+  xy: 1613, 376
+  size: 110, 148
+  orig: 110, 148
+  offset: 0, 0
+  index: -1
+cushion_bj
+  rotate: false
+  xy: 1284, 2
+  size: 233, 231
+  orig: 233, 231
+  offset: 0, 0
+  index: -1
+laizi_big
+  rotate: false
+  xy: 1957, 2
+  size: 83, 83
+  orig: 83, 83
+  offset: 0, 0
+  index: -1
+mdiamonds
+  rotate: false
+  xy: 1494, 235
+  size: 23, 37
+  orig: 23, 37
+  offset: 0, 0
+  index: 6
+mdiamonds
+  rotate: false
+  xy: 2015, 647
+  size: 26, 37
+  orig: 26, 37
+  offset: 0, 0
+  index: 8
+mdiamonds
+  rotate: false
+  xy: 571, 825
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: 7
+mdiamonds
+  rotate: false
+  xy: 1175, 819
+  size: 25, 42
+  orig: 25, 42
+  offset: 0, 0
+  index: 9
+bq_button
+  rotate: false
+  xy: 1725, 399
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+sjoker_big
+  rotate: false
+  xy: 1884, 647
+  size: 69, 93
+  orig: 69, 93
+  offset: 0, 0
+  index: -1
+mdiamonds
+  rotate: false
+  xy: 1991, 756
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 0
+mdiamonds
+  rotate: false
+  xy: 1783, 822
+  size: 20, 38
+  orig: 20, 38
+  offset: 0, 0
+  index: 2
+mdiamonds
+  rotate: false
+  xy: 603, 825
+  size: 25, 37
+  orig: 25, 37
+  offset: 0, 0
+  index: 1
+mdiamonds
+  rotate: false
+  xy: 654, 825
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 4
+sclubs_up
+  rotate: false
+  xy: 1249, 772
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+mdiamonds
+  rotate: false
+  xy: 1494, 313
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 3
+diamonds
+  rotate: false
+  xy: 1994, 181
+  size: 27, 46
+  orig: 27, 46
+  offset: 0, 0
+  index: 12
+poker_back
+  rotate: false
+  xy: 1474, 413
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
+mdiamonds
+  rotate: false
+  xy: 630, 825
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: 5
+background
+  rotate: false
+  xy: 2, 2
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
+diamonds
+  rotate: false
+  xy: 688, 818
+  size: 37, 44
+  orig: 37, 44
+  offset: 0, 0
+  index: 10
+diamonds
+  rotate: false
+  xy: 1806, 545
+  size: 39, 46
+  orig: 39, 46
+  offset: 0, 0
+  index: 11
+start_game_button
+  rotate: false
+  xy: 1716, 2
+  size: 239, 111
+  orig: 239, 111
+  offset: 0, 0
+  index: -1
+spoker_back
+  rotate: false
+  xy: 1884, 552
+  size: 69, 93
+  orig: 69, 93
+  offset: 0, 0
+  index: -1
+bj_button_gray
+  rotate: false
+  xy: 1852, 399
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1
+mpoker_bg
+  rotate: false
+  xy: 1770, 176
+  size: 110, 148
+  orig: 110, 148
+  offset: 0, 0
+  index: -1
+jdz_button
+  rotate: false
+  xy: 1701, 749
+  size: 125, 71
+  orig: 125, 71
+  offset: 0, 0
+  index: -1

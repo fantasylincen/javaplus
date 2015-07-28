@@ -1,0 +1,25 @@
+LoginUI.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+button_p
+  rotate: false
+  xy: 440, 2
+  size: 69, 32
+  orig: 69, 32
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 440, 36
+  size: 69, 32
+  orig: 69, 32
+  offset: 0, 0
+  index: -1
+login
+  rotate: false
+  xy: 2, 2
+  size: 436, 250
+  orig: 436, 250
+  offset: 0, 0
+  index: -1

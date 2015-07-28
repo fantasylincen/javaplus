@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\Administrator\git\games\javaplus-game-crazy\client\ui</ProjectDir>
+  <Version>1.6.0.0</Version>
+  <Resources>C:\Users\Administrator\git\games\javaplus-game-crazy\client\ui\Resources</Resources>
+  <Name>register</Name>
+  <JsonFileName>register.json</JsonFileName>
+  <JsonFolder>C:\Users\Administrator\git\games\javaplus-game-crazy\client\ui\Json</JsonFolder>
+  <JsonList>
+    <string>GameUI.json</string>
+    <string>LoginUI.json</string>
+    <string>HallUI.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>1280</Width>
+    <Height>720</Height>
+  </CanvasSize>
+  <filePath>C:\Users\Administrator\git\games\javaplus-game-crazy\client\ui\crazy-pocker.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath />
+  <imageFileList />
+  <imagePngList />
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>GameUI.json</CurrentUIJson>
+</UIProject>

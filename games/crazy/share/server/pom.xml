@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<groupId>cn.javaplus</groupId>
+	<artifactId>crazy-server-share</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>crazy-server-share</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>cn.javaplus</groupId>
+			<artifactId>crazy-share</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty</artifactId>
+			<version>3.9.2.Final</version>
+		</dependency>
+		<!-- <dependency> <groupId>cn.javaplus</groupId> <artifactId>crazy-share</artifactId> 
+			<version>1.0</version> </dependency> -->
+		<dependency>
+			<groupId>cn.javaplus</groupId>
+			<artifactId>javaplus-util</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>bson</artifactId>
+			<version>2.11.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>casbah-core_2.10</artifactId>
+			<version>2.6.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>casbah-commons_2.10</artifactId>
+			<version>2.6.4</version>
+		</dependency>
+
+	</dependencies>
+</project>

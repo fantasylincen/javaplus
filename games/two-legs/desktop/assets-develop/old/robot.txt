@@ -1,0 +1,32 @@
+robot.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg_up
+  rotate: false
+  xy: 17, 100
+  size: 12, 144
+  orig: 12, 144
+  offset: 0, 0
+  index: -1
+leg_down
+  rotate: false
+  xy: 2, 100
+  size: 13, 147
+  orig: 13, 147
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 2, 2
+  size: 91, 96
+  orig: 91, 96
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 31, 100
+  size: 38, 32
+  orig: 38, 32
+  offset: 0, 0
+  index: -1
