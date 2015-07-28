@@ -1,21 +1,19 @@
 package org.hhhhhh.guess.question;
 
-import org.hhhhhh.guess.exception.GuessException;
+import org.hhhhhh.guess.hibernate.dao.DbUtil;
+import org.hhhhhh.guess.hibernate.dto.AnswerDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionOptionDto;
 import org.hhhhhh.guess.user.User;
-import org.hhhhhh.guess.util.KeyValue;
 
 public class Option {
 
 	private final QuestionOptionDto dto;
-	private final User user;
 	private final QuestionDto questionDto;
 
-	public Option(QuestionDto questionDto, QuestionOptionDto dto, User user) {
+	public Option(QuestionDto questionDto, QuestionOptionDto dto) {
 		this.questionDto = questionDto;
 		this.dto = dto;
-		this.user = user;
 	}
 
 	public String getId() {
@@ -45,12 +43,12 @@ public class Option {
 	/**
 	 * 是否选定某个结果
 	 */
-	public boolean isSelected() {
+	public boolean isSelected(User user) {
+		
+		AnswerDto as = DbUtil.get(AnswerDto.class, user.getUsername() + ":" + questionDto.getId());
+		if (as == null)
+			return false;
 
-		KeyValue kv = user.getKeyValueForever();
-		String key = "SELECTED:" + questionDto.getId();
-		String head = kv.getString(key);
-
-		return dto.getHead().equals(head);
+		return as.getOptionHead().equals(dto.getHead());
 	}
 }

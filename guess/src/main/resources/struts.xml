@@ -39,6 +39,9 @@
 		<action name="setQuestion" class="org.hhhhhh.guess.gmanager.SetQuestionAction">
 			<result type="redirect" name="success">questions.jsp</result>
 		</action>
+		<action name="deleteQuestion" class="org.hhhhhh.guess.gmanager.DeleteQuestionAction">
+			<result type="redirect" name="success">questions.jsp</result>
+		</action>
 		<action name="setRound" class="org.hhhhhh.guess.gmanager.SetRoundAction">
 			<result type="redirect" name="success">index.jsp</result>
 		</action>

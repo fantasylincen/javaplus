@@ -383,9 +383,9 @@ public class Turntable {
 	private void shuaiJianKuCun() {
 		Controller c = getController();
 		long kuCun = c.getKuCun();
-		
+
 		long profit = inOut.getIn() - inOut.getOut();
-		
+
 		if (profit < 0) // 系统没有盈利, 就不衰减
 			return;
 
@@ -395,8 +395,8 @@ public class Turntable {
 
 		KeyValueSaveOnly o = Server.getKeyValueSaveOnly();
 
-		o.add("KU_CUN_SHUAI_JIAN_LIANG", reduce);		// 记录库存衰减量
-		o.set("LAST_KU_CUN_SHUAI_JIAN_LIANG", reduce);	// 记录上轮衰减量
+		o.add("KU_CUN_SHUAI_JIAN_LIANG", reduce); // 记录库存衰减量
+		o.set("LAST_KU_CUN_SHUAI_JIAN_LIANG", reduce); // 记录上轮衰减量
 	}
 
 	public int getRoleCount() {
@@ -669,7 +669,7 @@ public class Turntable {
 
 			Set<String> keySet = switchs.keySet();
 			List<Row> r = Turntable.this.result.getResult();
-			
+
 			long kuCun = getController().getKuCun();
 
 			for (String roleId : keySet) {
@@ -684,28 +684,29 @@ public class Turntable {
 				boolean isTestRole = role instanceof TestRole;
 
 				long xcjadd = result.getXiaoCaiJinAdd();
-				long cj = result.getCaiJin();
+				long cjadd = result.getCaiJin();
 				long rdc = result.getReduce();
 				long add = result.getAdd();
 
 				if (!isTestRole) {
 					Log.d("开奖", roleId, isRobot ? "robot" : "player", "库:"
-							+ kuCun,
-							role.getNick(), sw, buildResult(), "注:" + rdc, "赢:"
-									+ add, "大彩:" + cj, "小彩:" + xcjadd, "余额:"
-									+ role.getCoin(),
-							"银行:" + role.getBankCoin());
+							+ kuCun, role.getNick(), sw, buildResult(), "注:"
+							+ rdc, "赢:" + add, "大彩:" + cjadd, "小彩:" + xcjadd,
+							"余额:" + role.getCoin(), "银行:" + role.getBankCoin());
 				}
 
 				if (!isTestRole && !isRobot) {
 
 					inOut.addIn(rdc);
-					inOut.addOut(add + cj + xcjadd);
+					inOut.addOut(add + cjadd + xcjadd);
+
+					caiJin -= cjadd;
+					caiJin -= xcjadd;
 				}
 				settlements.put(roleId, result);
 			}
 
-			initCaiJin();
+			updateCaiJin();
 		}
 
 		private String buildResult() {
@@ -721,7 +722,7 @@ public class Turntable {
 			return sb.toString();
 		}
 
-		private void initCaiJin() {
+		private void updateCaiJin() {
 			caiJin = Math.max(getMinCaiJin(), caiJin);
 			saveCaiJinToDb();
 		}
@@ -814,8 +815,8 @@ public class Turntable {
 		}
 
 		private void saveToHistory() {
-//			Row first = result.getResult().get(0);
-			
+			// Row first = result.getResult().get(0);
+
 			for (Row r : result.getResult()) {
 				save(r);
 			}
@@ -1205,7 +1206,7 @@ public class Turntable {
 
 		Const cst = Server.getConst();
 
-		long ccc = cst.getLong("CAI_JIN_L"); // 机器人下注时 每项下注金额(范围) 格式: 最小值-最大值
+		long ccc = cst.getLong("CAI_JIN_L");
 
 		if (caij <= ccc) {
 			return 0;
@@ -1225,7 +1226,7 @@ public class Turntable {
 			return 0;
 		}
 
-		String base = Server.getConst().getString("CAI_JIN_SCALE");
+		String base = Server.getConst().getString("CAI_JIN_RECEIVE_SCALE_BIG");
 
 		String[] ss = base.split("\\-");
 		double min = new Double(ss[0]);
@@ -1234,18 +1235,28 @@ public class Turntable {
 		double percent = Util.Random.get(min, max);
 
 		long add = (long) (caij * percent);
+
+		long mm = Server.getConst().getLong("CAI_JIN_PERSON_MAX"); // 每人每次最多获得的彩金
+
+		add = Math.min(mm, add);
+
 		role.addCoin(add);
 
 		boolean robot = Server.getRobotManager().isRobot(role.getId());
 
-		Log.d("add cai jin", role.getId(), role.getNick(), add, robot ? "robot"
-				: "player");
+		log(role, add, robot);
 		if (add > 0) {
 			MessageManager msm = Server.getMessageManager();
-			// msm.sendNotice(10017, role.getNick(), add);
 			caiJinNotice = msm.buildMessage(10017, role.getNick(), add);
 		}
 		return add;
+	}
+
+	private void log(IRole role, long add, boolean robot) {
+		String id2 = role.getId();
+		String nick = role.getNick();
+		String string = robot ? "robot" : "player";
+		Log.d("add cai jin", id2, nick, add, string);
 	}
 
 	private long addCoin(Row row, IRole role, ISwitchs s) {
@@ -1339,6 +1350,7 @@ public class Turntable {
 			return 0;
 		return TurntableUtil.getByType(switchs, type);
 	}
+
 	public long getCountThisTimeWithOutRobot(String type) {
 		if (switchs == null)
 			return 0;

@@ -1,3 +1,6 @@
+<%@page import="cn.javaplus.excel.Row"%>
+<%@page import="cn.javaplus.excel.Sheet"%>
+<%@page import="cn.vgame.share.Xml"%>
 <%@page import="cn.vgame.a.Server"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDto"%>
 <%@page import="cn.vgame.a.gen.dto.MongoGen.CoinLogDao.CoinLogDtoCursor"%>
@@ -74,6 +77,7 @@
 					<th>昵称</th>
 					<th>充值金豆</th>
 					<th>平台</th>
+					<th>金额</th>
 				</tr>
 			</thead>
 
@@ -96,8 +100,24 @@
 					<td><%=Server.getRole(dto.getTo()).getNick()%></td>
 					<td><%=dto.getCoin()%></td>
 					<td><%=dto.getFrom()%></td>
+					<td><%=getRmb(dto.getCoin())%></td>
 				</tr>
 				<%
+					}
+				%>
+				
+				
+				<%!
+					public String getRmb(long coin) {
+						Xml xml = Server.getXml();
+						Sheet sheet = xml.get("recharge-xy");
+						List<Row> rows = sheet.find("jinDou", coin);
+						List<Row> rows2 = sheet.find("jinDouFirst", coin);
+						rows.addAll(rows2);
+						if(rows.isEmpty()) {
+							return "未知金额";
+						}
+						return "¥" + rows.get(0).get("rmb");					
 					}
 				%>
 

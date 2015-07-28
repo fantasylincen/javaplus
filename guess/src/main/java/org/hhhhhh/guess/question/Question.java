@@ -13,11 +13,13 @@ import com.google.common.collect.Lists;
 public class Question {
 
 	private final QuestionDto dto;
-	private final User user;
 
-	public Question(User user, QuestionDto dto) {
-		this.user = user;
+	public Question(QuestionDto dto) {
 		this.dto = dto;
+	}
+
+	public String getAnswerOptionHead() {
+		return dto.getAnswerOptionHead();
 	}
 
 	public String getId() {
@@ -33,7 +35,7 @@ public class Question {
 		return "gmanager/getImage?id=" + dto.getId();
 	}
 	
-	public boolean isAnswered() {
+	public boolean isAnswered(User user) {
 		return user.getKeyValueForever().getBoolean("IS_ANSWERED:" + getId());
 	}
 	
@@ -46,9 +48,13 @@ public class Question {
 		ArrayList<Option> ls = Lists.newArrayList();
 		List<QuestionOptionDto> find = DbUtil.find("QuestionOptionDto", "questionId", dto.getId());
 		for (QuestionOptionDto dto : find) {
-			ls.add(new Option(this.dto, dto, user));
+			ls.add(new Option(this.dto, dto));
 		}
 		return ls;
+	}
+
+	public int getJiFen() {
+		return dto.getJiFen();
 	}
 	
 }

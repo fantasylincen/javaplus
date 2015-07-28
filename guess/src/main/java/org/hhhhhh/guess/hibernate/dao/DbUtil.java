@@ -91,4 +91,21 @@ public class DbUtil {
 		}
 	}
 
+	public static void delete(Object dto) {
+		SessionFactory sf = HibernateSessionFactory.getSessionFactory();
+		Session s = null;
+		Transaction t = null;
+		try {
+			s = sf.openSession();
+			t = s.beginTransaction();
+			s.delete(dto);
+			t.commit();
+		} catch (Exception err) {
+			t.rollback();
+			err.printStackTrace();
+		} finally {
+			s.close();
+		}
+	}
+
 }

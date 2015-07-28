@@ -11,6 +11,7 @@ import org.hhhhhh.guess.hibernate.dao.DbUtil;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
 import org.hhhhhh.guess.hibernate.dto.RoundDto;
 import org.hhhhhh.guess.hibernate.dto.UserDto;
+import org.hhhhhh.guess.rankinglist.RankingList;
 import org.hhhhhh.guess.user.User;
 import org.hhhhhh.guess.util.KeyValue;
 
@@ -23,6 +24,10 @@ public class Manager {
 
 	private List<RoundDto> rounds;
 	private RoundDto current;
+
+	public RankingList getRankingList() {
+		return new RankingList();
+	}
 
 	public User getFirstOne() {
 
@@ -58,8 +63,8 @@ public class Manager {
 	}
 
 	private boolean isNowTimeInTimeScope(RoundDto dto) {
-		return Util.Time.isIn(dto.getStartTime() + "|00:00 to " + dto.getEndTime()
-				+ "|24:00");
+		return Util.Time.isIn(dto.getStartTime() + "|00:00 to "
+				+ dto.getEndTime() + "|24:00");
 	}
 
 	public Ad getAd() {
@@ -89,10 +94,6 @@ public class Manager {
 	public double getJiangChi() {
 		KeyValue kv = Server.getKeyValueForever();
 		return kv.getDouble("JIANG_CHI");
-	}
-
-	public int getRank(User user) {
-		return 1;// TODO LC
 	}
 
 	/**
@@ -152,4 +153,26 @@ public class Manager {
 	private void setRounds(List<RoundDto> rounds) {
 		this.rounds = rounds;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Question> getQuestions() {
+
+		RoundDto current = Server.getManager().getCurrent();
+
+		String roundId = current.getId();
+
+		List<QuestionDto> find = DbUtil.find("QuestionDto", "roundId", roundId);
+		ArrayList<Question> ls = Lists.newArrayList();
+
+		for (QuestionDto dto : find) {
+			ls.add(new Question(dto));
+		}
+		return ls;
+	}
+
+	public Question getQuestion(String questionId) {
+		QuestionDto find = DbUtil.get(QuestionDto.class, questionId);
+		return new Question(find);
+	}
+
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.DbUtil;
 import org.hhhhhh.guess.hibernate.dto.ImageDto;
-import org.hhhhhh.guess.hibernate.dto.QuestionOptionDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
 import org.hhhhhh.guess.util.ParameterUtil;
 
@@ -28,6 +27,7 @@ public class CreateQuestionAction extends ActionSupport implements
 	String optionD;
 	String optionE;
 	String optionF;
+	private int jiFen;
 
 	public String getOptionA() {
 		return optionA;
@@ -93,6 +93,7 @@ public class CreateQuestionAction extends ActionSupport implements
 		dto.setCreateTime(Util.Time.getCurrentFormatTime());
 		dto.setRoundId(roundId);
 		dto.setImageId(imageId);
+		dto.setJiFen(jiFen);
 		DbUtil.save(dto);
 
 		OptionSetter setter = new OptionSetter();
@@ -113,7 +114,6 @@ public class CreateQuestionAction extends ActionSupport implements
 	private String content;
 	private String dsc;
 	private List<File> image;
-
 
 	public String getDsc() {
 		return dsc;
@@ -141,6 +141,14 @@ public class CreateQuestionAction extends ActionSupport implements
 
 	public void setImage(List<File> image) {
 		this.image = image;
+	}
+
+	public int getJiFen() {
+		return jiFen;
+	}
+
+	public void setJiFen(int jiFen) {
+		this.jiFen = jiFen;
 	}
 
 }

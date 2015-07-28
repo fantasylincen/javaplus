@@ -1,3 +1,4 @@
+<%@page import="cn.javaplus.string.StringPrinter"%>
 <%@page import="cn.vgame.a.log.ConsoleLog"%>
 <%@page import="cn.javaplus.log.Log"%>
 <%@page import="cn.vgame.share.ParameterUtil"%>
@@ -81,26 +82,42 @@
 			%>
 		</div>
 
+		<table border="1">
+
+			<%
+				List<ConsoleLog> logs = ConsoleLog.get(fileName, new Integer(cnt),
+						find);
+
+				if (logs.isEmpty()) {
+					out.println("没有记录");
+				} else {
+
+					for (ConsoleLog log : logs) {
+			%>
+			<%=getTds(log)%>
+			<%
+				}
+				}
+			%>
 
 
-		<%
-			List<ConsoleLog> logs = ConsoleLog.get(fileName, new Integer(cnt),
-					find);
-
-			if (logs.isEmpty()) {
-				out.println("没有记录");
-			} else {
-
-				for (ConsoleLog log : logs) {
-		%>
-		<%=log.toString()%>
-		<br>
-		<%
-			}
-			}
-		%>
 
 
+			<%!public String getTds(ConsoleLog log) {
+		StringPrinter o = new StringPrinter();
+		String[] ss = log.toString().split(",");
+o.print("<tr>");
+		for (String s : ss) {
+			o.print("<td>");
+			o.print(s);
+			o.print("</td>");
+		}
+		o.print("</tr>");
+		return o.toString();
+
+	}%>
+
+		</table>
 
 
 		<br> <br>
