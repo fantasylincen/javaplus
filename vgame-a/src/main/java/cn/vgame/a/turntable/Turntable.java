@@ -684,21 +684,24 @@ public class Turntable {
 				boolean isTestRole = role instanceof TestRole;
 
 				long xcjadd = result.getXiaoCaiJinAdd();
-				long cj = result.getCaiJin();
+				long cjadd = result.getCaiJin();
 				long rdc = result.getReduce();
 				long add = result.getAdd();
 
 				if (!isTestRole) {
 					Log.d("开奖", roleId, isRobot ? "robot" : "player", "库:"
 							+ kuCun, role.getNick(), sw, buildResult(), "注:"
-							+ rdc, "赢:" + add, "大彩:" + cj, "小彩:" + xcjadd,
+							+ rdc, "赢:" + add, "大彩:" + cjadd, "小彩:" + xcjadd,
 							"余额:" + role.getCoin(), "银行:" + role.getBankCoin());
 				}
 
 				if (!isTestRole && !isRobot) {
 
 					inOut.addIn(rdc);
-					inOut.addOut(add + cj + xcjadd);
+					inOut.addOut(add + cjadd + xcjadd);
+
+					caiJin -= cjadd;
+					caiJin -= xcjadd;
 				}
 				settlements.put(roleId, result);
 			}
@@ -1238,8 +1241,6 @@ public class Turntable {
 		add = Math.min(mm, add);
 
 		role.addCoin(add);
-
-		this.caiJin -= add;
 
 		boolean robot = Server.getRobotManager().isRobot(role.getId());
 
