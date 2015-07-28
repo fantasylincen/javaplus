@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import cn.javaplus.collections.map.Maps;
 import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
+import cn.javaplus.log.Log;
 import cn.vgame.a.Server;
 
 public class Translate {
@@ -33,6 +34,7 @@ public class Translate {
 		if (tans == null) {
 			initTans();
 			lastUpdateTime = System.currentTimeMillis();
+			Log.d("reload translate config");
 		}
 
 		return tans;
