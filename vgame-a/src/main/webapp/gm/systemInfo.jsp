@@ -1,3 +1,7 @@
+<%@page import="cn.vgame.a.message.Message"%>
+<%@page import="cn.vgame.a.message.MessageManager"%>
+<%@page import="cn.vgame.a.turntable.History"%>
+<%@page import="cn.vgame.a.turntable.GetHistoryResult"%>
 <%@page import="cn.vgame.a.turntable.generator.ProfitCalc.Xs"%>
 <%@page import="cn.vgame.a.turntable.generator.ProfitCalc"%>
 <%@page import="cn.javaplus.collections.map.Maps"%>
@@ -282,8 +286,22 @@ background-color: #EBEBEB;
 
 				<br> <input style="display: none;" type="submit" value="保存" />
 			</form>
-
-			<%=Turntable.getInstance().getCd() / 1000%>秒
+		<%
+			GetHistoryResult r = t.getHistory();
+			List<History> hs = r.getHistory();
+			hs = Lists.newArrayList(hs);
+			Collections.reverse(hs);
+			StringBuilder sb = new StringBuilder();
+			
+			for(History h : hs) {
+				Sheet sheet = Server.getXml().get("weights");
+				Row row = sheet.get(h.getId());
+				String type = row.get("type");
+				String ch = TurntableUtil.toChinese(type);
+				sb.append(ch + "&nbsp");
+			}
+		 %>
+			<%=Turntable.getInstance().getCd() / 1000%>秒  &nbsp;&nbsp;   <%=sb.toString() %>
 
 			<table border="1" data-role="table" data-mode="columntoggle"
 				class="ui-body-d ui-shadow table-stripe ">
@@ -543,8 +561,43 @@ background-color: #EBEBEB;
 				</tbody>
 			</table>
 
+<br>
+<br>
+
+<table border="1" data-role="table" id="table-custom-2"
+					data-mode="columntoggle"
+					class="ui-body-d ui-shadow table-stripe ui-responsive ui-table ui-table-columntoggle">
+					<tbody>
+					
+						<%
+			MessageManager mm = Server.getMessageManager();
+			
+			List<Message> ms = mm.getMessages().getMessages();
+			ms = Lists.newArrayList(ms);
+			Collections.reverse(ms);
+			for(Message m: ms) {
+			
+				out.println("<tr>");
+				out.println("<td>");
+				out.println(m.getDate());
+				out.println("</td>");
+				out.println("<td>");
+				out.println("<font color=#007700>" + m.getNick() + "</font>");
+				out.println("</td>");
+				out.println("<td> ");
+				out.println(m.getMessage());
+				out.println("</td>");
+				out.println("</tr>");
+			}
+		 %>
+
+</tbody>
+</table>
+
+
 
 		</div>
 	</center>
+	<br><br>
 </body>
 </html>

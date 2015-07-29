@@ -17,7 +17,6 @@ public class WelcomeStage extends AbstractStage {
 	}
 
 
-
 	@Override
 	public void loadAssets() {
 		App.getAssets().loadFontInternal("simhei.ttf");

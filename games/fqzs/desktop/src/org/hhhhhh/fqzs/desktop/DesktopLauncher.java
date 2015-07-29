@@ -5,8 +5,8 @@ import org.hhhhhh.fqzs.core.App;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main(String[] arg) {
 		App listener = new App();
-		new LwjglApplication(listener, "fqzs", 760, 1280);
+		new LwjglApplication(listener, "fqzs", 760 / 3, 1280 / 3);
 	}
 }

@@ -2,6 +2,8 @@ package org.hhhhhh.fqzs.core;
 
 import org.hhhhhh.fqzs.event.Events;
 import org.hhhhhh.fqzs.event.RestartEvent;
+import org.hhhhhh.fqzs.login.LoginStage;
+import org.hhhhhh.fqzs.login.LoginSuccessListener;
 import org.hhhhhh.fqzs.welcome.LoadOverListener;
 import org.hhhhhh.fqzs.welcome.WelcomeStage;
 import org.javaplus.clickscreen.excel.StaticData;
@@ -17,8 +19,6 @@ import org.javaplus.game.common.Share;
 import org.javaplus.game.common.assets.Assets;
 import org.javaplus.game.common.messagebox.MessageBox;
 import org.javaplus.game.common.stage.IStage;
-
-import com.badlogic.gdx.ApplicationListener;
 
 public class App extends Game {
 
@@ -56,7 +56,7 @@ public class App extends Game {
 			public void onLoadOver() {
 				runInMainThread(new Runnable() {
 					public void run() {
-						changeToGameStage();
+						changeToLoginStage();
 					}
 				});
 			}
@@ -64,6 +64,23 @@ public class App extends Game {
 		setStage(stage);
 	}
 
+
+	private void changeToLoginStage() {
+		LoginStage stage = new LoginStage();
+		stage.addLoginSuccessListener(new LoginSuccessListener() {
+			
+			@Override
+			public void onLoginSuccess() {
+				runInMainThread(new Runnable() {
+					public void run() {
+						changeToGameStage();
+					}
+				});
+			}
+		});
+		setStage(stage);
+	}
+	
 	private void changeToGameStage() {
 		GameStage stage = new GameStage();
 		setStage(stage);
