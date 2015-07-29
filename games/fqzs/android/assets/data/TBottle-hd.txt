@@ -1,0 +1,165 @@
+TBottle-hd.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bottle33
+  rotate: false
+  xy: 2, 110
+  size: 30, 50
+  orig: 30, 50
+  offset: 0, 0
+  index: -1
+Bottle00
+  rotate: false
+  xy: 2, 56
+  size: 50, 52
+  orig: 50, 52
+  offset: 0, 0
+  index: -1
+Bottle12
+  rotate: false
+  xy: 82, 46
+  size: 20, 40
+  orig: 20, 40
+  offset: 0, 0
+  index: -1
+PBottle11
+  rotate: false
+  xy: 104, 40
+  size: 18, 34
+  orig: 18, 34
+  offset: 0, 0
+  index: -1
+Bottle-11
+  rotate: false
+  xy: 34, 110
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+PBottle32
+  rotate: false
+  xy: 78, 2
+  size: 24, 42
+  orig: 24, 42
+  offset: 0, 0
+  index: -1
+Bottle21
+  rotate: false
+  xy: 76, 92
+  size: 24, 42
+  orig: 24, 42
+  offset: 0, 0
+  index: -1
+Bottle11
+  rotate: false
+  xy: 102, 88
+  size: 18, 38
+  orig: 18, 38
+  offset: 0, 0
+  index: -1
+Bottle32
+  rotate: false
+  xy: 48, 152
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+PBottle31
+  rotate: false
+  xy: 2, 206
+  size: 26, 42
+  orig: 26, 42
+  offset: 0, 0
+  index: -1
+PBottle02
+  rotate: false
+  xy: 2, 162
+  size: 44, 42
+  orig: 44, 42
+  offset: 0, 0
+  index: -1
+Bottle31
+  rotate: false
+  xy: 48, 202
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: -1
+PBottle23
+  rotate: false
+  xy: 82, 136
+  size: 20, 38
+  orig: 20, 38
+  offset: 0, 0
+  index: -1
+PBottle01
+  rotate: false
+  xy: 82, 176
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+PBottle13
+  rotate: false
+  xy: 108, 202
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+Bottle23
+  rotate: false
+  xy: 54, 2
+  size: 22, 46
+  orig: 22, 46
+  offset: 0, 0
+  index: -1
+PBottle22
+  rotate: false
+  xy: 104, 2
+  size: 18, 36
+  orig: 18, 36
+  offset: 0, 0
+  index: -1
+Bottle01
+  rotate: false
+  xy: 2, 2
+  size: 50, 52
+  orig: 50, 52
+  offset: 0, 0
+  index: -1
+Bottle13
+  rotate: false
+  xy: 30, 206
+  size: 16, 42
+  orig: 16, 42
+  offset: 0, 0
+  index: -1
+PBottle33
+  rotate: false
+  xy: 54, 50
+  size: 26, 40
+  orig: 26, 40
+  offset: 0, 0
+  index: -1
+PBottle12
+  rotate: false
+  xy: 104, 166
+  size: 18, 34
+  orig: 18, 34
+  offset: 0, 0
+  index: -1
+Bottle22
+  rotate: false
+  xy: 80, 202
+  size: 26, 46
+  orig: 26, 46
+  offset: 0, 0
+  index: -1
+PBottle21
+  rotate: false
+  xy: 104, 128
+  size: 20, 36
+  orig: 20, 36
+  offset: 0, 0
+  index: -1
