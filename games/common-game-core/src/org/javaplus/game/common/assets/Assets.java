@@ -56,12 +56,22 @@ public class Assets {
 	static Map<String, Plist> plists = new HashMap<String, Plist>();
 	private static Loader sd;
 	private static Loader internal;
+	private static Loader defualtLoader;
 
 	public static void waitLoadingOver() {
 		getInternal().finishLoading();
 		getSd().finishLoading();
 	}
 
+
+	public static Loader getDefaultLoader() {
+		if (defualtLoader == null)
+			defualtLoader = getInternal();
+		return defualtLoader;
+	}
+	public static void setDefualtLoader(Loader defualtLoader) {
+		Assets.defualtLoader = defualtLoader;
+	}
 	public static Loader getInternal() {
 		if (internal == null)
 			internal = new Internal();
