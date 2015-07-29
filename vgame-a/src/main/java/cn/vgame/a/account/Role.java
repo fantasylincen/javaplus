@@ -45,6 +45,14 @@ public class Role implements IRole {
 		return dto.getRechargeHistory();
 	}
 
+	public String getZoneId() {
+		return dto.getZoneId();
+	}
+
+	public void setZoneId(String zoneId) {
+		dto.setZoneId(zoneId);
+	}
+
 	@Override
 	public long getJiangQuan() {
 		return dto.getJiangQuan();
@@ -451,10 +459,12 @@ public class Role implements IRole {
 	public void addRechargeHistory(long add, String from) {
 		dto.setRechargeHistory(dto.getRechargeHistory() + add);
 		Daos.getRoleDao().save(dto);
-
+		from = from + "-" + getZoneId();
+		
 		addCoinLog(add, from, "recharge");
-
+		
 		Server.getKeyValueSaveOnly().add("SYSTEM_RECHARGE", add);
+		Server.getKeyValueSaveOnly().add("SYSTEM_RECHARGE:" + from, add);
 	}
 
 	@Override
