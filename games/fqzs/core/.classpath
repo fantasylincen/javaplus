@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.1/bb5fe9832bcfe4bbc1de6bd357085b8a2a845d9c/gdx-1.6.1.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.1/5f028d1c47d0adcc5000f21d8868443c5119e639/gdx-1.6.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.1/54d45169ae4f97d6ae4fe9daed87d80eea700f67/gdx-box2d-1.6.1.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.1/3bbebb0c7071450ca297be7e0363924c2611850b/gdx-box2d-1.6.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.1/627fbfd56652cf6466c248b3fd507900b26993b8/gdx-freetype-1.6.1.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.1/ef65c50383aed15285467f914552740b3cc38177/gdx-freetype-1.6.1-sources.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/javaplus-common-game-core"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
