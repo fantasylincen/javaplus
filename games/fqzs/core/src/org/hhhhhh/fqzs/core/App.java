@@ -13,6 +13,7 @@ import org.hhhhhh.fqzs.login.RoleSelectedEvent;
 import org.hhhhhh.fqzs.login.RoleUI;
 import org.hhhhhh.fqzs.login.RoleUIListener;
 import org.hhhhhh.fqzs.message.MessageUI;
+import org.hhhhhh.fqzs.result.RoleData;
 import org.hhhhhh.fqzs.welcome.LoadOverEvent;
 import org.hhhhhh.fqzs.welcome.LoadOverListener;
 import org.hhhhhh.fqzs.welcome.WelcomeStage;
@@ -46,6 +47,8 @@ public class App extends Game {
 	private static UserData userData;
 
 	private RoleUI roleUI;
+
+	private static RoleData roleData;
 
 	public static FqzsClient getHttp() {
 		if (http == null)
@@ -184,5 +187,14 @@ public class App extends Game {
 		if (userData == null)
 			userData = new UserData();
 		return userData;
+	}
+
+	public static void setRoleData(RoleData roleData) {
+		App.roleData = roleData;
+
+	}
+
+	public static RoleData getRoleData() {
+		return roleData;
 	}
 }

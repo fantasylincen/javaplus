@@ -3,9 +3,9 @@ package org.javaplus.game.common.http;
 public class Parameter {
 
 	String key;
-	String value;
+	Object value;
 
-	public Parameter(String key, String value) {
+	public Parameter(String key, Object value) {
 		this.key = key;
 		this.value = value;
 	}
@@ -14,7 +14,7 @@ public class Parameter {
 		return key;
 	}
 
-	public String getValue() {
+	public Object getValue() {
 		return value;
 	}
 

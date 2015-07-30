@@ -20,7 +20,7 @@ public class Parameters {
 		return ps.values();
 	}
 
-	public void put(String key, String value) {
+	public void put(String key, Object value) {
 		Parameter p = new Parameter(key, value);
 		ps.put(key, p);
 	}

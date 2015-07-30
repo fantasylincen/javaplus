@@ -3,9 +3,11 @@ package org.hhhhhh.fqzs.login;
 import java.util.Properties;
 import java.util.Set;
 
-import org.hhhhhh.fqzs.welcome.WelcomeStage;
+import org.javaplus.game.common.assets.Assets;
 import org.javaplus.game.common.util.Sets;
 import org.javaplus.game.common.util.Util;
+
+import com.badlogic.gdx.files.FileHandle;
 
 public class GateConfig {
 
@@ -17,8 +19,9 @@ public class GateConfig {
 
 	public GateConfig() {
 
-		String content = Util.File.getContent(WelcomeStage.class.getResource(".properties"));
-		Properties p = Util.Properties.getProperties(content);
+		FileHandle file = Assets.getDefaultLoader().getFile("data/.properties");
+		String string = file.readString();
+		Properties p = Util.Properties.getProperties(string);
 		Set<Object> keySet = p.keySet();
 		for (Object k : keySet) {
 			replaceValue(k, p);

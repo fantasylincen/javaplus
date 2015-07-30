@@ -11,6 +11,9 @@ public class Space {
 	private ArrayList<Runnable> actions;
 	private double time;
 
+	/**
+	 * @param space 秒
+	 */
 	public Space(double space) {
 		this.space = space;
 		actions = Lists.newArrayList();
@@ -20,6 +23,10 @@ public class Space {
 		return space;
 	}
 
+	public void setSpace(double space) {
+		this.space = space;
+	}
+	
 	public void update(float delta) {
 		if (needDo(delta)) {
 			for (Runnable a : actions) {

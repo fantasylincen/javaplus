@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>libgdx</string>
         <key>textureFileName</key>
-        <filename>../game-assets/data/game.png</filename>
+        <filename>game.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>../game-assets/data/game.txt</filename>
+        <filename>game.txt</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -158,6 +158,60 @@
             <filename>dir.png</filename>
             <filename>mask.png</filename>
             <filename>Effects</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_L.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/C.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/D.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/E.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/F.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/G.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/H.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/I.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/J.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/K.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/L.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/qh.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/qx.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/xy.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/A.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/B.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_A.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_B.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_C.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_D.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_E.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_F.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_G.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_H.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_I.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_J.png</filename>
+            <filename>D:/用户目录/桌面/Desktop/资源/button_K.png</filename>
+            <filename>fqzs/A.png</filename>
+            <filename>fqzs/B.png</filename>
+            <filename>fqzs/button_A.png</filename>
+            <filename>fqzs/button_B.png</filename>
+            <filename>fqzs/button_C.png</filename>
+            <filename>fqzs/button_D.png</filename>
+            <filename>fqzs/button_E.png</filename>
+            <filename>fqzs/button_F.png</filename>
+            <filename>fqzs/button_G.png</filename>
+            <filename>fqzs/button_H.png</filename>
+            <filename>fqzs/button_I.png</filename>
+            <filename>fqzs/button_J.png</filename>
+            <filename>fqzs/button_K.png</filename>
+            <filename>fqzs/button_L.png</filename>
+            <filename>fqzs/C.png</filename>
+            <filename>fqzs/D.png</filename>
+            <filename>fqzs/E.png</filename>
+            <filename>fqzs/F.png</filename>
+            <filename>fqzs/G.png</filename>
+            <filename>fqzs/H.png</filename>
+            <filename>fqzs/I.png</filename>
+            <filename>fqzs/J.png</filename>
+            <filename>fqzs/K.png</filename>
+            <filename>fqzs/L.png</filename>
+            <filename>fqzs/qh.png</filename>
+            <filename>fqzs/qx.png</filename>
+            <filename>fqzs/xy.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
