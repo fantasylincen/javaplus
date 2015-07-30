@@ -91,7 +91,7 @@ public class TextDebugger extends Actor implements Out {
 	public void draw(Batch batch, float delta) {
 		String text = texts.toString();
 
-		font.drawMultiLine(batch, text, 0, getY(text));
+		font.draw(batch, text, 0, getY(text));
 	}
 
 	private float getY(String text) {

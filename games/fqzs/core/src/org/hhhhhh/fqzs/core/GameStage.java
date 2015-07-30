@@ -5,7 +5,6 @@ import org.hhhhhh.fqzs.event.ExitEvent;
 import org.javaplus.game.common.animation.AnimationCreator;
 import org.javaplus.game.common.assets.Assets;
 import org.javaplus.game.common.assets.Assets.Loader;
-import org.javaplus.game.common.log.Log;
 import org.javaplus.game.common.stage.AbstractStage;
 import org.javaplus.game.common.stage.GameUI;
 
@@ -67,11 +66,6 @@ public class GameStage extends AbstractStage {
 			Events.dispatch(new ExitEvent());
 			return true;
 		}
-		if ('d' == c) {
-			App.getPreferences().clear();
-			Log.d("clear preferences");
-		}
-
 		return true;
 	}
 

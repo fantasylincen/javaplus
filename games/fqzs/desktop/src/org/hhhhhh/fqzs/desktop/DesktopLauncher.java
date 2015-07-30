@@ -5,8 +5,13 @@ import org.hhhhhh.fqzs.core.App;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
 public class DesktopLauncher {
+	private static final double X = 1;
+
 	public static void main(String[] arg) {
-		App listener = new App();
-		new LwjglApplication(listener, "fqzs", 760 / 3, 1280 / 3);
+		App app = new App();
+		app.setLoginUI(new DesktopLoginUI());
+		app.setRoleUI(new DesktopRoleUI());
+		app.setMessageUI(new DesktopMessageUI());
+		new LwjglApplication(app, "fqzs", (int)(760 * X), (int) (1280 * X));
 	}
 }

@@ -102,4 +102,21 @@ public class HttpAsyncClient implements HttpClient {
 		}
 		return sb + "";
 	}
+
+	public void requestJson(final String configAction, CallBackJson back) {
+		Request request = new Request() {
+			
+			@Override
+			public String getUrl() {
+				return configAction;
+			}
+			
+			@Override
+			public Parameters getParameters() {
+				return new Parameters();
+			}
+		};
+		
+		requestJson(request, back);
+	}
 }

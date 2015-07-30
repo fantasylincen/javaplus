@@ -8,7 +8,7 @@ import org.freyja.libgdx.cocostudio.ui.widget.TTFLabel;
 import org.freyja.libgdx.cocostudio.ui.widget.TTFLabelStyle;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 
 public class CCLabel extends WidgetParser {
 

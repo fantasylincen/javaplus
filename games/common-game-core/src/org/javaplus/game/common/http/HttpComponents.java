@@ -36,6 +36,10 @@ public class HttpComponents {
 
 		void onTimeOut();
 
+		/**
+		 * 服务器有返回值, 但是返回值中包含了error字段不为空的时候, 执行该方法
+		 * @param error
+		 */
 		void failed(String error);
 
 		void onNetError(SocketException ex);

@@ -44,6 +44,7 @@
 		<action name="enterServer" class="cn.vgame.a.account.EnterServerAction" />
 		<action name="createRole" class="cn.vgame.a.account.CreateRoleAction" />
 		<action name="getRoleList" class="cn.vgame.a.account.GetRoleListAction" />
+		<action name="getRoleList2" class="cn.vgame.a.account.GetRoleList2Action" />
 		<action name="selectRole" class="cn.vgame.a.account.SelectRoleAction" />
 	</package>
 	
