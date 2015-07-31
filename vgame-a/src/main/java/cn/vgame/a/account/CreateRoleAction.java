@@ -62,7 +62,7 @@ public class CreateRoleAction extends JsonAction {
 		RoleDto dto = createNewUser(userId);
 		Role role = new Role(dto);
 
-		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
+		Events.dispatch(new SelectRoleEnterGameEvent(role, session, request));
 		Events.dispatch(new CreateRoleEvent(role, session));
 		
 		Server.getKeyValueSaveOnly().add("CREATE_ROLE_COUNT", 1);

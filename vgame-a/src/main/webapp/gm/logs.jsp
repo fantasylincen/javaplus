@@ -1,3 +1,5 @@
+<%@page import="cn.vgame.a.log.Translate"%>
+<%@page import="cn.vgame.a.log.GmLogTranslate2"%>
 <%@page import="cn.javaplus.log.Log"%>
 <%@page import="cn.vgame.share.ParameterUtil"%>
 <%@page import="cn.vgame.a.log.GmLogTranslate"%>
@@ -71,7 +73,7 @@
 				<tr>
 					<td><%=dto.getDate()%></td>
 					<td><%=dto.getUser()%></td>
-					<td><%=GmLogTranslate.translate(dto)%></td>
+					<td><%=Translate.translate(dto)%></td>
 					<td><%=dto.getClassName() + "." + dto.getMethodName()%></td>
 					<td><%=dto.getArgs()%></td>
 					<td><%="success".equals(dto.getResult()) ? "成功" : "失败"%></td>

@@ -65,8 +65,9 @@
 		
 		if(map.get(from) != null)
 		 	from = map.get(from);
-		
-		sb.append(from + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + Server.getRole(dto.getTo()).getNick());
+		Role roleTo = Server.getRole(dto.getTo());
+		String to = roleTo != null ? roleTo.getNick() : dto.getTo();
+		sb.append(from + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + to);
 
 		sb.append("</td>");
 

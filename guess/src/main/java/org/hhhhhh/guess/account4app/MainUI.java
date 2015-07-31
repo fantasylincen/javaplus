@@ -80,6 +80,9 @@ public class MainUI {
 		public String getDsc() {
 			return question.getDsc();
 		}
+		public String getTitle() {
+			return question.getTitle();
+		}
 
 		public String getImg() {
 			return question.getImg();

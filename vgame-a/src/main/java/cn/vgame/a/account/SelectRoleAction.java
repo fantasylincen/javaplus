@@ -60,7 +60,7 @@ public class SelectRoleAction extends JsonAction {
 		if (name != null)
 			kv.set("PLANTFORM", name);
 
-		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
+		Events.dispatch(new SelectRoleEnterGameEvent(role, session, request));
 		return new SelectRoleResult(role);
 	}
 

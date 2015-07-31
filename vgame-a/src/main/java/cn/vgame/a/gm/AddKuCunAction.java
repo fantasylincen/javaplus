@@ -1,5 +1,6 @@
 package cn.vgame.a.gm;
 
+import cn.javaplus.log.Log;
 import cn.vgame.a.Server;
 import cn.vgame.a.turntable.Turntable;
 import cn.vgame.a.turntable.Turntable.Controller;
@@ -24,6 +25,8 @@ public class AddKuCunAction extends ActionSupport {
 		c.setKuCun(c.getKuCun() + add);
 		
 		Server.getKeyValueSaveOnly().add("KU_CUN_TOU_FANG_LIANG", add);
+		
+		Log.d("add ku cun", add);
 		
 		return SUCCESS;
 	}

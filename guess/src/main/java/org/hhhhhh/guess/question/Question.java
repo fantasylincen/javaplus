@@ -56,5 +56,13 @@ public class Question {
 	public int getJiFen() {
 		return dto.getJiFen();
 	}
+
+	/**
+	 * 标题
+	 * @return
+	 */
+	public String getTitle() {
+		return dto.getContent();
+	}
 	
 }

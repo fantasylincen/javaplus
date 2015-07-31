@@ -9,6 +9,7 @@ import cn.javaplus.excel.Row;
 import cn.javaplus.excel.Sheet;
 import cn.javaplus.log.Log;
 import cn.vgame.a.Server;
+import cn.vgame.a.gen.dto.MongoGen.GmLogDto;
 
 public class Translate {
 
@@ -25,6 +26,14 @@ public class Translate {
 		return log;
 	}
 
+	public static String translate(GmLogDto dto) {
+
+		String className = dto.getClassName();
+		String methodName = dto.getMethodName();
+
+		return translate(className + "." + methodName);
+	}
+	
 	public static Map<String, String> getTans() {
 
 		if (timeOut()) {

@@ -128,11 +128,11 @@
 
 			<form id="upload" name="upload" method="post" action="createQuestion"
 				enctype="multipart/form-data">
-				<label for="content">问题内容</label> 
+				<label for="content">标题</label> 
 				<input id="content" name="content" type="text" class="txt1" /> 
 				
 				
-				<label for="dsc">说明</label>
+				<label for="dsc">内容</label>
 				<input id="dsc" name="dsc" type="text" class="txt1" />
 				
 				<label for="jiFen">积分奖励</label>

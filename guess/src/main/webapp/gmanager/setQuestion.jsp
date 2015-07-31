@@ -142,9 +142,9 @@
 
 			<form id="upload" name="upload" method="post" action="setQuestion"
 				enctype="multipart/form-data">
-				<label for="content">问题内容</label> <input id="content" name="content"
+				<label for="content">标题</label> <input id="content" name="content"
 					type="text" class="txt1" value="<%=dto.getContent()%>" /> <label
-					for="dsc">说明</label> <input id="dsc" name="dsc" type="text"
+					for="dsc">内容</label> <input id="dsc" name="dsc" type="text"
 					class="txt1" value="<%=dto.getDsc()%>" /> <label for="jiFen">积分奖励</label>
 				<input id="jiFen" name="jiFen" type="text" class="txt1"
 					value="<%=dto.getJiFen()%>" /> <label for="answerOptionHead">正确答案(填A/B/C/D/E/F)</label>
