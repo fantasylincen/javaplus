@@ -1,7 +1,6 @@
 package org.hhhhhh.fqzs.core;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import org.hhhhhh.fqzs.event.ExitEvent;
 import org.hhhhhh.fqzs.http.FqzsClient;
 import org.hhhhhh.fqzs.result.GetResultRequest;
 import org.hhhhhh.fqzs.result.PlayResult;
-import org.hhhhhh.fqzs.result.PlayResult.Result;
 import org.hhhhhh.fqzs.result.RollEndEvent;
 import org.hhhhhh.fqzs.result.Roller;
 import org.hhhhhh.fqzs.result.RollerLitener;
@@ -60,8 +58,6 @@ public class GameStage extends AbstractStage {
 
 	public class GetResultCallBack extends CallBackJsonAdaptor {
 
-		private Roller roller;
-
 		@Override
 		public void completed(JsonResult result) {
 			String text = result.toString();
@@ -71,12 +67,14 @@ public class GameStage extends AbstractStage {
 		}
 
 		private void startRoll() {
-			
-			roller = new Roller(playResult, lights);
-			roller.addListener(new RestartNewRoundLitener());
-			roller.roll();
+			Log.d("start roll");
+			Roller roller = getRoller();
+			gameGroup.addActor(roller);
+			roller.startRoll(playResult, lights);
 		}
 	}
+
+	private Roller roller;
 
 	public class UpdateTimerSecListener implements SynchronizeListener {
 
@@ -88,6 +86,14 @@ public class GameStage extends AbstractStage {
 			timer.setSec(sec);
 		}
 
+	}
+
+	public Roller getRoller() {
+		if (roller == null) {
+			roller = new Roller();
+			roller.addListener(new RestartNewRoundLitener());
+		}
+		return roller;
 	}
 
 	public class Timer extends Actor {
@@ -288,6 +294,7 @@ public class GameStage extends AbstractStage {
 
 		private String behindId;
 		private Light behind;
+		private Light next;
 
 		public void setBehind(Light behind) {
 			this.behind = behind;
@@ -296,6 +303,14 @@ public class GameStage extends AbstractStage {
 
 		public Light getBehind() {
 			return behind;
+		}
+
+		public void setNext(Light next) {
+			this.next = next;
+		}
+
+		public Light getNext() {
+			return next;
 		}
 
 	}
@@ -370,7 +385,9 @@ public class GameStage extends AbstractStage {
 
 			@Override
 			public void onSecChange(SecChangeEvent e) {
-				if (e.getOldSec() == 1 && e.getNewSec() == 0) {
+				int oldSec = e.getOldSec();
+				int newSec = e.getNewSec();
+				if (oldSec == 1 && newSec == 0 || oldSec < newSec) {
 					requestResult();
 					timer.hide();
 					synchronizer.pause();
@@ -437,7 +454,10 @@ public class GameStage extends AbstractStage {
 		}
 
 		for (Light l : lights.values()) {
-			l.setBehind(lights.get(l.getBehindId()));
+			Light behind = lights.get(l.getBehindId());
+			l.setBehind(behind);
+
+			behind.setNext(l);
 		}
 
 		for (Light l : lights.values()) {

@@ -81,7 +81,7 @@ public class LoginFrame extends JFrame {
 
 		@Override
 		public String getUrl() {
-			String root = App.getGateConfig().getGateUrl();
+			String root = App.getProperties().get("gateUrl");
 			return root + "account4games/oneKeyRegist";
 		}
 
@@ -147,7 +147,7 @@ public class LoginFrame extends JFrame {
 
 		@Override
 		public String getUrl() {
-			String root = App.getGateConfig().getGateUrl();
+			String root = App.getProperties().get("gateUrl");
 			return root + "account4games/loginById";
 		}
 
@@ -219,7 +219,7 @@ public class LoginFrame extends JFrame {
 
 		@Override
 		public String getUrl() {
-			String root = App.getGateConfig().getGateUrl();
+			String root = App.getProperties().get("gateUrl");
 			return root + "account4games/login";
 		}
 
@@ -291,7 +291,7 @@ public class LoginFrame extends JFrame {
 
 		@Override
 		public String getUrl() {
-			String root = App.getGateConfig().getGateUrl();
+			String root = App.getProperties().get("gateUrl");
 			return root + "account4games/regist";
 		}
 

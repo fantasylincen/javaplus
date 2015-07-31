@@ -5,7 +5,7 @@ import org.hhhhhh.fqzs.event.Events;
 import org.hhhhhh.fqzs.event.RestartEvent;
 import org.hhhhhh.fqzs.http.FqzsClient;
 import org.hhhhhh.fqzs.http.FqzsClientAdaptor;
-import org.hhhhhh.fqzs.login.GateConfig;
+import org.hhhhhh.fqzs.login.AppProperties;
 import org.hhhhhh.fqzs.login.LoginEvent;
 import org.hhhhhh.fqzs.login.LoginListener;
 import org.hhhhhh.fqzs.login.LoginUI;
@@ -42,13 +42,15 @@ public class App extends Game {
 
 	private static GameConfig config;
 
-	private static GateConfig gateConfig;
+	private static AppProperties gateConfig;
 
 	private static UserData userData;
 
 	private RoleUI roleUI;
 
 	private static RoleData roleData;
+
+	private static Translator translator;
 
 	public static FqzsClient getHttp() {
 		if (http == null)
@@ -169,9 +171,9 @@ public class App extends Game {
 		return config;
 	}
 
-	public static GateConfig getGateConfig() {
+	public static AppProperties getProperties() {
 		if (gateConfig == null)
-			gateConfig = new GateConfig();
+			gateConfig = new AppProperties();
 		return gateConfig;
 	}
 
@@ -196,5 +198,11 @@ public class App extends Game {
 
 	public static RoleData getRoleData() {
 		return roleData;
+	}
+
+	public static Translator getTranslator() {
+		if(translator == null)
+			translator = new Translator();
+		return translator;
 	}
 }

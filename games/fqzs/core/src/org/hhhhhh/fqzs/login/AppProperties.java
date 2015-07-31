@@ -9,32 +9,44 @@ import org.javaplus.game.common.util.Util;
 
 import com.badlogic.gdx.files.FileHandle;
 
-public class GateConfig {
+public class AppProperties {
 
-	private String configAction;
 
-	private String zoneId;
+	private Properties prop;
 
-	private String gateUrl;
-
-	public GateConfig() {
+	public AppProperties() {
 
 		FileHandle file = Assets.getDefaultLoader().getFile("data/.properties");
 		String string = file.readString();
-		Properties p = Util.Properties.getProperties(string);
-		Set<Object> keySet = p.keySet();
+		prop = Util.Properties.getProperties(string);
+		Set<Object> keySet = prop.keySet();
 		for (Object k : keySet) {
-			replaceValue(k, p);
+			replaceValue(k, prop);
 		}
-		configAction = p.getProperty("configAction");
-		gateUrl = p.getProperty("gateUrl");
-		zoneId = p.getProperty("zoneId");
-
 	}
 
-	public String getGateUrl() {
-		return gateUrl;
+	public int getInt(Object key) {
+		return new Integer(get(key));
 	}
+
+	public long getLong(Object key) {
+		return new Long(get(key));
+	}
+
+	public double getDouble(Object key) {
+		return new Double(get(key));
+	}
+
+	public boolean getBoolean(Object key) {
+		return "true".equals(get(key));
+	}
+
+	public String get(Object key) {
+		if (key == null)
+			return null;
+		return prop.getProperty(key + "");
+	}
+
 
 	private void replaceValue(Object k, Properties p) {
 
@@ -45,21 +57,4 @@ public class GateConfig {
 		}
 		p.setProperty(k.toString(), v);
 	}
-
-	public String getConfigAction() {
-		return configAction;
-	}
-
-	public void setConfigAction(String configAction) {
-		this.configAction = configAction;
-	}
-
-	public String getZoneId() {
-		return zoneId;
-	}
-
-	public void setZoneId(String zoneId) {
-		this.zoneId = zoneId;
-	}
-
 }

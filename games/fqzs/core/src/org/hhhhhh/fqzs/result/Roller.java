@@ -1,89 +1,65 @@
 package org.hhhhhh.fqzs.result;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.hhhhhh.fqzs.core.App;
 import org.hhhhhh.fqzs.core.GameStage.Light;
 import org.hhhhhh.fqzs.result.PlayResult.Result;
 import org.javaplus.game.common.assets.Assets;
 import org.javaplus.game.common.log.Log;
 import org.javaplus.game.common.util.Lists;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public class Roller extends Actor {
+public class Roller extends Image {
 
-//	public class RollAction {
-//
-//		private Result result;
-//		private SpaceDefine space;
-//		int index;
-//
-//		public RollAction(Result result, SpaceDefine space) {
-//			this.result = result;
-//			this.space = space;
-//		}
-//
-//		public Result getResult() {
-//			return result;
-//		}
-//
-//		public SpaceDefine getSpace() {
-//			return space;
-//		}
-//
-//		public void doAction(float delta) {
-//			if (timeUp()) {
-//				rollToNext();
-//				index++;
-//			}
-//			if (isOver())
-//				time = 0;
-//		}
-//
-//		private void rollToNext() {
-//			// re
-//		}
-//
-//		private boolean timeUp() {
-//			float secAll = 0;
-//			for (int i = 0; i < index; i++) {
-//				Integer mi = space.getSpaces().get(i);
-//				float sec = mi / 1000f;
-//				secAll += sec;
-//			}
-//			return time >= secAll;
-//		}
-//
-//		public boolean isOver() {
-//			return index >= space.getSpaces().size();
-//		}
-//
-//	}
 
 	private List<RollerLitener> listeners = Lists.newArrayList();
-	private PlayResult playResult;
-	private List<SpaceDefine> spaces;
-//	private ArrayList<RollAction> rollQueue;
-	// private boolean isStart;
+
 	private int time;
+
+	private PlayResult playResult;
+
 	private Map<String, Light> lights;
 
-	public Roller(PlayResult playResult, Map<String, Light> lights) {
-		this.playResult = playResult;
-		this.lights = lights;
-		spaces = loadSpaces();
-//		rollQueue = Lists.newArrayList();
+	Light current;
 
-		addActions();
+	public Roller() {
+		super(getRegion());
+		loadSpaces();
+	}
+
+	private static AtlasRegion getRegion() {
+		TextureAtlas altas = Assets.getDefaultLoader().getTextureAtlas("data/game.txt");
+		return altas.findRegion("qx");
+	}
+
+	private void loadSpaces() {
+
+		if (FIRST_ROLL_SPACES_A != null)
+			return;
+
+		FIRST_ROLL_SPACES_A = get("firstRollSpacesA");
+		FIRST_ROLL_SPACES_B = get( "firstRollSpacesB");
+		FIRST_ROLL_SPACES_C = get( "firstRollSpacesC");
+
+		NEXT_ROLL_SPACE = new Integer(App.getProperties().get("nextRollSpace"));
+	}
+
+	private SpaceDefine get(String string) {
+		String property = App.getProperties().get(string);
+		SpaceDefine spaceDefine = new SpaceDefine(property);
+		return spaceDefine;
 	}
 
 	private void addActions() {
+		
+		clearActions();
 		List<Result> rs = playResult.getResults();
 		Iterator<Result> it = rs.iterator();
 
@@ -102,72 +78,63 @@ public class Roller extends Actor {
 		actions.addAction(new EndAction(this));
 	}
 
-	private List<SpaceDefine> loadSpaces() {
-		FileHandle file = Assets.getDefaultLoader().getFile("data/rollSpace.txt");
-		String readString = file.readString();
-		String[] split = readString.split("\r");
-		ArrayList<SpaceDefine> ls = Lists.newArrayList();
-		for (String line : split) {
-			if (line.trim().isEmpty()) {
-				continue;
-			}
-			ls.add(new SpaceDefine(line));
-		}
-		return ls;
-	}
-
 	public void addListener(RollerLitener l) {
 		listeners.add(l);
 	}
 
-	public void roll() {
-		// List<Result> results = playResult.getResults();
-		// for (int i = 0; i < results.size(); i++) {
-		// Result result = results.get(i);
-		// SpaceDefine space = spaces.get(i);
-		// addToRollQueue(result, space);
-		// }
-		// this.isStart = true;
-		// Log.d("start roll");
+	public void rollOnce() {
+		Light c = getCurrent();
+		this.current = c.getNext();
+		
+		float x = getCurrent().getX();
+		float y = getCurrent().getY();
+		setPosition(x, y);
+	}
 
+	public void startRoll(PlayResult playResult, Map<String, Light> lights) {
+		this.playResult = playResult;
+		this.lights = lights;
+		addActions();
 		addAction(actions);
 	}
 
-//	private void addToRollQueue(Result result, SpaceDefine space) {
-//		RollAction action = new RollAction(result, space);
-//		this.rollQueue.add(action);
-//	}
-
-	// public void update(float delta) {
-	// if (!isStart) {
-	// this.time = 0;
-	// return;
-	// }
-	//
-	// this.time += delta;
-	//
-	// RollAction action = getCurrentAction();
-	// if (action == null) {
-	// isStart = false;
-	// for (RollerLitener l : listeners) {
-	// l.onRollEnd(new RollEndEvent(this));
-	// }
-	// return;
-	// }
-	//
-	// action.doAction(delta);
-	// }
-//
-//	private RollAction getCurrentAction() {
-//		for (RollAction action : rollQueue) {
-//			if (!action.isOver()) {
-//				return action;
-//			}
-//		}
-//		return null;
-//	}
-//
-//	private static float ACTION_SPACE_SEC = 0.2f;
 	private SequenceAction actions;
+	static int NEXT_ROLL_SPACE;
+	static SpaceDefine FIRST_ROLL_SPACES_A;
+	static SpaceDefine FIRST_ROLL_SPACES_B;
+	static SpaceDefine FIRST_ROLL_SPACES_C;
+
+	public Light getCurrent() {
+		if (current == null)
+			current = lights.get("1");
+		return current;
+	}
+
+	public int getSpace(String id) {
+
+		Light from = getCurrent();
+		Light to = lights.get(id);
+		
+		if(to == null)
+			throw new NullPointerException();
+
+		Light cursor = from;
+		int times = 0;
+		while (true) {
+			if (cursor == to) {
+				return times;
+			}
+			times++;
+			cursor = cursor.getNext();
+		}
+	}
+
+	public void onRollEnd() {
+		RollEndEvent e = new RollEndEvent(this);
+		for (RollerLitener l : listeners) {
+			l.onRollEnd(e);
+		}
+		Log.d("roll end");
+	}
 
 }

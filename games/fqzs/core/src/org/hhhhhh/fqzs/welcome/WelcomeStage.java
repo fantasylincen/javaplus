@@ -5,7 +5,7 @@ import java.util.List;
 import org.hhhhhh.fqzs.config.GameConfig;
 import org.hhhhhh.fqzs.core.App;
 import org.hhhhhh.fqzs.core.D;
-import org.hhhhhh.fqzs.login.GateConfig;
+import org.hhhhhh.fqzs.login.AppProperties;
 import org.javaplus.game.common.http.HttpComponents.CallBackJsonAdaptor;
 import org.javaplus.game.common.http.JsonResult;
 import org.javaplus.game.common.log.Log;
@@ -24,7 +24,7 @@ public class WelcomeStage extends AbstractStage {
 		@Override
 		public void completed(JsonResult result) {
 
-			GameConfig config = getConfig(result,gateConfig.getZoneId());
+			GameConfig config = getConfig(result,gateConfig.get("zoneId"));
 			Log.d("load game config successful");
 			Log.d(config);
 			
@@ -96,16 +96,16 @@ public class WelcomeStage extends AbstractStage {
 	}
 
 	private List<LoadOverListener> listeners = Lists.newArrayList();
-	private GateConfig gateConfig;
+	private AppProperties gateConfig;
 
 	@Override
 	public void onLoadingOver() {
-		gateConfig = App.getGateConfig();
+		gateConfig = App.getProperties();
 		requestGameConfig();
 	}
 
 	private void requestGameConfig() {
-		App.getHttp().request(gateConfig.getConfigAction(), new GetGameConfigCallBack());
+		App.getHttp().request(gateConfig.get("configAction"), new GetGameConfigCallBack());
 	}
 
 	@Override
