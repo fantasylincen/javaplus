@@ -1,6 +1,7 @@
 package org.hhhhhh.fqzs.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.hhhhhh.fqzs.event.ExitEvent;
 import org.hhhhhh.fqzs.http.FqzsClient;
 import org.hhhhhh.fqzs.result.GetResultRequest;
 import org.hhhhhh.fqzs.result.PlayResult;
+import org.hhhhhh.fqzs.result.PlayResult.Result;
 import org.hhhhhh.fqzs.result.RollEndEvent;
 import org.hhhhhh.fqzs.result.Roller;
 import org.hhhhhh.fqzs.result.RollerLitener;
@@ -52,10 +54,13 @@ public class GameStage extends AbstractStage {
 		public void onRollEnd(RollEndEvent e) {
 			synchronizer.start();
 			timer.show();
+			e.getRoller().remove();
 		}
 	}
 
 	public class GetResultCallBack extends CallBackJsonAdaptor {
+
+		private Roller roller;
 
 		@Override
 		public void completed(JsonResult result) {
@@ -66,6 +71,7 @@ public class GameStage extends AbstractStage {
 		}
 
 		private void startRoll() {
+			
 			roller = new Roller(playResult, lights);
 			roller.addListener(new RestartNewRoundLitener());
 			roller.roll();
@@ -334,7 +340,6 @@ public class GameStage extends AbstractStage {
 	Timer timer;
 	TableData tableData;
 
-	private Roller roller;
 	private PlayResult playResult;
 
 	public PlayResult getPlayResult() {
@@ -447,9 +452,6 @@ public class GameStage extends AbstractStage {
 			synchronizer.update(delta);
 		if (timer != null)
 			timer.update(delta);
-		
-		if(roller != null)
-			roller.update(delta);
 	}
 
 	private void resetPositions() {

@@ -141,7 +141,14 @@ background-color: #EBEBEB;
 </head>
 <body>
 	<center>
+		
+		
+	
 		<%
+		
+			String gmUserId = (String)request.getAttribute("gmUserId");
+			String gmUserPwd = (String)request.getAttribute("gmUserPwd");
+			
 			RoleDao dao = Daos.getRoleDao();
 			int playerCount = dao.find().getCount();
 

@@ -5,7 +5,7 @@ import org.hhhhhh.fqzs.core.App;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
 public class DesktopLauncher {
-	private static final double X = 1;
+	private static final double X = 0.5;
 
 	public static void main(String[] arg) {
 		App app = new App();
