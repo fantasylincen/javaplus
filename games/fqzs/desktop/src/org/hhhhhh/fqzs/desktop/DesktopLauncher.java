@@ -8,7 +8,7 @@ public class DesktopLauncher {
 	private static final double X = 0.5;
 
 	public static void main(String[] arg) {
-		App app = new App();
+		App app = App.getApp();
 		app.setLoginUI(new DesktopLoginUI());
 		app.setRoleUI(new DesktopRoleUI());
 		app.setMessageUI(new DesktopMessageUI());

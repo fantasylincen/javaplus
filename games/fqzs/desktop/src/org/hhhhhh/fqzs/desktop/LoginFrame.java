@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.hhhhhh.fqzs.core.App;
+import org.hhhhhh.fqzs.desktop.LoginFrame.AutoLoginThread;
 import org.hhhhhh.fqzs.login.LoginEvent;
 import org.javaplus.game.common.http.HttpComponents.CallBackJson;
 import org.javaplus.game.common.http.HttpComponents.CallBackJsonAdaptor;
@@ -23,8 +24,17 @@ import org.javaplus.game.common.http.Parameters;
 import org.javaplus.game.common.http.Request;
 import org.javaplus.game.common.log.Log;
 import org.javaplus.game.common.util.Lists;
+import org.javaplus.game.common.util.Util;
 
 public class LoginFrame extends JFrame {
+
+	public class AutoLoginThread extends Thread {
+		@Override
+		public void run() {
+			Util.Thread.sleep(500);
+			login();
+		}
+	}
 
 	public class OneKeyRegistCallBack implements CallBackJson {
 
@@ -317,6 +327,29 @@ public class LoginFrame extends JFrame {
 	private List<LoginFrameListener> listeners = Lists.newArrayList();
 	private JLabel status;
 
+
+	private boolean isEmail(String username) {
+		return username.contains("@");
+	}
+	private void login() {
+		final String username = loginUsername.getText();
+		final String password = loginPassword.getText();
+
+		if (username.isEmpty() || password.isEmpty()) {
+			Log.d("账号密码不能为空");
+			return;
+		}
+
+		if (isEmail(username)) {
+			Request request = new LoginByUsernameRequest(username, password);
+			CallBackJson back = new LoginByUsernameCallBack();
+			App.getHttp().request(request, back);
+		} else {
+			Request request = new LoginByIdRequest(username, password);
+			CallBackJson back = new LoginByIdCallBack();
+			App.getHttp().request(request, back);
+		}
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -372,29 +405,10 @@ public class LoginFrame extends JFrame {
 		JButton loginButton = new JButton("登录");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final String username = loginUsername.getText();
-				final String password = loginPassword.getText();
-
-				if (username.isEmpty() || password.isEmpty()) {
-					Log.d("账号密码不能为空");
-					return;
-				}
-
-				if (isEmail(username)) {
-					Request request = new LoginByUsernameRequest(username, password);
-					CallBackJson back = new LoginByUsernameCallBack();
-					App.getHttp().request(request, back);
-				} else {
-					Request request = new LoginByIdRequest(username, password);
-					CallBackJson back = new LoginByIdCallBack();
-					App.getHttp().request(request, back);
-				}
+				login();
 
 			}
 
-			private boolean isEmail(String username) {
-				return username.contains("@");
-			}
 		});
 		loginButton.setBounds(94, 105, 95, 25);
 		contentPane.add(loginButton);
@@ -460,6 +474,8 @@ public class LoginFrame extends JFrame {
 		JLabel label_4 = new JLabel("状态:");
 		label_4.setBounds(10, 166, 54, 15);
 		contentPane.add(label_4);
+		
+		new AutoLoginThread().start();
 	}
 
 	public void addListener(LoginFrameListener l) {

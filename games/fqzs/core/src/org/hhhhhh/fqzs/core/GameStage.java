@@ -13,6 +13,7 @@ import org.hhhhhh.fqzs.result.PlayResult;
 import org.hhhhhh.fqzs.result.RollEndEvent;
 import org.hhhhhh.fqzs.result.Roller;
 import org.hhhhhh.fqzs.result.RollerLitener;
+import org.javaplus.clickscreen.button.IButtonListener;
 import org.javaplus.game.common.GameAssets;
 import org.javaplus.game.common.animation.AnimationCreator;
 import org.javaplus.game.common.assets.Assets;
@@ -42,9 +43,42 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.google.common.collect.Maps;
 
 public class GameStage extends AbstractStage {
+
+	public class UpdateUserCoinListener implements RollerLitener {
+
+		@Override
+		public void onRollEnd(RollEndEvent e) {
+			long coin = playResult.getCoin();
+			App.getRoleData().setCoin(coin);
+		}
+
+	}
+
+	public class MyCoin extends Actor {
+		
+		protected BitmapFont font;
+		
+		public MyCoin() {
+			GameAssets s = App.getAssets();
+			FreeTypeFontGenerator g = s.getGenerator();
+			FreeTypeFontParameter data = new FreeTypeFontParameter();
+			data.color = Color.WHITE;
+			data.size = 32;
+			data.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
+			font = g.generateFont(data);
+		}
+
+		@Override
+		public void draw(Batch batch, float parentAlpha) {
+			if(font != null ) {
+				font.draw(batch, App.getRoleData().getCoin() + "", getX(), getY());
+			}
+		}
+	}
 
 	public class RestartNewRoundLitener implements RollerLitener {
 
@@ -92,6 +126,7 @@ public class GameStage extends AbstractStage {
 		if (roller == null) {
 			roller = new Roller();
 			roller.addListener(new RestartNewRoundLitener());
+			roller.addListener(new UpdateUserCoinListener());
 		}
 		return roller;
 	}
@@ -177,22 +212,15 @@ public class GameStage extends AbstractStage {
 		@Override
 		public Parameters getParameters() {
 			Parameters p = new Parameters();
-			p.put("A", 0);
-			p.put("B", 0);
-			p.put("C", 0);
-			p.put("D", 0);
-			p.put("E", 0);
-			p.put("F", 0);
-			p.put("G", 0);
-			p.put("H", 0);
-			p.put("I", 0);
-			p.put("J", 0);
-			p.put("K", 0);
-			p.put("L", 0);
+			for (String id : BUTTON_IDS) {
+				p.put(id, buttons.get(id).getValue());
+			}
 			return p;
 		}
 
 	}
+
+	static List<String> BUTTON_IDS = Lists.newArrayList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L");
 
 	public class Synchronizer {
 
@@ -330,27 +358,26 @@ public class GameStage extends AbstractStage {
 	@Override
 	public void loadAssets() {
 
-		App.getAssets().loadFontInternal("data/Entsani.ttf");
-		App.getAssets().loadFontInternal("data/WildHoney.ttf");
-		App.getAssets().setSystemFont("data/WildHoney.ttf");
+		App.getAssets().loadFontInternal("data/DS-DIGI.TTF");
+		App.getAssets().setSystemFont("data/DS-DIGI.TTF");
 
-		loader = Assets.getDefaultLoader();
+		Loader d = Assets.getDefaultLoader();
+		AnimationCreator.setLoader(d);
 
-		AnimationCreator.setLoader(loader);
+		d.loadTextureAtlas("data/game.txt");
 
-		loader.loadTextureAtlas("data/game.txt");
-
-		loader.loadBitmapFont("data/font.fnt");
-		loader.loadTextureAtlas("data/ui-green.atlas");
-		loader.loadTexture("data/PetNest03.png");
-		loader.loadTexture("data/fat_oldboss02.png");
-		loader.loadTextureAtlas("data/TBottle-hd.txt");
-		loader.loadTexture("data/coin-sprite-sheet.png");
+		d.loadBitmapFont("data/font.fnt");
+		d.loadTextureAtlas("data/ui-green.atlas");
+		d.loadTexture("data/PetNest03.png");
+		d.loadTexture("data/coin-sprite-sheet.png");
+		d.loadTexture("data/fat_oldboss02.png");
+		d.loadTextureAtlas("data/TBottle-hd.txt");
+		d.loadTexture("data/coin-sprite-sheet.png");
 
 	}
 
-	private Loader loader;
 	private Map<String, Light> lights = Maps.newHashMap();
+	private Map<String, FqzsButton> buttons = Maps.newHashMap();
 	Synchronizer synchronizer;
 	Timer timer;
 	TableData tableData;
@@ -367,10 +394,116 @@ public class GameStage extends AbstractStage {
 		Actor panel = new Actor();
 		gameGroup.addActor(panel);
 		initGameTable();// 游戏桌面
-		initControlButton();// 控制台
 
 		initTimer();
 		initSynchronizer();
+
+		initControlPanel();
+		
+		initMyCoinText();
+	}
+
+	private void initMyCoinText() {
+		MyCoin actor = new MyCoin();
+		actor.setPosition(500, 500);
+		addActor(actor);
+	}
+
+	private void initControlPanel() {
+		addButtons();
+	}
+
+	private void addButtons() {
+		List<ButtonLocation> ls = getButtonLocation();
+		for (ButtonLocation bt : ls) {
+			final FqzsButton b = new FqzsButton(bt.getId());
+			b.setPosition(bt.getX(), bt.getY());
+
+			b.addButtonListener(new IButtonListener() {
+
+				@Override
+				public void onException(Exception e) {
+				}
+
+				@Override
+				public void action(ChangeEvent event, Actor actor) {
+					if ("qh".equals(b.getId())) {
+						qh();
+					} else if ("qx".equals(b.getId())) {
+						qx();
+					} else if ("xy".equals(b.getId())) {
+						xy();
+					} else {
+						b.addValue(getValueEveryTime());
+					}
+				}
+
+			});
+
+			addActor(b);
+
+			buttons.put(b.getId(), b);
+		}
+	}
+
+	private int getValueEveryTime() {
+		return buttons.get("qh").getValue();
+	}
+
+	private void xy() {
+		Log.d("xy");
+	}
+
+	private void qx() {
+		for (String id : BUTTON_IDS) {
+			buttons.get(id).setValue(0);
+		}
+	}
+
+	private void qh() {
+		String qh = App.getProperties().get("qh");
+		String[] vv = qh.split(",");
+		ArrayList<Integer> ls = Lists.newArrayList();
+		for (String v : vv) {
+			int value = new Integer(v);
+			ls.add(value);
+		}
+		
+		FqzsButton bt = buttons.get("qh");
+		qh(bt, ls);
+	}
+
+	private void qh(FqzsButton bt, ArrayList<Integer> ls) {
+		int value = bt.getValue();
+		ls.addAll(ls);
+		
+		int index = ls.indexOf(value);
+		
+		Integer v = ls.get(index + 1);
+		bt.setValue(v);
+	}
+
+	private List<ButtonLocation> getButtonLocation() {
+		ArrayList<ButtonLocation> ls = Lists.newArrayList();
+		FileHandle file = Assets.getDefaultLoader().getFile("data/buttonList.txt");
+		String string = file.readString();
+		String[] lines = string.split("\r");
+		for (String s : lines) {
+			if (!s.trim().isEmpty()) {
+				String[] ss = s.split(":");
+				String id = ss[0].trim();
+				String x = ss[1].trim();
+				String y = ss[2].trim();
+
+				ButtonLocation e = new ButtonLocation();
+				e.setId(id);
+				e.setX(new Integer(x));
+				e.setY(new Integer(y));
+				ls.add(e);
+			}
+		}
+
+		return ls;
 	}
 
 	private void initTimer() {
@@ -410,7 +543,7 @@ public class GameStage extends AbstractStage {
 
 	private List<LightLocation> getLightLocation() {
 		ArrayList<LightLocation> ls = Lists.newArrayList();
-		FileHandle file = loader.getFile("data/lightList.txt");
+		FileHandle file = Assets.getDefaultLoader().getFile("data/lightList.txt");
 		String string = file.readString();
 		String[] lines = string.split("\r");
 		for (String s : lines) {
@@ -435,11 +568,6 @@ public class GameStage extends AbstractStage {
 		return ls;
 	}
 
-	private void initControlButton() {
-		TextureRegion region = Assets.getDefaultLoader().findRegion("data/game.txt", "tankBlue_outline");
-		Image img = new Image(region);
-		gameGroup.addActor(img);
-	}
 
 	private void initGameTable() {
 
@@ -472,6 +600,22 @@ public class GameStage extends AbstractStage {
 			synchronizer.update(delta);
 		if (timer != null)
 			timer.update(delta);
+
+		// try {
+		// resetButtonPositions();
+		// resetPositions();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+	}
+
+	private void resetButtonPositions() {
+		List<ButtonLocation> ls = getButtonLocation();
+		for (ButtonLocation bt : ls) {
+			FqzsButton bb = buttons.get(bt.getId());
+			if (bb != null)
+				bb.setPosition(bt.getX(), bt.getY());
+		}
 	}
 
 	private void resetPositions() {

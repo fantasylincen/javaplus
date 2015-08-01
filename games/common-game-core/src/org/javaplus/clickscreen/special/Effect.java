@@ -43,7 +43,7 @@ public class Effect extends Actor {
 		listeners.add(l);
 	}
 
-	private GameAnimation animation;
+	protected GameAnimation animation;
 
 	public Effect(GameAnimation animation) {
 		this.animation = animation;

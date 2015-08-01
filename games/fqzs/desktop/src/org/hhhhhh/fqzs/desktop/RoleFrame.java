@@ -22,6 +22,7 @@ import org.javaplus.game.common.http.Parameters;
 import org.javaplus.game.common.http.Request;
 import org.javaplus.game.common.log.Log;
 import org.javaplus.game.common.util.Lists;
+import org.javaplus.game.common.util.Util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -428,6 +429,16 @@ public class RoleFrame extends JFrame {
 		contentPane.add(status);
 
 		enterServer();
+		
+		new AutoEnterThread().start();
+	}
+
+	public class AutoEnterThread extends Thread {
+		@Override
+		public void run() {
+			Util.Thread.sleep(500);
+			selectRoleAndEnterGame();
+		}
 	}
 
 	protected void selectRoleAndEnterGame() {

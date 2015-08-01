@@ -1,5 +1,6 @@
 package org.hhhhhh.fqzs.result;
 
+import org.javaplus.clickscreen.special.Effect;
 import org.javaplus.game.common.animation.AnimationCreator;
 import org.javaplus.game.common.animation.GameAnimation;
 import org.javaplus.game.common.animation.PlayOverCallBack;
@@ -10,19 +11,16 @@ import org.javaplus.game.common.util.Util;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Array;
 
-public class AnimalSpecial extends Actor {
+public class AnimalEffect extends Effect {
 
-	private static final float PLAY_TIME = 0.5f;
+	private static final float PLAY_TIME = 1.5f;
 
-	private Array<TextureRegion> regions;
-	private GameAnimation animation;
 	private float vy;
 	private float vx;
 	private static float g = -3.8f;
@@ -36,7 +34,7 @@ public class AnimalSpecial extends Actor {
 		}
 
 	}
-
+	
 	public class RemoveSelf implements PlayOverCallBack {
 
 		@Override
@@ -46,8 +44,8 @@ public class AnimalSpecial extends Actor {
 
 	}
 
-	public AnimalSpecial() {
-		animation = AnimationCreator.create(PLAY_TIME, getRegions());
+	public AnimalEffect() {
+		super(AnimationCreator.create(PLAY_TIME, getRegions()));
 		animation.playOnce(new RemoveSelf());
 		gravitySpace.addAction(new MoveSelf());
 		vx = Util.Random.get(-9, 9);
@@ -93,11 +91,9 @@ public class AnimalSpecial extends Actor {
 		gravitySpace.update(delta);
 	}
 
-	private Array<TextureRegion> getRegions() {
-		if (regions != null) {
-			return regions;
-		}
-		Texture texture = Assets.getSd().getTexture("data/coin-sprite-sheet.png");
+	private static Array<TextureRegion> getRegions() {
+		Array<TextureRegion> regions;
+		Texture texture = Assets.getDefaultLoader().getTexture("data/coin-sprite-sheet.png");
 		regions = new Array<TextureRegion>();
 		int x = 0;
 		for (int i = 0; i < 10; i++) {
