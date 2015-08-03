@@ -35,6 +35,7 @@ public class AnimalEffect extends Effect {
 
 	}
 	
+	
 	public class RemoveSelf implements PlayOverCallBack {
 
 		@Override
