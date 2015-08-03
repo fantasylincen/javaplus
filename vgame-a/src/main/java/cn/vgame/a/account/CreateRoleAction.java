@@ -98,9 +98,10 @@ public class CreateRoleAction extends JsonAction {
 	
 
 	private boolean ipCreateTooMany() {
-		KeyValue da = Server.getKeyValueDaily();
-		int createCount = da.getInt("CREATE_ROLE_COUNT:" + ip);
-		return createCount > 5; // 一个设备每天最多创建5个帐户
+		return false;
+//		KeyValue da = Server.getKeyValueDaily();
+//		int createCount = da.getInt("CREATE_ROLE_COUNT:" + ip);
+//		return createCount > 5; // 一个设备每天最多创建5个帐户
 	}
 
 	private boolean deviceCreateTooMany() {
