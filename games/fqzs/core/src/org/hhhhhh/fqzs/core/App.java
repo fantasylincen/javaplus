@@ -8,6 +8,7 @@ import org.hhhhhh.fqzs.http.FqzsClientAdaptor;
 import org.hhhhhh.fqzs.login.AppProperties;
 import org.hhhhhh.fqzs.login.LoginEvent;
 import org.hhhhhh.fqzs.login.LoginListener;
+import org.hhhhhh.fqzs.login.LoginManager;
 import org.hhhhhh.fqzs.login.LoginUI;
 import org.hhhhhh.fqzs.login.RoleSelectedEvent;
 import org.hhhhhh.fqzs.login.RoleUI;
@@ -51,6 +52,8 @@ public class App extends Game {
 	private static RoleData roleData;
 
 	private static Translator translator;
+
+	private static LoginManager loginManager;
 
 	public static FqzsClient getHttp() {
 		if (http == null)
@@ -201,8 +204,14 @@ public class App extends Game {
 	}
 
 	public static Translator getTranslator() {
-		if(translator == null)
+		if (translator == null)
 			translator = new Translator();
 		return translator;
+	}
+
+	public static LoginManager getLoginManager() {
+		if (loginManager == null)
+			loginManager = new LoginManager();
+		return loginManager;
 	}
 }

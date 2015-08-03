@@ -86,7 +86,15 @@ public class SetQuestionAction extends ActionSupport implements QuestionOption {
 	private void updateImageData(QuestionDto dto) {
 		String imageId = dto.getImageId();
 		ImageDto idto = DbUtil.get(ImageDto.class, imageId);
-		idto.setImage(new ImageReader().read(image.get(0)));
+		
+		if(idto == null)
+		{
+			idto = new ImageDto();
+			idto.setId(imageId);
+		}
+		
+		File img = image.get(0);
+		idto.setImage(new ImageReader().read(img));
 		DbUtil.save(idto);
 
 	}

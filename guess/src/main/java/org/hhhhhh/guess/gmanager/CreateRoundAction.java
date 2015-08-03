@@ -1,5 +1,9 @@
 package org.hhhhhh.guess.gmanager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hhhhhh.guess.hibernate.dao.DbUtil;
 import org.hhhhhh.guess.hibernate.dto.RoundDto;
 
@@ -44,13 +48,24 @@ public class CreateRoundAction extends ActionSupport {
 
 		RoundDto dto = new RoundDto();
 		dto.setId(Util.ID.createId());
-		dto.setEndTime(endTime);
-		dto.setStartTime(startTime);
+		dto.setEndTime(parse(endTime));
+		dto.setStartTime(parse(startTime));
 		dto.setName(name.trim());
 		dto.setDsc(dsc.trim());
 		DbUtil.save(dto);
 
 		return SUCCESS;
+	}
+
+	private String parse(String time) {
+		try {
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-M-d HH:mm:ss");
+			SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date parse = sf.parse(time);
+			return sf2.format(parse);
+		} catch (ParseException e) {
+			return time;
+		}
 	}
 
 	public String getDsc() {

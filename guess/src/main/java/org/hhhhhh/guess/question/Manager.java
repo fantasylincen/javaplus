@@ -54,7 +54,7 @@ public class Manager {
 			Collections.reverse(rs);
 			for (RoundDto dto : rs) {
 				if (isNowTimeInTimeScope(dto)) {
-					current = getRounds().get(0);
+					current = dto;
 					break;
 				}
 			}
@@ -63,16 +63,18 @@ public class Manager {
 	}
 
 	private boolean isNowTimeInTimeScope(RoundDto dto) {
-		return Util.Time.isIn(dto.getStartTime() + "|00:00 to "
-				+ dto.getEndTime() + "|24:00");
+		String startTime = dto.getStartTime();
+		String endTime = dto.getEndTime();
+		String scope = startTime + "|00:00 to " + endTime + "|24:00";
+		return Util.Time.isIn(scope);
 	}
 
 	public Ad getAd() {
-		return new Ad();// TODO LC
+		return new Ad();
 	}
 
 	public Ad getAd2() {
-		return new Ad();// TODO LC
+		return new Ad();
 	}
 
 	/**

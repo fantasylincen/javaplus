@@ -1,5 +1,9 @@
 package cn.vgame.a.account;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.events.Events;
@@ -48,8 +52,13 @@ public class CreateRoleAction extends JsonAction {
 	private String nick;
 	private String deviceId;
 
+	private String ip;
+
 	@Override
 	public Object exec() {
+
+		ip = request.getRemoteAddr();
+
 		boolean canUse = Util.Sencitive.canUse(getNick());
 		if (!canUse) {
 			return new ErrorResult(10004);
@@ -60,6 +69,10 @@ public class CreateRoleAction extends JsonAction {
 		}
 
 		if (deviceId != null && deviceCreateTooMany()) {
+			return new ErrorResult(10110);
+		}
+
+		if (ipCreateTooMany()) {
 			return new ErrorResult(10110);
 		}
 
@@ -77,8 +90,17 @@ public class CreateRoleAction extends JsonAction {
 
 		if (deviceId != null)
 			da.add("CREATE_ROLE_COUNT:" + deviceId, 1);
+		
+		da.add("CREATE_ROLE_COUNT:" + ip, 1);//记录该IP创建角色的次数
 
 		return new CreateRoleResult(role, session);
+	}
+	
+
+	private boolean ipCreateTooMany() {
+		KeyValue da = Server.getKeyValueDaily();
+		int createCount = da.getInt("CREATE_ROLE_COUNT:" + ip);
+		return createCount > 5; // 一个设备每天最多创建5个帐户
 	}
 
 	private boolean deviceCreateTooMany() {

@@ -2,7 +2,6 @@ package org.hhhhhh.fqzs.desktop;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.SocketException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -12,324 +11,116 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.hhhhhh.fqzs.config.GameConfig;
 import org.hhhhhh.fqzs.core.App;
+import org.hhhhhh.fqzs.login.CreateRoleCallBack;
+import org.hhhhhh.fqzs.login.EnterServerCallBack;
+import org.hhhhhh.fqzs.login.RoleItem;
+import org.hhhhhh.fqzs.login.RoleListCallBack;
 import org.hhhhhh.fqzs.login.RoleSelectedEvent;
+import org.hhhhhh.fqzs.login.SelectRoleCallBack;
 import org.hhhhhh.fqzs.result.RoleData;
-import org.javaplus.game.common.http.HttpComponents.CallBackJson;
-import org.javaplus.game.common.http.JsonResult;
-import org.javaplus.game.common.http.Parameters;
-import org.javaplus.game.common.http.Request;
 import org.javaplus.game.common.log.Log;
 import org.javaplus.game.common.util.Lists;
-import org.javaplus.game.common.util.Util;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
 public class RoleFrame extends JFrame {
 
-	public class SelectRoleCallBack implements CallBackJson {
+	public class SelectRoleCallBackImpl implements SelectRoleCallBack {
 
 		@Override
-		public void completed(JsonResult result) {
-			setStatus("选定角色成功:" + result);
+		public void onSuccess(RoleData role) {
+
+			App.setRoleData(role);
+
+			dispatchEvent(new RoleSelectedEvent(role));
 			
-			JSONObject obj = result.toJsonObject();
-			JSONObject r = obj.getJSONObject("role");
-			
-			RoleData roleData = JSON.parseObject(r.toJSONString(), RoleData.class);
-			
-			App.setRoleData(roleData);
-			
-			dispatchEvent(new RoleSelectedEvent(roleData));
-		}
+			RoleFrame.this.selectedRoleId = role.getId();
+			nick.setText(role.getNick());
 
-		private void dispatchEvent(RoleSelectedEvent e) {
-			for (RoleFrameListener l : listeners) {
-				l.onRoleSelectedSuccess(e);
-			}
-		}
-
-		@Override
-		public void onTimeOut() {
-			setStatus("选定角色超时");
-		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
-	}
-
-	public class SelectRoleRequest implements Request {
-
-		@Override
-		public String getUrl() {
-			String path = "account/selectRole";
-			return buildFullPath(path);
-		}
-
-		private String buildFullPath(String path) {
-			GameConfig config = App.getConfig();
-			String rootPath = config.getRootPath();
-			String url = rootPath + path;
-			return url;
-		}
-
-		@Override
-		public Parameters getParameters() {
-			Parameters p = new Parameters();
-			p.put("roleId", App.getUserData().getRoleId());
-			return p;
-		}
-
-	}
-
-	public class CreateRoleCallBack implements CallBackJson {
-
-		@Override
-		public void completed(JsonResult result) {
-//			result.getString(key)
-			JSONObject obj = result.toJsonObject();
-			JSONObject role = obj.getJSONObject("role");
-			String n = role.getString("nick");
-			String roleId = role.getString("id");
-			App.getUserData().setRoleId(roleId);
-			nick.setText(n);
-			
 			createRolePanel.setVisible(false);
 			selectRolePanel.setVisible(true);
+			
+			setStatus("选定角色成功:" + role);
 		}
 
 		@Override
-		public void onTimeOut() {
-			setStatus("创建角色超时");
+		public void faild(String message) {
+			setStatus(message);
 		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
+	}
+	
+	private void dispatchEvent(RoleSelectedEvent e) {
+		for (RoleFrameListener l : listeners) {
+			l.onRoleSelectedSuccess(e);
 		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
 	}
 
-	public class CreateRoleRequest implements Request {
+
+	public class CreateRoleCallBackImpl implements CreateRoleCallBack {
 
 		@Override
-		public String getUrl() {
-			GameConfig config = App.getConfig();
-			String rootPath = config.getRootPath();
-			String url = rootPath + "account/createRole";
-			return url;
+		public void onSuccess(RoleItem role) {
+			App.getUserData().setRoleId(role.getId());
+			
+			
+			RoleFrame.this.selectedRoleId = role.getId();
+			nick.setText(role.getNick());
+
+			createRolePanel.setVisible(false);
+			selectRolePanel.setVisible(true);
+			
+			setStatus("创建角色成功");
 		}
 
 		@Override
-		public Parameters getParameters() {
-			Parameters p = new Parameters();
-			String text = newNick.getText();
-			p.put("nick", text.trim());
-			return p;
+		public void faild(String message) {
+			setStatus(message);
 		}
-
 	}
 
-	public class GetRoleListCallBack implements CallBackJson {
+	public class EnterServerCallBackImpl implements EnterServerCallBack {
 
 		@Override
-		public void completed(JsonResult result) {
-			setStatus("获取角色列表成功:" + result);
-			JSONObject obj = result.toJsonObject();
-			JSONArray roles = obj.getJSONArray("roles");
+		public void onSuccess() {
+			requestRoleList();
+			setStatus("进入服务器成功");
+		}
+
+		@Override
+		public void faild(String message) {
+			setStatus(message);
+		}
+	}
+
+	private String selectedRoleId;
+
+	public class RoleListCallBackImpl implements RoleListCallBack {
+
+		@Override
+		public void onGetRoleList(List<RoleItem> roles) {
+
 			if (roles.isEmpty())
 				createRolePanel.setVisible(true);
 			else {
 				selectRolePanel.setVisible(true);
-				String nick = getNick(roles);
-				String id = getId(roles);
-				App.getUserData().setRoleId(id);
-				
+				RoleItem role = roles.get(0);
+				String nick = role.getNick();
+				String id = role.getId();
+				RoleFrame.this.selectedRoleId = id;
 				RoleFrame.this.nick.setText(nick);
 			}
-		}
-
-		private String getId(JSONArray roles) {
-			JSONObject o = (JSONObject) roles.get(0);
-			return o.getString("id");
-		
-		}
-
-		private String getNick(JSONArray roles) {
-			JSONObject o = (JSONObject) roles.get(0);
-			return o.getString("nick");
+			setStatus("获取角色列表成功:" + roles);
 		}
 
 		@Override
-		public void onTimeOut() {
-			setStatus("获取角色列表超时");
+		public void faild(String message) {
+			setStatus(message);
 		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
-	}
-
-	public class GetRoleListRequest implements Request {
-
-		@Override
-		public String getUrl() {
-			GameConfig config = App.getConfig();
-			String rootPath = config.getRootPath();
-			String url = rootPath + "account/getRoleList2";
-			return url;
-		}
-
-		@Override
-		public Parameters getParameters() {
-			return new Parameters();
-		}
-
-	}
-
-	public class EnterServerRequest implements Request {
-
-		@Override
-		public String getUrl() {
-			GameConfig config = App.getConfig();
-			String rootPath = config.getRootPath();
-			String url = rootPath + "account/enterServer";
-			return url;
-		}
-
-		@Override
-		public Parameters getParameters() {
-			Parameters p = new Parameters();
-			p.put("token", token);
-			p.put("userId", id);
-			p.put("zoneId", App.getConfig().getZoneId());
-			return p;
-		}
-
 	}
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6181652666548268217L;
-
-	public class EnterServerCallBack implements CallBackJson {
-
-		@Override
-		public void completed(JsonResult result) {
-			String sessionId = result.getString("sessionId");
-			String id = result.getString("id");
-			App.getUserData().setJsessionid(sessionId);
-			App.getUserData().setUserId(id);
-			setStatus("进入服务器成功:" + result);
-
-			requestRoleList();
-		}
-
-		private void setStatus(String string) {
-			Log.d(string);
-			status.setText(string);
-		}
-
-		@Override
-		public void onTimeOut() {
-			setStatus("进入服务器超时");
-		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
-	}
 
 	private JPanel contentPane;
 	private List<RoleFrameListener> listeners = Lists.newArrayList();
@@ -338,8 +129,6 @@ public class RoleFrame extends JFrame {
 	private JPanel createRolePanel;
 	private JPanel selectRolePanel;
 	private JLabel nick;
-	private String token;
-	private String id;
 	private JLabel label_2;
 	private JLabel status;
 
@@ -359,8 +148,6 @@ public class RoleFrame extends JFrame {
 	 * @param id
 	 */
 	public RoleFrame(String id, String token) {
-		this.id = id;
-		this.token = token;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -428,39 +215,28 @@ public class RoleFrame extends JFrame {
 		status.setBounds(52, 248, 380, 15);
 		contentPane.add(status);
 
-		enterServer();
-		
-		new AutoEnterThread().start();
-	}
+		enterServer(token, id);
 
-	public class AutoEnterThread extends Thread {
-		@Override
-		public void run() {
-			Util.Thread.sleep(500);
-			selectRoleAndEnterGame();
-		}
+		new AutoEnterThread(this).start();
 	}
 
 	protected void selectRoleAndEnterGame() {
-		CallBackJson back = new SelectRoleCallBack();
-		Request request = new SelectRoleRequest();
-		App.getHttp().request(request, back);
+		SelectRoleCallBack callBack = new SelectRoleCallBackImpl();
+		App.getLoginManager().selectRoleAndEnterGame(selectedRoleId, callBack);
 	}
 
 	protected void createRole() {
-		CallBackJson back = new CreateRoleCallBack();
-		Request request = new CreateRoleRequest();
-		App.getHttp().request(request, back);
+		CreateRoleCallBack callBack = new CreateRoleCallBackImpl();
+		App.getLoginManager().createRole(newNick.getText().trim(), callBack);
 	}
 
-	private void enterServer() {
-		CallBackJson back = new EnterServerCallBack();
-		Request request = new EnterServerRequest();
-		App.getHttp().request(request, back);
+	private void enterServer(String token, String id) {
+		EnterServerCallBack callBack = new EnterServerCallBackImpl();
+		App.getLoginManager().enterServer(token, id, callBack);
 	}
 
 	private void requestRoleList() {
-		CallBackJson back = new GetRoleListCallBack();
-		App.getHttp().request(new GetRoleListRequest(), back);
+		RoleListCallBack callBack = new RoleListCallBackImpl();
+		App.getLoginManager().requestRoleList(callBack);
 	}
 }

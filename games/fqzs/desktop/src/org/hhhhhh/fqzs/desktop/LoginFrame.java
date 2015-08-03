@@ -1,9 +1,7 @@
 package org.hhhhhh.fqzs.desktop;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.SocketException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -15,303 +13,59 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.hhhhhh.fqzs.core.App;
-import org.hhhhhh.fqzs.desktop.LoginFrame.AutoLoginThread;
+import org.hhhhhh.fqzs.login.LoginCallBack;
 import org.hhhhhh.fqzs.login.LoginEvent;
-import org.javaplus.game.common.http.HttpComponents.CallBackJson;
-import org.javaplus.game.common.http.HttpComponents.CallBackJsonAdaptor;
-import org.javaplus.game.common.http.JsonResult;
-import org.javaplus.game.common.http.Parameters;
-import org.javaplus.game.common.http.Request;
-import org.javaplus.game.common.log.Log;
+import org.hhhhhh.fqzs.login.OneKeyRegistCallBack;
+import org.hhhhhh.fqzs.login.RegistCallBack;
 import org.javaplus.game.common.util.Lists;
-import org.javaplus.game.common.util.Util;
 
 public class LoginFrame extends JFrame {
 
-	public class AutoLoginThread extends Thread {
+	public class OneKeyRegistCallBackImpl implements OneKeyRegistCallBack {
+
 		@Override
-		public void run() {
-			Util.Thread.sleep(500);
-			login();
+		public void registFaild(String message) {
+			status.setText(message);
 		}
-	}
-
-	public class OneKeyRegistCallBack implements CallBackJson {
-
+		
 		@Override
-		public void completed(JsonResult result) {
-			String id = result.getString("userId");
-			String pwd = result.getString("pwd");
-			// if(pwd == null) {
-			// pwd = result.getString("password");
-			// }
+		public void registSuccess(String id, String pwd) {
 			loginUsername.setText(id);
 			loginPassword.setText(pwd);
-			setStatus("注册成功:" + result);
-		}
-
-		private void setStatus(String string) {
-			Log.d(string);
-			status.setText(string);
-		}
-
-		@Override
-		public void onTimeOut() {
-			setStatus("注册超时");
-		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
+			status.setText("一键注册成功");
 		}
 
 	}
 
-	public class OneKeyRegistRequest implements Request {
+	public class RegistCallBackImpl implements RegistCallBack {
 
 		@Override
-		public String getUrl() {
-			String root = App.getProperties().get("gateUrl");
-			return root + "account4games/oneKeyRegist";
+		public void registFaild(String message) {
+			status.setText(message);
 		}
-
+		
 		@Override
-		public Parameters getParameters() {
-			return new Parameters();
+		public void registSuccess() {
+			status.setText("注册成功");
 		}
 
 	}
 
-	public class RegistCallBack implements CallBackJson {
+	public class LoginCallBackImpl implements LoginCallBack {
 
 		@Override
-		public void completed(JsonResult result) {
-			setStatus("注册成功:" + result);
+		public void loginSuccess(String id, String token) {
+			for (LoginFrameListener l : listeners) {
+				LoginEvent e = new LoginEvent(id, token);
+				l.onLoginSuccess(e);
+			}
+			status.setText("登录成功");
 		}
-
-		private void setStatus(String string) {
-			Log.d(string);
-			status.setText(string);
-		}
-
 		@Override
-		public void onTimeOut() {
-			setStatus("注册超时");
+		public void loginFaild(String message) {
+			status.setText(message);
 		}
 
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
-	}
-
-	private final class LoginByIdRequest implements Request {
-		private final String userId;
-		private final String password;
-
-		private LoginByIdRequest(String userId, String password) {
-			this.userId = userId;
-			this.password = password;
-		}
-
-		@Override
-		public String getUrl() {
-			String root = App.getProperties().get("gateUrl");
-			return root + "account4games/loginById";
-		}
-
-		@Override
-		public Parameters getParameters() {
-			Parameters p = new Parameters();
-			p.put("userId", userId);
-			p.put("pwd", password);
-			p.put("tokenKey", App.getConfig().getTokenKey());
-			return p;
-		}
-	}
-
-	public class LoginByIdCallBack extends CallBackJsonAdaptor {
-
-		@Override
-		public void completed(JsonResult result) {
-			setStatus("登录成功:" + result);
-			String id = result.getString("id");
-			String token = result.getString("token");
-			loginSuccess(id, token);
-		}
-
-		private void setStatus(String string) {
-			Log.d(string);
-			status.setText(string);
-		}
-
-		@Override
-		public void onTimeOut() {
-			setStatus("登录超时");
-		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
-	}
-
-	private final class LoginByUsernameRequest implements Request {
-		private final String username;
-		private final String password;
-
-		private LoginByUsernameRequest(String username, String password) {
-			this.username = username;
-			this.password = password;
-		}
-
-		@Override
-		public String getUrl() {
-			String root = App.getProperties().get("gateUrl");
-			return root + "account4games/login";
-		}
-
-		@Override
-		public Parameters getParameters() {
-			Parameters p = new Parameters();
-			p.put("username", username);
-			p.put("password", password);
-			p.put("tokenKey", App.getConfig().getTokenKey());
-			return p;
-		}
-	}
-
-	public class LoginByUsernameCallBack extends CallBackJsonAdaptor {
-
-		@Override
-		public void completed(JsonResult result) {
-			setStatus("登录成功:" + result);
-			String id = result.getString("id");
-			String token = result.getString("token");
-			loginSuccess(id, token);
-		}
-
-		private void setStatus(String string) {
-			Log.d(string);
-			status.setText(string);
-		}
-
-		@Override
-		public void onTimeOut() {
-			setStatus("登录超时");
-		}
-
-		@Override
-		public void failed(String error) {
-			setStatus(error);
-		}
-
-		@Override
-		public void onNetError(SocketException ex) {
-			setStatus("网络错误");
-		}
-
-		@Override
-		public void httpError(String error) {
-			setStatus("网络错误:" + error);
-		}
-
-		@Override
-		public void jsonParseError(String result) {
-			setStatus("返回值异常:" + result);
-		}
-
-		@Override
-		public void cancelled() {
-			setStatus("中断");
-		}
-
-	}
-
-	public class RegistRequest implements Request {
-		private final String username;
-		private final String password;
-
-		private RegistRequest(String username, String password) {
-			this.username = username;
-			this.password = password;
-		}
-
-		@Override
-		public String getUrl() {
-			String root = App.getProperties().get("gateUrl");
-			return root + "account4games/regist";
-		}
-
-		@Override
-		public Parameters getParameters() {
-			Parameters p = new Parameters();
-			p.put("username", username);
-			p.put("password", password);
-			return p;
-		}
 	}
 
 	/**
@@ -327,52 +81,25 @@ public class LoginFrame extends JFrame {
 	private List<LoginFrameListener> listeners = Lists.newArrayList();
 	private JLabel status;
 
+	private JButton oneKeyRegistButton;
 
-	private boolean isEmail(String username) {
-		return username.contains("@");
+
+
+	private void regist() {
+		final String username = registUsername.getText();
+		final String password = registPassword.getText();
+		
+		RegistCallBack callBack = new RegistCallBackImpl();
+		
+		App.getLoginManager().regist(username, password, callBack);		
 	}
-	private void login() {
+	
+	void login() {
 		final String username = loginUsername.getText();
 		final String password = loginPassword.getText();
-
-		if (username.isEmpty() || password.isEmpty()) {
-			Log.d("账号密码不能为空");
-			return;
-		}
-
-		if (isEmail(username)) {
-			Request request = new LoginByUsernameRequest(username, password);
-			CallBackJson back = new LoginByUsernameCallBack();
-			App.getHttp().request(request, back);
-		} else {
-			Request request = new LoginByIdRequest(username, password);
-			CallBackJson back = new LoginByIdCallBack();
-			App.getHttp().request(request, back);
-		}
+		LoginCallBack callBack = new LoginCallBackImpl();
+		App.getLoginManager().login(username, password, callBack);		
 	}
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	public void loginSuccess(String id, String token) {
-		for (LoginFrameListener l : listeners) {
-			LoginEvent e = new LoginEvent(id, token);
-			l.onLoginSuccess(e);
-		}
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -406,7 +133,6 @@ public class LoginFrame extends JFrame {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				login();
-
 			}
 
 		});
@@ -434,30 +160,18 @@ public class LoginFrame extends JFrame {
 		JButton registButton = new JButton("注册");
 		registButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final String username = registUsername.getText();
-				final String password = registPassword.getText();
-
-				if (username.isEmpty() || password.isEmpty()) {
-					Log.d("账号密码不能为空");
-					return;
-				}
-
-				Request request = new RegistRequest(username, password);
-				CallBackJson back = new RegistCallBack();
-				App.getHttp().request(request, back);
+				regist();
 
 			}
+
 		});
 		registButton.setBounds(307, 105, 95, 25);
 		contentPane.add(registButton);
 
-		final JButton oneKeyRegistButton = new JButton("一键注册");
+		oneKeyRegistButton = new JButton("一键注册");
 		oneKeyRegistButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Request request = new OneKeyRegistRequest();
-				CallBackJson back = new OneKeyRegistCallBack();
-				App.getHttp().request(request, back);
-				oneKeyRegistButton.setEnabled(false);
+				oneKeyRegist();
 			}
 		});
 		oneKeyRegistButton.setBounds(307, 140, 95, 25);
@@ -474,8 +188,14 @@ public class LoginFrame extends JFrame {
 		JLabel label_4 = new JLabel("状态:");
 		label_4.setBounds(10, 166, 54, 15);
 		contentPane.add(label_4);
-		
-		new AutoLoginThread().start();
+
+		new AutoLoginThread(this).start();
+	}
+
+	protected void oneKeyRegist() {
+		oneKeyRegistButton.setEnabled(false);
+		OneKeyRegistCallBack callBack = new OneKeyRegistCallBackImpl();
+		App.getLoginManager().oneKeyRegist(callBack);		
 	}
 
 	public void addListener(LoginFrameListener l) {
