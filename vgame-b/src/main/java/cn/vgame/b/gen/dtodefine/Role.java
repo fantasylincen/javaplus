@@ -68,6 +68,11 @@ interface Role {
 	int getMaxMissionId();
 	
 	/**
+	 * 角色的体力
+	 */
+	int getPhysical();
+	
+	/**
 	 * 键： 关卡ID
 	 * 值: 关卡数据
 	 */

@@ -24,7 +24,7 @@ public class ServerConfig {
 		return kk;
 	}
 
-	public boolean getBoolean(String key) {
+	public boolean getBoolean(String key) { 
 		return new Boolean(getString(key));
 	}
 
