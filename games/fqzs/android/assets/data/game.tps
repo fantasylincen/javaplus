@@ -146,45 +146,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Bullets</filename>
-            <filename>Environment</filename>
-            <filename>Obstacles</filename>
-            <filename>Smoke</filename>
-            <filename>Tanks</filename>
-            <filename>Coin</filename>
-            <filename>RPGTile</filename>
-            <filename>menublood1.png</filename>
-            <filename>menublood2.png</filename>
-            <filename>dir.png</filename>
             <filename>mask.png</filename>
-            <filename>Effects</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_L.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/C.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/D.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/E.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/F.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/G.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/H.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/I.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/J.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/K.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/L.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/qh.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/qx.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/xy.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/A.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/B.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_A.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_B.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_C.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_D.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_E.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_F.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_G.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_H.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_I.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_J.png</filename>
-            <filename>D:/用户目录/桌面/Desktop/资源/button_K.png</filename>
             <filename>fqzs/A.png</filename>
             <filename>fqzs/B.png</filename>
             <filename>fqzs/button_A.png</filename>
