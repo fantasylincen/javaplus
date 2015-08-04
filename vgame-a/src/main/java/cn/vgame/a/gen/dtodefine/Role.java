@@ -43,6 +43,8 @@ interface Role {
 
 	long getCreateTime();
 
+	String getCreateIp();
+	
 	/**
 	 * @return 银行中的金豆
 	 */

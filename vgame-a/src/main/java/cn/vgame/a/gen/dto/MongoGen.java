@@ -128,6 +128,8 @@
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByBankPasswordFuzzy(String bankPassword) {						bankPassword = bankPassword.replaceAll("\\*", ".*");			bankPassword = "^" + bankPassword + "$";			BasicDBObject o = new BasicDBObject("bankPassword", Pattern.compile(bankPassword, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByCreateTime(long createTime) {						BasicDBObject o = new BasicDBObject("createTime", createTime);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findCreateTimeBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("createTime", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByCreateIp(String createIp) {						BasicDBObject o = new BasicDBObject("createIp", createIp);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByCreateIpFuzzy(String createIp) {						createIp = createIp.replaceAll("\\*", ".*");			createIp = "^" + createIp + "$";			BasicDBObject o = new BasicDBObject("createIp", Pattern.compile(createIp, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByBankCoin(long bankCoin) {						BasicDBObject o = new BasicDBObject("bankCoin", bankCoin);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findBankCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("bankCoin", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByRechargeHistory(long rechargeHistory) {						BasicDBObject o = new BasicDBObject("rechargeHistory", rechargeHistory);			return new RoleDtoCursor(collection.find(o));		}
@@ -490,6 +492,7 @@
 		private long jiangQuan = 0;
 		private String bankPassword = "";
 		private long createTime = 0;
+		private String createIp = "";
 		private long bankCoin = 0;
 		private long rechargeHistory = 0;
 		private boolean hasJinYan = false;
@@ -507,6 +510,7 @@
 			jiangQuan = MongoGen.copy(src.jiangQuan);			
 			bankPassword = MongoGen.copy(src.bankPassword);			
 			createTime = MongoGen.copy(src.createTime);			
+			createIp = MongoGen.copy(src.createIp);			
 			bankCoin = MongoGen.copy(src.bankCoin);			
 			rechargeHistory = MongoGen.copy(src.rechargeHistory);			
 			hasJinYan = MongoGen.copy(src.hasJinYan);			
@@ -524,6 +528,7 @@
 		public long getJiangQuan() {			return this.jiangQuan;		}
 		public String getBankPassword() {			return this.bankPassword;		}
 		public long getCreateTime() {			return this.createTime;		}
+		public String getCreateIp() {			return this.createIp;		}
 		public long getBankCoin() {			return this.bankCoin;		}
 		public long getRechargeHistory() {			return this.rechargeHistory;		}
 		public boolean getHasJinYan() {			return this.hasJinYan;		}
@@ -541,6 +546,7 @@
 		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		public void setBankPassword(String bankPassword) {			this.bankPassword = bankPassword;		}
 		public void setCreateTime(long createTime) {			this.createTime = createTime;		}
+		public void setCreateIp(String createIp) {			this.createIp = createIp;		}
 		public void setBankCoin(long bankCoin) {			this.bankCoin = bankCoin;		}
 		public void setRechargeHistory(long rechargeHistory) {			this.rechargeHistory = rechargeHistory;		}
 		public void setHasJinYan(boolean hasJinYan) {			this.hasJinYan = hasJinYan;		}
@@ -559,6 +565,7 @@
 			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			o.put("bankPassword", MongoGen.toObject(bankPassword));			
 			o.put("createTime", MongoGen.toObject(createTime));			
+			o.put("createIp", MongoGen.toObject(createIp));			
 			o.put("bankCoin", MongoGen.toObject(bankCoin));			
 			o.put("rechargeHistory", MongoGen.toObject(rechargeHistory));			
 			o.put("hasJinYan", MongoGen.toObject(hasJinYan));			
@@ -576,6 +583,7 @@
 			jiangQuan = getLong(o, "jiangQuan");
 			bankPassword = getString(o, "bankPassword");
 			createTime = getLong(o, "createTime");
+			createIp = getString(o, "createIp");
 			bankCoin = getLong(o, "bankCoin");
 			rechargeHistory = getLong(o, "rechargeHistory");
 			hasJinYan = getBoolean(o, "hasJinYan");
@@ -599,9 +607,11 @@
 
 
 
+
 		MongoMap<String> loadKeyValueDaily(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueDaily");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 		MongoMap<String> loadKeyValueForever(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueForever");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 
+
 
 
 

@@ -1,9 +1,5 @@
 package cn.vgame.a.account;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import cn.javaplus.log.Log;
 import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.events.Events;
@@ -124,6 +120,7 @@ public class CreateRoleAction extends JsonAction {
 		dto.setNick(nick);
 		dto.setOwnerId(userId);
 		dto.setCreateTime(System.currentTimeMillis());
+		dto.setCreateIp(ip);
 		dao.save(dto);
 		return dto;
 	}
