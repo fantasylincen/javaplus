@@ -23,22 +23,33 @@ interface Role {
 	 * 是否是机器人, 如果是机器人, 则系统自动帮忙玩, 且玩家不可登陆
 	 */
 	boolean getIsRobot();
-
+    /**
+     * 人物角色的名称
+     * @return
+     */
 	String getNick();
-
+	
+     /**
+      * 角色的头像
+      * @return
+      */
+	
+	int getHead();
+	
+	/**
+	 * 角色金币
+	 * @return
+	 */
 	long getCoin();
 
-	/**
-	 * 银行密码
-	 */
-	String getBankPassword();
+   
 
 	long getCreateTime();
 
 	/**
-	 * @return 银行中的金豆
+	 * @return 角色砖石
 	 */
-	long getBankCoin();
+	long getMasonry();
 	
 	/**
 	 * 累计充值量
@@ -71,6 +82,11 @@ interface Role {
 	 * 角色的体力
 	 */
 	int getPhysical();
+	
+	/**
+	 * 角色的体力倒计时
+	 */
+	int getPhysicalCd();
 	
 	/**
 	 * 键： 关卡ID

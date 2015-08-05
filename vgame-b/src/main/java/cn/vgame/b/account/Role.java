@@ -209,8 +209,8 @@ public class Role implements IRole {
 		save.add("COIN_IN", add);
 	}
 
-	public long getBankCoin() {
-		return dto.getBankCoin();
+	public long getMasonry() {
+		return dto.getMasonry();
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class Role implements IRole {
 	}
 
 	public long getCoinAll() {
-		long coin = getCoin() + getBankCoin();
+		long coin = getCoin() + getMasonry();
 		if (coin < 0)
 			return getCoin();
 		return coin;
@@ -290,5 +290,17 @@ public class Role implements IRole {
 	public void addRechargeHistory(long add) {
 		dto.setRechargeHistory(dto.getRechargeHistory() + add);
 		Daos.getRoleDao().save(dto);
+	}
+
+	public int getHead() {
+		return dto.getHead();
+	}
+
+	public int getPhysical() {
+		return dto.getPhysical();
+	}
+
+	public int getPhysicalCd() {
+		return dto.getPhysicalCd();
 	}
 }

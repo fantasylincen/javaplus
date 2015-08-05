@@ -92,6 +92,8 @@ public class GetBagAction extends JsonActionAfterRoleEnterGame {
 
 	@Override
 	protected Object run() {
+		
+//		Object userId = session.getAttribute("userId");
 		return new BagResult();
 	}
 }

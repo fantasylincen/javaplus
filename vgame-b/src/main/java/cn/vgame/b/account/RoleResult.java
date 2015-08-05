@@ -43,7 +43,7 @@ public class RoleResult {
 	}
 
 	public long getBankCoin() {
-		return role.getBankCoin();
+		return role.getMasonry();
 	}
 
 	public boolean hasJinYan() {

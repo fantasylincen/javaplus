@@ -49,14 +49,14 @@
 		public RoleDtoCursor findByIsRobot(boolean isRobot) {						BasicDBObject o = new BasicDBObject("isRobot", isRobot);			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByNick(String nick) {						BasicDBObject o = new BasicDBObject("nick", nick);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByNickFuzzy(String nick) {						nick = nick.replaceAll("\\*", ".*");			nick = "^" + nick + "$";			BasicDBObject o = new BasicDBObject("nick", Pattern.compile(nick, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByHead(int head) {						BasicDBObject o = new BasicDBObject("head", head);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findHeadBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("head", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByCoin(long coin) {						BasicDBObject o = new BasicDBObject("coin", coin);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("coin", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
-		public RoleDtoCursor findByBankPassword(String bankPassword) {						BasicDBObject o = new BasicDBObject("bankPassword", bankPassword);			return new RoleDtoCursor(collection.find(o));		}
-		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByBankPasswordFuzzy(String bankPassword) {						bankPassword = bankPassword.replaceAll("\\*", ".*");			bankPassword = "^" + bankPassword + "$";			BasicDBObject o = new BasicDBObject("bankPassword", Pattern.compile(bankPassword, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByCreateTime(long createTime) {						BasicDBObject o = new BasicDBObject("createTime", createTime);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findCreateTimeBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("createTime", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
-		public RoleDtoCursor findByBankCoin(long bankCoin) {						BasicDBObject o = new BasicDBObject("bankCoin", bankCoin);			return new RoleDtoCursor(collection.find(o));		}
-		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findBankCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("bankCoin", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByMasonry(long masonry) {						BasicDBObject o = new BasicDBObject("masonry", masonry);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findMasonryBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("masonry", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByRechargeHistory(long rechargeHistory) {						BasicDBObject o = new BasicDBObject("rechargeHistory", rechargeHistory);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findRechargeHistoryBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("rechargeHistory", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByHasJinYan(boolean hasJinYan) {						BasicDBObject o = new BasicDBObject("hasJinYan", hasJinYan);			return new RoleDtoCursor(collection.find(o));		}
@@ -66,6 +66,8 @@
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findMaxMissionIdBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("maxMissionId", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByPhysical(int physical) {						BasicDBObject o = new BasicDBObject("physical", physical);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findPhysicalBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("physical", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByPhysicalCd(int physicalCd) {						BasicDBObject o = new BasicDBObject("physicalCd", physicalCd);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findPhysicalCdBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("physicalCd", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public RoleDto createDTO() {			return new RoleDto();		}			public static class RoleDtoCursor implements Iterator<RoleDto>, Iterable<RoleDto>{				private DBCursor	cursor;			private int pageAll;				public RoleDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public RoleDto next() {				DBObject next = cursor.next();				RoleDto dto = new RoleDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<RoleDto> iterator() {				return this;			}		}	}
 		public static class SystemKeyValueDao {			private DBCollection	collection;			public SystemKeyValueDao(DBCollection collection) {			this.collection = collection;		}			public void save(SystemKeyValueDto u) {			collection.save(u.toObject());		}			public void delete(SystemKeyValueDto u) {			delete(u.getKey());		}			public void delete(String key) {			collection.remove(key(key));		}			public SystemKeyValueDto get(String key) {			DBObject o = collection.findOne(key(key));			if(o == null) {				return null;			}			SystemKeyValueDto x = new SystemKeyValueDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String key) {			BasicDBObject o = new BasicDBObject();		o.put("_id", key);			return o;		}			public SystemKeyValueDtoCursor find() {			return new SystemKeyValueDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public SystemKeyValueDtoCursor findByKey(String key) {			collection.ensureIndex("key");			BasicDBObject o = new BasicDBObject("key", key);			return new SystemKeyValueDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public SystemKeyValueDtoCursor findByKeyFuzzy(String key) {			collection.ensureIndex("key");			key = key.replaceAll("\\*", ".*");			key = "^" + key + "$";			BasicDBObject o = new BasicDBObject("key", Pattern.compile(key, Pattern.CASE_INSENSITIVE));			return new SystemKeyValueDtoCursor(collection.find(o));		}
@@ -201,16 +203,17 @@
 		private String ownerId = "";
 		private boolean isRobot = false;
 		private String nick = "";
+		private int head = 0;
 		private long coin = 0;
-		private String bankPassword = "";
 		private long createTime = 0;
-		private long bankCoin = 0;
+		private long masonry = 0;
 		private long rechargeHistory = 0;
 		private boolean hasJinYan = false;
 		private boolean isOnline = false;
 		private boolean hasFengHao = false;
 		private int maxMissionId = 0;
 		private int physical = 0;
+		private int physicalCd = 0;
 		private MongoMap<MissionDataDto> missionData = Maps.newMongoMap();
 		private MongoMap<String> keyValueDaily = Maps.newMongoMap();
 		private MongoMap<String> keyValueForever = Maps.newMongoMap();
@@ -218,16 +221,17 @@
 			ownerId = MongoGen.copy(src.ownerId);			
 			isRobot = MongoGen.copy(src.isRobot);			
 			nick = MongoGen.copy(src.nick);			
+			head = MongoGen.copy(src.head);			
 			coin = MongoGen.copy(src.coin);			
-			bankPassword = MongoGen.copy(src.bankPassword);			
 			createTime = MongoGen.copy(src.createTime);			
-			bankCoin = MongoGen.copy(src.bankCoin);			
+			masonry = MongoGen.copy(src.masonry);			
 			rechargeHistory = MongoGen.copy(src.rechargeHistory);			
 			hasJinYan = MongoGen.copy(src.hasJinYan);			
 			isOnline = MongoGen.copy(src.isOnline);			
 			hasFengHao = MongoGen.copy(src.hasFengHao);			
 			maxMissionId = MongoGen.copy(src.maxMissionId);			
 			physical = MongoGen.copy(src.physical);			
+			physicalCd = MongoGen.copy(src.physicalCd);			
 			missionData = MissionDataDto.copy(src.missionData);			
 			keyValueDaily = MongoGen.copyString(src.keyValueDaily);			
 			keyValueForever = MongoGen.copyString(src.keyValueForever);			
@@ -235,16 +239,17 @@
 		public String getOwnerId() {			return this.ownerId;		}
 		public boolean getIsRobot() {			return this.isRobot;		}
 		public String getNick() {			return this.nick;		}
+		public int getHead() {			return this.head;		}
 		public long getCoin() {			return this.coin;		}
-		public String getBankPassword() {			return this.bankPassword;		}
 		public long getCreateTime() {			return this.createTime;		}
-		public long getBankCoin() {			return this.bankCoin;		}
+		public long getMasonry() {			return this.masonry;		}
 		public long getRechargeHistory() {			return this.rechargeHistory;		}
 		public boolean getHasJinYan() {			return this.hasJinYan;		}
 		public boolean getIsOnline() {			return this.isOnline;		}
 		public boolean getHasFengHao() {			return this.hasFengHao;		}
 		public int getMaxMissionId() {			return this.maxMissionId;		}
 		public int getPhysical() {			return this.physical;		}
+		public int getPhysicalCd() {			return this.physicalCd;		}
 		public MongoMap<MissionDataDto> getMissionData() {			return this.missionData;		}
 		public MongoMap<String> getKeyValueDaily() {			return this.keyValueDaily;		}
 		public MongoMap<String> getKeyValueForever() {			return this.keyValueForever;		}
@@ -252,16 +257,17 @@
 		public void setOwnerId(String ownerId) {			this.ownerId = ownerId;		}
 		public void setIsRobot(boolean isRobot) {			this.isRobot = isRobot;		}
 		public void setNick(String nick) {			this.nick = nick;		}
+		public void setHead(int head) {			this.head = head;		}
 		public void setCoin(long coin) {			this.coin = coin;		}
-		public void setBankPassword(String bankPassword) {			this.bankPassword = bankPassword;		}
 		public void setCreateTime(long createTime) {			this.createTime = createTime;		}
-		public void setBankCoin(long bankCoin) {			this.bankCoin = bankCoin;		}
+		public void setMasonry(long masonry) {			this.masonry = masonry;		}
 		public void setRechargeHistory(long rechargeHistory) {			this.rechargeHistory = rechargeHistory;		}
 		public void setHasJinYan(boolean hasJinYan) {			this.hasJinYan = hasJinYan;		}
 		public void setIsOnline(boolean isOnline) {			this.isOnline = isOnline;		}
 		public void setHasFengHao(boolean hasFengHao) {			this.hasFengHao = hasFengHao;		}
 		public void setMaxMissionId(int maxMissionId) {			this.maxMissionId = maxMissionId;		}
 		public void setPhysical(int physical) {			this.physical = physical;		}
+		public void setPhysicalCd(int physicalCd) {			this.physicalCd = physicalCd;		}
 		public void setMissionData(MongoMap<MissionDataDto> missionData) {			this.missionData = missionData;		}
 		public void setKeyValueDaily(MongoMap<String> keyValueDaily) {			this.keyValueDaily = keyValueDaily;		}
 		public void setKeyValueForever(MongoMap<String> keyValueForever) {			this.keyValueForever = keyValueForever;		}
@@ -270,16 +276,17 @@
 			o.put("ownerId", MongoGen.toObject(ownerId));			
 			o.put("isRobot", MongoGen.toObject(isRobot));			
 			o.put("nick", MongoGen.toObject(nick));			
+			o.put("head", MongoGen.toObject(head));			
 			o.put("coin", MongoGen.toObject(coin));			
-			o.put("bankPassword", MongoGen.toObject(bankPassword));			
 			o.put("createTime", MongoGen.toObject(createTime));			
-			o.put("bankCoin", MongoGen.toObject(bankCoin));			
+			o.put("masonry", MongoGen.toObject(masonry));			
 			o.put("rechargeHistory", MongoGen.toObject(rechargeHistory));			
 			o.put("hasJinYan", MongoGen.toObject(hasJinYan));			
 			o.put("isOnline", MongoGen.toObject(isOnline));			
 			o.put("hasFengHao", MongoGen.toObject(hasFengHao));			
 			o.put("maxMissionId", MongoGen.toObject(maxMissionId));			
 			o.put("physical", MongoGen.toObject(physical));			
+			o.put("physicalCd", MongoGen.toObject(physicalCd));			
 			o.put("missionData", MongoGen.toObject(missionData));
 			o.put("keyValueDaily", MongoGen.toObjectString(keyValueDaily));
 			o.put("keyValueForever", MongoGen.toObjectString(keyValueForever));
@@ -287,16 +294,17 @@
 			ownerId = getString(o, "ownerId");
 			isRobot = getBoolean(o, "isRobot");
 			nick = getString(o, "nick");
+			head = getInteger(o, "head");
 			coin = getLong(o, "coin");
-			bankPassword = getString(o, "bankPassword");
 			createTime = getLong(o, "createTime");
-			bankCoin = getLong(o, "bankCoin");
+			masonry = getLong(o, "masonry");
 			rechargeHistory = getLong(o, "rechargeHistory");
 			hasJinYan = getBoolean(o, "hasJinYan");
 			isOnline = getBoolean(o, "isOnline");
 			hasFengHao = getBoolean(o, "hasFengHao");
 			maxMissionId = getInteger(o, "maxMissionId");
 			physical = getInteger(o, "physical");
+			physicalCd = getInteger(o, "physicalCd");
 			missionData = loadMissionData(o);
 			keyValueDaily = loadKeyValueDaily(o);
 			keyValueForever = loadKeyValueForever(o);
@@ -314,10 +322,12 @@
 
 
 
+
 		MongoMap<MissionDataDto> loadMissionData(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("missionData");			if (dto == null) {				return null;			}			MongoMap<MissionDataDto> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				MissionDataDto d = new MissionDataDto();				d.fromDBObject((BasicDBObject)dto.get(key));				map.put(key, d);			}			return map;		}						
 		MongoMap<String> loadKeyValueDaily(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueDaily");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 		MongoMap<String> loadKeyValueForever(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueForever");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 
+
 
 
 
