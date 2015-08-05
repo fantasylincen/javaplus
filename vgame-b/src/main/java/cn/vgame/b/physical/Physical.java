@@ -1,7 +1,9 @@
-package cn.vgame.b.mission;
+package cn.vgame.b.physical;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.javaplus.collections.list.Lists;
 import cn.javaplus.excel.Row;
@@ -19,13 +21,13 @@ import cn.vgame.share.KeyValue;
 import cn.vgame.share.Xml;
 
 /**
- * 玩家关卡
+ * 
  */
-public class Mission {
+public class Physical {
 
 	private final Role role;
 
-	public Mission(Role role) {
+	public Physical(Role role) {
 		this.role = role;
 	}
 
@@ -42,27 +44,44 @@ public class Mission {
 	}
 
 	/**
-	 * 设置关卡的星星数 获取前端的得到星星个数。以及通关关数
-	 * 
+	 * 获取当前体力数，存储到数据库中
 	 */
 
-	public void setMissionStar(int star, String id) {
+	public void setPhysical(int physical){
 		RoleDto dto = role.getDto();
-		MongoMap<MissionDataDto> data = dto.getMissionData();
-
-		MissionDataDto v = new MissionDataDto();
-		v.setStar(1);
-		data.put(id, v);
+        dto.setPhysical(physical);
 		Daos.getRoleDao().save(dto);
 
 	}
-
-	public int getMaxMissionId() {
+	/**
+	 * 获取当前体力数，根据时间进行体力恢复
+	 * 
+	 */
+	public int getPhysicalforTime() {
 		RoleDto dto = role.getDto();
-		int maxMissionId = dto.getMaxMissionId();
-		return maxMissionId;
+        int physical=dto.getPhysical();
+        Timer timer=new Timer();
+		timer.schedule(new addPhysicalTime(), 1000, 600000);
+      
+		if(physical>30){
+			physical=30;
+		}
+		return physical;
+		
 	}
-    
 	
-	
+	/**
+	 * 每6分钟加一个体力
+	 * @author Administrator
+	 *
+	 */
+	public class addPhysicalTime extends TimerTask{
+		RoleDto dto = role.getDto();
+		int physical=dto.getPhysical();
+		
+		public void run() {
+			physical=physical+1;
+		}
+	}
+
 }

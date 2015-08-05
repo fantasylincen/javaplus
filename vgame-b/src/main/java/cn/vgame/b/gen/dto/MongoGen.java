@@ -16,7 +16,7 @@
 							static DBObject toObject(RoleDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectRoleDto(RoleDto value) {		return value.toObject();	}	 	static BasicDBList toObjectRoleDto(List<RoleDto> value) {		BasicDBList o = new BasicDBList();		for (RoleDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(SystemKeyValueDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectSystemKeyValueDto(SystemKeyValueDto value) {		return value.toObject();	}	 	static BasicDBList toObjectSystemKeyValueDto(List<SystemKeyValueDto> value) {		BasicDBList o = new BasicDBList();		for (SystemKeyValueDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
 							static DBObject toObject(YiJieRechargeLogDto value) {		if(value == null) 			return null;		return value.toObject();	}	 	static DBObject toObjectYiJieRechargeLogDto(YiJieRechargeLogDto value) {		return value.toObject();	}	 	static BasicDBList toObjectYiJieRechargeLogDto(List<YiJieRechargeLogDto> value) {		BasicDBList o = new BasicDBList();		for (YiJieRechargeLogDto v : value) {			o.add(toObject(v));		}		return o;	}	 	 
-		public static interface CollectionFetcher {			DBCollection getCollection(String string);		void destroy();	}			public static interface MongoDto {			DBObject toObject();		void fromDBObject(DBObject o);	}			public static interface MongoDbProperties {			/**		 * 数据库名		 */		String getName();				/**		 * 主机地址		 */		String getHost();				/**		 * 端口		 */		int getPort();		}	public static final class Daos {			private static CollectionFetcher	fetcher;		private static MongoDbProperties	properties;		private static Map<String, DBCollection> cache = new HashMap<String, DBCollection>();				public static void destroy() {			getCollectionFetcher().destroy();		}				public static final void setProperties(MongoDbProperties properties) {			Daos.properties = properties;		}				public static final CollectionFetcher getCollectionFetcher() {			if(fetcher == null)				fetcher = new NormalFetcher();			return fetcher;		}				private static  class NormalFetcher implements CollectionFetcher {			@Override			public DBCollection getCollection(String name) {								Mongo m = getMongo();				DB db = m.getDB(properties.getName());				return db.getCollection(name);			}			@Override			public void destroy() {				if(mongo != null)					mongo.close();			}						private static Mongo mongo;			private static Mongo getMongo() {				if(mongo == null) {					try {						if(properties == null) {							throw new NullPointerException("请先setProperties");						}						mongo = new MongoClient(properties.getHost(), properties.getPort());					} catch (UnknownHostException e) {						throw cn.javaplus.util.Util.Exception.toRuntimeException(e);					}				}				return mongo;			}		}		private static DBCollection getCollection(String collectionName) {			DBCollection c;			try {				c = cache.get(collectionName);			} catch (NullPointerException e) {				c = null;			}			if (c != null) {				return c;			}			c = getCollectionFetcher().getCollection(collectionName);			cache.put(collectionName, c);			return c;		}		public static ConsoleLogDao getConsoleLogDao() {			return new ConsoleLogDao(getCollection("ConsoleLog"));		}
+		public static interface CollectionFetcher {			DBCollection getCollection(String string);		void destroy();	}			public static interface MongoDto {			DBObject toObject();		void fromDBObject(DBObject o);	}			public static interface MongoDbProperties {			/**		 * 数据库名		 */		String getName();				/**		 * 主机地址		 */		String getHost();				/**		 * 端口		 */		int getPort();		}	public static final class Daos {			private static CollectionFetcher	fetcher;		private static MongoDbProperties	properties;		private static Map<String, DBCollection> cache = new HashMap<String, DBCollection>();				public static void destroy() {			getCollectionFetcher().destroy();		}				public static final void setProperties(MongoDbProperties properties) {			Daos.properties = properties;		}				public static final CollectionFetcher getCollectionFetcher() {			if(fetcher == null)				fetcher = new NormalFetcher();			return fetcher;		}				private static  class NormalFetcher implements CollectionFetcher {			@Override			public DBCollection getCollection(String name) {								Mongo m = getMongo();				DB db = m.getDB(properties.getName());				return db.getCollection(name);			}			@Override			public void destroy() {				if(mongo != null)					mongo.close();			}						private static Mongo mongo;			private static Mongo getMongo() {				if(mongo == null) {					try {						if(properties == null) {							throw new NullPointerException("请先setProperties");						}						mongo = new MongoClient(properties.getHost(), properties.getPort());					} catch (UnknownHostException e) {						throw cn.javaplus.util.Util.Exception.toRuntimeException(e);					}				}				return mongo;			}		}		public static DBCollection getCollection(String collectionName) {			DBCollection c;			try {				c = cache.get(collectionName);			} catch (NullPointerException e) {				c = null;			}			if (c != null) {				return c;			}			c = getCollectionFetcher().getCollection(collectionName);			cache.put(collectionName, c);			return c;		}		public static ConsoleLogDao getConsoleLogDao() {			return new ConsoleLogDao(getCollection("ConsoleLog"));		}
 		public static GmLogDao getGmLogDao() {			return new GmLogDao(getCollection("GmLog"));		}
 		public static RoleDao getRoleDao() {			return new RoleDao(getCollection("Role"));		}
 		public static SystemKeyValueDao getSystemKeyValueDao() {			return new SystemKeyValueDao(getCollection("SystemKeyValue"));		}
@@ -64,6 +64,8 @@
 		public RoleDtoCursor findByHasFengHao(boolean hasFengHao) {						BasicDBObject o = new BasicDBObject("hasFengHao", hasFengHao);			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByMaxMissionId(int maxMissionId) {						BasicDBObject o = new BasicDBObject("maxMissionId", maxMissionId);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findMaxMissionIdBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("maxMissionId", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByPhysical(int physical) {						BasicDBObject o = new BasicDBObject("physical", physical);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findPhysicalBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("physical", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public RoleDto createDTO() {			return new RoleDto();		}			public static class RoleDtoCursor implements Iterator<RoleDto>, Iterable<RoleDto>{				private DBCursor	cursor;			private int pageAll;				public RoleDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public RoleDto next() {				DBObject next = cursor.next();				RoleDto dto = new RoleDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<RoleDto> iterator() {				return this;			}		}	}
 		public static class SystemKeyValueDao {			private DBCollection	collection;			public SystemKeyValueDao(DBCollection collection) {			this.collection = collection;		}			public void save(SystemKeyValueDto u) {			collection.save(u.toObject());		}			public void delete(SystemKeyValueDto u) {			delete(u.getKey());		}			public void delete(String key) {			collection.remove(key(key));		}			public SystemKeyValueDto get(String key) {			DBObject o = collection.findOne(key(key));			if(o == null) {				return null;			}			SystemKeyValueDto x = new SystemKeyValueDto();			x.fromDBObject(o);			return x;		}			private BasicDBObject key(String key) {			BasicDBObject o = new BasicDBObject();		o.put("_id", key);			return o;		}			public SystemKeyValueDtoCursor find() {			return new SystemKeyValueDtoCursor(collection.find());		}			public long getCount() {			return collection.count();		}			public SystemKeyValueDtoCursor findByKey(String key) {			collection.ensureIndex("key");			BasicDBObject o = new BasicDBObject("key", key);			return new SystemKeyValueDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public SystemKeyValueDtoCursor findByKeyFuzzy(String key) {			collection.ensureIndex("key");			key = key.replaceAll("\\*", ".*");			key = "^" + key + "$";			BasicDBObject o = new BasicDBObject("key", Pattern.compile(key, Pattern.CASE_INSENSITIVE));			return new SystemKeyValueDtoCursor(collection.find(o));		}
@@ -208,6 +210,7 @@
 		private boolean isOnline = false;
 		private boolean hasFengHao = false;
 		private int maxMissionId = 0;
+		private int physical = 0;
 		private MongoMap<MissionDataDto> missionData = Maps.newMongoMap();
 		private MongoMap<String> keyValueDaily = Maps.newMongoMap();
 		private MongoMap<String> keyValueForever = Maps.newMongoMap();
@@ -224,6 +227,7 @@
 			isOnline = MongoGen.copy(src.isOnline);			
 			hasFengHao = MongoGen.copy(src.hasFengHao);			
 			maxMissionId = MongoGen.copy(src.maxMissionId);			
+			physical = MongoGen.copy(src.physical);			
 			missionData = MissionDataDto.copy(src.missionData);			
 			keyValueDaily = MongoGen.copyString(src.keyValueDaily);			
 			keyValueForever = MongoGen.copyString(src.keyValueForever);			
@@ -240,6 +244,7 @@
 		public boolean getIsOnline() {			return this.isOnline;		}
 		public boolean getHasFengHao() {			return this.hasFengHao;		}
 		public int getMaxMissionId() {			return this.maxMissionId;		}
+		public int getPhysical() {			return this.physical;		}
 		public MongoMap<MissionDataDto> getMissionData() {			return this.missionData;		}
 		public MongoMap<String> getKeyValueDaily() {			return this.keyValueDaily;		}
 		public MongoMap<String> getKeyValueForever() {			return this.keyValueForever;		}
@@ -256,6 +261,7 @@
 		public void setIsOnline(boolean isOnline) {			this.isOnline = isOnline;		}
 		public void setHasFengHao(boolean hasFengHao) {			this.hasFengHao = hasFengHao;		}
 		public void setMaxMissionId(int maxMissionId) {			this.maxMissionId = maxMissionId;		}
+		public void setPhysical(int physical) {			this.physical = physical;		}
 		public void setMissionData(MongoMap<MissionDataDto> missionData) {			this.missionData = missionData;		}
 		public void setKeyValueDaily(MongoMap<String> keyValueDaily) {			this.keyValueDaily = keyValueDaily;		}
 		public void setKeyValueForever(MongoMap<String> keyValueForever) {			this.keyValueForever = keyValueForever;		}
@@ -273,6 +279,7 @@
 			o.put("isOnline", MongoGen.toObject(isOnline));			
 			o.put("hasFengHao", MongoGen.toObject(hasFengHao));			
 			o.put("maxMissionId", MongoGen.toObject(maxMissionId));			
+			o.put("physical", MongoGen.toObject(physical));			
 			o.put("missionData", MongoGen.toObject(missionData));
 			o.put("keyValueDaily", MongoGen.toObjectString(keyValueDaily));
 			o.put("keyValueForever", MongoGen.toObjectString(keyValueForever));
@@ -289,6 +296,7 @@
 			isOnline = getBoolean(o, "isOnline");
 			hasFengHao = getBoolean(o, "hasFengHao");
 			maxMissionId = getInteger(o, "maxMissionId");
+			physical = getInteger(o, "physical");
 			missionData = loadMissionData(o);
 			keyValueDaily = loadKeyValueDaily(o);
 			keyValueForever = loadKeyValueForever(o);
@@ -305,10 +313,12 @@
 
 
 
+
 		MongoMap<MissionDataDto> loadMissionData(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("missionData");			if (dto == null) {				return null;			}			MongoMap<MissionDataDto> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				MissionDataDto d = new MissionDataDto();				d.fromDBObject((BasicDBObject)dto.get(key));				map.put(key, d);			}			return map;		}						
 		MongoMap<String> loadKeyValueDaily(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueDaily");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 		MongoMap<String> loadKeyValueForever(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueForever");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 
+
 
 
 

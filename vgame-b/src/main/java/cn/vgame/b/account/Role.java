@@ -7,6 +7,7 @@ import cn.vgame.b.gen.dto.MongoGen.MongoMap;
 import cn.vgame.b.gen.dto.MongoGen.RoleDao;
 import cn.vgame.b.gen.dto.MongoGen.RoleDto;
 import cn.vgame.b.mission.Mission;
+import cn.vgame.b.physical.Physical;
 import cn.vgame.b.result.ErrorResult;
 import cn.vgame.share.KeyValue;
 import cn.vgame.share.KeyValueSaveOnly;
