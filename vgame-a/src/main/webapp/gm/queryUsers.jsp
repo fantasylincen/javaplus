@@ -143,7 +143,7 @@
 		sb.append("<tr>");
 
 		sb.append("<td>");
-		sb.append("<a href=\"setUser.jsp?roleId=" + dto.getId() + "\">"
+		sb.append("<a target=\"_blank\" href=\"setUser.jsp?roleId=" + dto.getId() + "\">"
 				+ dto.getId() + "</a>" + fengHao + jinYan + robot);
 		sb.append("</td>");
 
@@ -170,10 +170,11 @@
 		sb.append("</td>");
 		
 		sb.append("<td>");
-		sb.append("<font color='" + getColor(dto) + "'>" + dto.getCreateIp() + "</font>");
+		sb.append("<font color='" + getColor(dto) + "'>█</font><a target=\"_blank\" href='http://www.ip138.com/ips1388.asp?ip=" + dto.getCreateIp() + "&action=2'>" + dto.getCreateIp() + "</a>");
 		sb.append("</td>");
 		
 		sb.append("<td>");
+		
 		if(dto.getIsRobot()) {
 			sb.append("<a href=\"setRobot?robot=false&roleId=" + dto.getId() + "\">取消</a>");
 		} else {
