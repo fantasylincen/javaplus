@@ -83,38 +83,4 @@ public class RoleResult {
 		return role.getCoinAll();
 	}
 	
-	/**
-	 * 还可以首冲的ID列表
-	 * @return
-	 */
-	public List<Integer> getFirstRechargeIds() {
-		
-		Plantform plantform = (Plantform) session.getAttribute("plantform");
-		if(plantform == null)
-			return Lists.newArrayList();
-		
-		Xml xml = Server.getXml();
-		
-		Sheet xy = xml.get(plantform.getRechargeSheetName());
-		List<Row> all = xy.getAll();
-		ArrayList<Integer> ls = Lists.newArrayList();
-		for (Row row : all) {
-			if(canFirstRecharge(row)) {
-				ls.add(row.getInt("id"));
-			}
-		}
-		return ls;
-	}
-
-	private boolean canFirstRecharge(Row row) {
-		int a = row.getInt("jinDou");
-		int b = row.getInt("jinDouFirst");
-		if(a == b)
-			return false;
-		String rmb = row.get("rmb");
-		KeyValue kv = role.getKeyValueForever();
-		boolean hasRecharge = kv.getBoolean("FIRST_RECHARGE_MARK:" + rmb);
-		return !hasRecharge;
-	}
-
 }
