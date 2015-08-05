@@ -44,8 +44,12 @@ public class MainUI {
 			return option.getDsc();
 		}
 
-		public String getScale() {
+		public double getScale() {
 			return option.getScale();
+		}
+		
+		public String getScaleValue() {
+			return option.getScaleText();
 		}
 
 		public boolean isSelected(User user) {

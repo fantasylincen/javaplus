@@ -22,70 +22,9 @@
 <center>
 <body>
 	<div style="width: 95%; ">
-		<table  border="1">
-			<thead>
-				<tr>
-					<th>角色ID</th>
-					<th>所属帐号</th>
-					<th>昵称</th>
-					<th><a href="queryUsers.jsp?query_users_sort=coin">金币</a></th>
-					<th><a href="queryUsers.jsp?query_users_sort=bankCoin">仓库</a></th>
-					<th><a href="queryUsers.jsp?query_users_sort=jiangQuan">奖券</a></th>
-					<th><a href="queryUsers.jsp?query_users_sort=createTime">创建时间</a></th>
-					<th>机器人</th>
-				</tr>
-			</thead>
-
-
-			<%!void print(StringBuffer sb, RoleDto dto) {
-
-		String fengHao = dto.getHasFengHao() ? "&nbsp;&nbsp;&nbsp;<font color=\"#FF5555\">封号中</font>" : "";
-		String jinYan = dto.getHasJinYan() ? "&nbsp;&nbsp;&nbsp;<font color=\"#FF5555\">禁言中</font>" : "";
-		String robot = dto.getIsRobot() ? "&nbsp;&nbsp;&nbsp;<font color=\"#FF5555\">机器人</font>" : "";
-
-		sb.append("<tr>");
-
-		sb.append("<td>");
-		sb.append("<a href=\"setUser.jsp?roleId=" + dto.getId() + "\">"
-				+ dto.getId() + "</a>" + fengHao + jinYan + robot);
-		sb.append("</td>");
-
-		sb.append("<td>");
-		sb.append(dto.getOwnerId());
-		sb.append("</td>");
-
-		sb.append("<td>");
-		sb.append(dto.getNick());
-		sb.append("</td>");
-
-		sb.append("<td>");
-		sb.append(dto.getCoin());
-		sb.append("</td>");
-		sb.append("<td>");
-		sb.append(dto.getBankCoin());
-		sb.append("</td>");
-		sb.append("<td>");
-		sb.append(dto.getJiangQuan());
-		sb.append("</td>");
-
-		sb.append("<td>");
-		sb.append(Util.Time.format(dto.getCreateTime()));
-		sb.append("</td>");
-		
-		sb.append("<td>");
-		if(dto.getIsRobot()) {
-			sb.append("<a href=\"setRobot?robot=false&roleId=" + dto.getId() + "\">取消</a>");
-		} else {
-			sb.append("<a href=\"setRobot?robot=true&roleId=" + dto.getId() + "\">设置为机器人</a>");
-		}
-		sb.append("</td>");
-
-		sb.append("</tr>");
-
-	}%>
-
-			<%
-				int cev = 1000;
+	<%
+	
+	int cev = 1000;
 				StringBuffer ssb = new StringBuffer();
 
 				
@@ -96,6 +35,7 @@
 				String cv = request.getParameter("countEvery");
 				String guanJianZi = request.getParameter("guanJianZi");
 				String query_users_sort = request.getParameter("query_users_sort");
+				
 				
 				RoleDtoCursor find;
 				
@@ -167,33 +107,8 @@
 					find.skip(skip);
 				}
 				find.limit(countEvery);
-
-				for (RoleDto dto : find) {
-					print(ssb, dto);
-				}
-
-				out.println(ssb.toString());
-			%>
-		</table>
-
-
-
-
-
-			<%
-				if(guanJianZi != null && !guanJianZi.trim().isEmpty()) {
-			 %>
-			 		总记录:<%=count %>&nbsp;&nbsp;&nbsp;&nbsp;以上是查找&nbsp;&nbsp;&nbsp;[  <%=guanJianZi %>  ]&nbsp;&nbsp;&nbsp;的结果
-			<%
-				} else {
-			 %>
-			 		总记录:<%=count %>&nbsp;&nbsp;&nbsp;&nbsp;以上是所有结果
-			<%
-				}
-			 %>
-		<br>
-<br><br>
-
+				
+	 %>
 		<form id="nextPage" action="queryUsers.jsp" method="post">
 			<input type="hidden" name="countEvery" value="<%=cev%>"> <input
 				type="hidden" name="page" value="<%=p + 1%>">
@@ -216,6 +131,103 @@
 				type="text" name="guanJianZi" value="<%=guanJianZi%>"><a
 				href="javascript:jump.submit();">查找</a>
 		</form>
+
+
+			<%!void print(StringBuffer sb, RoleDto dto) {
+
+		String fengHao = dto.getHasFengHao() ? "&nbsp;&nbsp;&nbsp;<font color=\"#FF5555\">封号中</font>" : "";
+		String jinYan = dto.getHasJinYan() ? "&nbsp;&nbsp;&nbsp;<font color=\"#FF5555\">禁言中</font>" : "";
+		String robot = dto.getIsRobot() ? "&nbsp;&nbsp;&nbsp;<font color=\"#FF5555\">机器人</font>" : "";
+
+		sb.append("<tr>");
+
+		sb.append("<td>");
+		sb.append("<a href=\"setUser.jsp?roleId=" + dto.getId() + "\">"
+				+ dto.getId() + "</a>" + fengHao + jinYan + robot);
+		sb.append("</td>");
+
+		sb.append("<td>");
+		sb.append(dto.getOwnerId());
+		sb.append("</td>");
+
+		sb.append("<td>");
+		sb.append(dto.getNick());
+		sb.append("</td>");
+
+		sb.append("<td>");
+		sb.append(dto.getCoin());
+		sb.append("</td>");
+		sb.append("<td>");
+		sb.append(dto.getBankCoin());
+		sb.append("</td>");
+		sb.append("<td>");
+		sb.append(dto.getJiangQuan());
+		sb.append("</td>");
+
+		sb.append("<td>");
+		sb.append(Util.Time.format(dto.getCreateTime()));
+		sb.append("</td>");
+		
+		sb.append("<td>");
+		sb.append(dto.getCreateIp());
+		sb.append("</td>");
+		
+		sb.append("<td>");
+		if(dto.getIsRobot()) {
+			sb.append("<a href=\"setRobot?robot=false&roleId=" + dto.getId() + "\">取消</a>");
+		} else {
+			sb.append("<a href=\"setRobot?robot=true&roleId=" + dto.getId() + "\">设置为机器人</a>");
+		}
+		sb.append("</td>");
+
+		sb.append("</tr>");
+
+	}%>
+
+		<table  border="1">
+			<thead>
+				<tr>
+					<th>角色ID</th>
+					<th>所属帐号</th>
+					<th>昵称</th>
+					<th><a href="queryUsers.jsp?query_users_sort=coin">金币</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=bankCoin">仓库</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=jiangQuan">奖券</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=createTime">创建时间</a></th>
+					<th><a href="queryUsers.jsp?query_users_sort=createIp">创建IP</a></th>
+					<th>机器人</th>
+				</tr>
+			</thead>
+			<%
+				
+				
+				for (RoleDto dto : find) {
+					print(ssb, dto);
+				}
+
+				out.println(ssb.toString());
+			%>
+			
+		</table>
+
+
+
+
+
+			<%
+				if(guanJianZi != null && !guanJianZi.trim().isEmpty()) {
+			 %>
+			 		总记录:<%=count %>&nbsp;&nbsp;&nbsp;&nbsp;以上是查找&nbsp;&nbsp;&nbsp;[  <%=guanJianZi %>  ]&nbsp;&nbsp;&nbsp;的结果
+			<%
+				} else {
+			 %>
+			 		总记录:<%=count %>&nbsp;&nbsp;&nbsp;&nbsp;以上是所有结果
+			<%
+				}
+			 %>
+		<br>
+<br><br>
+
 	</div>
 	</center>
 </body>

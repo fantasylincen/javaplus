@@ -19,8 +19,8 @@ public class G implements AnalyzeStrategy {
 	public G() {
 		String d = new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis() - Time.MILES_ONE_DAY));
 		dateNow = new Integer(d);
-		
-//		dateNow = 20150705;
+
+		// dateNow = 20150705;
 	}
 
 	public boolean conform(Stock1 stock) {
@@ -53,18 +53,19 @@ public class G implements AnalyzeStrategy {
 			return false;
 
 		double d = (close - price) / price;
-		
+
 		boolean b = d < 0.0;
-		if(b)
+		if (b)
 			Log.d(last.getId(), String.format("%.2f", d * 100) + "%");
 		return b;
 	}
 
 	private double get201407(OneDayData last) {
-//		Log.d(last.getDate());
-		if (last.getDate() != dateNow)
+//		Log.d("lastDate", last.getDate(), "dateNow", dateNow);
+		int dt = last.getDate();
+		if (dt != dateNow)
 			return 0;
-		
+
 		while (true) {
 			last = last.getYestoday();
 			if (last == null)

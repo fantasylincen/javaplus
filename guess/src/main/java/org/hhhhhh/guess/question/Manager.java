@@ -15,6 +15,7 @@ import org.hhhhhh.guess.rankinglist.RankingList;
 import org.hhhhhh.guess.user.User;
 import org.hhhhhh.guess.util.KeyValue;
 
+import cn.javaplus.log.Log;
 import cn.javaplus.time.Time;
 import cn.javaplus.util.Util;
 
@@ -167,6 +168,7 @@ public class Manager {
 		ArrayList<Question> ls = Lists.newArrayList();
 
 		for (QuestionDto dto : find) {
+			Log.d(dto.getImageId());
 			ls.add(new Question(dto));
 		}
 		return ls;

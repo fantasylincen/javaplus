@@ -3,10 +3,14 @@ package org.hhhhhh.guess.question;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hhhhhh.guess.exception.GuessException;
 import org.hhhhhh.guess.hibernate.dao.DbUtil;
+import org.hhhhhh.guess.hibernate.dto.AnswerDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionDto;
 import org.hhhhhh.guess.hibernate.dto.QuestionOptionDto;
 import org.hhhhhh.guess.user.User;
+
+import cn.javaplus.log.Log;
 
 import com.google.common.collect.Lists;
 
@@ -32,11 +36,14 @@ public class Question {
 	}
 	
 	public String getImg() {
-		return "gmanager/getImage?id=" + dto.getId();
+		String string = "gmanager/getImage?id=" + dto.getImageId();
+		return string;
 	}
 	
 	public boolean isAnswered(User user) {
-		return user.getKeyValueForever().getBoolean("IS_ANSWERED:" + getId());
+		
+		AnswerDto as = DbUtil.get(AnswerDto.class, user.getUsername() + ":" + dto.getId());
+		return as != null;
 	}
 	
 	public int getCount() {
