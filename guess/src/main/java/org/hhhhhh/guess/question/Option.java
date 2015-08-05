@@ -28,13 +28,9 @@ public class Option {
 		return dto.getDsc();
 	}
 
-	public String getScale() {
-		int count = questionDto.getCount();
-		double percent;
-		if (count == 0)
-			percent = 0;
-		else
-			percent = (dto.getCount() + 0f / count);
+	public String getScaleText() {
+		
+		double percent = getScale();
 		String format = String.format("%.0f", percent * 100);
 		return format + "%";
 	}
@@ -50,5 +46,16 @@ public class Option {
 			return false;
 
 		return as.getOptionHead().equals(dto.getHead());
+	}
+
+	public double getScale() {
+
+		int count = questionDto.getCount();
+		double percent;
+		if (count == 0)
+			percent = 0;
+		else
+			percent = (dto.getCount() + 0f / count);
+		return percent;
 	}
 }

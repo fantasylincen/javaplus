@@ -1,4 +1,4 @@
-package cn.vgame.a.plantform;
+package cn.vgame.plantform;
 
 
 public interface Plantform {

@@ -83,6 +83,8 @@ interface Role {
 	 */
 	int getPhysical();
 	
+	String getCreateIp();
+	
 	/**
 	 * 角色的体力倒计时
 	 */

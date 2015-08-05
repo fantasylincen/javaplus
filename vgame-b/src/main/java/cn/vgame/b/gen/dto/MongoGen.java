@@ -66,6 +66,8 @@
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findMaxMissionIdBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("maxMissionId", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByPhysical(int physical) {						BasicDBObject o = new BasicDBObject("physical", physical);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findPhysicalBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("physical", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByCreateIp(String createIp) {						BasicDBObject o = new BasicDBObject("createIp", createIp);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByCreateIpFuzzy(String createIp) {						createIp = createIp.replaceAll("\\*", ".*");			createIp = "^" + createIp + "$";			BasicDBObject o = new BasicDBObject("createIp", Pattern.compile(createIp, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByPhysicalCd(int physicalCd) {						BasicDBObject o = new BasicDBObject("physicalCd", physicalCd);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findPhysicalCdBetween(int min, int max) {						BasicDBObject o = new BasicDBObject();			o.put("physicalCd", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 			public void clear () {			collection.drop();		}			public RoleDto createDTO() {			return new RoleDto();		}			public static class RoleDtoCursor implements Iterator<RoleDto>, Iterable<RoleDto>{				private DBCursor	cursor;			private int pageAll;				public RoleDtoCursor(DBCursor cursor) {				this.cursor = cursor;			}				public boolean hasNext() {				return cursor.hasNext();			}				public RoleDto next() {				DBObject next = cursor.next();				RoleDto dto = new RoleDto();				dto.fromDBObject(next);				return dto;			}				public int getCount() {				return cursor.count();			}				public void skip(int skip) {				cursor.skip(skip);			}						public void limit(int limit) {				cursor.limit(limit);			}						/**			 * 分页, page从1开始 countOfEveryPage必须大于0			 */			public void page(int page, int countOfEveryPage) {				if(countOfEveryPage <= 0) {					throw new RuntimeException("countOfEveryPage must > 0");				}				int count = getCount();				pageAll = count / countOfEveryPage;				if(count % countOfEveryPage != 0) {					pageAll ++;				}								if(page > pageAll)					page = pageAll;								if(page < 1)					page = 1;									int skip = (page - 1) * countOfEveryPage ;				skip(skip);				limit(countOfEveryPage);			}						public int getPageAll() {				return pageAll;			}				public void remove() {				throw new UnImplMethodException();			}				public Iterator<RoleDto> iterator() {				return this;			}		}	}
@@ -213,6 +215,7 @@
 		private boolean hasFengHao = false;
 		private int maxMissionId = 0;
 		private int physical = 0;
+		private String createIp = "";
 		private int physicalCd = 0;
 		private MongoMap<MissionDataDto> missionData = Maps.newMongoMap();
 		private MongoMap<String> keyValueDaily = Maps.newMongoMap();
@@ -231,6 +234,7 @@
 			hasFengHao = MongoGen.copy(src.hasFengHao);			
 			maxMissionId = MongoGen.copy(src.maxMissionId);			
 			physical = MongoGen.copy(src.physical);			
+			createIp = MongoGen.copy(src.createIp);			
 			physicalCd = MongoGen.copy(src.physicalCd);			
 			missionData = MissionDataDto.copy(src.missionData);			
 			keyValueDaily = MongoGen.copyString(src.keyValueDaily);			
@@ -249,6 +253,7 @@
 		public boolean getHasFengHao() {			return this.hasFengHao;		}
 		public int getMaxMissionId() {			return this.maxMissionId;		}
 		public int getPhysical() {			return this.physical;		}
+		public String getCreateIp() {			return this.createIp;		}
 		public int getPhysicalCd() {			return this.physicalCd;		}
 		public MongoMap<MissionDataDto> getMissionData() {			return this.missionData;		}
 		public MongoMap<String> getKeyValueDaily() {			return this.keyValueDaily;		}
@@ -267,6 +272,7 @@
 		public void setHasFengHao(boolean hasFengHao) {			this.hasFengHao = hasFengHao;		}
 		public void setMaxMissionId(int maxMissionId) {			this.maxMissionId = maxMissionId;		}
 		public void setPhysical(int physical) {			this.physical = physical;		}
+		public void setCreateIp(String createIp) {			this.createIp = createIp;		}
 		public void setPhysicalCd(int physicalCd) {			this.physicalCd = physicalCd;		}
 		public void setMissionData(MongoMap<MissionDataDto> missionData) {			this.missionData = missionData;		}
 		public void setKeyValueDaily(MongoMap<String> keyValueDaily) {			this.keyValueDaily = keyValueDaily;		}
@@ -286,6 +292,7 @@
 			o.put("hasFengHao", MongoGen.toObject(hasFengHao));			
 			o.put("maxMissionId", MongoGen.toObject(maxMissionId));			
 			o.put("physical", MongoGen.toObject(physical));			
+			o.put("createIp", MongoGen.toObject(createIp));			
 			o.put("physicalCd", MongoGen.toObject(physicalCd));			
 			o.put("missionData", MongoGen.toObject(missionData));
 			o.put("keyValueDaily", MongoGen.toObjectString(keyValueDaily));
@@ -304,6 +311,7 @@
 			hasFengHao = getBoolean(o, "hasFengHao");
 			maxMissionId = getInteger(o, "maxMissionId");
 			physical = getInteger(o, "physical");
+			createIp = getString(o, "createIp");
 			physicalCd = getInteger(o, "physicalCd");
 			missionData = loadMissionData(o);
 			keyValueDaily = loadKeyValueDaily(o);
@@ -323,10 +331,12 @@
 
 
 
+
 		MongoMap<MissionDataDto> loadMissionData(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("missionData");			if (dto == null) {				return null;			}			MongoMap<MissionDataDto> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				MissionDataDto d = new MissionDataDto();				d.fromDBObject((BasicDBObject)dto.get(key));				map.put(key, d);			}			return map;		}						
 		MongoMap<String> loadKeyValueDaily(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueDaily");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 		MongoMap<String> loadKeyValueForever(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueForever");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 
+
 
 
 

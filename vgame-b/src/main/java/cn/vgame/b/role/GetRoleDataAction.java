@@ -44,7 +44,7 @@ public class GetRoleDataAction extends JsonActionAfterRoleEnterGame {
 		}
 //		体力恢复倒计时(秒)
 		public int getPhysicalCd() {
-			return role.getPhysicalCd();
+			return 0; //TODO chenke
 		}
 		
 //		金币

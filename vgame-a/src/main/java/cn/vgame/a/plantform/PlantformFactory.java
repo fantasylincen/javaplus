@@ -1,5 +1,7 @@
 package cn.vgame.a.plantform;
 
+import cn.vgame.plantform.Plantform;
+
 public class PlantformFactory {
 
 	public static Plantform createPlantform(String plantform) {

@@ -4,9 +4,12 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.javaplus.game.common.assets.Assets;
+import org.javaplus.game.common.assets.Assets.Loader;
+import org.javaplus.game.common.log.Log;
 import org.javaplus.game.common.util.Sets;
 import org.javaplus.game.common.util.Util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 public class AppProperties {
@@ -16,7 +19,9 @@ public class AppProperties {
 
 	public AppProperties() {
 
-		FileHandle file = Assets.getDefaultLoader().getFile("data/.properties");
+		Loader loader = Assets.getDefaultLoader();
+		FileHandle file = loader.getFile("data/game.properties");
+		
 		String string = file.readString();
 		prop = Util.Properties.getProperties(string);
 		Set<Object> keySet = prop.keySet();

@@ -34,6 +34,7 @@ public class SendCoinAction extends JsonActionAfterRoleEnterGame {
 			throw new ErrorResult(10109).toException();
 		}
 		role.sendCoin(roleId, coin, password);
+		role.getKeyValueSaveOnly().add("SEND_COIN", coin);
 		return new BankResult(role);
 	}
 

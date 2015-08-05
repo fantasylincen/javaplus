@@ -57,29 +57,6 @@ public class WelcomeStage extends AbstractStage {
 			return null;
 		}
 	}
-	// {
-	// "name":"FeiQinZouShou","projectId":"142562186547910000009",
-	// "zones":[{
-	// "gameXmlPath":"http://120.24.227.207/gm/fileDownload?projectId=142562186547910000009&zoneId=10002",
-	// "gameXmlVersion":1,
-	// "host":"113.204.112.162",
-	// "isDebug":"true",
-	// "isNotice":"true",
-	// "isShowDjt":"true",
-	// "isShowGg":"true",
-	// "isShowJd":"true",
-	// "isShowJs":"true",
-	// "isShowZfb":"true",
-	// "isShowZxwj":"true",
-	// "tokenKey":"ACoiuqwe9712311d",
-	// "webContextRoot":"vgame-a",
-	// "zipGameXmlPath":"http://120.24.227.207/gm/fileDownloadClientXml?projectId=142562186547910000009&zoneId=10002",
-	// "zipXmlVersion":1,
-	// "zoneId":"10002",
-	// "zoneName":"??(??)"
-	// },
-	//
-	// {"gameXmlPath":...........................
 
 	public WelcomeStage() {
 		super(D.STAGE_W, D.STAGE_H);
@@ -87,12 +64,10 @@ public class WelcomeStage extends AbstractStage {
 
 	@Override
 	public void loadAssets() {
-		App.getAssets().loadFontInternal("simhei.ttf");
 	}
 
 	@Override
 	public void unloadAssets() {
-		App.getAssets().unloadFont("simhei.ttf");
 	}
 
 	private List<LoadOverListener> listeners = Lists.newArrayList();

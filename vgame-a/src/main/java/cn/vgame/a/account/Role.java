@@ -368,6 +368,8 @@ public class Role implements IRole {
 
 		otherRole.addCoinLog(coin, getId(), "send coin");
 
+		otherRole.getKeyValueSaveOnly().add("RECEIVE_COIN", coin);
+
 		Server.getKeyValueSaveOnly().add("TRADE_VOL", coin);
 	}
 

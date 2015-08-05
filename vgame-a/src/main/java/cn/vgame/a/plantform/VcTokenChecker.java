@@ -4,6 +4,7 @@ import cn.javaplus.util.Util;
 import cn.vgame.a.Server;
 import cn.vgame.a.config.ServerConfig;
 import cn.vgame.a.result.ErrorResult;
+import cn.vgame.plantform.TokenChecker;
 
 public class VcTokenChecker implements TokenChecker {
 

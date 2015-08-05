@@ -48,107 +48,116 @@
 
 <style type="text/css">
 .dark-matter {
-margin-left: auto;
-margin-right: auto;
-max-width: 500px;
-background: #555;
-padding: 20px 30px 20px 30px;
-font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
-color: #D3D3D3;
-text-shadow: 1px 1px 1px #444;
-border: none;
-border-radius: 5px;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 500px;
+	background: #555;
+	padding: 20px 30px 20px 30px;
+	font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #D3D3D3;
+	text-shadow: 1px 1px 1px #444;
+	border: none;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
 }
+
 .dark-matter h1 {
-padding: 0px 0px 10px 40px;
-display: block;
-border-bottom: 1px solid #444;
-margin: -10px -30px 30px -30px;
+	padding: 0px 0px 10px 40px;
+	display: block;
+	border-bottom: 1px solid #444;
+	margin: -10px -30px 30px -30px;
 }
+
 .dark-matter h1>span {
-display: block;
-font-size: 11px;
+	display: block;
+	font-size: 11px;
 }
+
 .dark-matter label {
-display: block;
-margin: 0px 0px 5px;
+	display: block;
+	margin: 0px 0px 5px;
 }
+
 .dark-matter label>span {
-float: left;
-width: 20%;
-text-align: right;
-padding-right: 10px;
-margin-top: 10px;
-font-weight: bold;
+	float: left;
+	width: 20%;
+	text-align: right;
+	padding-right: 10px;
+	margin-top: 10px;
+	font-weight: bold;
 }
-.dark-matter input[type="text"], .dark-matter input[type="email"], .dark-matter textarea, .dark-matter select {
-border: none;
-color: #525252;
-height: 25px;
-line-height:15px;
-margin-bottom: 16px;
-margin-right: 6px;
-margin-top: 2px;
-outline: 0 none;
-padding: 5px 0px 5px 5px;
-width: 70%;
-border-radius: 2px;
--webkit-border-radius: 2px;
--moz-border-radius: 2px;
--moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-background: #DFDFDF;
+
+.dark-matter input[type="text"],.dark-matter input[type="email"],.dark-matter textarea,.dark-matter select
+	{
+	border: none;
+	color: #525252;
+	height: 25px;
+	line-height: 15px;
+	margin-bottom: 16px;
+	margin-right: 6px;
+	margin-top: 2px;
+	outline: 0 none;
+	padding: 5px 0px 5px 5px;
+	width: 70%;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	background: #DFDFDF;
 }
+
 .dark-matter select {
-background: #DFDFDF url('down-arrow.png') no-repeat right;
-background: #DFDFDF url('down-arrow.png') no-repeat right;
-appearance:none;
--webkit-appearance:none;
--moz-appearance: none;
-text-indent: 0.01px;
-text-overflow: '';
-width: 70%;
-height: 35px;
-color: #525252;
-line-height: 25px;
+	background: #DFDFDF url('down-arrow.png') no-repeat right;
+	background: #DFDFDF url('down-arrow.png') no-repeat right;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	width: 70%;
+	height: 35px;
+	color: #525252;
+	line-height: 25px;
 }
-.dark-matter textarea{
-height:100px;
-padding: 5px 0px 0px 5px;
-width: 70%;
+
+.dark-matter textarea {
+	height: 100px;
+	padding: 5px 0px 0px 5px;
+	width: 70%;
 }
+
 .dark-matter .button {
-background: #FFCC02;
-border: none;
-padding: 10px 25px 10px 25px;
-color: #585858;
-border-radius: 4px;
--moz-border-radius: 4px;
--webkit-border-radius: 4px;
-text-shadow: 1px 1px 1px #FFE477;
-font-weight: bold;
-box-shadow: 1px 1px 1px #3D3D3D;
--webkit-box-shadow:1px 1px 1px #3D3D3D;
--moz-box-shadow:1px 1px 1px #3D3D3D;
+	background: #FFCC02;
+	border: none;
+	padding: 10px 25px 10px 25px;
+	color: #585858;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	text-shadow: 1px 1px 1px #FFE477;
+	font-weight: bold;
+	box-shadow: 1px 1px 1px #3D3D3D;
+	-webkit-box-shadow: 1px 1px 1px #3D3D3D;
+	-moz-box-shadow: 1px 1px 1px #3D3D3D;
 }
+
 .dark-matter .button:hover {
-color: #333;
-background-color: #EBEBEB;
+	color: #333;
+	background-color: #EBEBEB;
 }
 </style>
 
 </head>
 <body>
 	<center>
-		
-		
-	
+
+
+
 		<%
-		
-			String gmUserId = (String)request.getAttribute("gmUserId");
-			String gmUserPwd = (String)request.getAttribute("gmUserPwd");
-			
+			String gmUserId = (String) request.getAttribute("gmUserId");
+			String gmUserPwd = (String) request.getAttribute("gmUserPwd");
+
 			RoleDao dao = Daos.getRoleDao();
 			int playerCount = dao.find().getCount();
 
@@ -181,31 +190,34 @@ background-color: #EBEBEB;
 				</tr>
 			</thead> -->
 					<tbody>
-					<tr>
+						<tr>
 							<td>内存</td>
 							<%
 								long free = Runtime.getRuntime().freeMemory();
 								long total = Runtime.getRuntime().totalMemory();
 								long max = Runtime.getRuntime().maxMemory();
-								double p = ((free + 0.0) / total * 100) ;
-								
-							 %>
-							<td><%=free/1024/1024%>M /<%=total/1024/1024%>M  [<%=String.format("%.2f", p)%>%] max:<%=max/1024/1024 %>M</td>
-						</tr>					
+								double p = ((free + 0.0) / total * 100);
+							%>
+							<td><%=free / 1024 / 1024%>M /<%=total / 1024 / 1024%>M [<%=String.format("%.2f", p)%>%]
+								max:<%=max / 1024 / 1024%>M</td>
+						</tr>
 
-			<%-- 			<tr>
+						<%-- 			<tr>
 							<td>开奖次数(今日/历史)</td>
 							<td><%=t.getGenerateTimesToday() + "/"
 					+ t.getGenerateTimesHistory()%></td>
 						</tr> --%>
-						
+
 						<tr>
 							<td>今日新增/历史创建</td>
 							<%
-								long sendToday = Server.getKeyValueDaily().getLong("CREATE_USER_SEND_COIN");
-								long sendHistory = Server.getKeyValueForever().getLong("CREATE_USER_SEND_COIN");
-							 %>
-							<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%> 送豆[<%=buildRmb(sendToday)%>/<%=buildRmb(sendHistory)%>]</td>
+								long sendToday = Server.getKeyValueDaily().getLong(
+										"CREATE_USER_SEND_COIN");
+								long sendHistory = Server.getKeyValueForever().getLong(
+										"CREATE_USER_SEND_COIN");
+							%>
+							<td><%=Server.getKeyValueDaily().getLong("CREATE_ROLE_COUNT")%>/<%=Server.getKeyValueForever().getLong("CREATE_ROLE_COUNT")%>
+								送豆[<%=buildRmb(sendToday)%>/<%=buildRmb(sendHistory)%>]</td>
 						</tr>
 						<tr>
 							<td>今日登陆/历史登陆</td>
@@ -216,8 +228,8 @@ background-color: #EBEBEB;
 							<%
 								long td = Server.getKeyValueDaily().getLong("SYSTEM_RECHARGE");
 								long hd = Server.getKeyValueForever().getLong("SYSTEM_RECHARGE");
-							 %>
-							<td><%=td + "(≈¥" + td/ 1200 + ")"%>/<%=hd + "(≈¥" + hd/ 1200 + ")"%></td>
+							%>
+							<td><%=td + "(≈¥" + td / 1200 + ")"%>/<%=hd + "(≈¥" + hd / 1200 + ")"%></td>
 						</tr>
 						<tr>
 							<td>今日交易量/历史交易量</td>
@@ -226,8 +238,8 @@ background-color: #EBEBEB;
 
 						<tr>
 							<td>场外金币+银行</td>
-							<td><font color="#FF0000"><%=all%> + <%=allBank%> 
-									= <%=(allBank + all) / 10000%>W &nbsp;:&nbsp;&nbsp; <%=buildRmb(allBank + all) %></font></td>
+							<td><font color="#FF0000"><%=all%> + <%=allBank%> = <%=(allBank + all) / 10000%>W
+									&nbsp;:&nbsp;&nbsp; <%=buildRmb(allBank + all)%></font></td>
 						</tr>
 
 						<tr>
@@ -293,22 +305,23 @@ background-color: #EBEBEB;
 
 				<br> <input style="display: none;" type="submit" value="保存" />
 			</form>
-		<%
-			GetHistoryResult r = t.getHistory();
-			List<History> hs = r.getHistory();
-			hs = Lists.newArrayList(hs);
-			Collections.reverse(hs);
-			StringBuilder sb = new StringBuilder();
-			
-			for(History h : hs) {
-				Sheet sheet = Server.getXml().get("weights");
-				Row row = sheet.get(h.getId());
-				String type = row.get("type");
-				String ch = TurntableUtil.toChinese(type);
-				sb.append(ch + "&nbsp");
-			}
-		 %>
-			<%=Turntable.getInstance().getCd() / 1000%>秒  &nbsp;&nbsp;   <%=sb.toString() %>
+			<%
+				GetHistoryResult r = t.getHistory();
+				List<History> hs = r.getHistory();
+				hs = Lists.newArrayList(hs);
+				Collections.reverse(hs);
+				StringBuilder sb = new StringBuilder();
+
+				for (History h : hs) {
+					Sheet sheet = Server.getXml().get("weights");
+					Row row = sheet.get(h.getId());
+					String type = row.get("type");
+					String ch = TurntableUtil.toChinese(type);
+					sb.append(ch + "&nbsp");
+				}
+			%>
+			<%=Turntable.getInstance().getCd() / 1000%>秒 &nbsp;&nbsp;
+			<%=sb.toString()%>
 
 			<table border="1" data-role="table" data-mode="columntoggle"
 				class="ui-body-d ui-shadow table-stripe ">
@@ -364,7 +377,7 @@ background-color: #EBEBEB;
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
 		sb.append("<td>-</td>");
-		
+
 		sb.append("<td>-</td>");
 
 		for (String type : types) {
@@ -497,6 +510,31 @@ background-color: #EBEBEB;
 
 		return map;
 	}%>
+
+					<%!public static String getRechargeTip(Role role) {
+
+		return (role.getRechargeHistory() > 0 ? "<font color='#FF0000'>(充"
+				+ role.getRechargeHistory() + ")</font>" : "");
+	}%>
+					<%!public static String getMaJiaTip(Role role) {
+
+		int count = getMaJiaCount(role);
+
+		return (count >= 2 ? "<font color='#777700'>(" + count + "小号)</font>"
+				: "");
+	}%>
+	
+	<%!public static int getMaJiaCount(Role role) {
+
+		String ip = role.getDto().getCreateIp();
+		if(ip == null) {
+			return 0;
+		}
+		String key = "CREATE_ROLE_COUNT:" + ip;
+		return Server.getKeyValueForever().getInt(key);
+	}%>
+	
+	
 					<%!private static void print(int i, String id, ISwitchs s, StringBuilder sb) {
 		Role role = Server.getRole(id);
 
@@ -508,11 +546,9 @@ background-color: #EBEBEB;
 		sb.append("<td>");
 
 		sb.append("<a href=\"coinLog.jsp?showBackButton=false&roleId="
-				+ role.getId()
-				+ "&page=200000000&countEvery=14\">"
-				+ role.getNick()
-				+ (role.getRechargeHistory() > 0 ? "<font color='#FF0000'>(充"
-						+ role.getRechargeHistory() + ")</font>" : "") + "</a>");
+				+ role.getId() + "&page=200000000&countEvery=14\">"
+				+ role.getNick() + getRechargeTip(role) + getMaJiaTip(role)
+				+ "</a>");
 		sb.append("</td>");
 
 		sb.append("<td>");
@@ -543,7 +579,8 @@ background-color: #EBEBEB;
 		sb.append("<td>");
 
 		if (bankCoin >= 200000) {
-			sb.append("<font color = \"#FF0000\">" + buildRmb(bankCoin) + "</font>");
+			sb.append("<font color = \"#FF0000\">" + buildRmb(bankCoin)
+					+ "</font>");
 		} else {
 			sb.append(buildRmb(bankCoin));
 		}
@@ -568,43 +605,43 @@ background-color: #EBEBEB;
 				</tbody>
 			</table>
 
-<br>
-<br>
+			<br> <br>
 
-<table border="1" data-role="table" id="table-custom-2"
-					data-mode="columntoggle"
-					class="ui-body-d ui-shadow table-stripe ui-responsive ui-table ui-table-columntoggle">
-					<tbody>
-					
-						<%
-			MessageManager mm = Server.getMessageManager();
-			
-			List<Message> ms = mm.getMessages().getMessages();
-			ms = Lists.newArrayList(ms);
-			Collections.reverse(ms);
-			for(Message m: ms) {
-			
-				out.println("<tr>");
-				out.println("<td>");
-				out.println(m.getDate());
-				out.println("</td>");
-				out.println("<td>");
-				out.println("<font color=#007700>" + m.getNick() + "</font>");
-				out.println("</td>");
-				out.println("<td> ");
-				out.println(m.getMessage());
-				out.println("</td>");
-				out.println("</tr>");
-			}
-		 %>
+			<table border="1" data-role="table" id="table-custom-2"
+				data-mode="columntoggle"
+				class="ui-body-d ui-shadow table-stripe ui-responsive ui-table ui-table-columntoggle">
+				<tbody>
 
-</tbody>
-</table>
+					<%
+						MessageManager mm = Server.getMessageManager();
+
+						List<Message> ms = mm.getMessages().getMessages();
+						ms = Lists.newArrayList(ms);
+						Collections.reverse(ms);
+						for (Message m : ms) {
+
+							out.println("<tr>");
+							out.println("<td>");
+							out.println(m.getDate());
+							out.println("</td>");
+							out.println("<td>");
+							out.println("<font color=#007700>" + m.getNick() + "</font>");
+							out.println("</td>");
+							out.println("<td> ");
+							out.println(m.getMessage());
+							out.println("</td>");
+							out.println("</tr>");
+						}
+					%>
+
+				</tbody>
+			</table>
 
 
 
 		</div>
 	</center>
-	<br><br>
+	<br>
+	<br>
 </body>
 </html>

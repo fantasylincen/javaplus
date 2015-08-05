@@ -36,7 +36,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Vector2;
@@ -365,13 +364,8 @@ public class GameStage extends AbstractStage {
 		AnimationCreator.setLoader(d);
 
 		d.loadTextureAtlas("data/game.txt");
-
 		d.loadBitmapFont("data/font.fnt");
 		d.loadTextureAtlas("data/ui-green.atlas");
-		d.loadTexture("data/PetNest03.png");
-		d.loadTexture("data/coin-sprite-sheet.png");
-		d.loadTexture("data/fat_oldboss02.png");
-		d.loadTextureAtlas("data/TBottle-hd.txt");
 		d.loadTexture("data/coin-sprite-sheet.png");
 
 	}

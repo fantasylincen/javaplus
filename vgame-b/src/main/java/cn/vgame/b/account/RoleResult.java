@@ -1,17 +1,26 @@
 package cn.vgame.b.account;
 
+import javax.servlet.http.HttpSession;
+
 public class RoleResult {
 
 	/**
 	 * 
 	 */
 	private final Role role;
+	private final HttpSession session;
 
 	/**
+	 * @param session 
 	 * @param createRoleResult
 	 */
-	RoleResult(Role r) {
+	public RoleResult(Role r, HttpSession session) {
 		role = r;
+		this.session = session;
+	}
+
+	public long getRechargeHistory() {
+		return role.getRechargeHistory();
 	}
 
 	public long getCreateTime() {
@@ -42,9 +51,6 @@ public class RoleResult {
 		return role.getLaBa();
 	}
 
-	public long getBankCoin() {
-		return role.getMasonry();
-	}
 
 	public boolean hasJinYan() {
 		return role.hasJinYan();
@@ -61,5 +67,5 @@ public class RoleResult {
 	public long getCoinAll() {
 		return role.getCoinAll();
 	}
-
+	
 }
