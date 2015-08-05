@@ -1,3 +1,4 @@
+<%@page import="java.awt.Color"%>
 <%@page import="com.mongodb.DBCursor"%>
 <%@page import="com.mongodb.DBCollection"%>
 <%@page import="com.mongodb.BasicDBObject"%>
@@ -169,7 +170,7 @@
 		sb.append("</td>");
 		
 		sb.append("<td>");
-		sb.append(dto.getCreateIp());
+		sb.append("<font color='" + getColor(dto) + "'>" + dto.getCreateIp() + "</font>");
 		sb.append("</td>");
 		
 		sb.append("<td>");
@@ -183,6 +184,24 @@
 		sb.append("</tr>");
 
 	}%>
+	
+	<%!
+		public String getColor(RoleDto dto) {
+
+			String ip = dto.getCreateIp();
+			if(ip == null || ip.isEmpty()) {
+				return "#000000";
+			}
+			String [] cs = ip.split("\\.");
+			
+			int r = (new Integer(cs[0]) + new Integer(cs[1])) / 2;
+			int g = new Integer(cs[2]);
+			int b = new Integer(cs[3]);
+			
+			Color c = new Color(r, g, b);
+			return Integer.toHexString(c.getRGB());
+		}
+	 %>
 
 		<table  border="1">
 			<thead>

@@ -1,12 +1,13 @@
 package cn.vgame.a.plantform;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
 import cn.javaplus.util.Util;
 import cn.javaplus.web.WebContentFethcer;
 import cn.vgame.a.Server;
 import cn.vgame.a.result.ErrorResult;
+import cn.vgame.plantform.TokenChecker;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public class DomainTokenChecker implements TokenChecker {
 

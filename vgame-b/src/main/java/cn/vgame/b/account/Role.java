@@ -7,7 +7,6 @@ import cn.vgame.b.gen.dto.MongoGen.MongoMap;
 import cn.vgame.b.gen.dto.MongoGen.RoleDao;
 import cn.vgame.b.gen.dto.MongoGen.RoleDto;
 import cn.vgame.b.mission.Mission;
-import cn.vgame.b.physical.Physical;
 import cn.vgame.b.result.ErrorResult;
 import cn.vgame.share.KeyValue;
 import cn.vgame.share.KeyValueSaveOnly;
@@ -142,6 +141,7 @@ public class Role implements IRole {
 	private final RoleDto dto;
 	private Bag bag;
     private Mission mission;
+	private String zoneId;
 	public long getCreateTime() {
 		return dto.getCreateTime();
 	}
@@ -290,5 +290,17 @@ public class Role implements IRole {
 	public void addRechargeHistory(long add) {
 		dto.setRechargeHistory(dto.getRechargeHistory() + add);
 		Daos.getRoleDao().save(dto);
+	}
+
+	public long getRechargeHistory() {
+		return dto.getRechargeHistory();
+	}
+
+	public void setZoneId(String zoneId) {
+		this.zoneId = zoneId;
+	}
+	
+	public String getZoneId() {
+		return zoneId;
 	}
 }

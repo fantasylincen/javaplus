@@ -18,9 +18,6 @@ import com.google.common.collect.Lists;
  * 
  * A.正常情况:
  * 	{
- * 		roles:[
- * 				角色ID1,角色ID2,角色ID3,角色ID4,角色ID5
- * 		]
  * 	}
  * 
  * B.错误:
@@ -30,16 +27,9 @@ import com.google.common.collect.Lists;
  * 
  * 说明: 标准错误, 客户端需要对所有包  统一处理
  *    {
- *    	String error 错误文字,
- *    	int code 这个错误对应到配置表 messages 里面的错误号,
- *      String args [    比如 消息: 10008    message too long len must < %s0     那么 args =[ 10] 时 , 该消息表示  message too long len must < 10
- *      	String arg1...
- *      	String arg2...
- *      	String arg3...
- *      ],
  *    }
  */
-public class GetRoleListAction extends JsonAction {
+public class GetRoleList2Action extends JsonAction {
 
 	public class RoleListResult {
 
@@ -52,14 +42,39 @@ public class GetRoleListAction extends JsonAction {
 		/**
 		 * 该玩家在服务器内, 所有的角色
 		 */
-		public List<String> getRoles() {
+		public List<RoleResult> getRoles() {
 			RoleDao dao = Daos.getRoleDao();
 			RoleDtoCursor c = dao.findByOwnerId(userId);
-			ArrayList<String> ls = Lists.newArrayList();
+			ArrayList<RoleResult> ls = Lists.newArrayList();
 			for (RoleDto r : c) {
-				ls.add(r.getId());
+				ls.add(new RoleResult(r));
 			}
 			return ls;
+		}
+	}
+	
+	public class RoleResult {
+		private final RoleDto r;
+		public RoleResult(RoleDto r) {
+			this.r = r;
+		}
+		public String getId() {
+			return r.getId();
+		}
+		public String getNick() {
+			return r.getNick();
+		}
+		public long getCoin() {
+			return r.getCoin();
+		}
+		public long getBankCoin() {
+			return r.getBankCoin();
+		}
+		public boolean getHasJinYan() {
+			return r.getHasJinYan();
+		}
+		public boolean getHasFengHao() {
+			return r.getHasFengHao();
 		}
 	}
 

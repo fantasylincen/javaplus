@@ -72,6 +72,8 @@ interface Role {
 	 */
 	int getPhysical();
 	
+	String getCreateIp();
+	
 	/**
 	 * 键： 关卡ID
 	 * 值: 关卡数据
