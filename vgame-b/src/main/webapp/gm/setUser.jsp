@@ -96,10 +96,6 @@ function juge(form){
 					<td><%=role.getCoin()%></td>
 				</tr>
 				<tr>
-					<td>银行金币</td>
-					<td><%=role.getBankCoin()%></td>
-				</tr>
-				<tr>
 					<td>赠送金币</td>
 					<td><input name="addCoin" value="0" /></td>
 				</tr>

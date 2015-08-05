@@ -1,6 +1,7 @@
 package cn.vgame.b.account;
 
 import cn.javaplus.util.Util;
+import cn.vgame.b.Server;
 import cn.vgame.b.bag.Bag;
 import cn.vgame.b.gen.dto.MongoGen.Daos;
 import cn.vgame.b.gen.dto.MongoGen.MongoMap;
@@ -295,9 +296,34 @@ public class Role implements IRole {
 	public int getHead() {
 		return dto.getHead();
 	}
+//	PHYSICAL_MAX
+//	PHYSICAL_ADD_RATE
+//	PHYSICAL_ADD_EVERY_TIMES
 
 	public int getPhysical() {
+		int physicalNeedAdd = calcPhysicalNeedAdd();
+		if(physicalNeedAdd != 0) {
+			dto.setPhysical(physicalNeedAdd + dto.getPhysical());
+			int max = Server.getConst().getInt("PHYSICAL_MAX");
+			
+			if(dto.getPhysical() > max)
+				dto.setPhysical(max);
+			
+			Daos.getRoleDao().save(dto);
+
+			getKeyValueSaveOnly().set("LAST_ADD_PHYSICAL_TIME", System.currentTimeMillis());
+		}
 		return dto.getPhysical();
+	}
+
+	private int calcPhysicalNeedAdd() {
+		long last = getKeyValueForever().getLong("LAST_ADD_PHYSICAL_TIME");
+		long now = System.currentTimeMillis();
+		int rateSec = Server.getConst().getInt("PHYSICAL_ADD_RATE");
+		int add = Server.getConst().getInt("PHYSICAL_ADD_EVERY_TIMES");
+		
+		
+		return (int) ((now - last) / 1000 / rateSec * add);
 	}
 
 	public int getPhysicalCd() {

@@ -27,7 +27,7 @@
 				{ type:购买物品类型, id:购买id  客户端发好多就原样返回, count:数量}
 		-->
 		<action name="buy" class="cn.vgame.b.turntable.BuyAction" />
-		<action name="getRoleData" class="cn.vgame.b.turntable.GetRoleDataAction" />
+		<action name="getRoleData" class="cn.vgame.b.role.GetRoleDataAction" />
 		
 		
 		<!-- 
