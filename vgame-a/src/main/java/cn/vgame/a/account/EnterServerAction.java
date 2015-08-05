@@ -31,6 +31,8 @@ public class EnterServerAction extends JsonAction {
 
 	private String plantform;
 	private String appId;
+	private String zoneId;
+	private String deviceId;
 
 	@Override
 	public Object exec() {
@@ -43,6 +45,8 @@ public class EnterServerAction extends JsonAction {
 
 		session.setAttribute("userId", getUserId());
 		session.setAttribute("plantform", p);
+		session.setAttribute("zoneId", zoneId);
+		session.setAttribute("deviceId", deviceId);
 		
 		Log.d("enter game " + getUserId());
 		Server.getKeyValueSaveOnly().add("ENTER_GAME_TIMES", 1);
@@ -86,5 +90,21 @@ public class EnterServerAction extends JsonAction {
 
 	public void setAppId(String appId) {
 		this.appId = appId;
+	}
+
+	public String getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(String zoneId) {
+		this.zoneId = zoneId;
+	}
+
+	public String getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
 }

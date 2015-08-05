@@ -1,6 +1,7 @@
 package org.hhhhhh.house.spider;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hhhhhh.house.config.GameProperties;
@@ -35,45 +36,70 @@ public class Spider {
 
 			List<HouseDto> willNotify = getWillNotify();
 
+			ArrayList<HouseDto> filter10000 = filter10000(willNotify);
+
 			try {
-//				Log.d("send email...");
-				if (willNotify.isEmpty()) {
-//					Log.d("update list is empty!");
-					return;
+				// Log.d("send email...");
+				if (!filter10000.isEmpty()) {
+					//
+					String cc = GameProperties.getStringNoTrim("emailContent");
+					String content = cc.replace("CONTENT",
+							buildConent(filter10000));
+
+					String title = GameProperties.getString("emailTitle")
+							.trim();
+					title += filter10000.size() + "条";
+					String from = GameProperties.getString("email").trim();
+					String host = GameProperties.getString("emailServerHost")
+							.trim();
+					String port = GameProperties.getString("emailServerPort")
+							.trim();
+					String pwd = GameProperties.getString("emailPassword")
+							.trim();
+					String emailTo = GameProperties.getString("emailTo").trim();
+
+					SimpleMailSender s = new SimpleMailSender();
+					MailSenderInfo m = new MailSenderInfo();
+					m.setValidate(true);
+					m.setMailServerHost(host);
+					m.setMailServerPort(port);
+					m.setUserName(from);
+					m.setPassword(pwd);
+					m.setFromAddress(from);
+					m.setToAddress(emailTo);
+					m.setSubject(title);
+					m.setContent(content);
+					s.sendTextMailInThread(m);
+
+					Log.d("send successful count:" + filter10000.size());
+
 				}
-
-				String cc = GameProperties.getStringNoTrim("emailContent");
-				String content = cc.replace("CONTENT", buildConent(willNotify));
-
-				String title = GameProperties.getString("emailTitle").trim();
-				title += willNotify.size() + "条";
-				String from = GameProperties.getString("email").trim();
-				String host = GameProperties.getString("emailServerHost")
-						.trim();
-				String port = GameProperties.getString("emailServerPort")
-						.trim();
-				String pwd = GameProperties.getString("emailPassword").trim();
-				String emailTo = GameProperties.getString("emailTo").trim();
-
-				SimpleMailSender s = new SimpleMailSender();
-				MailSenderInfo m = new MailSenderInfo();
-				m.setValidate(true);
-				m.setMailServerHost(host);
-				m.setMailServerPort(port);
-				m.setUserName(from);
-				m.setPassword(pwd);
-				m.setFromAddress(from);
-				m.setToAddress(emailTo);
-				m.setSubject(title);
-				m.setContent(content);
-				s.sendTextMailInThread(m);
-
-				Log.d("send successful count:" + willNotify.size());
 
 				marksend(willNotify);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+
+		private ArrayList<HouseDto> filter10000(List<HouseDto> willNotify) {
+			ArrayList<HouseDto> ls = Lists.newArrayList(willNotify);
+			Iterator<HouseDto> it = ls.iterator();
+			while (it.hasNext()) {
+				HouseDto dto = (HouseDto) it.next();
+
+				String p = dto.getPrice();
+				p = p.replaceAll("元.+", "");
+				p = p.trim();
+
+				try {
+					Double d = new Double(p);
+					if (d < 10000)
+						it.remove();
+				} catch (NumberFormatException e) {
+					it.remove();
+				}
+			}
+			return ls;
 		}
 
 		private List<HouseDto> getWillNotify() {
@@ -91,6 +117,7 @@ public class Spider {
 				dto.setIs_send_email(true);
 			}
 			Daos.getHouseDao().save(willNotify);
+//			Log.d("marksend");
 		}
 
 	}
@@ -115,7 +142,13 @@ public class Spider {
 
 			for (FangYuanWangDownloader d : downloaders) {
 
-				List<HouseDto> ls = d.download();
+				List<HouseDto> ls;
+				try {
+					ls = d.download();
+				} catch (Exception e1) {
+					ls = Lists.newArrayList();
+					e1.printStackTrace();
+				}
 				for (HouseDto dto : ls) {
 
 					try {
@@ -175,6 +208,9 @@ public class Spider {
 			downloadThread = new SpiderThread();
 			downloadThread.setPriority(Thread.MAX_PRIORITY);
 			downloadThread.addDownloader(new DiYiShiJianDownloader());
+//			downloadThread.addDownloader(new Com58Downloader());
+			downloadThread.addDownloader(new AiYiFangDownloader());
+//			downloadThread.addDownloader(new SouFangDownloader());
 			downloadThread.start();
 		}
 		if (sendEmailThread == null) {

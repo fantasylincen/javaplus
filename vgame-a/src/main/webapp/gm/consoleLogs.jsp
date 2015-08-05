@@ -1,3 +1,4 @@
+<%@page import="cn.javaplus.string.StringPrinter"%>
 <%@page import="cn.vgame.a.log.ConsoleLog"%>
 <%@page import="cn.javaplus.log.Log"%>
 <%@page import="cn.vgame.share.ParameterUtil"%>
@@ -15,8 +16,9 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-
-	<%!public String buildTimeScope(HttpSession session,
+<center>
+	<div style="width: 95%; ">
+		<%!public String buildTimeScope(HttpSession session,
 			HttpServletRequest request, int count, String dsc) {
 
 		if (ParameterUtil.getParameter(request, session, "count") == null) {
@@ -36,72 +38,91 @@
 		}
 
 	}%>
-	<div>
+		<div>
 
-		<%
-			String find = ParameterUtil.getParameter(request, session,
-					"console-log-find");
-			if (find == null) {
-				find = "";
-			}
-		%>
-		
-		
-		<%
-			String fileName = ParameterUtil.getParameter(request, session,
-					"console-log-file-name");
-			if (fileName == null) {
-				fileName = "";
-			}
-		%>
+			<%
+				String find = ParameterUtil.getParameter(request, session,
+						"console-log-find");
+				if (find == null) {
+					find = "";
+				}
+			%>
 
-		<%=buildTimeScope(session, request, 40, "40条")%>
-		<%=buildTimeScope(session, request, 100, "100条")%>
-		<%=buildTimeScope(session, request, 200, "200条")%>
-		<%=buildTimeScope(session, request, 500, "500条")%>
-		<%=buildTimeScope(session, request, 1000, "1000条")%>
-		<%=buildTimeScope(session, request, 2000, "2000条")%>
-		<%=buildTimeScope(session, request, 5000, "5000条")%>
+
+			<%
+				String fileName = ParameterUtil.getParameter(request, session,
+						"console-log-file-name");
+				if (fileName == null) {
+					fileName = "";
+				}
+			%>
+
+			<%=buildTimeScope(session, request, 40, "40条")%>
+			<%=buildTimeScope(session, request, 100, "100条")%>
+			<%=buildTimeScope(session, request, 200, "200条")%>
+			<%=buildTimeScope(session, request, 500, "500条")%>
+			<%=buildTimeScope(session, request, 1000, "1000条")%>
+			<%=buildTimeScope(session, request, 2000, "2000条")%>
+			<%=buildTimeScope(session, request, 5000, "5000条")%>
+
+			<br> <br>
+
+			<form name="jump" action="consoleLogs.jsp" method="post">
+				<input type="text" name="console-log-find" id="console-log-find"
+					value="<%=find%>" /> <a href="javascript:jump.submit();">查找</a>
+			</form>
+
+			<a href="consoleLogs.jsp">刷新</a> &nbsp;&nbsp;&nbsp; <a
+				href="consoleLogList.jsp">返回</a><br> <br>
+
+			<%
+				String cnt = ParameterUtil.getParameter(request, session, "count");
+				if (cnt != null) {
+					session.setAttribute("count", cnt);
+				}
+			%>
+		</div>
+
+		<table border="1">
+
+			<%
+				List<ConsoleLog> logs = ConsoleLog.get(fileName, new Integer(cnt),
+						find);
+
+				if (logs.isEmpty()) {
+					out.println("没有记录");
+				} else {
+
+					for (ConsoleLog log : logs) {
+			%>
+			<%=getTds(log)%>
+			<%
+				}
+				}
+			%>
+
+
+
+
+			<%!public String getTds(ConsoleLog log) {
+		StringPrinter o = new StringPrinter();
+		String[] ss = log.toString().split(",");
+o.print("<tr>");
+		for (String s : ss) {
+			o.print("<td>");
+			o.print(s);
+			o.print("</td>");
+		}
+		o.print("</tr>");
+		return o.toString();
+
+	}%>
+
+		</table>
+
 
 		<br> <br>
-		
-		<form name="jump" action="consoleLogs.jsp" method="post">
-			<input type="text" name="console-log-find" id="console-log-find" value="<%=find%>" /> <a href="javascript:jump.submit();">查找</a>
-		</form>
-
-		<a href="consoleLogs.jsp">刷新</a> &nbsp;&nbsp;&nbsp; <a href="consoleLogList.jsp">返回</a><br>
-		<br>
-
-		<%
-			String cnt = ParameterUtil.getParameter(request, session, "count");
-			if (cnt != null) {
-				session.setAttribute("count", cnt);
-			}
-		%>
 	</div>
-
-
-
-	<%
-		List<ConsoleLog> logs = ConsoleLog.get(fileName, new Integer(cnt), find);
-
-		if (logs.isEmpty()) {
-			out.println("没有记录");
-		} else {
-
-			for (ConsoleLog log : logs) {
-	%>
-	<%=log.toString()%>
-	<br>
-	<%
-		}
-		}
-	%>
-
-
-
-
-	<br>
-	<br>
+	</center>
 </body>
 </html>

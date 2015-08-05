@@ -7,56 +7,90 @@
 	<package name="app" namespace="/app" extends="struts-default">
 
 
-     	<global-results>
-     	  	<result name="guessexception">/app/errorProcessor</result>  
-        </global-results>
-        <global-exception-mappings>
-            <exception-mapping result="guessexception" exception="org.hhhhhh.guess.exception.GuessException">
-            </exception-mapping>
-        </global-exception-mappings>
-        
+		<global-results>
+			<result name="guessexception">/app/errorProcessor</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="guessexception"
+				exception="org.hhhhhh.guess.exception.GuessException">
+			</exception-mapping>
+		</global-exception-mappings>
 
-		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction"/>
+
+		<action name="regist" class="org.hhhhhh.guess.account4app.RegistAction" />
 		<action name="login" class="org.hhhhhh.guess.account4app.LoginAction" />
 		<action name="getDatas" class="org.hhhhhh.guess.account4app.GetDatasAction" />
 		<action name="select" class="org.hhhhhh.guess.account4app.SelectAction" />
-		
-		
+
+
 		<action name="resetPwd" class="org.hhhhhh.guess.account4app.ResetPwdAction" />
-        <action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction"/>
+		<action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction" />
 
 	</package>
 
+	<package name="gmanager" namespace="/gmanager" extends="struts-default">
+
+		<action name="createRound" class="org.hhhhhh.guess.gmanager.CreateRoundAction">
+			<result type="redirect" name="success">index.jsp</result>
+		</action>
+		<action name="createQuestion" class="org.hhhhhh.guess.gmanager.CreateQuestionAction">
+			<result type="redirect" name="success">questions.jsp</result>
+		</action>
+		<action name="setQuestion" class="org.hhhhhh.guess.gmanager.SetQuestionAction">
+			<result type="redirect" name="success">questions.jsp</result>
+		</action>
+		<action name="deleteQuestion" class="org.hhhhhh.guess.gmanager.DeleteQuestionAction">
+			<result type="redirect" name="success">questions.jsp</result>
+		</action>
+		<action name="setRound" class="org.hhhhhh.guess.gmanager.SetRoundAction">
+			<result type="redirect" name="success">index.jsp</result>
+		</action>
+		<action name="getImage" class="org.hhhhhh.guess.gmanager.GetImageAction">
+
+			<result name="success" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+
+
+
+	</package>
 
 	<package name="web" namespace="/web" extends="struts-default">
 
 
-     	<global-results>
-     	  	<result name="guessexception">/web/error.jsp
-     	  	<param name="actionName"></param>
-     	  	</result>  
-        </global-results>
-        <global-exception-mappings>
-            <exception-mapping result="guessexception" exception="org.hhhhhh.guess.exception.GuessException">
-            </exception-mapping>
-        </global-exception-mappings>
-        
+		<global-results>
+			<result name="guessexception">
+				/web/error.jsp
+				<param name="actionName"></param>
+			</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="guessexception"
+				exception="org.hhhhhh.guess.exception.GuessException">
+			</exception-mapping>
+		</global-exception-mappings>
+
 
 
 		<action name="regist" class="org.hhhhhh.guess.account4web.RegistAction">
-			<result type="redirect" name="success">/web/registSuccessful.jsp</result>
+			<result type="redirect" name="success">/web/registSuccessful.jsp
+			</result>
 			<result type="redirect" name="error">/web/regist.jsp</result>
 		</action>
-		<action name="login" class="org.hhhhhh.guess.account4web.LoginAction" >
+		<action name="login" class="org.hhhhhh.guess.account4web.LoginAction">
 			<result type="redirect" name="success">/web/index.jsp</result>
 		</action>
-		
-		
+
+
 		<action name="resetPwd" class="org.hhhhhh.guess.account4web.ResetPwdAction" />
-        <action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction">
-           	<result name="error">/web/error.jsp</result>
-        </action>
+		<action name="errorProcessor" class="org.hhhhhh.guess.exception.ErrorAction">
+			<result name="error">/web/error.jsp</result>
+		</action>
 
 	</package>
-	
+
 </struts>    

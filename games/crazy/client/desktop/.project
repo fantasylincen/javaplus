@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>crazy-client-desktop</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Json</name>
+			<type>2</type>
+			<location>C:/Users/Administrator/git/games/javaplus-game-crazy/client/ui/Json</location>
+		</link>
+		<link>
+			<name>Resources</name>
+			<type>2</type>
+			<location>C:/Users/Administrator/git/games/javaplus-game-crazy/client/ui/Resources</location>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -19,10 +19,10 @@
 <head>
 <%@include file="head.html"%>
 </head>
+<center>
 <body>
-	<div>
-		<h2>用户管理</h2>
-		<table class="bordered">
+	<div style="width: 95%; ">
+		<table  border="1">
 			<thead>
 				<tr>
 					<th>角色ID</th>
@@ -85,7 +85,7 @@
 	}%>
 
 			<%
-				int cev = 14;
+				int cev = 1000;
 				StringBuffer ssb = new StringBuffer();
 
 				
@@ -217,5 +217,6 @@
 				href="javascript:jump.submit();">查找</a>
 		</form>
 	</div>
+	</center>
 </body>
 </html>

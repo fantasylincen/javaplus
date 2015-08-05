@@ -6,12 +6,12 @@
 	<emailServerHost>smtp.163.com</emailServerHost>
 	<emailServerPort>25</emailServerPort>
 	
-	<emailTo>317991763@qq.com</emailTo>
+	<emailTo>zuixinfangyuan@163.com</emailTo>
 	<emailTitle>房源更新</emailTitle>
 	<emailContent>
 		房源有更新!
 		
-		点击查看最近所有房源:http://hhhhhh.org:8090/house-spider/web
+		点击查看最近所有房源:http://113.204.112.162/house-spider/web
 	
 CONTENT
 		

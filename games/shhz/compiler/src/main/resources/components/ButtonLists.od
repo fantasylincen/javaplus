@@ -1,0 +1,27 @@
+[
+	{
+		
+		"name":"MainButtonList",			
+		"x":0,
+		"y":0,
+		
+		"Buttons":[
+			{
+				"name":"Home",				
+				"x":500,
+				"y":5,
+				"w":100,
+				"h":100,
+				"image":"building/townhouse/b_th_01.png"
+			},
+			{
+				"name":"Exit",
+				"x":600,
+				"y":5,
+				"w":100,
+				"h":100,
+				"image":"resource/x_n.png"
+			},
+		]
+	},
+]

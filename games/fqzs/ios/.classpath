@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.robovm.eclipse.ROBOVM_CONTAINER"/>
+	<classpathentry kind="con" path="org.robovm.eclipse.ROBOVM_COCOA_TOUCH_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="src" path="/fqzs-core"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-rt/1.2.0/acc15cdcbf104c45a8f7152fec522e14117d7820/robovm-rt-1.2.0.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-rt/1.2.0/288da9e771e95fcc6a58f9af45a4c85effbac7d1/robovm-rt-1.2.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-cocoatouch/1.2.0/80b0820fe4e00c62302d5c487b3afa839061356a/robovm-cocoatouch-1.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-robovm/1.6.1/cae4611ec20ae48efafa8cb9ea28d2bca04ff2ce/gdx-backend-robovm-1.6.1.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-robovm/1.6.1/9ef361b8044d200af81b5181fbe45427587d3daf/gdx-backend-robovm-1.6.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-platform/1.6.1/2a62a7def04f4919c7962777c36ce540bdce820e/gdx-platform-1.6.1-natives-ios.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-platform/1.6.1/24a06691b8ff2d1944f3fc9e2264896d79baac28/gdx-box2d-platform-1.6.1-natives-ios.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype-platform/1.6.1/9ca5c641ba66b03119201918997138c21a5bb337/gdx-freetype-platform-1.6.1-natives-ios.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.1/bb5fe9832bcfe4bbc1de6bd357085b8a2a845d9c/gdx-1.6.1.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.1/5f028d1c47d0adcc5000f21d8868443c5119e639/gdx-1.6.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-objc/1.2.0/12c7cfb9ac50b8809bf436c24a2358f1be5f18e8/robovm-objc-1.2.0.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-objc/1.2.0/61dee172348ebed15db74e756cdec1f91d5a6937/robovm-objc-1.2.0-sources.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/javaplus-common-game-core"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -22,13 +22,18 @@
 <%@include file="head.html"%>
 </head>
 <body>
+<center>
 	<div>
 		<%
 			String roleId = request.getParameter("roleId");
+			String s = request.getParameter("showBackButton");
+			boolean showBackButton = s == null;
+			
 			String nick = Server.getRole(roleId).getNick();
+			
 		 %>
 		<h2>[<%=nick %>] 的金豆记录</h2>
-		<table class="bordered">
+		<table border="1">
 			<thead>
 				<tr>
 					<th>时间</th>
@@ -60,13 +65,14 @@
 		
 		if(map.get(from) != null)
 		 	from = map.get(from);
-		
-		sb.append(from + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + Server.getRole(dto.getTo()).getNick());
+		Role roleTo = Server.getRole(dto.getTo());
+		String to = roleTo != null ? roleTo.getNick() : dto.getTo();
+		sb.append(from + "&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;" + to);
 
 		sb.append("</td>");
 
 		sb.append("<td>");
-		sb.append(dto.getCoin());
+		sb.append(buildRmb(dto.getCoin()));
 		sb.append("</td>");
 
 		sb.append("<td>");
@@ -77,7 +83,10 @@
 		sb.append("</tr>");
 
 	}%>
-
+<%!public static String buildRmb(long coin) {
+		int rmb = (int) (coin / 2800);
+		return coin + "&nbsp;&nbsp;(¥" + rmb + ")";
+	}%>
 
 <%!
 
@@ -99,7 +108,7 @@
 	}
  %>
 			<%
-				int cev = 14;
+				int cev = 1000;
 				StringBuffer ssb = new StringBuffer();
 
 				CoinLogDao dao = Daos.getCoinLogDao();
@@ -173,10 +182,16 @@
 			<input type="text" name="page" value="<%=p%>"> <a
 				href="javascript:jump.submit();">go</a>
 		</form>
-		
-		 <a
-			href="setUser.jsp?roleId=<%=roleId%>"> 返回</a> <br>
+		<%
+			if(showBackButton) {
+		 %>
+		 		<a href="setUser.jsp?roleId=<%=roleId%>"> 返回</a>
+			<%
+			}
+		 %>
+			 <br>
 		
 	</div>
+	</center>
 </body>
 </html>

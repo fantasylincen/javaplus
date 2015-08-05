@@ -1,0 +1,18 @@
+HallUI.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+joker_big
+  rotate: false
+  xy: 141, 2
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
+poker_back
+  rotate: false
+  xy: 2, 2
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1

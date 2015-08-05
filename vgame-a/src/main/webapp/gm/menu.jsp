@@ -9,7 +9,7 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-
+<div>
 	<%
 		ParameterUtil.getParameter(request, session, "gmUserId");
 	 %>
@@ -35,7 +35,7 @@
 	<a href="systemInfo.jsp">系统信息</a>
 	<br>
 	<br>
-	<a href="turntableControl.jsp">系统控制</a>
+	<a href="robotManage.jsp">机器人管理</a>
 	<br>
 	<br>
 	<a href="logs.jsp?page=100000000">操作日志</a>
@@ -49,12 +49,9 @@
 	<br>
 	<a href="consoleLogList.jsp">系统日志</a>
 	<br>
-	<!-- <br>
-	<a href="../notice/notice.jsp">公告页面</a>
-	<br> -->
 	<br>
 	<a href="../yinshang/yinshang.jsp">银商管理</a>
 	<br>
-	<br>
+	<br></div>
 </body>
 </html>

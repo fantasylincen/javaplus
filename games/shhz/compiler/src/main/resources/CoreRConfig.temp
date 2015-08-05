@@ -1,0 +1,47 @@
+package cn.javaplus.game.shhz;
+
+import cn.javaplus.shhz.shape.PolygonImpl;
+import cn.javaplus.shhz.assets.Assets;
+import cn.javaplus.shhz.components.ButtonList;
+import cn.javaplus.shhz.components.Button;
+
+import com.badlogic.gdx.graphics.Texture;
+
+public class R {
+
+	public static class TextureShape {
+		private PolygonImpl polygon;
+		private Texture texture;
+		private String texturePath;
+
+		public PolygonImpl getPolygon() {
+			return polygon;
+		}
+
+		public Texture getTexture() {
+			return texture;
+		}
+
+		public void setPolygon(PolygonImpl polygon) {
+			this.polygon = polygon;
+		}
+
+		public void setTexture(Texture texture) {
+			this.texture = texture;
+		}
+		
+		public String getTexturePath() {
+			return texturePath;
+		}
+		
+		public void setTexturePath(String texturePath) {
+			this.texturePath = texturePath;
+		}
+	}
+	
+REPEATED CLASSS
+
+TEXTURE_SHAPES
+
+BUTTONS_LISTS
+}

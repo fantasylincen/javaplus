@@ -14,16 +14,17 @@ public class UserCreator {
 	 * @param session
 	 * @param username
 	 * @param password
+	 * @param nick 
 	 * @param userId
 	 * @return
 	 */
 	public UserDto createNewUser(HttpSession session, String username,
-			String password) {
+			String password, String nick) {
 		UserDao dao = Daos.getUserDao();
 		UserDto dto = new UserDto();
 		dto.setUsername(username);
 		dto.setPassword(password);
-		dto.setNick("");
+		dto.setNick(nick);
 		dao.save(dto);
 		session.setAttribute("username", dto.getUsername());
 		return dto;

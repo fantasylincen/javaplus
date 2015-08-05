@@ -60,7 +60,7 @@ public class RegistAction extends ActionSupport {
 		}
 
 		UserCreator c = new UserCreator();
-		c.createNewUser(session, un, pwd);
+		c.createNewUser(session, un, pwd, "");
 		Log.d("regist successful");
 		return SUCCESS;
 	}

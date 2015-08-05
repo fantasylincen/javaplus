@@ -7,9 +7,8 @@ import org.apache.struts2.ServletActionContext;
 import org.hhhhhh.guess.Server;
 import org.hhhhhh.guess.action.JsonAction;
 import org.hhhhhh.guess.config.GameProperties;
-import org.hhhhhh.guess.hibernate.dao.Daos;
-import org.hhhhhh.guess.hibernate.dao.SystemKeyValueDao;
-import org.hhhhhh.guess.hibernate.dto.SystemKeyValueDto;
+import org.hhhhhh.guess.hibernate.dao.DbUtil;
+import org.hhhhhh.guess.hibernate.dto.KeyValueDto;
 import org.hhhhhh.guess.user.User;
 
 import cn.javaplus.mail.MailSenderInfo;
@@ -41,8 +40,7 @@ public class ResetPwdAction extends JsonAction {
 	private String email;
 
 	private String generateResetEmailCode() {
-		SystemKeyValueDao dao = Daos.getSystemKeyValueDao();
-		SystemKeyValueDto dto = new SystemKeyValueDto();
+		KeyValueDto dto = new KeyValueDto();
 
 		String random = Util.Random.getRandomString(32)
 				+ Util.Secure.md5(Util.ID.createId());
@@ -51,10 +49,10 @@ public class ResetPwdAction extends JsonAction {
 		String key = "RESET_PASSWORD:" + random;
 		String value = getEmail() + ":" + System.currentTimeMillis();
 
-		dto.setKey(key);
-		dto.setValue(value);
+		dto.setK(key);
+		dto.setV(value);
 
-		dao.save(dto);
+		DbUtil.save(dto);
 		return random;
 	}
 
@@ -106,7 +104,7 @@ public class ResetPwdAction extends JsonAction {
 
 		int errorCode;
 
-		User user = Server.loadUserByUsername(getEmail());
+		User user = Server.getUser(getEmail());
 
 		if (user != null) {
 			String code = generateResetEmailCode();

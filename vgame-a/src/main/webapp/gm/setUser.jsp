@@ -28,6 +28,8 @@
 </head>
 <body bgcolor="rgb(110,110,110)">
 
+<div>
+
 	<script>
 function juge(form){
 	if (form.reason.value == null || form.reason.value == ""){ 
@@ -195,7 +197,7 @@ function juge(form){
 					<td><br></td>
 				</tr>
 				<tr>
-					<td><a href="coinLog.jsp?roleId=<%=role.getId()%>&page=200000000&countEvery=14">查看金豆记录</a></td>
+					<td><a href="coinLog.jsp?roleId=<%=role.getId()%>&page=200000000">查看金豆记录</a></td>
 					<td></td>
 				</tr>
 			</tbody>
@@ -209,7 +211,7 @@ function juge(form){
 
 
 
-	</form>
+	</form></div>
 </body>
 
 </html>

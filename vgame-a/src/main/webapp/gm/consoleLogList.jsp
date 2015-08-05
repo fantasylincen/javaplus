@@ -17,35 +17,34 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
+<center>
+	<div data-demo-html="true" style="width: 95%; ">
 
-	<div>
+		<a href="menu.jsp">返回</a><br> <br>
 
-		<a href="menu.jsp">返回</a><br>
+
+
+		<%
+			List<File> logs = ConsoleLog.getFiles();
+
+			if (logs.isEmpty()) {
+				out.println("没有日志记录");
+			} else {
+
+				for (File log : logs) {
+		%>
+		<a href="consoleLogs.jsp?console-log-file-name=<%=log.getName()%>"><%=log.getName().replaceAll("\\.log", "")%></a>
 		<br>
+		<%
+			}
+			}
+		%>
+
+
+
+
+		<br> <br>
 	</div>
-
-
-
-	<%
-		List<File> logs = ConsoleLog.getFiles();
-
-		if (logs.isEmpty()) {
-			out.println("没有日志记录");
-		} else {
-
-			for (File log : logs) {
-	%>
-	<a href="consoleLogs.jsp?console-log-file-name=<%=log.getName()%>"><%=log.getName()%></a>
-	<br>
-	<%
-		}
-		}
-	%>
-
-
-
-
-	<br>
-	<br>
+	</center>
 </body>
 </html>

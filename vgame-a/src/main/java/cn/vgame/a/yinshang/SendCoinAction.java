@@ -10,7 +10,6 @@ import cn.vgame.a.Server;
 import cn.vgame.a.account.Role;
 import cn.vgame.a.gen.dto.MongoGen.Daos;
 import cn.vgame.a.gen.dto.MongoGen.RoleDao.RoleDtoCursor;
-import cn.vgame.share.EncodingUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -38,12 +37,15 @@ public class SendCoinAction extends ActionSupport {
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 
+		if(coin == null || nick == null)
+			return SUCCESS;
+		
 		checkIsNumber();
 		this.coinReal = new Long(coin);
 		
 		
 		Role role = Server.getRole(session);
-
+		
 		checkCoin(role);
 
 		Role otherRole = Server.getRole(getId(nick));

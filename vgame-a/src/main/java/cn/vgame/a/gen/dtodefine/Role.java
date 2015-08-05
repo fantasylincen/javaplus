@@ -19,6 +19,8 @@ interface Role {
 	@Index
 	String getOwnerId();
 
+	String getZoneId();
+	
 	/**
 	 * 是否是机器人, 如果是机器人, 则系统自动帮忙玩, 且玩家不可登陆
 	 */
@@ -41,6 +43,8 @@ interface Role {
 
 	long getCreateTime();
 
+	String getCreateIp();
+	
 	/**
 	 * @return 银行中的金豆
 	 */

@@ -1,0 +1,151 @@
+robot.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg_down
+  rotate: false
+  xy: 1594, 511
+  size: 13, 147
+  orig: 13, 147
+  offset: 0, 0
+  index: -1
+sky_mask
+  rotate: false
+  xy: 2, 353
+  size: 1136, 170
+  orig: 1136, 170
+  offset: 0, 0
+  index: -1
+rankingListButtonUp
+  rotate: false
+  xy: 1609, 511
+  size: 90, 65
+  orig: 100, 75
+  offset: 8, 3
+  index: -1
+label_gray
+  rotate: false
+  xy: 2, 583
+  size: 897, 56
+  orig: 897, 56
+  offset: 0, 0
+  index: -1
+ground
+  rotate: false
+  xy: 1210, 324
+  size: 541, 185
+  orig: 541, 185
+  offset: 0, 0
+  index: -1
+cloud3
+  rotate: false
+  xy: 1692, 186
+  size: 175, 136
+  orig: 175, 140
+  offset: 0, 1
+  index: -1
+shareButtonUp
+  rotate: false
+  xy: 1609, 578
+  size: 76, 73
+  orig: 100, 75
+  offset: 12, 0
+  index: -1
+head
+  rotate: false
+  xy: 1869, 186
+  size: 91, 96
+  orig: 91, 96
+  offset: 0, 0
+  index: -1
+rankingListButtonDown
+  rotate: false
+  xy: 1873, 515
+  size: 82, 55
+  orig: 100, 75
+  offset: 10, 10
+  index: -1
+mask
+  rotate: false
+  xy: 1210, 2
+  size: 480, 320
+  orig: 480, 320
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 901, 525
+  size: 165, 130
+  orig: 195, 150
+  offset: 1, 16
+  index: -1
+sign
+  rotate: false
+  xy: 1701, 515
+  size: 160, 134
+  orig: 160, 134
+  offset: 0, 0
+  index: -1
+label_white
+  rotate: false
+  xy: 2, 525
+  size: 897, 56
+  orig: 897, 56
+  offset: 0, 0
+  index: -1
+cloud1
+  rotate: false
+  xy: 1692, 2
+  size: 309, 182
+  orig: 319, 182
+  offset: 0, 0
+  index: -1
+building
+  rotate: false
+  xy: 2, 2
+  size: 1206, 349
+  orig: 1206, 349
+  offset: 0, 0
+  index: -1
+leg_up
+  rotate: false
+  xy: 1863, 515
+  size: 8, 144
+  orig: 12, 144
+  offset: 2, 0
+  index: -1
+guide
+  rotate: false
+  xy: 1753, 324
+  size: 201, 189
+  orig: 217, 203
+  offset: 10, 6
+  index: -1
+black_background
+  rotate: false
+  xy: 1687, 578
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+shareButtonDown
+  rotate: false
+  xy: 1140, 353
+  size: 68, 71
+  orig: 100, 75
+  offset: 16, 2
+  index: -1
+sky
+  rotate: false
+  xy: 1362, 511
+  size: 230, 142
+  orig: 230, 142
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 1140, 511
+  size: 220, 162
+  orig: 220, 162
+  offset: 0, 0
+  index: -1

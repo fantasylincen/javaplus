@@ -115,6 +115,8 @@
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByIdFuzzy(String id) {			collection.ensureIndex("id");			id = id.replaceAll("\\*", ".*");			id = "^" + id + "$";			BasicDBObject o = new BasicDBObject("id", Pattern.compile(id, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByOwnerId(String ownerId) {			collection.ensureIndex("ownerId");			BasicDBObject o = new BasicDBObject("ownerId", ownerId);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByOwnerIdFuzzy(String ownerId) {			collection.ensureIndex("ownerId");			ownerId = ownerId.replaceAll("\\*", ".*");			ownerId = "^" + ownerId + "$";			BasicDBObject o = new BasicDBObject("ownerId", Pattern.compile(ownerId, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByZoneId(String zoneId) {						BasicDBObject o = new BasicDBObject("zoneId", zoneId);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByZoneIdFuzzy(String zoneId) {						zoneId = zoneId.replaceAll("\\*", ".*");			zoneId = "^" + zoneId + "$";			BasicDBObject o = new BasicDBObject("zoneId", Pattern.compile(zoneId, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByIsRobot(boolean isRobot) {						BasicDBObject o = new BasicDBObject("isRobot", isRobot);			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByNick(String nick) {						BasicDBObject o = new BasicDBObject("nick", nick);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByNickFuzzy(String nick) {						nick = nick.replaceAll("\\*", ".*");			nick = "^" + nick + "$";			BasicDBObject o = new BasicDBObject("nick", Pattern.compile(nick, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
@@ -126,6 +128,8 @@
 		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByBankPasswordFuzzy(String bankPassword) {						bankPassword = bankPassword.replaceAll("\\*", ".*");			bankPassword = "^" + bankPassword + "$";			BasicDBObject o = new BasicDBObject("bankPassword", Pattern.compile(bankPassword, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByCreateTime(long createTime) {						BasicDBObject o = new BasicDBObject("createTime", createTime);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findCreateTimeBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("createTime", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
+		public RoleDtoCursor findByCreateIp(String createIp) {						BasicDBObject o = new BasicDBObject("createIp", createIp);			return new RoleDtoCursor(collection.find(o));		}
+		/**		 * 模糊查找		 * 比如   pattern = *lyc*01*		 * 匹配  alyc12370121		 * 匹配  x123lycacbb0100 		 */		public RoleDtoCursor findByCreateIpFuzzy(String createIp) {						createIp = createIp.replaceAll("\\*", ".*");			createIp = "^" + createIp + "$";			BasicDBObject o = new BasicDBObject("createIp", Pattern.compile(createIp, Pattern.CASE_INSENSITIVE));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByBankCoin(long bankCoin) {						BasicDBObject o = new BasicDBObject("bankCoin", bankCoin);			return new RoleDtoCursor(collection.find(o));		}
 		/**		 * 在min和max之间, 包含min和max		 */		public RoleDtoCursor findBankCoinBetween(long min, long max) {						BasicDBObject o = new BasicDBObject();			o.put("bankCoin", new BasicDBObject("$gte", min).append("$lte", max));			return new RoleDtoCursor(collection.find(o));		}
 		public RoleDtoCursor findByRechargeHistory(long rechargeHistory) {						BasicDBObject o = new BasicDBObject("rechargeHistory", rechargeHistory);			return new RoleDtoCursor(collection.find(o));		}
@@ -481,12 +485,14 @@
 	static MongoMap<GmLogDto> copy(MongoMap<GmLogDto> map) {		MongoMapImpl<GmLogDto> m = new MongoMapImpl<GmLogDto>();				for (String key : map.keySet()) {			GmLogDto v = map.get(key);			m.put(key, MongoGen.copy(v));		}		return m;	}			static List<GmLogDto> copy(List<GmLogDto> list) {		List<GmLogDto> ls = Lists.newArrayList();		for (GmLogDto t : list) {			ls.add(MongoGen.copy(t));		}		return ls;	}		@Override		public String toString() {			return toObject().toString();		}	}
 		public static class RoleDto implements MongoDto{		private String id = "";
 		private String ownerId = "";
+		private String zoneId = "";
 		private boolean isRobot = false;
 		private String nick = "";
 		private long coin = 0;
 		private long jiangQuan = 0;
 		private String bankPassword = "";
 		private long createTime = 0;
+		private String createIp = "";
 		private long bankCoin = 0;
 		private long rechargeHistory = 0;
 		private boolean hasJinYan = false;
@@ -497,12 +503,14 @@
 		private MongoMap<String> keyValueForever = Maps.newMongoMap();
 		public RoleDto() {		}				/**		 * Copy new one		 */		public RoleDto(RoleDto src) {			id = MongoGen.copy(src.id);			
 			ownerId = MongoGen.copy(src.ownerId);			
+			zoneId = MongoGen.copy(src.zoneId);			
 			isRobot = MongoGen.copy(src.isRobot);			
 			nick = MongoGen.copy(src.nick);			
 			coin = MongoGen.copy(src.coin);			
 			jiangQuan = MongoGen.copy(src.jiangQuan);			
 			bankPassword = MongoGen.copy(src.bankPassword);			
 			createTime = MongoGen.copy(src.createTime);			
+			createIp = MongoGen.copy(src.createIp);			
 			bankCoin = MongoGen.copy(src.bankCoin);			
 			rechargeHistory = MongoGen.copy(src.rechargeHistory);			
 			hasJinYan = MongoGen.copy(src.hasJinYan);			
@@ -513,12 +521,14 @@
 			keyValueForever = MongoGen.copyString(src.keyValueForever);			
 		}		public String getId() {			return this.id;		}
 		public String getOwnerId() {			return this.ownerId;		}
+		public String getZoneId() {			return this.zoneId;		}
 		public boolean getIsRobot() {			return this.isRobot;		}
 		public String getNick() {			return this.nick;		}
 		public long getCoin() {			return this.coin;		}
 		public long getJiangQuan() {			return this.jiangQuan;		}
 		public String getBankPassword() {			return this.bankPassword;		}
 		public long getCreateTime() {			return this.createTime;		}
+		public String getCreateIp() {			return this.createIp;		}
 		public long getBankCoin() {			return this.bankCoin;		}
 		public long getRechargeHistory() {			return this.rechargeHistory;		}
 		public boolean getHasJinYan() {			return this.hasJinYan;		}
@@ -529,12 +539,14 @@
 		public MongoMap<String> getKeyValueForever() {			return this.keyValueForever;		}
 		public void setId(String id) {			this.id = id;		}
 		public void setOwnerId(String ownerId) {			this.ownerId = ownerId;		}
+		public void setZoneId(String zoneId) {			this.zoneId = zoneId;		}
 		public void setIsRobot(boolean isRobot) {			this.isRobot = isRobot;		}
 		public void setNick(String nick) {			this.nick = nick;		}
 		public void setCoin(long coin) {			this.coin = coin;		}
 		public void setJiangQuan(long jiangQuan) {			this.jiangQuan = jiangQuan;		}
 		public void setBankPassword(String bankPassword) {			this.bankPassword = bankPassword;		}
 		public void setCreateTime(long createTime) {			this.createTime = createTime;		}
+		public void setCreateIp(String createIp) {			this.createIp = createIp;		}
 		public void setBankCoin(long bankCoin) {			this.bankCoin = bankCoin;		}
 		public void setRechargeHistory(long rechargeHistory) {			this.rechargeHistory = rechargeHistory;		}
 		public void setHasJinYan(boolean hasJinYan) {			this.hasJinYan = hasJinYan;		}
@@ -546,12 +558,14 @@
 		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();		o.put("_id", id);
 			o.put("id", MongoGen.toObject(id));			
 			o.put("ownerId", MongoGen.toObject(ownerId));			
+			o.put("zoneId", MongoGen.toObject(zoneId));			
 			o.put("isRobot", MongoGen.toObject(isRobot));			
 			o.put("nick", MongoGen.toObject(nick));			
 			o.put("coin", MongoGen.toObject(coin));			
 			o.put("jiangQuan", MongoGen.toObject(jiangQuan));			
 			o.put("bankPassword", MongoGen.toObject(bankPassword));			
 			o.put("createTime", MongoGen.toObject(createTime));			
+			o.put("createIp", MongoGen.toObject(createIp));			
 			o.put("bankCoin", MongoGen.toObject(bankCoin));			
 			o.put("rechargeHistory", MongoGen.toObject(rechargeHistory));			
 			o.put("hasJinYan", MongoGen.toObject(hasJinYan));			
@@ -562,12 +576,14 @@
 			o.put("keyValueForever", MongoGen.toObjectString(keyValueForever));
 			return o;		}		@Override		public void fromDBObject(DBObject o) {			id = getString(o, "id");
 			ownerId = getString(o, "ownerId");
+			zoneId = getString(o, "zoneId");
 			isRobot = getBoolean(o, "isRobot");
 			nick = getString(o, "nick");
 			coin = getLong(o, "coin");
 			jiangQuan = getLong(o, "jiangQuan");
 			bankPassword = getString(o, "bankPassword");
 			createTime = getLong(o, "createTime");
+			createIp = getString(o, "createIp");
 			bankCoin = getLong(o, "bankCoin");
 			rechargeHistory = getLong(o, "rechargeHistory");
 			hasJinYan = getBoolean(o, "hasJinYan");
@@ -590,9 +606,13 @@
 
 
 
+
+
 		MongoMap<String> loadKeyValueDaily(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueDaily");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 		MongoMap<String> loadKeyValueForever(DBObject o) {			BasicDBObject dto = (BasicDBObject) o.get("keyValueForever");			if (dto == null) {				return null;			}			MongoMap<String> map = Maps.newMongoMap();			for (String key : dto.keySet()) {				map.put(key, (String)dto.get(key));			}			return map;		}						
 
+
+
 
 
 

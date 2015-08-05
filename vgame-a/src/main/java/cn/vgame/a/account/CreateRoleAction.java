@@ -10,6 +10,8 @@ import cn.vgame.a.gen.dto.MongoGen.RoleDto;
 import cn.vgame.a.result.ErrorResult;
 import cn.vgame.a.util.RoleIdGenerator;
 import cn.vgame.share.EncodingUtil;
+import cn.vgame.share.KeyValue;
+import cn.vgame.share.KeyValueSaveOnly;
 
 /**
  * 创建角色
@@ -44,30 +46,64 @@ public class CreateRoleAction extends JsonAction {
 	private static final long serialVersionUID = -6099859675509539457L;
 
 	private String nick;
+	private String deviceId;
+
+	private String ip;
 
 	@Override
 	public Object exec() {
+
+		ip = request.getRemoteAddr();
+
 		boolean canUse = Util.Sencitive.canUse(getNick());
 		if (!canUse) {
 			return new ErrorResult(10004);
 		}
-		
-		if(isAreadyUse()) {
+
+		if (isAreadyUse()) {
 			return new ErrorResult(10025);
 		}
-		
+
+		if (deviceId != null && deviceCreateTooMany()) {
+			return new ErrorResult(10110);
+		}
+
+		if (ipCreateTooMany()) {
+			return new ErrorResult(10110);
+		}
+
 		String userId = (String) session.getAttribute("userId");
 		if (userId == null)
 			return new ErrorResult(10005);
 		RoleDto dto = createNewUser(userId);
 		Role role = new Role(dto);
 
-		Events.dispatch(new SelectRoleEnterGameEvent(role, session));
+		Events.dispatch(new SelectRoleEnterGameEvent(role, session, request));
 		Events.dispatch(new CreateRoleEvent(role, session));
+
+		KeyValueSaveOnly da = Server.getKeyValueSaveOnly();
+		da.add("CREATE_ROLE_COUNT", 1);
+
+		if (deviceId != null)
+			da.add("CREATE_ROLE_COUNT:" + deviceId, 1);
 		
-		Server.getKeyValueSaveOnly().add("CREATE_ROLE_COUNT", 1);
-		
+		da.add("CREATE_ROLE_COUNT:" + ip, 1);//记录该IP创建角色的次数
+
 		return new CreateRoleResult(role, session);
+	}
+	
+
+	private boolean ipCreateTooMany() {
+		return false;
+//		KeyValue da = Server.getKeyValueDaily();
+//		int createCount = da.getInt("CREATE_ROLE_COUNT:" + ip);
+//		return createCount > 5; // 一个设备每天最多创建5个帐户
+	}
+
+	private boolean deviceCreateTooMany() {
+		KeyValue da = Server.getKeyValueDaily();
+		int createCount = da.getInt("CREATE_ROLE_COUNT:" + deviceId);
+		return createCount > 5; // 一个设备每天最多创建5个帐户
 	}
 
 	private boolean isAreadyUse() {
@@ -76,14 +112,15 @@ public class CreateRoleAction extends JsonAction {
 	}
 
 	private RoleDto createNewUser(String userId) {
-		
+
 		RoleDao dao = Daos.getRoleDao();
-		
+
 		RoleDto dto = dao.createDTO();
 		dto.setId(RoleIdGenerator.createRoleId());
 		dto.setNick(nick);
 		dto.setOwnerId(userId);
 		dto.setCreateTime(System.currentTimeMillis());
+		dto.setCreateIp(ip);
 		dao.save(dto);
 		return dto;
 	}
@@ -98,6 +135,14 @@ public class CreateRoleAction extends JsonAction {
 	public void setNick(String nick) {
 		nick = EncodingUtil.iso2Utf8(nick);
 		this.nick = nick;
+	}
+
+	public String getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
 
 }

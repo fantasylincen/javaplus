@@ -1,0 +1,36 @@
+package cn.javaplus.game.shhz.gen;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Properties;
+
+import cn.javaplus.shhz.util.Closer;
+import cn.javaplus.shhz.util.Util;
+
+import com.google.common.io.Resources;
+
+public class R {
+	
+REPEATED CLASSS
+
+	private static String getFileContent(String name) {
+		return Util.File.getContent(Resources.getResource(name));
+	}
+
+	private static Properties getProp(String string) {
+
+		Properties prop = new Properties();
+		InputStream is = null;
+		try {
+			is = Resources.getResource(string).openStream();
+			InputStreamReader r = new InputStreamReader(is, "utf8");
+			prop.load(r);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			Closer.close(is);
+		}
+		return prop;
+	}
+}

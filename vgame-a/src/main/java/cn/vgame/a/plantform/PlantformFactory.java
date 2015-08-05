@@ -4,15 +4,15 @@ public class PlantformFactory {
 
 	public static Plantform createPlantform(String plantform) {
 		if ("xy".equals(plantform)) {
-			return new XyPlantform();
+			return new XyPlantform(plantform);
 		}
 		if ("domain".equals(plantform)) {
-			return new DomainPlantform();
+			return new DomainPlantform(plantform);
 		}
 		if ("appstore".equals(plantform)) {
-			return new AppStorePlantform();
+			return new AppStorePlantform(plantform);
 		}
-		return new VcPlantform();
+		return new VcPlantform(plantform);
 	}
 
 }
