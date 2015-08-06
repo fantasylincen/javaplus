@@ -24,42 +24,44 @@ public class MainUI {
 		return ls;
 	}
 
-	public static class OptionItem {
 
-		private final Option option;
+	public class QuestionItem {
 
-		public OptionItem(Option option) {
-			this.option = option;
+		public class OptionItem {
+
+			private final Option option;
+
+			public OptionItem(Option option) {
+				this.option = option;
+			}
+
+			public String getId() {
+				return option.getId();
+			}
+
+			public String getTitle() {
+				return option.getTitle();
+			}
+
+			public String getDsc() {
+				return option.getDsc();
+			}
+
+			public double getScale() {
+				return option.getScale();
+			}
+			
+			public String getScaleValue() {
+				return option.getScaleText();
+			}
+
+			public boolean isSelected() {
+				boolean selected = option.isSelected(user);
+//				Log.d(selected, question.getDsc());
+				return selected;
+			}
+
 		}
-
-		public String getId() {
-			return option.getId();
-		}
-
-		public String getTitle() {
-			return option.getTitle();
-		}
-
-		public String getDsc() {
-			return option.getDsc();
-		}
-
-		public double getScale() {
-			return option.getScale();
-		}
-		
-		public String getScaleValue() {
-			return option.getScaleText();
-		}
-
-		public boolean isSelected(User user) {
-			return option.isSelected(user);
-		}
-
-	}
-
-	public static class QuestionItem {
-
 		private final Question question;
 
 		public QuestionItem(Question question) {
