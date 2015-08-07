@@ -1,24 +1,11 @@
 package cn.vgame.b.physical;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.javaplus.collections.list.Lists;
-import cn.javaplus.excel.Row;
-import cn.javaplus.excel.Sheet;
-import cn.vgame.b.Server;
 import cn.vgame.b.account.Role;
-import cn.vgame.b.bag.Bag;
 import cn.vgame.b.gen.dto.MongoGen.Daos;
-import cn.vgame.b.gen.dto.MongoGen.MissionDataDto;
-import cn.vgame.b.gen.dto.MongoGen.MongoMap;
 import cn.vgame.b.gen.dto.MongoGen.RoleDto;
-import cn.vgame.b.result.ErrorResult;
-import cn.vgame.b.turntable.GetBagAction.BagItem;
-import cn.vgame.share.KeyValue;
-import cn.vgame.share.Xml;
 
 /**
  * 
@@ -33,14 +20,6 @@ public class Physical {
 
 	public Role getRole() {
 		return role;
-	}
-
-
-	public int getCount(int id) {
-		RoleDto dto = role.getDto();
-		MongoMap<MissionDataDto> data = dto.getMissionData();
-		MissionDataDto d = data.get(id + "");
-		return d.getStar();
 	}
 
 	/**

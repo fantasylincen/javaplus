@@ -191,13 +191,13 @@
 		List<String> loadArgs(DBObject o) {			List<String> ls = Lists.newArrayList();						BasicDBList args = getBasicDBList(o, "args");			for (Object xxx : args) {				ls.add((String)xxx);			}			return ls;		}										
 
 	static MongoMap<GmLogDto> copy(MongoMap<GmLogDto> map) {		MongoMapImpl<GmLogDto> m = new MongoMapImpl<GmLogDto>();				for (String key : map.keySet()) {			GmLogDto v = map.get(key);			m.put(key, MongoGen.copy(v));		}		return m;	}			static List<GmLogDto> copy(List<GmLogDto> list) {		List<GmLogDto> ls = Lists.newArrayList();		for (GmLogDto t : list) {			ls.add(MongoGen.copy(t));		}		return ls;	}		@Override		public String toString() {			return toObject().toString();		}	}
-		public static class MissionDataDto implements MongoDto{		private int star = 0;
-		public MissionDataDto() {		}				/**		 * Copy new one		 */		public MissionDataDto(MissionDataDto src) {			star = MongoGen.copy(src.star);			
-		}		public int getStar() {			return this.star;		}
-		public void setStar(int star) {			this.star = star;		}
+		public static class MissionDataDto implements MongoDto{		private String status = "";
+		public MissionDataDto() {		}				/**		 * Copy new one		 */		public MissionDataDto(MissionDataDto src) {			status = MongoGen.copy(src.status);			
+		}		public String getStatus() {			return this.status;		}
+		public void setStatus(String status) {			this.status = status;		}
 		@Override		public DBObject toObject() {			BasicDBObject o = new BasicDBObject();
-			o.put("star", MongoGen.toObject(star));			
-			return o;		}		@Override		public void fromDBObject(DBObject o) {			star = getInteger(o, "star");
+			o.put("status", MongoGen.toObject(status));			
+			return o;		}		@Override		public void fromDBObject(DBObject o) {			status = getString(o, "status");
 		}
 
 	static MongoMap<MissionDataDto> copy(MongoMap<MissionDataDto> map) {		MongoMapImpl<MissionDataDto> m = new MongoMapImpl<MissionDataDto>();				for (String key : map.keySet()) {			MissionDataDto v = map.get(key);			m.put(key, MongoGen.copy(v));		}		return m;	}			static List<MissionDataDto> copy(List<MissionDataDto> list) {		List<MissionDataDto> ls = Lists.newArrayList();		for (MissionDataDto t : list) {			ls.add(MongoGen.copy(t));		}		return ls;	}		@Override		public String toString() {			return toObject().toString();		}	}

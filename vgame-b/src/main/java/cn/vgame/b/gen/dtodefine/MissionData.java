@@ -3,8 +3,8 @@ package cn.vgame.b.gen.dtodefine;
 public interface MissionData {
 	
 	/**
-	 * 星星数量
+	 * 星星状态
 	 * @return
 	 */
-	int getStar();
+	String getStatus();
 }

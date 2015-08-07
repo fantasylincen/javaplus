@@ -26,27 +26,6 @@ import cn.vgame.b.mission.Mission;
 
 public class GetMissionStarAction extends JsonActionAfterRoleEnterGame {
 
-	public class MissionStarItem {
-		private int id;
-		private int count;
-
-		public int getCount() {
-			return count;
-		}
-
-		public void setCount(int count) {
-			this.count = count;
-		}
-
-		public int getId() {
-			return id;
-		}
-
-		public void setId(int id) {
-			this.id = id;
-		}
-	}
-
 	/**
 	 * 
 	 * 
@@ -64,31 +43,6 @@ public class GetMissionStarAction extends JsonActionAfterRoleEnterGame {
 	 */
 	
 	
-	public class MissionResult {
-		
-		public List<MissionStarItem> getItems() {
-			
-			Mission mission = role.getMission();
-			ArrayList<MissionStarItem> ls = Lists.newArrayList();
-			Sheet sheet = Server.getXml().get("mession");
-			List<Row> all = sheet.getAll();
-			for (Row row : all) {
-				int id = row.getInt("id");
-				MissionStarItem item = new MissionStarItem();
-				item.setId(id);
-				item.setCount(mission.getCount(id));
-				ls.add(item);
-			}
-			return ls;
-			
-		}
-		
-		public int getMaxMissionId() {
-			Mission mission = role.getMission();
-			return mission.getMaxMissionId();
-		}
-	}
-
 	/**
 	 * 
 	 */
@@ -96,6 +50,7 @@ public class GetMissionStarAction extends JsonActionAfterRoleEnterGame {
 
 	@Override
 	protected Object run() {
-		return new MissionResult();
+//		return new MissionResult();
+		return new Object();
 	}
 }

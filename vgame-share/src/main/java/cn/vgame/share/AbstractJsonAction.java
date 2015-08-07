@@ -64,6 +64,8 @@ public abstract class AbstractJsonAction extends ActionSupport {
 			Log.e(s);
 			e(e);
 		} catch (Throwable e) {
+			e.printStackTrace();
+			e(e);
 
 			String simpleName = e.getClass().getSimpleName();
 			String message = e.getMessage();
@@ -72,7 +74,7 @@ public abstract class AbstractJsonAction extends ActionSupport {
 
 			out.println(s);
 			Log.e(s);
-			e(e);
+
 		} finally {
 			out.flush();
 			Closer.close(out);
