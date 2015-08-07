@@ -54,7 +54,7 @@
 		
 		
 		<action name="getBag" class="cn.vgame.b.turntable.GetBagAction" />
-	    <action name="getMissionStar" class="cn.vgame.b.turntable.GetMissionStarAction" />
+	    <action name="submitMissionData" class="cn.vgame.b.turntable.SubmitMissionDataAction" />
 		
 	</package>
 

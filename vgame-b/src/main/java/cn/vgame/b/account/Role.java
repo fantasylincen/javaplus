@@ -292,14 +292,38 @@ public class Role implements IRole {
 		dto.setRechargeHistory(dto.getRechargeHistory() + add);
 		Daos.getRoleDao().save(dto);
 	}
-
+     	/**
+     	 * 获取当前角色的头像
+     	 * @return
+     	 */
 	public int getHead() {
 		return dto.getHead();
+	}
+	/**
+	 * 获取当前角色的最大关卡数
+	 * @return
+	 */
+	
+	public int getMaxMissionId() {
+		return dto.getMaxMissionId();
+	}
+	
+	/**
+	 * 获取当前角色的体力时间
+	 * @return
+	 */
+	
+	public int getPhysicalCd() {
+		return dto.getPhysicalCd();
 	}
 //	PHYSICAL_MAX
 //	PHYSICAL_ADD_RATE
 //	PHYSICAL_ADD_EVERY_TIMES
 
+	/**
+	 * 获取当前角色的体力
+	 * @return
+	 */
 	public int getPhysical() {
 		int physicalNeedAdd = calcPhysicalNeedAdd();
 		if(physicalNeedAdd != 0) {

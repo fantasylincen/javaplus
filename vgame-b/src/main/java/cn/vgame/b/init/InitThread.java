@@ -2,6 +2,7 @@ package cn.vgame.b.init;
 
 import cn.javaplus.log.Log;
 import cn.javaplus.log.Out;
+import cn.javaplus.util.Util;
 import cn.javaplus.web.WebContentFethcer;
 import cn.vgame.b.Server;
 import cn.vgame.b.config.GameProperties;
@@ -46,11 +47,20 @@ public final class InitThread extends Thread {
 		Out out = new FileLogger(Server.getConfig().getString("logFilePath"));
 		Log.setOut(out);
 		Log.setErr(out);
+		Log.d("init log over");
 	}
 
 	private void initGameXml() {
+
+		Log.d("init game.xml ...");
 		String path = Server.getConfig().getString("gameXmlPath");
+		
+		System.err.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		path = "http://localhost:8080/vgame-b/game.xml";
+		
 		final String content = WebContentFethcer.get("utf8", path);
+//		final String content = Util.File.getContent("C:/Users/Administrator/Desktop/fqzs/弹珠/数值文档/game.xml");
+		
 		Server.getXml().init(content);
 		Log.d("init game.xml over");
 	}

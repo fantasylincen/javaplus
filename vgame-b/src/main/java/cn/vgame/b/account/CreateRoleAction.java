@@ -47,7 +47,7 @@ public class CreateRoleAction extends JsonAction {
 
 	private String nick;
 	private String deviceId;
-
+    private int  head;
 	private String ip;
 
 	@Override
@@ -118,6 +118,7 @@ public class CreateRoleAction extends JsonAction {
 		RoleDto dto = dao.createDTO();
 		dto.setId(RoleIdGenerator.createRoleId());
 		dto.setNick(nick);
+		dto.setHead(getHead());
 		dto.setOwnerId(userId);
 		dto.setCreateTime(System.currentTimeMillis());
 		dto.setCreateIp(ip);
@@ -143,6 +144,16 @@ public class CreateRoleAction extends JsonAction {
 
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
+	}
+
+
+	public int getHead() {
+		return head;
+	}
+
+
+	public void setHead(int head) {
+		this.head = head;
 	}
 
 }
