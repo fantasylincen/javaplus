@@ -77,7 +77,7 @@
 		</action>
 
 		<action name="uploadGameXmlAction" class="cn.vgame.b.gm.UploadGameXmlAction">
-			<result type="redirect">/gm/message.jsp</result>
+				<result type="redirect">/gm/gameXml.jsp</result>
 		</action>
 
 

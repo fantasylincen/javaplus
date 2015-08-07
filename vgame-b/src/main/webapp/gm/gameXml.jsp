@@ -1,5 +1,6 @@
 
 
+<%@page import="cn.vgame.b.Server"%>
 <%@page import="org.apache.struts2.ServletActionContext"%>
 <%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@page import="java.io.IOException"%>
@@ -24,28 +25,39 @@
 
 
 		<p>
-			<span style="font-size:18px;"><strong>配置表</strong></span>
+			<span style="font-size:18px;"><strong>配置表</strong>
+			</span>
 		</p>
 		<p>
 			<span style="font-size:18px;"><strong>
-			<hr />
-			<br />
-		</strong></span>
+					<hr /> <br /> </strong>
+			</span>
 		</p>
 		<p>
-			<span style="font-size:18px;"><strong>
-		</strong></span>
+			<span style="font-size:18px;"><strong> </strong>
+			</span>
 		</p>
-		
 
-		<br> 
-		<form action="gm/uploadGameXmlAction" enctype="multipart/form-data"
+
+		<br>
+		<form action="uploadGameXmlAction" enctype="multipart/form-data"
 			method="post">
-			上传  game.xml: <input type="file" name="image"><br><br> <input
-				type="submit" value="上传" />
+			上传 game.xml: <input type="file" name="image"><br>
+			<br> <input type="submit" value="上传" /> <br> <br> <br>
 
+			<%
+				if (Server.getKeyValueForever().getString("GAME_XML") != null) {
+			%>
+				<a href="../xml/getGameXml">点击下载 </a>
+			<%
+				} else {
+			%>
+					您还没有上传数值表 , 请上传最新数值表
+			<%
+				}
+			%>
 		</form>
-		
+
 	</div>
 </body>
 </html>
