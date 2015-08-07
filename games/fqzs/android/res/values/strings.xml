@@ -3,4 +3,10 @@
 
     <string name="app_name">fqzs</string>
 
+    <string name="usernameHint">请输入帐号</string>
+
+    <string name="passwordHint">请输入密码</string>
+
+    <string name="loginButtonHint">登录</string>
+
 </resources>

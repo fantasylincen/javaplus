@@ -1,5 +1,6 @@
 package cn.vgame.b.init;
 
+import cn.javaplus.excel.Row;
 import cn.javaplus.log.Log;
 import cn.javaplus.log.Out;
 import cn.javaplus.util.Util;
@@ -59,7 +60,9 @@ public final class InitThread extends Thread {
 		if(content.isEmpty())
 			throw new RuntimeException("请上传最新配置表");
 		Server.getXml().init(content);
-		Log.d("init game.xml over");
+		Row row = Server.getXml().get("messages").get(10012);
+		Log.d(row.get("value"));
+		Log.d("init game.xml over ", "PHYSICAL_ADD_RATE", Server.getConst().getString("PHYSICAL_ADD_RATE"));
 	}
 
 	private void initMongoDb() {

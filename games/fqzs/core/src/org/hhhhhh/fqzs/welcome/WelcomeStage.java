@@ -16,6 +16,7 @@ import org.javaplus.game.common.util.Lists;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class WelcomeStage extends AbstractStage {
 
@@ -24,22 +25,22 @@ public class WelcomeStage extends AbstractStage {
 		@Override
 		public void completed(JsonResult result) {
 
-			GameConfig config = getConfig(result,gateConfig.get("zoneId"));
+			GameConfig config = getConfig(result, gateConfig.get("zoneId"));
 			Log.d("load game config successful");
 			Log.d(config);
-			
+
 			App.setConfig(config);
-			
+
 			LoadOverEvent e = new LoadOverEvent(config);
 
 			for (LoadOverListener d : listeners) {
 				d.onLoadOver(e);
 			}
 		}
-		
+
 		@Override
 		public void onTimeOut() {
-			requestGameConfig(); //重新请求数据
+			requestGameConfig(); // 重新请求数据
 			Log.d("重新请求游戏配置数据");
 		}
 

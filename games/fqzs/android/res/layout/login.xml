@@ -5,17 +5,25 @@
     android:background="@drawable/background"
     tools:context="com.example.test.MainActivity" >
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
     <EditText
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/progressBar1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
-        android:background="@drawable/textfieldbackground"
         android:ems="10"
-        android:hint="请输入帐号"
-        android:inputType="textEmailAddress" />
+        android:hint="@string/usernameHint" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/password"
@@ -24,9 +32,8 @@
         android:layout_alignLeft="@+id/username"
         android:layout_alignRight="@+id/username"
         android:layout_below="@+id/username"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/textfieldbackground"
         android:ems="10"
+        android:hint="@string/passwordHint"
         android:inputType="textPassword" />
 
     <Button
@@ -34,9 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/password"
-        android:layout_alignRight="@+id/username"
+        android:layout_alignRight="@+id/password"
         android:layout_below="@+id/password"
-        android:layout_marginTop="43dp"
-        android:text="登录" />
+        android:text="@string/loginButtonHint" />
 
 </RelativeLayout>

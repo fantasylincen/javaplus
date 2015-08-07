@@ -69,7 +69,8 @@ public class UploadGameXmlAction extends ActionSupport {
 	private void saveGameXml(byte[] data) {
 		KeyValue kv = cn.vgame.b.Server.getKeyValueForever();
 		try {
-			kv.set("GAME_XML", new String(data, "utf8"));
+			String value = new String(data, "utf8");
+			kv.set("GAME_XML", value);
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
