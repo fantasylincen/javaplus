@@ -44,12 +44,6 @@
 			上传  game.xml: <input type="file" name="image"><br><br> <input
 				type="submit" value="上传" />
 
-			<%
-				String s = "gm/reloadConfig";
-			%>
-			<br><br>
-			<a href="<%=s%>">重新加载系统配置</a>
-
 		</form>
 		
 	</div>
