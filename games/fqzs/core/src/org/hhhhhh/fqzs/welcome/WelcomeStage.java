@@ -6,6 +6,7 @@ import org.hhhhhh.fqzs.config.GameConfig;
 import org.hhhhhh.fqzs.core.App;
 import org.hhhhhh.fqzs.core.D;
 import org.hhhhhh.fqzs.login.AppProperties;
+import org.javaplus.game.common.assets.Assets;
 import org.javaplus.game.common.http.HttpComponents.CallBackJsonAdaptor;
 import org.javaplus.game.common.http.JsonResult;
 import org.javaplus.game.common.log.Log;
@@ -65,6 +66,7 @@ public class WelcomeStage extends AbstractStage {
 
 	@Override
 	public void loadAssets() {
+		Assets.getDefaultLoader().loadTextureAtlas("game.txt");
 	}
 
 	@Override
@@ -78,6 +80,8 @@ public class WelcomeStage extends AbstractStage {
 	public void onLoadingOver() {
 		gateConfig = App.getProperties();
 		requestGameConfig();
+		
+		addActor(actor);
 	}
 
 	private void requestGameConfig() {
