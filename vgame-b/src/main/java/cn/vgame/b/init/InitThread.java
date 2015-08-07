@@ -52,9 +52,11 @@ public final class InitThread extends Thread {
 
 	private void initGameXml() {
 
-		Log.d("init game.xml ...");
-		final String content = Server.getKeyValueForever().getString("GAME_XML");
-		if(content == null)
+		String path = Server.getConfig().getString("localGameXmlPath");
+		Log.d("init game.xml ...", path);
+		final String content = WebContentFethcer.get("utf8", path);
+//		final String content = Util.File.getContent("C:/Users/Administrator/Desktop/fqzs/弹珠/数值文档/game.xml");
+		if(content.isEmpty())
 			throw new RuntimeException("请上传最新配置表");
 		Server.getXml().init(content);
 		Log.d("init game.xml over");

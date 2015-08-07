@@ -18,10 +18,10 @@
 		<action name="getGameXml" class="cn.vgame.b.config.GetGameXmlAction">
 
 			<result name="success" type="stream">
-				<param name="contentType">text/plain</param>
+				<param name="contentType">application/octet-stream</param>
 				<param name="contentDisposition">attachment;fileName="game.xml"</param>
 				<param name="inputName">downloadFile</param>
-				<param name="bufferSize">1024</param>
+				<param name="bufferSize">10240000</param>
 			</result>
 		</action>
 

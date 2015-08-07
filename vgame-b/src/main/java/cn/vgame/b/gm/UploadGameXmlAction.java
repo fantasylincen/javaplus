@@ -2,6 +2,7 @@ package cn.vgame.b.gm;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import cn.vgame.b.init.InitThread;
 import cn.vgame.share.KeyValue;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -59,13 +61,18 @@ public class UploadGameXmlAction extends ActionSupport {
 				fis.close();
 			}
 		}
+		new InitThread().run();
 		return SUCCESS;
 	}
 
 
 	private void saveGameXml(byte[] data) {
 		KeyValue kv = cn.vgame.b.Server.getKeyValueForever();
-		kv.set("GAME_XML", new String(data));
+		try {
+			kv.set("GAME_XML", new String(data, "utf8"));
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 

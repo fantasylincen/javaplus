@@ -8,20 +8,25 @@ import java.net.URL;
 
 import cn.javaplus.log.Log;
 import cn.javaplus.string.StringPrinter;
+import cn.javaplus.util.Closer;
 
 public class WebContentFethcer {
 	public static String get(String encoding, String url) {
 		URL getUrl;
 		HttpURLConnection connection = null;
 		StringPrinter out = new StringPrinter();
+		InputStream is= null;
+		InputStreamReader in= null;
+		BufferedReader reader= null;
 		try {
 			getUrl = new URL(url);
 			connection = (HttpURLConnection) getUrl.openConnection();
 			connection.setConnectTimeout(8000);
 			connection.connect();
-			InputStream is = connection.getInputStream();
-			InputStreamReader in = new InputStreamReader(is, encoding);
-			BufferedReader reader = new BufferedReader(in);
+
+			is = connection.getInputStream();
+			in = new InputStreamReader(is, encoding);
+			reader = new BufferedReader(in);
 			String line;
 			while(true) {
 				line = reader.readLine();
@@ -37,6 +42,10 @@ public class WebContentFethcer {
 		} finally {
 			if (connection != null)
 				connection.disconnect();
+
+			Closer.close(is);
+			Closer.close(in);
+			Closer.close(reader);
 		}
 		return out.toString();
 	}

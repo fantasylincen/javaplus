@@ -43,8 +43,9 @@ public class GetGameXmlAction extends ActionSupport{
     	KeyValue kv = Server.getKeyValueForever();
     	String gameXml = kv.getString("GAME_XML");
     	if(gameXml == null)
-    		return new byte[0];
-    	return gameXml.getBytes();
+    		return new byte[] {};
+    	byte[] bytes = gameXml.getBytes();
+		return bytes;
     }
 
 	@Override  

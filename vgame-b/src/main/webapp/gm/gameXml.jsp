@@ -20,7 +20,6 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-
 	<div class="container theme-showcase" role="main">
 
 
@@ -48,7 +47,7 @@
 			<%
 				if (Server.getKeyValueForever().getString("GAME_XML") != null) {
 			%>
-				<a href="../xml/getGameXml">点击下载 </a>
+					已上传
 			<%
 				} else {
 			%>
@@ -59,5 +58,7 @@
 		</form>
 
 	</div>
+	
+	
 </body>
 </html>
