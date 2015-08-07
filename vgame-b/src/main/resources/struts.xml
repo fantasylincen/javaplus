@@ -13,6 +13,9 @@
 	<package name="recharge4YiJie" extends="struts-default" namespace="/recharge">
 		<action name="recharge4YiJie" class="cn.vgame.b.recharge.Recharge4YiJieAction" />
 	</package>
+	<package name="xml" extends="struts-default" namespace="/getGameXml">
+		<action name="getGameXml" class="cn.vgame.b.config.GetGameXmlAction" />
+	</package>
 
 	<package name="game" extends="struts-default" namespace="/turntable">
 
@@ -83,6 +86,11 @@
 		<action name="setUser" class="cn.vgame.b.gm.SetUserAction">
 			<result type="redirect">/gm/setUser.jsp</result>
 		</action>
+
+		<action name="uploadGameXmlAction" class="cn.vgame.b.gm.UploadGameXmlAction">
+			<result type="redirect">/gm/message.jsp</result>
+		</action>
+		
 
 	</package>
 

@@ -94,7 +94,7 @@ public class MainUI {
 			return /*"http://113.204.112.162/guess/gmanager/" + */question.getImg();
 		}
 
-		public boolean isAnswered(User user) {
+		public boolean isAnswered() {
 			return question.isAnswered(user);
 		}
 

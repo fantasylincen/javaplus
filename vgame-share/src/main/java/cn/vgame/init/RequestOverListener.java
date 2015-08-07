@@ -1,4 +1,4 @@
-package cn.vgame.a.init;
+package cn.vgame.init;
 
 public interface RequestOverListener {
 

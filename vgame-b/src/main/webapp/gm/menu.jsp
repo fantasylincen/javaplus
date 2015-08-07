@@ -27,17 +27,21 @@
 		<span style="font-size:18px;"><strong> </strong>
 		</span>
 	</p>
+	
+	
 
 	<a href="queryUsers.jsp">用户管理</a>
 	<br>
 	<br>
 	<a href="systemInfo.jsp">系统信息</a>
 	<br>
+	
+	<br>
+	<a href="gameXml.jsp">数值表</a>
+	<br>
+	
 	<br>
 	<a href="turntableControl.jsp">轮盘控制</a>
-	<br>
-	<br>
-	<a href="randomTest.jsp">随机测试</a>
 	<br>
 	<br>
 	<a href="logs.jsp">操作日志</a>

@@ -85,6 +85,13 @@ public class ZoneUtil {
 		obj.put("zipGameXmlPath", getZipClientXmlPath(pid, zoneId));
 		obj.put("gameXmlVersion", getGameXmlVersion(pid, zoneId));
 		obj.put("zipXmlVersion", getClientXmlVersion(pid, zoneId));
+		obj.put("localGameXmlPath", getLocalGameXmlPath(pid, zoneId));
+	}
+
+	private static Object getLocalGameXmlPath(String pid, String zoneId) {
+		Zone zone = Server.getProjectManager().getZone(pid, zoneId);
+		String serverUrl = zone.getServerUrl();
+		return serverUrl + "/xml/getGameXml";
 	}
 
 	/**
