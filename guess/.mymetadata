@@ -4,7 +4,7 @@
   name="guess"
   id="myeclipse.1436712590220"
   context-root="/guess"
-  j2ee-spec="6.0"
+  j2ee-spec="1.7"
   archive="guess.war">
   <attributes>
     <attribute name="webrootdir" value="src/main/webapp" />

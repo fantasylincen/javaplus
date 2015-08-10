@@ -4,7 +4,7 @@
   name="house-spider"
   id="myeclipse.1436712590220"
   context-root="/house-spider"
-  j2ee-spec="6.0"
+  j2ee-spec="1.7"
   archive="house-spider.war">
   <attributes>
     <attribute name="webrootdir" value="src/main/webapp" />

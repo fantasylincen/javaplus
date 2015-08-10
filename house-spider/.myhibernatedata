@@ -1,6 +1,6 @@
 #MyEclipse Hibernate Properties
 #Sun Jul 12 22:52:00 CST 2015
-sessionFactoryName=org.hhhhhh.guess.hibernate.HibernateSessionFactory
+sessionFactoryName=org.hhhhhh.house-spider.hibernate.HibernateSessionFactory
 genBasicCompId=false
 profile=
 daoSFId=
@@ -19,7 +19,7 @@ sessionFactoryId=
 basePersistenceClass=
 genAnnotations=false
 reSettingsFile=
-configFile=/guess/src/main/java/hibernate.cfg.xml
+configFile=/house-spider/src/main/java/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=false
 baseDaoClass=
