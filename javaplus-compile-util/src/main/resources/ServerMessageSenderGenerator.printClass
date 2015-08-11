@@ -1,6 +1,0 @@
-		public void METHOD_NAME(Channel channel, PAR_TYPE PAR_NAME) {
-			JSONObject obj = (JSONObject) JSON.toJSON(PAR_NAME);
-			obj.put("className", "FULL_CLASS_PATH");
-			obj.put("methodName", "METHOD_NAME");
-			channel.send(obj.toJSONString());
-		}
