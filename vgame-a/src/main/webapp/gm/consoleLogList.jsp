@@ -30,7 +30,6 @@
 			if (logs.isEmpty()) {
 				out.println("没有日志记录");
 			} else {
-
 				for (File log : logs) {
 		%>
 		<a href="consoleLogs.jsp?console-log-file-name=<%=log.getName()%>"><%=log.getName().replaceAll("\\.log", "")%></a>
